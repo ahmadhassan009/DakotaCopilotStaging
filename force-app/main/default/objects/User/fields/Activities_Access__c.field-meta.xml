@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activities_Access__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>Check/uncheck this checkbox to give/revert Activities access to community users with the following profile(s): Marketplace User - Emerging Manager Membership and Marketplace User - Standard Membership</inlineHelpText>
+    <label>Events, Tasks, Notes Access</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

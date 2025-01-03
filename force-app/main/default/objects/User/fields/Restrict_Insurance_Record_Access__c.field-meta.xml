@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Insurance_Record_Access__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>Check/Uncheck this checkbox to give/revert Insurance Accounts and related data access to community users</inlineHelpText>
+    <label>Restrict Insurance Record Access</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

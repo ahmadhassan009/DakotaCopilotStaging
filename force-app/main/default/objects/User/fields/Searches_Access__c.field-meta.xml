@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Searches_Access__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>Check/uncheck this checkbox to give/revert marketplace searches access to community users with the following profile(s): Marketplace User - Emerging Manager Membership and</inlineHelpText>
+    <label>Searches Access</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>
