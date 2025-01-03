@@ -1,0 +1,105 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-20-2020
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   11-09-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+    <div class="slds-page-header" role="banner">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate" style='display:flex'>
+                <div class="slds-media__body slds-align-middle">
+                    <nav role="navigation" aria-label="Breadcrumbs">
+                        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                            <li class="slds-breadcrumb__item slds-text-title_caps"><a href={maNameLink}>Metro Areas</a>
+                            </li>
+                            <li class="slds-breadcrumb__item slds-text-title_caps"><a href={recordLink}>{recordName}</a>
+                            </li>
+                        </ol>
+                    </nav>
+                    <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle"
+                        title="List View"><b>Contacts ( {offset}{plusSign} )</b></h1>
+                </div>
+                <div class="slds-grid slds-gutters cstm_width">
+                    <div class="slds-size_1-of-3 paddingRight">
+                        <c-multi-select-combobox-custom data-id="accountType" placeholder="Select Account Type" class=""
+                            name="Account Type" options={accountTypeOptions} onchange={handleAccountTypeChange}
+                            onstoreoldvalues={storeAccountTypeOldValues}>
+                        </c-multi-select-combobox-custom>
+                    </div>
+                    <div class="slds-size_1-of-3 paddingRight paddingLeft">
+                        <c-multi-select-combobox-custom data-id="assetClassCoverage"
+                            placeholder="Select Asset Class Coverage" class="" name="Asset Class Coverage"
+                            options={assetClassCoverageOptions} onchange={handleAssetClassCoverageChange}
+                            onstoreoldvalues={storeAssetClassCoverageOldValues}>
+                        </c-multi-select-combobox-custom>
+                    </div>
+                    <div class="slds-size_1-of-3 paddingLeft">
+                        <c-multi-select-combobox-custom data-id="contactType" placeholder="Select Contact Type" class=""
+                            name="Contact Type" options={contactTypeOptions} onchange={handleContactTypeChange}
+                            onstoreoldvalues={storeContactTypeOldValues}>
+                        </c-multi-select-combobox-custom>
+                    </div>
+                </div>
+                <div class="slds-m-right_x-small lgc--bg">
+                    <lightning-button-menu alternative-text="Show menu" variant="border-filled"
+                        icon-name="utility:settings" menu-alignment="right" class="marginLeftButton">
+                        <lightning-menu-item value="MenuItemOne" label="LIST VIEW CONTROLS"></lightning-menu-item>
+                        <lightning-menu-item class=".slds-has-focus" value="MenuItemTwo" label="Reset Column Widths"
+                            disabled="true"></lightning-menu-item>
+                    </lightning-button-menu>
+                </div>
+                <div class="slds-m-right_xx-small">
+                    <div class="slds-button-group">
+                        <button name="refreshButton" title="Reset/Refresh" type="button"
+                            class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={refreshTable}>
+                            <svg focusable="false" data-key="refresh" aria-hidden="true" class="slds-button__icon">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.37.1#refresh">
+                                </use>
+                            </svg>
+                            <span class="slds-assistive-text">Refresh</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="slds-page-header__name-switcher" if:false={isCommunityBoolean}>
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <button class="slds-button slds-button_neutral" onclick={createNewRecord}>New</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner>
+    </template>
+    <div style="height: 550px">
+        <template if:false={checkArea}>
+            <lightning-datatable class="related-list" wrap-text-max-lines="5" onrowaction={handleRowAction}
+                columns={NotMetroColumns} data={allRelatedContactsToMa} key-field="Id" show-row-number-column="true"
+                hide-checkbox-column="true" default-sort-direction={defaultSortDirection}
+                sorted-direction={sortedDirection} sorted-by={sortedBy} onsort={onHandleSort}
+                enable-infinite-loading="true" onloadmore={loadMoreData} load-more-offset="50">
+            </lightning-datatable>
+        </template>
+        <template if:true={checkArea}>
+            <lightning-datatable class="related-list" style="overflow: hidden;" wrap-text-max-lines="5"
+                onrowaction={handleRowAction} columns={MetroColumns} data={allRelatedContactsToMa} key-field="Id"
+                show-row-number-column="true" hide-checkbox-column="true" default-sort-direction={defaultSortDirection}
+                sorted-direction={sortedDirection} sorted-by={sortedBy} onsort={onHandleSort}
+                enable-infinite-loading="true" onloadmore={loadMoreData} load-more-offset="50">
+            </lightning-datatable>
+        </template>
+    </div>
+    <template if:true={showToast}>
+        <c-custom-toast-message toastmessage={toastmessage} title={title} alternative-text={alternativeText}
+            icon-name={iconName} toast-msg-classes={toastMsgClasses} toast-msg-icon-classes={toastMsgIconClasses}>
+        </c-custom-toast-message>
+    </template>
+</template>

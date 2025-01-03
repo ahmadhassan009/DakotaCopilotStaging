@@ -1,0 +1,63 @@
+.headerStyle {
+    display:flex;
+}
+
+.dataTableHeight {
+    height: 790px;
+}
+
+.headerColor {
+    background-color: #f3f3f3;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    margin-right: -1px;
+    border-radius: 5px 5px 0 0;
+}
+
+.iconBackgroundColor{
+    background-color: #A094ED;
+}
+.caps{
+    text-transform: capitalize;
+    font-size: 13px;
+    line-height: 13px;
+    color: #222222;
+    letter-spacing: 0px;
+    margin-left: 1px;
+}
+.iconPosition{
+    float: left;
+}
+.titlePosition{
+    margin-left: 40px;
+    margin-top: -2px;
+}
+
+.searchPosition{
+    margin-top: -19px;
+    margin-right: 5px;
+}
+
+.menuPosition{
+    margin-right: 4px;
+}
+
+
+.parentDiv{
+    position: relative;
+}
+
+
+.disFlex {
+    display:flex;
+}
+
+.disCont {
+    display:contents;
+}
+
+.footer{
+    height: 5px;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+}

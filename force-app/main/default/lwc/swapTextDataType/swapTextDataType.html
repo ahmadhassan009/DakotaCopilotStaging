@@ -1,0 +1,9 @@
+<template>
+     
+     <template if:true={text.islink}>
+          <a href={text.value} title={text.Name} target="_self" tabindex="-1">{text.Name}</a>
+     </template>
+     <template if:false={text.islink}>
+          {text.value}
+     </template>
+</template>

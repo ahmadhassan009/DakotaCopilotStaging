@@ -1,0 +1,7 @@
+<aura:component
+    implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute type="Id" name="recordId" />
+    <aura:attribute type="Boolean" name="hideFollowButton"/>
+    <aura:attribute type="Boolean" name="hideShareButton"/>
+    <c:followShareIcon recordId="{!v.recordId}" hideFollowButton = "{!v.hideFollowButton}" hideShareButton="{!v.hideShareButton}" class="lwc-styling" />
+</aura:component>

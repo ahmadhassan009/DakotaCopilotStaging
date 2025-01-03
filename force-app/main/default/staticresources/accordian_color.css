@@ -1,0 +1,14 @@
+c-dakota-news .accordian-color .slds-accordion__summary-action {
+   background-color: #f3f3f3;
+   height: 25px
+}
+
+c-dakota-news lightning-formatted-date-time {
+   font-size: 13px !important;
+   font-weight: bold;
+}
+
+c-dakota-news-view-all lightning-formatted-date-time {
+   font-size: 13px !important;
+   font-weight: bold;
+}

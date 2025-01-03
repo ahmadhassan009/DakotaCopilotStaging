@@ -1,0 +1,12 @@
+.no-permission-msg {
+   padding-top: 112px;
+ }
+ .top-Heading {
+   font-size: 0.875rem;
+   font-weight: 700;
+ }
+ .error-Message
+ {
+   font-size: 1.25rem;
+   line-height: 1.25;  
+ }

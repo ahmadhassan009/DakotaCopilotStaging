@@ -1,0 +1,55 @@
+.accountSearchDiv {
+    padding: 8px 150px 8px 221px;
+}
+
+.accountNameSearch {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.searchFieldStyle {
+    width: calc(100% - 90px);
+    line-height: 19px;
+    font-size: 13px;
+    min-width: 112px !important;
+    max-width: 300px;
+}
+
+.searchButton {
+    padding-left: 10px;
+    padding-top: 24px;
+}
+
+.accountsSearchedDataDiv {
+    padding: 10px 20px 15px 20px;
+}
+
+.datatableHeight {
+    height :calc(100vh - 225px);
+    margin-top: -1px;
+    background-color: white;
+}
+
+.errorMsgHeight {
+    height: 60px;
+}
+
+.hideDiv {
+    display: none;
+}
+
+.popupWidth {
+    width: 100%;
+}
+
+.headerBorder{
+    margin-left: -1px;
+    margin-right: -1px;
+    border-radius: 5px 5px 0 0;
+}
+
+.ServerRes{
+    height: 500px;
+    padding-top: 100px;
+    text-align: center;
+}

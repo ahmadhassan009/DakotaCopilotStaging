@@ -1,0 +1,114 @@
+<template>
+    <template if:true={hasPermission}>
+        <div class="slds-card">
+            <div class="slds-grid slds-page-header forceRelatedListCardHeader article-div">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate header">
+                    <div class="header-position">                    
+                        <nav role="navigation" aria-label="Breadcrumbs">
+                            <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <li class="slds-breadcrumb__item slds-line-height--reset"><a href={recordNameLink}>{objName}</a></li>
+                                <template if:true={recNameAvailable}>
+                                    <li class="slds-breadcrumb__item slds-line-height--reset"><a href={recordLink}> {recordName}</a></li>
+                                </template>
+                            </ol>
+                        </nav>
+                        <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="List View"><b>Activities ({offset}{plusSign})</b></h1>
+                    </div>
+
+                    <div class="event-task-button" >
+                        <button class="slds-button slds-button_neutral " onclick={createNewTask} >New Task</button>
+                        <button class="slds-button slds-button_neutral " onclick={createNewEvent} >New Event</button>
+                    </div>
+
+                    <div class="event-task-radio-button slds-m-right--xx-small">
+                        <lightning-radio-group name="radioGroup" label="" options={toggleButtons} value={selectedButton} type="button" onchange={handleToggleButtonChange}>
+                        </lightning-radio-group>
+                    </div>
+                    <div class="slds-m-top--xx-small event-task-refresh" >
+                        <button name="refreshButton" title="Refresh" type="button" class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={refreshTable}>
+                            <svg  focusable="false" data-key="refresh" aria-hidden="true" class="slds-button__icon">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.37.1#refresh"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Refresh</span>
+                        </button>
+                    </div>
+                </header>
+            </div>
+        
+            <div class="full-page" >
+                <template if:true={showOpenActivities}> 
+                    <c-activities-in-accounts-view-all record-id={recordId} ongettotalrecords={handleTotalRecordsValue} >
+                    </c-activities-in-accounts-view-all>
+                    <div if:true={isLoading}>   
+                        <lightning-spinner 
+                            alternative-text="Loading..." size="medium">
+                        </lightning-spinner>
+                    </div>
+                </template>
+                <template if:true={showPastActivities}> 
+                    <c-activities-history-in-acc-and-cont-view-all record-id={recordId} ongettotalrecords={handleTotalRecordsValue} >
+                    </c-activities-history-in-acc-and-cont-view-all>
+                    <div if:true={isLoading}   >   
+                        <lightning-spinner 
+                            alternative-text="Loading..."  size="medium">
+                        </lightning-spinner>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+   
+    <!-- Add POPUP  -->
+    <div class="slds-m-around--xx-large modal-popup">
+        <template if:true={addPopup}>         
+            <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                <div class="slds-modal__container modal-container-width" role="document" tabindex="0">                   
+                    <div class="slds-modal__header">
+                        <h2  class="slds-text-heading_medium slds-hyphenate">New Task : Dakota Marketplace Task</h2>                   
+                    </div>
+                    <div  class="slds-scrollable_y">
+                        <div class="slds-modal__content slds-p-around--medium modal-content-overflow">   
+                            <c-create-new-task account-id={recordId} org-id={orgId} selected-status="Open" selected-priority="Normal" selected-subject="" onnotsaved={handleNotSaved}  onsaved={handleSave}></c-create-new-task>  
+                        </div>
+                    </div>
+                    
+                    <div class="slds-align_absolute-center slds-modal__footer modal-footer">
+                        <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeAddPopup}></lightning-button>
+                        <div class="slds-m-left_small">
+                            <lightning-button disabled={isDisabled} variant="brand" label="Save" onclick={saveTask}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open"></div>
+        </template>
+    </div>
+
+    <!-- Add Event POPUP  -->
+    <div class="slds-m-around--xx-large modal-popup">
+        <template if:true={addEventPopup}>         
+            <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                <div class="slds-modal__container modal-container-width" role="document" tabindex="0">                   
+                    <div class="slds-modal__header">
+                        <h2  class="slds-text-heading_medium slds-hyphenate">New Event : Dakota Marketplace Event</h2>                   
+                    </div>
+                    <div  class="slds-scrollable_y">
+                        <div class="slds-modal__content slds-p-around--medium modal-content-overflow">   
+                            <c-create-new-event account-id={recordId} org-id={orgId} all-day-event="false" selected-subject=""  onnotsaved={handleNotSaved}  onsaved={handleSave}></c-create-new-event>  
+                        </div>
+                    </div>
+                    
+                    <div class="slds-align_absolute-center slds-modal__footer modal-footer">
+                        <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeEventAddPopup}></lightning-button>
+                        <div class="slds-m-left_small">
+                            <lightning-button disabled={isDisabled} variant="brand" label="Save" onclick={saveEvent}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open"></div>
+        </template>
+    </div>
+
+    <c-no-permissions-template does-not-has-permission={doesNotHasPermission}></c-no-permissions-template>
+</template>

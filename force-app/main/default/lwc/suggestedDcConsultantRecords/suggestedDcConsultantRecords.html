@@ -1,0 +1,49 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12">
+            <article class="slds-card lightning-card">
+                <div
+                    class="forceRelatedListCardHeader slds-grid slds-p-around--small slds-p-left--x-large slds-page-header">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left--large">
+                        <template if:false={suggestedConsultantCollapsed}>
+                            <lightning-button-icon onclick={suggestedConsultantChevronButtonClicked}
+                                variant="border-filled" size="small"
+                                icon-name="utility:chevrondown"></lightning-button-icon>
+                        </template>
+                        <template if:true={suggestedConsultantCollapsed}>
+                            <lightning-button-icon onclick={suggestedConsultantChevronButtonClicked}
+                                variant="border-filled" size="small"
+                                icon-name="utility:chevronright"></lightning-button-icon>
+                        </template>
+                        <div class="slds-media__body slds-p-left--x-small">
+                            <h2 class="slds-card__header-title">
+                                <a class="slds-card__header-link fontWeight" onclick={handleShowFullRelatedList}>
+                                    <span >Suggested Advisors ({suggestedConsultantRecordCount})</span>
+                                </a>
+                            </h2>
+                           
+                        </div>
+
+                    </header>
+                </div>
+    <template if:false={suggestedConsultantCollapsed}>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium">
+            </lightning-spinner>
+        </template>
+        <div>
+            <lightning-datatable key-field="Id" data={data} columns={columns} show-row-number-column="true"
+                wrap-text-max-lines="5" hide-checkbox-column default-sort-direction={defaultSortDirection}
+                sorted-direction={sortedDirection} sorted-by={sortedBy} onsort={updateColumnSorting}>
+            </lightning-datatable>
+        </div>
+        <footer class="slds-card__footer alignText">
+            <a onclick={handleShowFullRelatedList}>View All</a>
+            <span class="slds-assistive-text">entity type</span>
+        </footer>
+    </template>
+</article>
+
+</lightning-layout-item>
+</lightning-layout>
+</template>

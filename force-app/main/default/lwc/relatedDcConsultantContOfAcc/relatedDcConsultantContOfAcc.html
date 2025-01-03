@@ -1,0 +1,86 @@
+<template>
+    <template if:true={recordsExist}>
+        <lightning-layout>
+            <lightning-layout-item size="12" class="layoutWidth">
+                <article class="slds-card slds-card_boundary">
+                    <div class="slds-grid slds-page-header forceRelatedListCardHeader headerSyle">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:contact" alternative-text="DC Consultant Contacts"
+                                    title="DC Consultant Contacts"></lightning-icon>
+                            </div>
+                            <div id="dcConsultantContactsRelatedList" class="slds-media__body">
+                                <h2 class="slds-card__header-title headingStlye">
+
+                                    <span>DC Consultant Contacts ({totalRecords})</span>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                </article>
+            </lightning-layout-item>
+        </lightning-layout>
+        
+        <template if:true={dataExist}>
+            <lightning-layout>
+                <lightning-layout-item size="12">
+                    <article class="slds-card lightning-card">
+                        <div class="forceRelatedListCardHeader slds-grid slds-p-around--small slds-p-left--x-large slds-page-header">
+                            <header
+                                class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left--large">
+                                <template if:false={DcConsultantCollapsed}>
+                                    <lightning-button-icon onclick={DcConsultantChevronButtonClicked}
+                                        variant="border-filled" size="small"
+                                        icon-name="utility:chevrondown"></lightning-button-icon>
+                                </template>
+                                <template if:true={DcConsultantCollapsed}>
+                                    <lightning-button-icon onclick={DcConsultantChevronButtonClicked}
+                                        variant="border-filled" size="small"
+                                        icon-name="utility:chevronright"></lightning-button-icon>
+                                </template>
+
+                                <div class="slds-media__body slds-p-left--x-small">
+                                    <h2 class="slds-card__header-title">
+                                        <a class="slds-card__header-link headingStlye"
+                                            onclick={handleShowFullRelatedList}>
+                                            <span>Consultants ({totalConsultants})</span>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        
+                        <template if:true={isLoading}>
+                            <lightning-spinner alternative-text="Loading..." size="medium">
+                            </lightning-spinner>
+                        </template>
+                        <template if:false={DcConsultantCollapsed}>
+                            <div>
+                                <lightning-datatable key-field="Id" data={data} columns={columns}
+                                    show-row-number-column="true" enable-infinite-loading={enableInfiniteLoading}
+                                    wrap-text-max-lines="5" hide-checkbox-column
+                                    default-sort-direction={defaultSortDirection} sorted-direction={sortedDirection}
+                                    sorted-by={sortedBy} onsort={updateColumnSorting}>
+                                </lightning-datatable>
+                            </div>
+                            <footer class="slds-card__footer viewAllAlignment">
+                                <a onclick={handleShowFullRelatedList}>View All</a>
+                                <span class="slds-assistive-text">entity type</span>
+                            </footer>
+                        </template>
+                    </article>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+
+        <template if:true={suggestedConsultantExists}>
+            <div>
+                <c-suggested-dc-consultant-records record-id={recordId} account-info={accountInfo}
+                    columns={columns} suggested-consultant-record-count={suggestedConsultantRecordCount}
+                    un-accessible-contact-ids={unAccessibleContactIds}
+                    enable-infinite-loading="false"></c-suggested-dc-consultant-records>
+            </div>
+        </template>
+    </template>
+</template>

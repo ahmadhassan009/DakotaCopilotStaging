@@ -1,0 +1,20 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner>
+    </template>
+    <template if:true={recordsExist}>
+        <div class="slds-table_bordered slds-table_col-bordered slds-scrollable">
+            <div class="state-table-div">
+                <lightning-datatable key-field="Id" data={stateRecords} columns={columns} hide-checkbox-column
+                    enable-infinite-loading="true" onloadmore={loadMoreData} load-more-offset="20"
+                    default-sort-direction={defaultSortDirection} sorted-direction={sortDirection} sorted-by={sortedBy}
+                    onsort={onHandleSort} onrowaction={handleRowAction}>
+                </lightning-datatable>
+            </div>
+        </div>
+    </template>
+    <template if:false={recordsExist}>
+        <p class="noRecordsStyling">No results found.</p>
+    </template>
+</template>

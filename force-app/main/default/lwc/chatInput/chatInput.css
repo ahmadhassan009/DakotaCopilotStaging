@@ -1,0 +1,143 @@
+.container{
+    /* position: relative; */
+
+    position: relative;
+    height: 100%;
+    align-items: flex-end;
+    display: flex;
+}
+.box-icon {
+    /* position: relative;
+    padding-left: 5px;
+    outline: none; 
+    box-shadow: none; 
+    align-items: flex-start;
+    top: 6px; */
+
+    position: relative;
+    padding-left: 5px;
+    outline: none; /* Remove focus outline (optional) */
+    box-shadow: none; /* Remove box shadow if SLDS applies it */
+    align-items: flex-end;
+    bottom: 6px;
+}
+.box-icon:focus {
+    outline: none; 
+    box-shadow: none;
+    outline: none; /* Remove focus outline (optional) */
+    box-shadow: none; /* Remove box shadow if SLDS applies it */
+    border-color: transparent !important; /* Prevent border color change */
+}
+.send-icon {
+    /* position: relative;
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+    outline: none; 
+    box-shadow: none; 
+    align-items: flex-start;
+    top: 2px; */
+
+    position: relative;
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+    outline: none; /* Remove focus outline (optional) */
+    box-shadow: none; /* Remove box shadow if SLDS applies it */
+    align-items: flex-end;
+    bottom: 2px;
+}
+.send-icon:focus {
+    outline: none; 
+    box-shadow: none;
+    outline: none; /* Remove focus outline (optional) */
+    box-shadow: none; /* Remove box shadow if SLDS applies it */
+    border-color: transparent !important; /* Prevent border color change */
+}
+  
+.input-box {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px !important;
+    border-style: solid;
+    border-color: #c9c9c9;
+    left: 20px;
+    right: 20px;
+    position: absolute;
+    transition: height 0.2s ease, transform 0.2s ease;
+    bottom: 5px;
+    /* background-color: aqua; */
+}
+  
+  /* input[type=text] {
+      background-color: #ffffff !important;
+      border-radius: 8px !important;
+      height: 32px !important;
+      color: #5c5c5c;
+      padding: 5px 55px 5px 30px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: #c9c9c9;
+  } */
+  
+  
+::placeholder {
+    color: #C1C1C1;
+    opacity: 1 !important;
+    font-weight: 400 !important;
+    line-height: 18px !important;
+}
+
+.white-utility-icon {
+    --sds-c-icon-color-foreground-default: #d8d8d8;
+    ;
+}
+
+.newChatIconCss{
+    height: 16px !important;
+    max-width: none;
+    width: 16px !important;
+}
+
+.new-icon {
+
+}
+
+.historyIconCss{
+    height: 16px !important;
+    max-width: none;
+    width: 16px !important;
+}
+
+.sendIconCss{
+    height: 24px !important;
+    max-width: none;
+    width: 24px !important;
+}
+
+.slds-input-has-icon .slds-input__icon {
+    /* top: 9px;
+    margin-top: 0px !important; */
+    right: 10px;
+}
+
+textarea[type=text] {
+    background-color: #ffffff !important;
+    border-color: #ffffff;
+    position: relative;
+    min-height: 30px !important;
+    box-shadow: none; /* Remove any shadow on focus */
+    resize: none; /* Disable resizing */
+    padding-left: 5px;
+    padding-right: 3px;
+    padding-top: 4px;
+    padding-bottom: 3px;
+    line-height: normal;
+    transition: height 0.2s ease, transform 0.2s ease; /* Smooth height and position transitions */
+    height: 30px;
+    /* background-color: bisque; */
+}
+
+textarea[type=text]:focus {
+    border-color: #ffffff !important; /* Prevent border color change */
+    outline: none; /* Remove focus outline (optional) */
+    box-shadow: none; /* Remove box shadow if SLDS applies it */
+}

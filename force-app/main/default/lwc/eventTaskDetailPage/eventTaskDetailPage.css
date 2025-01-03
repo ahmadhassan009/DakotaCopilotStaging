@@ -1,0 +1,62 @@
+.detailForm { 
+    padding: 16px 30px 16px 30px;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.minHeight {
+    min-height: 45px;
+}
+
+.fontSize{
+    font-size: 14px;
+}
+
+.headingStlye{
+    color: #102138;
+    font-weight: 700;
+    line-height: 28px;
+    margin-top: 2px;
+}
+
+.listStyle{
+    padding: 10px;
+}
+
+.separater-div{    
+    height: 10px;
+    background-color: none !important;
+}
+
+.headerSyle{
+    border-radius: 4px;
+}
+
+.editButton{
+    float: right;
+}
+
+.modal-footer {
+    margin:unset; 
+    padding:16px;
+}
+
+.boundry{
+
+    background: none;
+    border: none;
+}
+.popup-button
+{
+   padding-right: 5px;
+}
+
+.recordBannerTextColor{
+    color: #5a5a5a;
+}
+.modal-container-width {
+    width: 70%; 
+    max-width: 840px; 
+    min-width: 480px;
+}

@@ -1,0 +1,7 @@
+<aura:component  implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute type="String" name="recordId" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <div class="slds-card">
+        <c:educationContactsRelatedToAccountViewAll recordId="{!v.recordId}" />
+    </div>
+</aura:component>

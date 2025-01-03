@@ -1,0 +1,116 @@
+<apex:page id="loginPage" showHeader="false" showChat="false" sidebar="false" standardStylesheets="false" controller="ForgotPasswordController">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Forgot Password</title>
+    
+        <!-- Bootstrap core CSS -->
+        <link href="{!URLFOR($Resource.include, '_include/css/bootstrap.min.css')}" rel="stylesheet"/>
+    
+        <!-- Custom styles for this template -->
+        <link href="{!URLFOR($Resource.include, '_include/css/forgot.css')}" rel="stylesheet" />
+    
+        <style>
+            body{
+            	padding: 0;
+                background-color: #fff;
+            }
+            .contentWrapper > img {
+            	display: block;
+            	margin-left: auto;
+            	margin-right: auto;
+            }
+            .contentTitle{
+            	font-size: 24px;
+            	margin-top: 36px;
+            	margin-bottom: 12px;
+            }
+            .textWrapper{
+                margin: auto;
+                max-width: 380px;
+            	padding: 20px;
+            	border-radius: 4px;
+                width: calc(100% - 40px);
+            	border: 1px solid #d8dde6;
+            }
+            .textWrapper > p{
+            	font-size: 13px;
+            	line-height: 24px;
+            	margin-bottom: 12px;
+            }
+            .form-forgot{
+            	margin: 0;
+            	padding: 0;
+            }
+            .form-forgot > a{
+            	width: 100%;
+            	display: block;
+            	font-size: 13px;
+            	text-align: center;
+            	padding: 12px 24px;
+    			border-radius: 4px;
+            	margin-bottom: 16px;
+            	background-color: #000;
+            	color: #fff !important;
+            }
+            .form-forgot > a:hover{
+            	cursor: pointer;
+            	text-decoration: none;
+            }
+            footer{
+            	bottom: 0;
+                height: 24px;
+            	width: 100vw;
+            	position: fixed;
+            	font-size: 12px;
+                letter-spacing: 0.25px;
+            }
+            @media only screen and (min-height: 1200px) {
+                .contentWrapper { padding-top: 275px; }
+            }
+            @media only screen and (max-height: 1200px) {
+                .contentWrapper { padding-top: 215px; }
+            }
+     		@media(max-width: 1024px){
+            	.contentWrapper { min-height: 100vh; }
+            }
+            @media only screen and (max-height: 1000px) {
+                .contentWrapper { padding-top: 175px; }
+            }
+            @media only screen and (max-height: 900px) {
+                .contentWrapper { padding-top: 135px; }
+            }
+            @media only screen and (max-height: 736px) {
+                .contentWrapper { padding-top: 95px; }
+            }
+            @media only screen and (max-height: 670px) {
+                .contentWrapper { padding-top: 75px; }
+            }
+            @media only screen and (max-height: 610px) {
+                .contentWrapper { padding-top: 55px; }
+            }
+        </style>
+    </head>
+	<body>
+        <div class="contentWrapper">
+            <apex:image url="{!$Resource.DakotaMarketplaceLogo}" width="180" />
+            <h2 class="contentTitle text-center"> Check Your Email </h2>
+            <div class="textWrapper">
+                <p>We've sent you an email with a link to finish resetting your password.</p>
+                <p>Can't find the email? Try checking your spam folder.</p>
+                <p>If you still can't log in, have us <a href="./ForgotUI">resend the email</a> or contact your administrator.</p>
+                <div class="form-forgot">
+                    <a href="./SignInUI">Return to Login</a>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center"> © 2023 dakota.com. All rights reserved. </footer>
+		<script src="{!URLFOR($Resource.include, '_include/js/jquery-1.10.2.min.js')}"></script>
+		<script>
+            $(document).ready(function() {
+                $('.un').attr('placeholder','Username');
+            });
+		</script>
+    </body>
+</apex:page>

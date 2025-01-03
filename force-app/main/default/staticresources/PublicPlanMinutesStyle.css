@@ -1,0 +1,129 @@
+@page {
+                        padding-top: 40px;
+                        margin-left: -5px;
+                        margin-right: 0px;
+                        @top-center {
+                               content: element(header);
+                        }
+                        @bottom-left {
+                             content: element(footer);
+                        }
+                    }
+                    div.header {
+                          display:flex;
+                          margin-bottom: 20px;
+                          position: running(header);
+                    }
+                    div.footer {                    
+                        position: running(footer);
+                        display: flex;
+                        margin-bottom: -2% !important;
+                    }
+                    table.header{
+                        height: 65px;
+                        font-family:sans-serif;
+                        background-color: #E6E7E8;
+                        width: 100%; 
+                        margin-bottom: 20px;
+                    }
+                    div.content{
+                        margin-left: 50px;
+                        margin-right: 50px;
+                    }
+                    .headerLogo {
+                        width:30%;
+                    }
+                    .headerImage {
+                        margin-top: -5px;
+                    }
+                    .headerTitle {
+                        width:70%; 
+                        padding-left:80px; 
+                        padding-top:20px;
+                    }
+                    .headerTitileText {
+                        font-weight: 900; 
+                        font-size: 18px;
+                    }
+                    .footerText {
+                        padding-left:20px;
+                    }
+                    .footerTitile {
+                        font-size: 14px; 
+                        background-color: white;
+                        color: #989799; 
+                        padding: 8px;
+                        font-family: sans-serif;
+                        font-style: italic
+                    }
+                    .linkContainer {
+                        padding-left:80px;
+                    }
+                    .link-a {
+                        color:black;
+                        font-family: sans-serif;
+                        font-size: 14px;
+                        font-style: italic;
+                    }
+                    .tableContainer {
+                        width:100%; 
+                        border-spacing: inherit;
+                    }
+                    .outputTextContainer {
+                        width:60%; 
+                        text-align:left;
+                    }
+                    .outputTextClass {
+                        font-family: sans-serif;
+                        font-size: 18px;
+                        margin-left: -1px;
+                    }
+                    .tdDivider {
+                        width:10%;
+                    }
+                    .innerTd {
+                        width:30%; 
+                        vertical-align: top;
+                    }
+                    .tdOutputText {
+                        float:right; 
+                        margin-right: 0px; 
+                        font-style: italic; 
+                        margin-top:0px; 
+                        font-family: sans-serif; 
+                        font-size: 15px; 
+                        color:#099CE8
+                    }
+                    .outpulPanelHr {
+                        height:2px;
+                        border-width:1px;
+                        background-color:#099CE8; 
+                        border-color:black
+                    }
+                    .divStyle {
+                        padding-left:25px;
+                    }
+                    .fontStyle{
+            			font-family: sans-serif;
+                        white-space: pre-line;
+                        font-size: 15px;
+                    }
+            		.meetingSummaryStyle{
+                        font-family: sans-serif;
+                        white-space: pre-line;
+                        font-size: 14px;
+                    }
+            		.accountNameStyle{
+                        font-family: sans-serif;
+                        font-size: 18px;
+                        margin-left: -1px;
+                    }
+            		.meetingDateStyle{
+                        float:right;
+                        margin-right: 0px;
+                        font-style: italic;
+                        margin-top:0px;
+                        font-family: sans-serif;
+                        font-size: 15px;
+                        color:#099CE8
+                    }

@@ -1,0 +1,15 @@
+<aura:component  implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute type="String" name="stateName" />
+    <aura:attribute type="String" name="objectName" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    <div class="state-main-comp">
+        <c:stateDetailForMetroAreas stateName="{!v.stateName}" />
+        <c:metroAreaStatesAllAccounts stateName="{!v.stateName}" />
+        <c:metroAreaStatesContacts stateName="{!v.stateName}" panelName="Contacts" homeOffice='true'/>
+        <c:metroAreaStatesContacts stateName="{!v.stateName}" panelName="Contacts" homeOffice='false'/>
+        <c:metroAreaStatesAllAccTypes stateName="{!v.stateName}" />
+        <c:metroAreaStatesMarketplaceSearches stateName="{!v.stateName}" />
+        <c:dakotaStateContentPanelMetroArea stateName="{!v.stateName}"/>
+    </div>
+</aura:component>

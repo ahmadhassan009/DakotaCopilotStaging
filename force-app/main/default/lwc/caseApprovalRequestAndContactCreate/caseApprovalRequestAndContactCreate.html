@@ -1,0 +1,26 @@
+<template>
+        <header class="slds-modal__header">
+            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Case Approval</h2>
+        </header>
+        <!-- Modal/Popup Box LWC body starts here -->
+        <div class="slds-p-around_medium slds-m-around_small" id="modal-content-id-1">
+            <template if:false={fieldMissing}>
+                <div>
+                    <div class="slds-spinner--brand  slds-spinner slds-spinner--medium slds-is-relative" role="alert">
+                      <span class="slds-assistive-text">Loading...</span>
+                      <div class="slds-spinner__dot-a"></div>
+                      <div class="slds-spinner__dot-b"></div>
+                    </div>
+                  </div>
+            </template>
+            <template if:true={fieldMissing}>
+                <p class="fontsize">These required field(s) must be completed: </p>
+                <br/>
+                <ul class="slds-list_dotted">
+                    <template for:each={missingFields} for:item="missingField">
+                        <li class="fontsize" key={missingField}>{missingField}</li>
+                    </template>
+                </ul>
+            </template>
+        </div>
+</template>

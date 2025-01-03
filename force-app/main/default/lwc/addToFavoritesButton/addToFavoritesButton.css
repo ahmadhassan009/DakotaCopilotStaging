@@ -1,0 +1,356 @@
+.favoriteIcon
+{
+    background-color: #0d70a5;
+    height: 30px !important;
+}
+
+.unfavIconColor {
+    --sds-c-icon-color-foreground-default: #f3f2f2;
+}
+
+.favIconBorder {
+    border: #006195 1px solid;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 0px;
+}
+
+.favIconWidth 
+{
+    width: 2.5%;
+    display: none;
+}
+
+.modal-body {
+    height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.article {
+    cursor: pointer;
+}
+
+.greyBackground {
+    z-index: 9988;
+}
+
+.dropDownButton {
+    float: left !important;
+    width: 20px;
+    height: 30px !important;
+    margin-left: -13px;
+    background-color: #f3f2f2;
+    border: #919191 1px solid;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 4px;
+}
+
+.followListModal {
+    top: 52px;
+    max-width: 300px;
+    max-height: 400px;
+    width: 300px;
+    right: 14.4%;
+}
+
+.followListContent {
+    max-height: 275px;
+    overflow: auto;
+}
+
+.favoriteListArticle {
+    cursor: pointer;
+}
+
+.slds-card__footer {
+    height: 42px;
+}
+
+.noFavFoundModalSize {
+    width: 300px;
+    height: 400px;
+}
+
+.editFollowSearchbox {
+    padding-bottom: 23px;
+    padding-left: 90px;
+    padding-right: 90px !important;
+}
+
+.deleteFavoriteIcon {
+    float: right;
+}
+
+.deleteConfirmationBox {
+    z-index: 9988;
+}
+
+.editFollowPopup {
+    max-height: 800px;
+}
+
+.cardStyling {
+    position: absolute;
+    left: -125px;
+    top: 16px;
+}
+
+.favIconPlacement {
+    float: right;
+    z-index: 999;
+    position: relative;
+    margin-top: -103px;
+    margin-right: 130px;
+    min-width: 59px;
+}
+
+.favIconPlacementAccCon {
+    float: right;
+    z-index: 999;
+    position: relative;
+    margin-top: -103px;
+    margin-right: 130px;
+    min-width: 70px;
+}
+
+lightning-spinner 
+{
+    background: none;
+}
+
+.noFavFoundText
+{
+    text-align: justify;
+}
+
+.favModalPosition {
+    height: 929px;
+    position: absolute;
+    width: 100vw;
+    right: -240px;
+    top: -15px;
+    left: auto;
+}
+
+.slds-card__footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: right;
+}
+
+/* ***********custom toast msg**********   */
+.comments-icn{
+    --sds-c-icon-color-foreground-default: white; 
+ }
+
+.toasMsgStyling {
+    height:4rem;
+    position: fixed;
+    top: 4%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.favIconPlacementHome {
+    margin-top:-97px !important;
+    margin-right:158px !important;
+}
+
+@media(max-width: 1023px) {
+    .favIconPlacementHome {
+        margin-top: -365px !important;
+    }
+}
+
+.cstm_accordian_div_width {
+    width:100%;
+    background-color: #ECEEFD;
+}
+
+.cstm_accordian_contact_div_styling {
+    background-color: #ECEEFD;
+    margin-top: -3px;
+    margin-bottom: 10px;
+}
+
+.cstm_h1_styling {
+    cursor: default;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 7.5px 5px 5px 5px;
+}
+
+.cstm_helptext_styling {
+    margin-top: 2.25%;
+}
+
+.notificationModel {
+    right: 11.5%;
+    top: 53px;
+    max-width: 500px;
+    max-height: 690px;
+    width: 467px;
+    height: auto;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.right-column {
+    padding-left: 28px;
+}
+
+.left-column {
+    padding-right: 25px;
+}
+
+.searchesLeftColumn {
+    padding-left: 21%;
+}
+
+.searchesRightColumn {
+    padding-left: 15%;
+}
+
+.cstmGroupWidth {
+    width: 111%;
+}
+
+.buttonBg {
+    background-color: white !important;
+}
+
+/* preferencesSection.css */
+.preferences-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align items at each end of the container */
+}
+
+
+
+.manageButton {
+    margin-left: 15.5%;
+    margin-top: 1%;
+}
+
+.gear-icon {
+    fill: #a0a0a0; /* Gray color for the gear icon */
+    margin-right: 5px;
+}
+
+.toggle-icon {
+    --sds-c-icon-color-foreground-default: #0d70a5; /* Gray color for the gear icon */
+}
+
+.right-section {
+    margin-top: 2%;
+    position: relative;
+    float: right;
+    padding-bottom: 3%;
+}
+
+.cstm_header_div {
+    text-align: left;
+    max-height: 43px;
+    width: 100%;
+    display: flex;
+    padding-top: 2%;
+    padding-bottom: 9%;
+}
+
+.toggleOff
+{
+    --sds-c-icon-color-foreground-default: #d3d3d3;
+}
+
+.cross-icon {
+    left: 26rem;
+    position: absolute;
+    margin-top: 11px !important;
+    cursor: pointer;
+}
+
+.chevron-icon {
+    --sds-c-icon-color-foreground-default: black; /* Gray color for the gear icon */
+}
+
+.slds-checkbox_toggle .slds-checkbox_faux:after, .slds-checkbox_toggle .slds-checkbox--faux:after, .slds-checkbox--toggle .slds-checkbox_faux:after, .slds-checkbox--toggle .slds-checkbox--faux:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    width: 0.85rem;
+    height: 0.85rem;
+    background-color: var(--slds-c-checkbox-toggle-switch-color-background, var(--sds-c-checkbox-toggle-switch-color-background, var(--slds-g-color-neutral-base-100, var(--lwc-colorBackgroundAlt,rgb(255, 255, 255)))));
+    border-radius: var(--slds-c-checkbox-toggle-radius-border, var(--sds-c-checkbox-toggle-radius-border, var(--lwc-borderRadiusPill,15rem)));
+}
+
+.slds-checkbox_toggle [type=checkbox]:checked+.slds-checkbox_faux:before, .slds-checkbox_toggle [type=checkbox]:checked+.slds-checkbox--faux:before, .slds-checkbox_toggle [type=checkbox]:checked~.slds-checkbox_faux:before, .slds-checkbox_toggle [type=checkbox]:checked~.slds-checkbox--faux:before, .slds-checkbox_toggle [type=checkbox]:checked+.slds-checkbox_faux_container .slds-checkbox_faux:before, .slds-checkbox_toggle [type=checkbox]:checked+.slds-checkbox--faux_container .slds-checkbox--faux:before, .slds-checkbox--toggle [type=checkbox]:checked+.slds-checkbox_faux:before, .slds-checkbox--toggle [type=checkbox]:checked+.slds-checkbox--faux:before, .slds-checkbox--toggle [type=checkbox]:checked~.slds-checkbox_faux:before, .slds-checkbox--toggle [type=checkbox]:checked~.slds-checkbox--faux:before, .slds-checkbox--toggle [type=checkbox]:checked+.slds-checkbox_faux_container .slds-checkbox_faux:before, .slds-checkbox--toggle [type=checkbox]:checked+.slds-checkbox--faux_container .slds-checkbox--faux:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 0.85rem;
+    height: 0.85rem;
+    background-color: var(--slds-c-checkbox-toggle-switch-color-background-checked, var(--sds-c-checkbox-toggle-switch-color-background-checked, var(--slds-c-checkbox-toggle-switch-color-background, var(--sds-c-checkbox-toggle-switch-color-background, var(--lwc-colorBackgroundAlt,rgb(255, 255, 255))))));
+    border-radius: var(--slds-c-checkbox-toggle-radius-border, var(--sds-c-checkbox-toggle-radius-border, var(--lwc-borderRadiusPill,15rem)));
+    transition: transform .2s cubic-bezier(0.75, 0, 0.08, 1);
+}
+
+.slds-checkbox_toggle [type=checkbox]:checked+.slds-checkbox_faux:after, .slds-checkbox_toggle [type=checkbox]:checked+.slds-checkbox--faux:after, .slds-checkbox_toggle [type=checkbox]:checked~.slds-checkbox_faux:after, .slds-checkbox_toggle [type=checkbox]:checked~.slds-checkbox--faux:after, .slds-checkbox_toggle [type=checkbox]:checked+.slds-checkbox_faux_container .slds-checkbox_faux:after, .slds-checkbox_toggle [type=checkbox]:checked+.slds-checkbox--faux_container .slds-checkbox--faux:after, .slds-checkbox--toggle [type=checkbox]:checked+.slds-checkbox_faux:after, .slds-checkbox--toggle [type=checkbox]:checked+.slds-checkbox--faux:after, .slds-checkbox--toggle [type=checkbox]:checked~.slds-checkbox_faux:after, .slds-checkbox--toggle [type=checkbox]:checked~.slds-checkbox--faux:after, .slds-checkbox--toggle [type=checkbox]:checked+.slds-checkbox_faux_container .slds-checkbox_faux:after, .slds-checkbox--toggle [type=checkbox]:checked+.slds-checkbox--faux_container .slds-checkbox--faux:after {
+    display: none !important;
+}
+
+.cstm_sizing {
+    width: 2rem !important;
+    height: 1rem !important;
+}
+
+.cstm_padding_styling {
+    padding-top: 6px !important;
+    padding-left: 3px !important;
+}
+
+.spinner {
+    background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.cstm_popup_spinner {
+    top: inherit !important;
+    bottom: inherit !important;
+}
+
+.cstm_coloring {
+    border-color: #627ecc;
+    background-color: #627ecc;
+}
+
+.manage_all_preferences_styling {
+    font-size: 11px;
+    color: #7b62d8;
+}
+
+.weekly_toggle_styling {
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 0;
+    padding-left: 3.75%;
+}
+
+.weekly_toggle_div {
+    display: flex;
+    width: 45%;
+    padding-left: 1%;
+    margin-top: 3.4%;
+}
+
+.cstm_footer_width {
+   width: 116%;
+}

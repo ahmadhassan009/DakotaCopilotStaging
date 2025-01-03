@@ -1,0 +1,28 @@
+<aura:component implements="lightning:recordHomeTemplate" description="Full-width header above main region and right sidebar with full-width main content">
+    <aura:attribute name="headerElement" type="Aura.Component[]" />
+    <aura:attribute name="sideBarLeftElement" type="Aura.Component[]" />
+    <aura:attribute name="sidebarRightElement" type="Aura.Component[]" />
+    <aura:attribute name="FullRegionElement" type="Aura.Component[]" />
+
+    <div>
+        <div class="slds-grid slds-grid_vertical">
+            <div class="slds-col">
+                <span>{!v.headerElement}</span>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12 slds-p-top_small slds-p-right_small slds-p-bottom_small">
+              <span>{!v.sideBarLeftElement}</span>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12 slds-p-top_small slds-p-bottom_small">
+              <span>{!v.sidebarRightElement}</span>
+            </div>
+        </div>
+        <div class="slds-grid slds-grid_vertical">
+            <div class="slds-col">
+                {!v.FullRegionElement}
+            </div>
+        </div>
+    </div>
+
+</aura:component>

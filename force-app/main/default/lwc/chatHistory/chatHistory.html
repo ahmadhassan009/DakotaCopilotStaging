@@ -1,0 +1,38 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner> 
+    </template>
+    <template if:false={isLoading}>
+        <div class="history-main">
+            <div class="header">
+                <div class="back-icon" onclick={handleBackButton}>
+                    <img src={chevronleftIcon} />
+                </div>
+                <!-- <lightning-icon icon-name="utility:back" class="back-icon" alternative-text="Back"></lightning-icon> -->
+                <span class="title">Chat History</span>
+            </div>
+
+            <div class="search-container">
+                <lightning-input type="search" placeholder="Search..." class="search-input" onchange={handleSearch}></lightning-input>
+            </div>
+
+            <div class="chat-list">
+                <template if:true={hasHistory}>
+                    <template for:each={filteredChatHistoryList} for:item="chat">
+                        <div key={chat.threadId} class="chat-item">
+                            <p class="chat-content">{chat.label}</p>
+                            <div class="date-div">
+                                <a href="javascript:void(0)" class="chat-link" data-threadid={chat.threadId} onclick={handleViewChat}>View</a>
+                                <p class="chat-time">{chat.formattedTimestamp}</p>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={hasHistory}>
+                    <p class="no-history-text">There is no chat history yet.</p>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

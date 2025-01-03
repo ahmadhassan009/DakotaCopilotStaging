@@ -1,0 +1,4 @@
+<design:component label="followShareIconWrapper">
+   <design:attribute name="hideFollowButton" />
+   <design:attribute name="hideShareButton" />
+</design:component>

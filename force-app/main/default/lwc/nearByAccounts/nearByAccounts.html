@@ -1,0 +1,115 @@
+<template>
+    <div class="slds-is-relative" onclick={handleListClose}>
+        <div style="background-color: white; border-radius: 3px; position: relative;">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="small">
+                </lightning-spinner>
+            </template>
+            <div class="slds-grid slds-wrap" style="padding: 16px;">
+                <div style="flex: 4%;">
+                    <lightning-icon icon-name="standard:address" size="small"></lightning-icon>
+                </div>
+                <div style="flex: 80%;">
+                    <strong>
+                        <p style="font-size: 1.3em; padding-left: 4px;">Nearby Accounts List View</p>
+                    </strong>
+                </div>
+                <div style="flex: 4%;">
+                    <button style="height:24px; width:24px;"
+                        class="slds-button slds-button_icon slds-button_icon-border" title="Refresh"
+                        alternative-text="Refresh" onclick={refreshMap}>
+                        <svg class="slds-button__icon" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.28.0#refresh"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div style="padding-right: 16px; padding-left: 16px;">
+                <lightning-map map-markers={mapMarkers} list-view="hidden" zoom-level={zoomlevel}></lightning-map>
+            </div>
+            </br>
+            <div class="slds-grid slds-wrap"
+                style="flex-wrap: wrap; padding-right: 10px; padding-left: 10px; padding-bottom:4px;">
+                <div style="flex: 90%;">
+                    <strong>
+                        <p style="font-size: 1.2em; padding-left:6px;">Nearby Accounts List View</p>
+                    </strong>
+                </div>
+                <div style="flex-grow: 1;">
+                    <template if:false={showRelatedSection}>
+                        <lightning-button-icon icon-name="utility:chevrondown" variant="border" alternative-text="Show"
+                            title="Show" onclick={ShowRelatedList}></lightning-button-icon>
+                    </template>
+                    <template if:true={showRelatedSection}>
+                        <lightning-button-icon icon-name="utility:chevronup" variant="border" alternative-text="Hide"
+                            title="Hide" onclick={HideRelatedList}></lightning-button-icon>
+                    </template>
+                </div>
+            </div>
+            <template if:true={showRelatedSection}>
+                <div class="slds-grid slds-wrap" style="flex-wrap: wrap; padding: 10px;">
+                    <template if:true={showAccTypeCheckbox}>
+                        <div class="slds-form-element" style="padding-left:8px; flex:32%;">
+                            <label class="slds-form-element__label">
+                                <span class="">Account Type</span>
+                            </label>
+                            <div class="slds-form-element__control">
+                                <c-multi-select-combobox-custom label="" class="displayStyle" name="SameAccountType"
+                                    options={accountTypes} onchange={handleChangeMultiPickList}
+                                    onstoreoldvalues={storeOldValues}>
+                                </c-multi-select-combobox-custom>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:false={showAccTypeCheckbox}>
+                        <div style="padding-left:8px;"></div>
+                    </template>
+                    <div class="slds-form-element" style="padding-left: 20px; padding-right: 10px; flex:31%;">
+                        <lightning-combobox name="maxRecords" label="Max Records" value={MaxRecordvalue}
+                            onopen={handleListClose} options={maxRecordOptions} onchange={getFilteredRecords}
+                            data-id="maxRecords">
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-form-element" style="flex:33%; padding-right:10px;">
+                        <lightning-combobox name="maxDistance" label="Max Distance(miles)" value={maxDistanceValue}
+                            onclick={handleListClose} onopen={handleListClose} options={maxDistanceOptions}
+                            onchange={getFilteredRecords} data-id="maxDistance">
+                        </lightning-combobox>
+                    </div>
+                </div>
+                <template if:false={hideDatatable}>
+                    <div class="slds-grid" style="padding-right: 5px; padding-left: 5px; display:block!important">
+                        <div style="margin:0px;flex-wrap: wrap; width: 100%;" class="slds-accordion__summary">
+                            <div class="dataTableClass" style={listStyling}>
+
+                                <lightning-datatable hide-checkbox-column="true" columns={columns} data={accountsList}
+                                    key-field="Id" sorted-by={sortedBy} sorted-direction={SortedDirection}
+                                    onsort={updateColumnSorting}>>
+                                </lightning-datatable>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template if:false={accountGeocoded}>
+                    <div>
+                        </br>
+                        <strong>
+                            <p style="text-align: center; color: grey;"> Either the address is not set or it is not
+                                Geo-coded.</p>
+                        </strong>
+                        </br>
+                    </div>
+                </template>
+                <template if:false={nearbyAccountsFound}>
+                    <div>
+                        </br>
+                        <strong>
+                            <p style="text-align: center; color: grey;"> No Nearby Accounts Available.</p>
+                        </strong>
+                        </br>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+</template>

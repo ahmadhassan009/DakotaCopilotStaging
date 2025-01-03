@@ -1,0 +1,54 @@
+<template>
+
+    <template if:true={holdingRecordExists}>
+        <lightning-record-view-form object-api-name="Investment_Holdings__c" record-id={recordId} density="comfy">
+            <div class="slds-grid slds-wrap bg-color">
+                <div class="slds-col slds-size_1-of-2 left-column">
+                    <lightning-output-field class="field-border" field-name="Name">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="NAIC_Company_Number__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Investment_Firm__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Unrealized_Valuation_Inc_Dec__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Investment_Income__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Source_of_Method_to_obtain_Fair_Value__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border"
+                        field-name="Fair_Val_Hierarchy_Method_For_Fair_Value__c">
+                    </lightning-output-field>
+                    <div>
+                        <label class="slds-form-element__label addressLeftPadding" for="form-element-01"
+                            style={emptyAddressPadingBottom}>Address</label>
+                        <div class="field-border slds-form-element slds-form-element_stacked bottomMargin addressFontStyling">
+                            <lightning-formatted-address street={street} city={city} country={country} province={state}
+                                postal-code={postalCode}></lightning-formatted-address>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-2 right-column">
+                    <lightning-output-field class="field-border" field-name="Account__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Date_Acquired__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Initial_Investment__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Fund_Balance__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Book_Carrying_Value_Less_Encumbrances__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Percentage_of_Ownership__c">
+                    </lightning-output-field>
+                    <template if:true={showCurrentYearField}>
+                        <lightning-output-field class="field-border" field-name="Current_Year_s_Depreciation__c">
+                        </lightning-output-field>
+                    </template>
+                    <lightning-output-field class="field-border" field-name="Commitment_For_Additional_Investment__c">
+                    </lightning-output-field>
+                </div>
+            </div>
+        </lightning-record-view-form>
+    </template>
+</template>

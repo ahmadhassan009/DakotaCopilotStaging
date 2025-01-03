@@ -1,0 +1,18 @@
+.filesDiv lightning-datatable table[role="grid"].slds-table tbody th, table[role="grid"].slds-table tbody td {
+    padding-top: 8px !important;
+}
+.notesDiv lightning-datatable table[role="grid"].slds-table tbody th, table[role="grid"].slds-table tbody td {
+    padding-top: 5px !important;
+}
+
+.cstm_combobox_styling > div > div > lightning-base-combobox > div > div > .slds-listbox.slds-listbox_vertical.slds-dropdown.slds-dropdown_fluid.slds-dropdown_left {
+    max-height: 217px !important;
+}
+
+div > .paddingLeft.displayStyle > div {
+    padding-left: 5.5% !important;
+}
+
+div > .paddingLeft.paddingRight.displayStyle > div {
+    padding-right: 5% !important;
+}

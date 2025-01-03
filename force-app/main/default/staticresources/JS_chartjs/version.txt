@@ -1,0 +1,4 @@
+v3.0.0
+
+https://www.chartjs.org
+https://github.com/chartjs/Chart.js

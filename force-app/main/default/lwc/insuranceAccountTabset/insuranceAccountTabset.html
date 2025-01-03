@@ -1,0 +1,39 @@
+<template>
+    <div class="parentDiv">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="small" >
+            </lightning-spinner>
+    </template>
+    <lightning-tabset>
+        <lightning-tab label="General Information" class="tab-padding">
+        <c-custom-account-record-detail record-id={recordId}></c-custom-account-record-detail>
+        </lightning-tab>
+        <template if:true={insuranceRecordExists}>
+            <lightning-tab label="Insurance Details" class="tab-padding">
+                <c-insurance-accounts-additional-section record-id={recordId} ></c-insurance-accounts-additional-section>
+            </lightning-tab>
+        </template>
+        <lightning-tab label="Platform Details" class="tab-padding">
+            <lightning-flow flow-api-name="Display_Platform_Details" flow-input-variables={inputVariables} ></lightning-flow>
+        </lightning-tab>
+        <lightning-tab label="Alternatives" class="tab-padding">
+            <c-alternatives-tab-in-account-detail-page record-id={recordId}></c-alternatives-tab-in-account-detail-page>
+        </lightning-tab>
+        <lightning-tab label="Consultants" class="tab-padding">
+            <lightning-flow flow-api-name="Display_Consultants" flow-input-variables={inputVariables} ></lightning-flow>
+        </lightning-tab>
+        <lightning-tab label="Investment Structures" class="tab-padding">
+            <lightning-flow flow-api-name="Display_Investment_Structures" flow-input-variables={inputVariables} ></lightning-flow>
+        </lightning-tab>
+        <lightning-tab label="Equities" class="tab-padding">
+            <lightning-flow flow-api-name="Display_Equities" flow-input-variables={inputVariables} ></lightning-flow>
+        </lightning-tab>
+        <lightning-tab label="Fixed Income" class="tab-padding">
+            <lightning-flow flow-api-name="Display_Fixed_Income" flow-input-variables={inputVariables} ></lightning-flow>
+        </lightning-tab>
+        <lightning-tab label="Additional Webpages" class="tab-padding">
+            <lightning-flow flow-api-name="Display_Additional_Webpages" flow-input-variables={inputVariables} ></lightning-flow>
+        </lightning-tab>
+    </lightning-tabset>
+</div>
+</template>

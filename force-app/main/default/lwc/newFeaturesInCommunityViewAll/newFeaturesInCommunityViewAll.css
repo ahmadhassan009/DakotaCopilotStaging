@@ -1,0 +1,160 @@
+.headerStyle
+{
+    display: block;
+    height: fit-content;
+    background: unset;
+    padding-bottom: 10px;
+}
+
+.layoutWidth
+{
+    width: 100%;
+}
+
+.borderMargin{
+   margin-top: 4px;
+ }
+
+.headingStlye
+{
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+
+.newsRecords{
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+ 
+ }
+ .newsRecordbottom{
+   margin-top: -12.5px;
+ }
+ .iconBackgroundColor{
+     background-color: #b070e6;
+ }
+ .comment-div
+ {
+    font-size: 1em;
+    font-weight: 400;
+    font-style: normal;
+    word-wrap:break-word; 
+    max-width: calc(100% - 48px);
+ }
+ 
+ .button-style
+ {
+    float:right;
+ }
+ 
+ .popup-button
+ {
+    padding-right: 5px;
+ }
+ 
+ .comment-section
+ {
+    padding-top: 7px;
+    width: 100%;
+    flex-wrap: nowrap !important;  
+ }
+ 
+ .text-area-div
+ {
+    position: inherit; 
+    margin-left: 11px;
+    margin-right: 11px; 
+    margin-bottom: 10px;
+ }
+ 
+ .comm-div-display
+ {
+    display: flex;
+    padding-bottom: 20px;
+ }
+ 
+ .title-div
+ {
+    font-size: 1.1em;
+ }
+ 
+ .footer-div
+ {
+    text-align: center;
+ }
+ 
+ .scrollContainer {
+   margin-bottom: 15px;
+    height: 720px;
+    overflow: auto;
+    position: relative;
+ }
+ .scrollArea {
+    position: relative;
+ }
+ 
+ .approval-notes-style {
+    color: #2e844a;
+ }
+ 
+ .approval-notes-date {
+    color: #2e844a;
+    font-size:0.88em;
+ }
+ 
+ .section-space{
+    margin-top: 10px;
+    
+ }
+ 
+ .card-height{
+    overflow: auto;
+    height: 720px;
+ }
+ .spinner-height{
+    height: 25px;
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 20%;
+ }
+ .spinner{
+    position: relative;
+   
+ }
+ .link-color{
+    color: #3558D6;
+    font-size: 13px;
+ }
+ 
+ .record-css {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .videoPopup{
+   padding: 0 !important;
+   border-radius: 4px;
+}
+
+.videoPopupCancel{
+   top:-1.5rem !important;
+}
+
+.card-height-no-record{
+   height: 100px;
+   margin-left: 47.5%;
+   margin-top: 4.5%;
+ }
+
+ .headerposition{
+   margin: 15px 0px 0px 15px;
+   display: block;
+ }
+ 
+.dateStyle{
+   font-weight: bold;
+      font-size: 13px;
+
+}

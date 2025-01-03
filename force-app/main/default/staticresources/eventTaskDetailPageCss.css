@@ -1,0 +1,10 @@
+.editButton lightning-button button
+{
+    border-radius: 4px 0px 0px 4px !important;
+}
+
+.deleteButton lightning-button button
+{
+    border-radius: 0px 4px 4px 0px;
+    border-left: none;
+}

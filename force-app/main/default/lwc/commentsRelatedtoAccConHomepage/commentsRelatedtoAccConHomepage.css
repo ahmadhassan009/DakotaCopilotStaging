@@ -1,0 +1,85 @@
+.comment-div
+{
+   font-size: 1em;
+   font-weight: 400;
+   font-style: normal;
+   word-wrap:break-word; 
+   /*max-width: calc(100% - 48px);*/
+   width: 100%;
+}
+
+.button-style
+{
+   float:right;
+}
+
+.popup-button
+{
+   padding-right: 5px;
+}
+
+.comment-section
+{
+   padding-top: 7px;
+   width: 100%;
+   flex-wrap: nowrap !important;  
+}
+
+.text-area-div
+{
+   position: inherit; 
+   margin-left: 11px;
+   margin-right: 11px; 
+   margin-bottom: 10px;
+}
+
+.comm-div-display
+{
+   display: flex;
+   padding-bottom: 20px;
+}
+
+.title-div
+{
+   font-size: 1.1em;
+}
+
+.footer-div
+{
+   text-align: center;
+   height: 24px;
+}
+
+.scrollContainer {
+   height: 503px;
+   overflow: auto;
+   position: relative;
+}
+.scrollArea {
+   position: relative;
+}
+
+.approval-notes-style {
+   color: #2e844a;
+}
+
+.approval-notes-date {
+   color: #2e844a;
+   font-size:0.88em;
+}
+
+.borderVisibility{
+   border:none;
+}
+
+.borderMargin{
+   margin-top: 7px;
+}
+
+.headerPadding {
+   padding-bottom: 10px;
+ }
+
+.topBorderMargin{
+   margin-top: 7px;
+}

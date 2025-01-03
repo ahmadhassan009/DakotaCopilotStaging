@@ -1,0 +1,71 @@
+.bg{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color:rgb(255, 255, 255) !important;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 0px;
+}
+
+.msgs-box{
+    width: 100%;
+    height: calc(100% - 42px);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    overflow: auto;
+}
+
+.txt-box{
+    width: 100%;
+    height: 12%;
+}
+
+.titleBar{
+    background-color:#F1F3FB;
+    height: 32px;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space between title and icons */
+    align-items: center; /* Center vertically */
+    padding-left:15px;
+    padding-right:5px;
+}
+
+.mainComponent{
+    height: calc(100% - 32px);
+}
+.title{
+    color: #03234D; /* Text color */
+    margin: 0; /* Remove default margin */
+    font-weight: bold;
+    line-height: 16px;
+    font-size: 14px;
+}
+
+.icon-container {
+    display: flex; /* Use flexbox for icons */
+}
+
+.icon-button {
+    background: none; /* No background */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 16px; /* Font size for icons */
+    color: #1d1d1d; /* Icon color */
+    padding: 0; /* Remove padding */
+}
+
+.icon-button:hover {
+    color: #0070f3; /* Change color on hover */
+}
+
+.icon {
+    font-size: 24px; /* Adjust the font size to increase the icon size */
+    line-height: 1; /* Optional: Adjust line height to center the icon properly */
+    display: inline-block; /* Ensure it behaves like a block element */
+    width: 32px; /* Set a width for better clickability */
+    height: 32px; /* Set a height for better clickability */
+    text-align: center; /* Center the icon within the button */
+}

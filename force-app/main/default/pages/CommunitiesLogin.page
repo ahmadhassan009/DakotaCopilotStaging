@@ -1,0 +1,132 @@
+<apex:page id="loginPage" controller="CommunitiesLoginController" action="{!CommunitiesLoginController}"  title="{!$Label.site.site_login}" showHeader="false">
+   <style>
+      h1 {
+      font-size: 25px;
+      font-weight: 1000;
+      }
+      body .bPageBlock{
+      border-color: transparent !important;
+      border-width: 0 !important;
+      }
+      .message.warningM3{ margin: 0; }
+      img.msgIcon{ 
+      margin-left: 0px !important;
+      margin-top: 0 !important;
+      }
+      .pbBody{ margin: 0 !important; }
+      .Title{
+      margin-top: 40px !important;
+      margin-bottom: 60px !important;
+      }
+      form{
+      width: 100%;
+      height: 222px;
+      }
+      .smalltext{
+      margin-top: 10px;
+      font-size: 20px;
+      }
+      form img{
+      max-width: 220px !important;
+      width: 100% !important;
+      margin: 0 auto;
+      display: block;
+      }
+      .formGroup{
+      min-width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      }
+      .formGroup2
+      {
+      min-width: 50%;
+      }
+      .formGroup2> iframe{
+      min-height: 100vh;
+      }
+      .padding15{
+      padding-right:7px;
+      padding-bottom: 89px;
+      }
+      .padding16{
+      padding-right:26px;
+      padding-bottom: 157px
+      }
+      .paddingForHeading{
+      padding-right:50px;
+      padding-bottom: 120px;
+      }
+      label{
+      display: block;
+      margin-bottom: 10px;
+      }
+      form input[type="submit"]{
+      background: #357389;
+      background-color: #357389;
+      padding: 30px 30px;
+      color: #fff;
+      border-radius: 5px;
+      border-color: #357389;
+      border-style: none;
+      font-size: 20px;
+      }
+      img:hover {
+      border-radius: 16px;
+      }
+      .rotate img,
+      .rotate2 img{
+      transition: 0.5s ease-in-out;
+      }
+      .rotate img:hover,
+      .rotate2 img:hover{
+      transform: scale(1.2);
+      transition: 0.5s ease-in-out;
+      padding: 5px;
+      background-color: #ddffff!important;
+      }
+      .rotateShah .fa.fa-folder-open:hover{
+      font-size:6em;
+      transition: 1s ease-out;
+      }
+      .rotate + .label,
+      .rotate2 + .label{
+      font-size: 1.2rem;
+      font-family: sans-serif;
+      margin-top: 25px;
+      }
+     
+      .rotate2 + .label {
+      margin-left: 90px;
+      }
+   </style>
+   <apex:form >
+    
+      <div style="display: flex; width: 100%;">
+         <div class="formGroup">
+            <div class="paddingForHeading">
+               <h1>Login with</h1>
+            </div>
+            <div class="slds-m-around_xxx-small padding15" >
+               <div class="rotate" style="text-align: left; margin: 0 auto; flex-direction: column;">
+                  <apex:commandLink value=""   action="{!forwardToAuthPage}" id="theButton">
+                     <apex:image value="{!URLFOR($Resource.CommunityLoginPage,'sf2.png')}"/>
+                  </apex:commandLink>
+               </div>
+            </div>
+            <div class="slds-m-around_xxx-small padding16" >
+               <div class="rotate2" style="text-align: left; margin: 0 auto; flex-direction: column;">
+                  <apex:commandLink value="" action="{!forwardToSSOPage}">
+                     <apex:variable var="imageVar" value="{!SSOkey}"/>
+                     <apex:image value="{!URLFOR($Resource.CommunityLoginPage,imageVar)}"/>
+                  </apex:commandLink>
+               </div>
+            </div>
+         </div>
+         <div class="formGroup2">
+            <apex:iframe src="https://www.dakota.com/new-cocktail-ad" id="theIframe"/>
+         </div>
+      </div>
+   </apex:form>
+</apex:page>

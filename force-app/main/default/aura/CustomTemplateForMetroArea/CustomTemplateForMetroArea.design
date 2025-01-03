@@ -1,0 +1,8 @@
+<design:component label="Header SideBars and Full Region">
+    <flexipage:template >
+        <flexipage:region name="headerElement" defaultWidth="Large"/>
+        <flexipage:region name="sideBarLeftElement" defaultWidth="Medium"/>
+        <flexipage:region name="sidebarRightElement" defaultWidth="Small"/>
+        <flexipage:region name="FullRegionElement" defaultWidth="Large"/>
+    </flexipage:template>
+</design:component>

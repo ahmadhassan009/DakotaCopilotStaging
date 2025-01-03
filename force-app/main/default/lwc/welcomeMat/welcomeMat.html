@@ -1,0 +1,98 @@
+<template>
+  <template if:true={isLoading}>
+    <lightning-spinner alternative-text="Loading..." size="medium" style="position: fixed;">
+    </lightning-spinner> 
+  </template>
+  <template if:true={showModal}>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="welcome-mat-130-label" aria-describedby="welcome-mat-130-content" aria-modal="true">
+        <div class="slds-modal__container">
+          <template if:false={nonCustomerMat}>
+            <header class="slds-modal__header slds-modal__header_empty">
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick= {closeModal}>
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">Close</span>
+              </button>
+            </header>
+          </template>
+          <div class="slds-modal__content message-content" id="welcome-mat-130-content">
+            <div class="slds-welcome-mat slds-welcome-mat_info-only">
+              <div class="slds-welcome-mat__content slds-grid">
+                <template if:false={nonCustomerMat}>
+                  <div class="slds-welcome-mat__info slds-size_1-of-2">
+                    <div class="slds-welcome-mat__info-content">
+                      <h2 class="slds-welcome-mat__info-title" id="welcome-mat-130-label">{leftTitle}</h2>
+                      <div class="slds-welcome-mat__info-description slds-text-longform">
+                        <p>{leftDescription}</p>
+                      </div>
+                      <div class="slds-welcome-mat__info-actions">
+                        <button class="slds-button slds-button_brand" onclick={openVideo}>{leftButtonLabel}</button>
+                        <div class="slds-m-top_large">
+                          <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                              <div class="slds-checkbox">
+                                <input type="checkbox" name="options" id="dontShowAgain" disabled={checkboxDisabledFlag} value="dontShowAgain" data-id="dontShowAgain" onchange={saveUserPreference}/>
+                                <label class="slds-checkbox__label" for="dontShowAgain">
+                                  <span class="slds-checkbox_faux"></span>
+                                  <span class="slds-form-element__label">Don&#x27;t show this again</span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <template if:true={nonCustomerMat}>
+                  <div class="slds-welcome-mat__info slds-size_1-of-2">
+                    <div class="slds-welcome-mat__info-content">
+                      <h2 class="slds-welcome-mat__info-title" id="welcome-mat-131-label">{leftTitle}</h2>
+                      <div class="slds-welcome-mat__info-description slds-text-longform trialDiv">
+                        <p>{leftDescription}</p>
+                      </div>
+                      <div class="slds-welcome-mat__info-actions">
+                        <div class="slds-m-top_large">
+                          <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                              <div class="slds-checkbox trialCheckboxDiv">
+                                <input type="checkbox" name="options1" id="dontShowAgainNonCust" disabled={trialCheckboxDisabledFlag} value="dontShowAgainNonCust" data-id="dontShowAgainNonCust" onchange={saveUserPreference}/>
+                                <label class="slds-checkbox__label" for="dontShowAgainNonCust">
+                                  <span class="slds-checkbox_faux"></span>
+                                  <span class="slds-form-element__label">{leftNonCustomerAgreement} <a href={leftButtonLink} target="_blank"> Dakota Trial User Agreement</a></span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <button class="slds-button slds-button_brand"  data-id="agreement-button" onclick={closeModal} disabled={agreementButtonStatus} >{leftButtonLabel}</button>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <ul class="slds-welcome-mat__tiles slds-size_1-of-2 slds-welcome-mat__tiles_info-only" style="padding: 74px 48px 124px;display: flex;">
+                  <div  class="welcome-mat-list" style="margin: 0 auto auto;">
+                    <template for:each={rightPanelRecords} for:item="rpanelRecord">
+                      <li class="slds-welcome-mat__tile slds-welcome-mat__tile_info-only" key={rpanelRecord.Id}>
+                        <div class="slds-media">
+                          <div class="slds-media__body" style="text-align: center;">
+                            <div class="slds-welcome-mat__tile-body">
+                              <h3 class="slds-welcome-mat__tile-title">{rpanelRecord.Welcome_Modal_Name__c}</h3>
+                              <p class="slds-welcome-mat__tile-description">{rpanelRecord.Description__c}</p>
+                            </div>
+                              <button class="slds-button slds-button_brand" style='margin-top: 15px;' onclick={openRightPanelVideos} data-url={rpanelRecord.Action_URL__c}>{rpanelRecord.Action_Name__c}</button>
+                          </div>
+                        </div>
+                      </li>
+                    </template>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

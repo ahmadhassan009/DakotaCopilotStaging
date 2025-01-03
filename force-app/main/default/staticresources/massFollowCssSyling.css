@@ -1,0 +1,24 @@
+c-mass-follow-list-view-all .selectedFavIcon {
+	stroke-width: 44px;
+    stroke: #00bf58;
+}
+
+c-mass-follow-list-view-all .addIconStyling {
+    background-color: #eaeaea;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    padding-top: 4px;
+	width: 20px;
+    height: 20px;
+    color: #747474 !important;
+}
+
+c-mass-follow-list-view-all button {
+    color: #747474 !important;
+}
+
+c-mass-follow-list-view-all tbody tr {
+    height: 31px !important;
+}

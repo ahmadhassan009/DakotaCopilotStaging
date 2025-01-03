@@ -1,0 +1,27 @@
+:host {
+    --slds-c-accordion-summary-color-background: #e5e5e5;
+}
+
+.modal-footer {
+    margin: unset;
+}
+
+.footerAllignment{
+    text-align: center;
+    margin-bottom: -15px;
+    margin-top: -2px;
+}
+.editPopupHeight{
+    padding: 1.5rem;
+}
+
+.blockMargin{
+    margin: 2px -1px;
+}
+
+.fontStyle{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #222222;
+}

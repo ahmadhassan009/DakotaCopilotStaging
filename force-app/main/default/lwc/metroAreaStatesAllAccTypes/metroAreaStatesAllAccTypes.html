@@ -1,0 +1,13 @@
+<template>
+    <div>
+        <template if:true={stateExists}>
+            <template for:each={accountTypeMetadata} for:item="accountMeta">
+                <lightning-layout-item key={accountMeta.Id} size="3" >
+                    <!-- Start sub-component -->
+                    <c-metro-area-states-specific-acc-types state-name={stateName} account-meta={accountMeta}></c-metro-area-states-specific-acc-types>
+                    <!-- End sub-component -->
+                </lightning-layout-item>
+            </template>
+        </template>
+    </div>
+</template>

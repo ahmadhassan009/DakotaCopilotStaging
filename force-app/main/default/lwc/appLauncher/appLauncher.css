@@ -1,0 +1,7 @@
+.slds-app-launcher__tile.slds-is-draggable .slds-app-launcher__tile-figure{
+    padding-bottom:2.5% !important;
+}
+
+.slds-app-launcher__tile-body{
+    padding-top: 3%;
+}

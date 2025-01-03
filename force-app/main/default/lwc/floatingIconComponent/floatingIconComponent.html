@@ -1,0 +1,26 @@
+<template>
+    <template if:true={isFunctionalityAccessible}>
+        <div if:true={showParentComponent} class={parentClass}>
+            <div if:false={isCommunity} class={sfFloatingIconClass} onclick={handleDivClick} data-id="dakota-copilot-icon-internal">
+                <img src={floatingIcon} alt="Dakota Copilot" class=""/>
+                <span class="text-icon">Dakota Copilot</span>    
+            </div>     
+            <div if:true={isCommunity} class={mpFloatingIconClass} onclick={handleDivClick} data-id="dakota-copilot-icon">
+                <img src={floatingIcon} alt="Dakota Copilot" class=""/>
+                <span class="text-icon">Dakota Copilot</span>    
+            </div>   
+        </div>
+        <div if:true={showChildComponent}>
+            <div if:false={isCommunity} class={chatboxClass}  data-id="dakota-copilot-component-internal">
+                <c-chatbot show-child-component={showChildComponent} 
+                minimize-child-component={minimizeChildComponent} 
+                ontoggle={handleToggle}></c-chatbot>
+            </div>
+            <div if:true={isCommunity} class={chatboxClassCommunity} data-id="dakota-copilot-component">
+                <c-chatbot show-child-component={showChildComponent} 
+                minimize-child-component={minimizeChildComponent} 
+                ontoggle={handleToggle}></c-chatbot>
+            </div>
+        </div>
+    </template>
+</template>

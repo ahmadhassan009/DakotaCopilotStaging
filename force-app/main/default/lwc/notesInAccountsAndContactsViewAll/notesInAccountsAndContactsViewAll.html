@@ -1,0 +1,134 @@
+<template>
+	<template if:true={hasPermission}>
+		<div class="slds-card">
+			<div class="slds-grid slds-page-header forceRelatedListCardHeader article-div">
+				<header class="slds-media slds-media_center slds-has-flexi-truncate ">
+					<div class="slds-media__body slds-align-middle">
+						<nav role="navigation" aria-label="Breadcrumbs">
+							<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+								<li class="slds-breadcrumb__item slds-line-height--reset"><a href={recordNameLink}>{objType}</a></li>
+								<template if:true={recNameAvailable}>
+									<li class="slds-breadcrumb__item slds-line-height--reset"><a href={recordLink}> {recordName}</a></li>
+								</template>
+							</ol>
+						</nav>
+						<h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="List View"><b>Notes ({offset}{plusSign})</b></h1> </div>
+							<div>
+							<button name="refreshButton" title="Refresh" type="button" class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={refreshTable}>
+								<svg focusable="false" data-key="refresh" aria-hidden="true" class="slds-button__icon">
+									<use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.37.1#refresh"></use>
+								</svg> <span class="slds-assistive-text">Refresh</span> </button>
+								<button class="slds-button slds-button_neutral " onclick={openCreateModal}>New Note</button>
+							</div>
+				</header>
+			</div>
+				<template if:true={isLoading}>
+					<lightning-spinner alternative-text="Loading..." size="medium"> </lightning-spinner>
+				</template>
+				<div class="custom-table-height">
+					<c-custom-datatable 
+						columns={columns} 
+						onrowaction={handleRowAction} 
+						data={data} 
+						key-field="Id" 
+						show-row-number-column="true"
+						default-sort-direction={defaultSortDirection}
+						sorted-direction={sortedDirection} 
+						sorted-by={sortedBy}
+						onsort={onHandleSort}  
+						enable-infinite-loading="true"
+						onloadmore={loadMoreData}
+						hide-checkbox-column
+						load-more-offset="50"
+						wrap-text-max-lines="5"> 
+					</c-custom-datatable>
+				</div>
+		</div>
+	</template>
+	<!-- Create Notes -->
+	<div class="slds-m-around--xx-large modal-popup">
+		<template if:true={showCreateModal}>
+			<div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+				<div class="slds-modal__container modal-container" role="document" tabindex="0">
+					<template if:true={isLoadingCreateCon}>
+						<lightning-spinner alternative-text="Loading..." size="medium"> </lightning-spinner>
+					</template>
+					<header class="slds-modal__header">
+						<h2 class="slds-text-heading_medium slds-hyphenate">Create Notes</h2> </header>
+					<template if:false={areDetailsVisible}>
+						<div>
+							<div class="slds-spinner--brand  slds-spinner slds-spinner--medium slds-is-relative" role="alert"> <span class="slds-assistive-text">Loading...</span>
+								<div class="slds-spinner__dot-a"></div>
+								<div class="slds-spinner__dot-b"></div>
+							</div>
+						</div>
+					</template>
+					<!-- Modal/Popup Box LWC body starts here -->
+					<div class="slds-modal__content modal-content">
+						<c-create-new-note parent-record-id={recordId} is-account={isAccount} is-contact={isContact} onrecordviewload={recordViewHandler} onclosemodal={closeCreateModal} onsaverecord={handleSuccess}></c-create-new-note>
+					</div>
+				</div>
+			</div>
+			<div class="slds-backdrop slds-backdrop_open"></div>
+		</template>
+	</div>
+	<!-- Edit Notes -->
+	<div class="slds-m-around--xx-large modal-popup">
+		<template if:true={showEditModal}>
+			<div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+				<div class="slds-modal__container modal-container" role="document" tabindex="0">
+					
+					<header class="slds-modal__header">
+						<h2 class="slds-text-heading_medium slds-hyphenate">Edit Notes</h2> </header>
+						<template if:false={areDetailsVisible}>
+							<div>
+								<div class="slds-spinner--brand  slds-spinner slds-spinner--medium slds-is-relative" role="alert"> <span class="slds-assistive-text">Loading...</span>
+									<div class="slds-spinner__dot-a"></div>
+									<div class="slds-spinner__dot-b"></div>
+								</div>
+							</div>
+						</template>
+					
+					<!-- Modal/Popup Box LWC body starts here -->
+					<div class="slds-modal__content modal-content">
+						
+						<c-create-new-note  record-id={editNoteId} is-account={isAccount} is-contact={isContact} onrecordviewload={recordViewHandler} onrefreshtable={refreshTable} onclosemodal={closeEditModal} onsaverecord={handleSuccess}></c-create-new-note>
+					</div>
+				</div>
+			
+			</div>
+	
+	      <div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	</div>
+	<!-- DELETE POPUP  -->
+	<div class="slds-m-around--xx-large modal-popup">
+		<template if:true={deletePopup}>
+			<div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+				<div class="slds-modal__container" role="document" tabindex="0">
+					<div class="slds-modal__header">
+						<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Note</h2> </div>
+					<div class="slds-modal__content slds-p-around--medium">
+						<form class="slds-form--stacked">
+							<div class="slds">
+								<div class="slds-grid slds-wrap">
+									<div class="slds-col--padded slds-medium-size--1-of-2">
+										<div class="slds-form-element">
+											<div class="slds-form-element__control"> Are you sure you want to delete this Note? </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="slds-modal__footer">
+						<lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeDeletePopup}></lightning-button>
+						<lightning-button variant="brand" label="Delete" onclick={deleteRow}></lightning-button>
+					</div>
+				</div>
+			</div>
+			<div class="slds-backdrop slds-backdrop--open"></div>
+		</template>
+	</div>
+	<c-no-permissions-template does-not-has-permission={doesNotHasPermission}></c-no-permissions-template>
+</template>

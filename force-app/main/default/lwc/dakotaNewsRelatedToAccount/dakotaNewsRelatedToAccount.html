@@ -1,0 +1,49 @@
+<template>
+    <template if:true={dakotaNewsExist}>
+        <lightning-layout>
+            <lightning-layout-item size="12" class="layoutWidth">
+                <article class="slds-card slds-card_boundary">
+                    <div class="slds-grid slds-page-header forceRelatedListCardHeader headerSyle">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <!-- <lightning-avatar size="small" src="/img/icon/t4v35/custom/custom23_120.png" initials="DN" class="iconColor" alternative-text="Dakota News">
+                                </lightning-avatar> -->
+                                <lightning-icon icon-name="doctype:box_notes" ></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <a class="slds-card__header-link headingStlye" onclick={handleShowFullRelatedList}>
+                                        <span>Fundraising News ({totalRecords})</span>
+                                    </a>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium">
+                        </lightning-spinner> 
+                    </template>
+                    <div class="dataTableHeight">
+                        <c-custom-datatable
+                            key-field="Id"
+                            data={dakotaNewsRecords}
+                            columns={columns}
+                            show-row-number-column="true" 
+                            enable-infinite-loading="false"
+                            wrap-text-max-lines = "5"
+                            hide-checkbox-column 
+                            default-sort-direction={defaultSortDirection}
+                            sorted-direction={sortedDirection}
+                            sorted-by={sortedBy}
+                            onsort={updateColumnSorting}>
+                        </c-custom-datatable>
+                    </div>
+                    <footer class="slds-card__footer">
+                        <a onclick={handleShowFullRelatedList}>View All</a>
+                        <span class="slds-assistive-text">entity type</span>
+                    </footer>
+                </article>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

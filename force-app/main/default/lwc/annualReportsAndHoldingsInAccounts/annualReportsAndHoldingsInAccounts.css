@@ -1,0 +1,20 @@
+.headerSyle
+{
+    display: block;
+    height: fit-content;
+}
+
+.layoutWidth
+{
+    width: 100%;
+}
+
+.headingStlye
+{
+    font-weight: bold;
+}
+
+.iconColor
+{
+    background-color: #50ceb9;
+}

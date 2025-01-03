@@ -1,0 +1,29 @@
+.layout-div{
+    width:100%;
+}
+
+.article-div{
+    display: block; 
+    height: fit-content;
+}
+
+.header-content{
+    float: left; 
+    margin-right: 12px;
+}
+
+.float-content{
+    float: left; 
+}
+
+.font-properties{
+    font-weight: bold
+}
+
+.backgroundColor{
+    background-color: #D4D4D4;
+}
+
+.iconBackgroundColorInvestment{
+    background-color: #43b5b5;
+}

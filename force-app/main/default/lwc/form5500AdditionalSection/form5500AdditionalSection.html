@@ -1,0 +1,82 @@
+<template>
+    <div class="slds-card slds-p-around--small">
+        <lightning-accordion active-section-name={activeSections} allow-multiple-sections-open>
+            <lightning-accordion-section  name="details" label="Details" >
+                <lightning-record-view-form object-api-name="Account" record-id={recordId} density="comfy">
+                    <div class="summary-content">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-output-field class="field-border field-padding" field-name="Name"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="AUM__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="MetroArea__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="Assets_BOY__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="Date_Received__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="BillingAddress"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="Form_5500_PDF__c"> </lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-output-field class="field-border field-padding" field-name="Plan_Type__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="Plan_Year__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="Total_Participants__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="Participants_EOY__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="EIN__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="PN__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border field-padding" field-name="Plan_Codes__c"> </lightning-output-field>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-record-view-form>
+            </lightning-accordion-section>
+
+            <template if:true={form5500RecordExists}>
+            <lightning-accordion-section  name="additionalInfo" label="Additional Information" >
+                <lightning-record-view-form object-api-name="Form_5500_Additional_Information__c" record-id={form5500RecordId} density="comfy">
+                    <div class="summary-content">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-output-field class="field-border" field-name="Ack_Id__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Form_Plan_Year_Begin_Date__c"></lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Plan_EFF_Date__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Spons_DFE_Phone_Num__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Form_Tax_PRD__c"> </lightning-output-field>
+
+                                <template if:true={isAdminSignedName}>
+                                    <lightning-output-field class="field-border" field-name="Admin_Name__c"> </lightning-output-field>        
+                                </template>
+                                <template if:true={isSponsSignedName}>
+                                    <lightning-output-field class="field-border" field-name="Spons_Signed_Name__c"> </lightning-output-field>        
+                                </template>
+                                <template if:true={isDFESignedName}>
+                                    <lightning-output-field class="field-border" field-name="DFE_Signed_Name__c"> </lightning-output-field>        
+                                </template>
+
+                                <template if:true={isAdminManualSignedName}>
+                                    <lightning-output-field class="field-border" field-name="Admin_Manual_Signed_Name__c"> </lightning-output-field>        
+                                </template>
+                                <template if:true={isSponsManualSignedName}>
+                                    <lightning-output-field class="field-border" field-name="Spons_Manual_Signed_Name__c"> </lightning-output-field>        
+                                </template>
+                                <template if:true={isDFEManualSignedName}>
+                                    <lightning-output-field class="field-border" field-name="DFE_Manual_Signed_Name__c"> </lightning-output-field>        
+                                </template>
+                                
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-output-field class="field-border" field-name="Sch_A_Attached_IND__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Sch_C_Attached_IND__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Sch_D_Attached_IND__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Sch_H_Attached_IND__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Sch_I_Attached_IND__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Sch_R_Attached_IND__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Num_Sch_A_Attached_CNT__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Sch_MB_Attached_IND__c"> </lightning-output-field>
+                                <lightning-output-field class="field-border" field-name="Sch_SB_Attached_IND__c"> </lightning-output-field>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-record-view-form>
+            </lightning-accordion-section>
+            </template>
+        </lightning-accordion>
+    </div>
+</template>

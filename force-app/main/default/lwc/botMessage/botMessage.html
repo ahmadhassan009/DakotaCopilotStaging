@@ -1,0 +1,63 @@
+<template>
+    <template lwc:if={isData}>
+        <div class="response-container">
+            <c-tabulator-data-snap record-received={recordsPreview}></c-tabulator-data-snap>
+            <div>
+                <br />
+                <div lwc:dom="manual"></div>
+                    <lightning-button label="View all Data" title="Click to View all Data"
+                        onclick={handleViewAllData} class="custom-btn"></lightning-button>
+            </div>
+            <div class="msg-info">
+                <div class="msg-info-name">{chatMessage.sender}</div>
+                <div class="msg-info-name">•</div> 
+                <div class="msg-info-time">{chatMessage.time}</div>
+            </div>
+        </div>
+    </template>
+    <template lwc:elseif={isRegenerate}>
+        <template for:each={chatHistoryBotMsgList} for:item="chat" for:index="index">
+            <div key={chat.threadId}>
+                <button class="regenerate-button" data-index={index} onclick={handleRegenerateClick}>
+                    <span class="icon-span">
+                        <img class="msg-img" src={refreshIcon} />
+                    </span>
+                    <span class="label">Regenerate</span>
+                    <div class={isLoadingRegenerate}>
+                        <lightning-spinner alternative-text="Loading" size="small" class="spinner-on-button"></lightning-spinner>
+                    </div>
+                </button>
+            </div>       
+        </template>
+    </template>
+    <template lwc:elseif={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner> 
+    </template>
+    <template lwc:elseif={isMessage}>
+        <div class="msg-bubble">
+            <div>
+                {chatMessage.message}
+            </div>
+        </div>
+        <div class="msg-info">
+            <div class="msg-info-name">{chatMessage.sender}</div>
+            <div class="msg-info-name">•</div> 
+            <div class="msg-info-time">{chatMessage.time}</div>
+        </div>
+    </template>
+    <template lwc:else>
+        <div class="msg-bubble">
+            <div class="typing">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+        <div class="msg-info">
+            <div class="msg-info-name">{chatMessage.sender}</div>
+            <div class="msg-info-name">•</div> 
+            <div class="msg-info-time">{chatMessage.time}</div>
+        </div>
+    </template>
+</template>

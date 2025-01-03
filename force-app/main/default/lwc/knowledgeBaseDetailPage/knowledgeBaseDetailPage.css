@@ -1,0 +1,30 @@
+.right-column {
+    padding-left: 25px;
+}
+
+.full-width-bottom-fields {
+    padding-left: 12px;
+}
+
+.minHeight {
+    min-height: 21px;
+    /* padding-bottom: 1px; */
+}
+
+.leftColumnDivStyling {
+    margin-top: -5px;
+    width: 97.8%;;
+}
+
+.rightColumnDivStyling {
+    margin-top: -5px;
+    margin-left: -12px;
+}
+
+.leftColumnWidth {
+    width: 97.8%;
+}
+
+.rightColumnWidth {
+    margin-left: -12px;
+}

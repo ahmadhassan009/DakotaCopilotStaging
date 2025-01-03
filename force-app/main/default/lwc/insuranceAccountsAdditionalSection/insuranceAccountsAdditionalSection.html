@@ -1,0 +1,30 @@
+<template>
+
+    <template if:true={insuranceRecordExists}>
+        <lightning-record-view-form object-api-name="Insurance_Additional_Information__c"
+            record-id={insuranceAdditionalInformationRecordId} density="comfy">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2 left-column">
+                    <lightning-output-field class="field-border" field-name="NAIC_Company_Number__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="NAIC_Group_Code_Current_Period__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="NAIC_Group_Code_Prior_Period__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Country_of_Domicile__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="State_of_Domicile_Or_Port_of_Entry__c">
+                    </lightning-output-field>
+                </div>
+                <div class="slds-col slds-size_1-of-2 right-column">
+                    <lightning-output-field class="field-border" field-name="Employers_ID_Number__c">
+                    </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Data_Quarter__c"> </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Data_Year__c"> </lightning-output-field>
+                    <lightning-output-field class="field-border" field-name="Total_Net_Admitted_Assets__c">
+                    </lightning-output-field>
+                </div>
+            </div>
+        </lightning-record-view-form>
+    </template>
+</template>

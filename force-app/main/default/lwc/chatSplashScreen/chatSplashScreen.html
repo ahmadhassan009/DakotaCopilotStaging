@@ -1,0 +1,25 @@
+<template>
+    <template if:false={buttonClicked}>  
+        <div class="splash-main">
+            <div class="splash-bot-div">
+                <img src={botSplashImg} />
+            </div>
+            <div class="splash-text">
+                Welcome to Dakota Copilot!
+            </div>
+            <div class="button-div">
+                <button class= "get-started-button"
+                onclick={handleGetStartedButton}>Get Started
+                </button>
+            </div>
+            <div class="dakota-marketplace-img">
+                <img src={marketplaceImg} />
+            </div>
+        </div>
+    </template>
+    <template if:true={buttonClicked}>
+        <div class="bg">
+            <c-chat-how-can-we-help-you class="msgs-box-how-can-we"></c-chat-how-can-we-help-you>
+        </div>    
+    </template>
+</template>

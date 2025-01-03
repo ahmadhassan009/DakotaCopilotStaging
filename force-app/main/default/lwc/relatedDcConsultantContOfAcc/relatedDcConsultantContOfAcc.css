@@ -1,0 +1,47 @@
+.headerSyle
+{
+    display: block;
+    height: fit-content;
+}
+
+.layoutWidth
+{
+    width: 100%;
+}
+
+.headingStlye
+{
+    font-weight: bold;
+}
+
+.iconColor
+{
+    background-color: #ea70b1;
+}
+.viewAllAlignment {
+    text-align: center;
+}
+
+.help-text-container {
+    display: flex;
+    align-items: center;
+}
+.help-text {
+    margin-left: 0.5rem;
+    color: #999;
+}
+.lightningLayoutItemWidth {
+    width:100%;
+}
+
+.articleDivStyling {
+    padding-top:3px; 
+    padding-bottom:3px
+}
+.countStyling
+{
+    padding-left:16px;
+}
+.emptyListStyling {
+    text-align: center;margin-top: 5px; margin-bottom: 5px;
+}

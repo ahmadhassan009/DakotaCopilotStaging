@@ -1,0 +1,36 @@
+.record-container{
+    border-radius: 8px;
+    border: 1px solid #dcdcdc; /* Add border color */
+    overflow: hidden; /* Ensure the radius applies to the content */
+}
+.total-records-container{
+    width: 100%;
+    height: 32px;
+    background-color: rgb(243, 243, 243);
+    align-items: center;
+    display: flex;
+    padding-left: 8px;
+    gap: 2px;
+}
+
+lightning-datatable::part(base) {
+    overflow-x: auto; /* Allow horizontal scrolling */
+}
+
+/* Horizontal scrollbar customization */
+lightning-datatable::part(base)::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+lightning-datatable::part(base)::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+lightning-datatable::part(base)::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+lightning-datatable::part(base)::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}

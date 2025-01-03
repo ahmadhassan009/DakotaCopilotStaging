@@ -1,0 +1,145 @@
+<template>
+    <template if:true={hasPermission}>
+    <lightning-layout>
+        <lightning-layout-item size="12" class="layout-div">
+            <article class="slds-card slds-card_boundary">
+                <div class="slds-grid slds-page-header forceRelatedListCardHeader article-div">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate header-static-posisiton">
+                        <div class={headerPosition}>
+                            <div class="slds-media__figure header-icon-position">
+                                <lightning-icon size="small" icon-name="custom:custom18" alternative-text="Notes" title="Notes"></lightning-icon>
+                            </div>
+                            <div class="notes-label">
+                                <h2 class="slds-card__header-title">
+                                    <a class="slds-card__header-link" onclick={handleShowFullRelatedList} style="font-weight: bold">
+                                        <span>Notes</span>
+                                        <span> ({totalRecords})</span>
+                                    </a>
+                                </h2>
+                            </div>
+                        </div>
+                            <div style= "margin:auto;">
+                                    <button class="slds-button slds-button_neutral " onclick={openCreateModal} >New Note</button>
+                            </div>
+                    </header>
+                </div>
+                <template if:true={recordsExists}> 
+                    <div >
+                            <c-custom-datatable 
+                                columns={columns}
+                                onrowaction={handleRowAction}
+                                data={data} 
+                                key-field="Id"  
+                                show-row-number-column="true" 
+                                enable-infinite-loading="false" 
+                                wrap-text-max-lines = "5"
+                                hide-checkbox-column
+                                default-sort-direction={defaultSortDirection}
+                                sorted-direction={sortedDirection}
+                                sorted-by={sortedBy}
+                                onsort={updateColumnSorting}>
+                            </c-custom-datatable>
+                    </div>
+                    <footer class="slds-card__footer">
+                        <a onclick={handleShowFullRelatedList}>View All</a>
+                        <span class="slds-assistive-text">entity type</span>
+                    </footer>
+                </template>
+            </article>
+        </lightning-layout-item>
+    </lightning-layout>
+    <!-- Create Notes -->
+    <div class="slds-m-around--xx-large modal-popup">
+    <template if:true={showCreateModal}>
+        <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+            <div class="slds-modal__container modal-container"  role="document" tabindex="0"> 
+                
+                <header class="slds-modal__header">
+                    <h2  class="slds-text-heading_medium slds-hyphenate">Create Notes</h2>                   
+                </header>
+                <template if:false={areDetailsVisible}>
+                    <div>
+                        <div class="slds-spinner--brand  slds-spinner slds-spinner--medium slds-is-relative" role="alert">
+                        <span class="slds-assistive-text">Loading...</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </template>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content modal-content"> 
+                    <c-create-new-note parent-record-id={recordId} is-account={isAccount} is-contact={isContact} onrecordviewload={recordViewHandler}  onclosemodal={closeCreateModal} onsaverecord={handleSuccess}></c-create-new-note>
+                </div>
+                
+            
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    </div>
+    <!-- Edit Notes -->
+    <div class="slds-m-around--xx-large modal-popup">
+        <template if:true={showEditModal}>
+            <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                <div class="slds-modal__container modal-container" role="document" tabindex="0"> 
+
+                    <header class="slds-modal__header">
+                        <h2  class="slds-text-heading_medium slds-hyphenate">Edit Notes</h2>                   
+                    </header>
+                    <template if:false={areDetailsVisible}>
+                        <div>
+                            <div class="slds-spinner--brand  slds-spinner slds-spinner--medium slds-is-relative" role="alert">
+                            <span class="slds-assistive-text">Loading...</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content modal-content"> 
+                        <c-create-new-note  record-id={editNoteId} is-account={isAccount} is-contact={isContact} onrefreshtable={refreshTable} onrecordviewload={recordViewHandler} onclosemodal={closeEditModal} onsaverecord={handleSuccess}></c-create-new-note>
+
+                    </div>
+                    
+                </div>
+         
+               
+            </div>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        </div>
+    <!-- DELETE POPUP  -->
+    <div class="slds-m-around--xx-large modal-popup">
+        <template if:true={deletePopup}>    
+                 
+        <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+            <div class="slds-modal__container"  role="document" tabindex="0">                   
+                <div class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Note</h2>                   
+                </div>
+                <div class="slds-modal__content slds-p-around--medium">                    
+                    <form class="slds-form--stacked">
+                        <div class="slds">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col--padded slds-medium-size--1-of-2">
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__control">
+                                            Are you sure you want to delete this Note?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeDeletePopup}></lightning-button>
+                    <lightning-button variant="brand" label="Delete" onclick={deleteRow}></lightning-button>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </template>
+    </div>
+</template>
+</template>

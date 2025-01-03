@@ -1,0 +1,11 @@
+.comments-icn {
+    --sds-c-icon-color-foreground-default: white;
+}
+
+.toasMsgStyling {
+    height: 4rem;
+    position: fixed;
+    top: 4%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

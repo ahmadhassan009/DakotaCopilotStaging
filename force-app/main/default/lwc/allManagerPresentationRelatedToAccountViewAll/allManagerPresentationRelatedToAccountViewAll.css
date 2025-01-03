@@ -1,0 +1,27 @@
+.dataTableDiv {
+    height: 760px;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+}
+
+.gridStyle {
+    display:flex
+}
+
+.topStyling {
+    border: 0;
+    box-shadow: none;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+}
+
+.cstm_spinner {
+    top: 13px !important;
+    right: 25px !important;
+    bottom: 14px !important;
+    left: 25.5px !important;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    border: 0;
+    box-shadow: none;
+}

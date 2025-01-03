@@ -1,0 +1,61 @@
+<template>
+    <div class="slds-page-header" role="banner">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate headerStyle">
+                <div class="slds-media__body slds-align-middle">
+                    <nav role="navigation" aria-label="Breadcrumbs">
+                        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                            <li class="slds-breadcrumb__item slds-line-height--reset"><a
+                                    href={accountNameLink}>Account</a></li>
+                            <li class="slds-breadcrumb__item slds-line-height--reset"><a
+                                    href={recordLink}>{recordName}</a></li>
+                        </ol>
+                    </nav>
+                    <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle"
+                        title="List View"><span>Alumni ( {offset}{plusSign} )</span></h1>
+                </div>
+                <div class="slds-m-right_x-small lgc--bg">
+                    <lightning-button-menu alternative-text="Show menu" variant="border-filled"
+                        icon-name="utility:settings" menu-alignment="right" class="slds-m-left_xx-large">
+                        <lightning-menu-item value="MenuItemOne" label="LIST VIEW CONTROLS"></lightning-menu-item>
+                        <lightning-menu-item class=".slds-has-focus" value="MenuItemTwo" label="Reset Column Widths"
+                            disabled="true"></lightning-menu-item>
+                    </lightning-button-menu>
+                </div>
+                <div class="slds-m-right_xx-small">
+                    <div class="slds-button-group">
+                        <button name="refreshButton" title="Refresh" type="button"
+                            class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={refreshTable}>
+                            <svg focusable="false" data-key="refresh" aria-hidden="true" class="slds-button__icon">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.37.1#refresh">
+                                </use>
+                            </svg>
+                            <span class="slds-assistive-text">Refresh</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner> 
+    </template>
+    <div class="dataTableHeight">
+        <lightning-datatable
+            key-field="Id"
+            data={educationRecords}
+            columns={columns}
+            show-row-number-column="true" 
+            enable-infinite-loading="true"
+            hide-checkbox-column 
+            default-sort-direction={defaultSortDirection}
+            sorted-direction={sortedDirection}
+            sorted-by={sortedBy}
+            onsort={updateColumnSorting}
+            onloadmore={loadMoreData} 
+            load-more-offset="50">
+        </lightning-datatable>
+    </div>
+</template>

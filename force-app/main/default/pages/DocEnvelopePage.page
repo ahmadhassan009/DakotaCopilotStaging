@@ -1,0 +1,5 @@
+<apex:page standardController="zqu__Quote__c" extensions="QuoteControllerLightning" action="{!autoRun}">  
+<apex:sectionHeader title="Open DocuSign Envelope Page and Pop Page"/>   
+<apex:outputPanel > You tried calling the an Apex Controller from a button.  If you see this page, something went wrong. Print this page and send the error to HDNotifier.  
+</apex:outputPanel> 
+</apex:page>

@@ -1,0 +1,61 @@
+<template>
+    <article class="slds-card slds-p-left_medium slds-p-top_medium slds-p-bottom_medium article-radius">
+        <div class="slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate" style="display: block;">
+                <nav role="navigation" aria-label="Breadcrumbs">
+                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <li class="slds-breadcrumb__item slds-line-height--reset"><a href={homeLink}>Back To Home</a></li>
+                    </ol>
+                </nav>
+                <div style="display:flex;"> 
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <b><div style="font-size: large;">{objectTitle}
+                            <span> ({offset}{plusSign})</span></div></b>
+                        </h2>
+                    </div>
+                </div>
+            </header>
+        </div> 
+        </br>
+        <div class="scrollContainer" onscroll={handleScroll}>
+            <div class="scrollArea">
+                <template for:each={commentss} for:item="comment">
+                    <div class="comm-div-display" key={comment.Id}>
+                        <div class="slds-grid slds-wrap comment-section" >
+                            <div>
+                                <lightning-icon size="medium" icon-name="standard:user" alternative-text={objectTitle} class="slds-m-right_small"></lightning-icon>
+                            </div>
+                            <div  class="comment-div">
+                                <p><b><lightning-formatted-url value={comment.accURL} label={comment.accountName} target="_self"></lightning-formatted-url></b>  <template if:true = {comment.accountName}> (Account) <template if:true = {comment.accountAccountType}>| <b>{comment.accountAccountType}</b></template>
+                                                                                                                    <template if:true = {comment.accountAccountAum}> | <b>${comment.accountAccountAum}</b></template> 
+                                                                                                                    <template if:true = {comment.accountAccountMetroArea}> | <b>{comment.accountAccountMetroArea}</b></template>
+                                                                                                                    </template></p>
+                                <p><b><lightning-formatted-url value={comment.conURL} label={comment.contactName} target="_self"></lightning-formatted-url></b>  <template if:true = {comment.contactName}> (Contact) <template if:true = {comment.contactAccountName}>| <b>{comment.contactAccountName}</b></template>
+                                                                                                                    <template if:true = {comment.contactAccountType}> | <b>{comment.contactAccountType}</b></template>
+                                                                                                                    <template if:true = {comment.contactAccountAum}> | <b>${comment.contactAccountAum}</b></template>
+                                                                                                                    <template if:true = {comment.contactAccountMetroArea}> | <b>{comment.contactAccountMetroArea}</b></template>
+                                                                                                                    </template></p>
+                                <p><lightning-formatted-text value={comment.name} ></lightning-formatted-text></p>
+                                <div class="slds-m-top_xxx-small">
+                                    <p style="font-size:0.88em;color:blue;">by <b> Anonymous </b>On {comment.commentTime}</p>
+                                </div>
+                                <template if:true={comment.approvalNotes}>
+                                    <p class="approval-notes-style">{comment.approvalNotes}</p>
+                                    <template if:true={comment.approvalNotesDate}>
+                                        <p class="approval-notes-date">
+                                            by <b>Dakota </b>
+                                            On {comment.approvalNotesDate}
+                                        </p>
+                                    </template>
+                                </template>
+                                <div class="slds-border_bottom borderMargin">
+                                </div>
+                            </div>
+                        </div> 
+                    </div>   
+                </template>
+            </div>
+        </div>
+    </article>  
+</template>

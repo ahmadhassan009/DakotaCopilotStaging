@@ -1,0 +1,73 @@
+<template>
+    <template if:true={fsRecordsExists}>
+    <lightning-layout>
+        <lightning-layout-item size="12" style="width:100%">
+            <article class="slds-card slds-card_boundary">
+                <div class="slds-grid slds-page-header forceRelatedListCardHeader" style="display:block; height:fit-content;">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure">
+                            <lightning-icon size="small" icon-name="custom:custom13" alternative-text="Fee Schedule">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <h2 class="slds-card__header-title">
+                                <a class="slds-card__header-link" onclick={handleShowFullRelatedList} style="font-weight: bold">
+                                    <span>Fee Schedules</span>
+                                    <span> ({offset}{plusSign})</span>
+                                </a>
+                            </h2>
+                        </div>
+                        
+                        <template if:false={isCommunity}> 
+                            <div class="slds-m-right_x-small lgc--bg">
+                                <lightning-button-menu alternative-text="Show menu"   variant="border-filled" icon-name="utility:settings" menu-alignment="right" class="slds-m-left_xx-large">
+                                    <lightning-menu-item  value="MenuItemOne" label="LIST VIEW CONTROLS" ></lightning-menu-item>
+                                    <lightning-menu-item class=".slds-has-focus" value="MenuItemTwo" label="Reset Column Widths" disabled="true" ></lightning-menu-item>
+                                </lightning-button-menu>
+                            </div>
+                            <div class="slds-m-right_xx-small">
+                                <div class="slds-button-group">
+                                    <button name="refreshButton" title="Refresh" type="button" class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={refreshTable}>
+                                        <svg  focusable="false" data-key="refresh" aria-hidden="true" class="slds-button__icon">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.37.1#refresh"></use>
+                                        </svg>
+                                        <span class="slds-assistive-text">Refresh</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                       
+                    </header>
+                </div>
+                
+                <template if:false={collapsed}>
+                <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium">
+                        </lightning-spinner> 
+                </template>
+                    <div >
+                       <lightning-datatable
+                            class="relate-list"
+                            key-field="UniqueVal"
+                            data={feeScheduleRecords}
+                            columns={columns}
+                            show-row-number-column="true" 
+                            enable-infinite-loading="false"
+                            hide-checkbox-column 
+                            default-sort-direction={defaultSortDirection}
+                            sorted-direction={sortedDirection}
+                            sorted-by={sortedBy}
+                            onsort={updateColumnSorting}>
+                        </lightning-datatable>
+                    </div>
+                <footer class="slds-card__footer ">
+                    <a onclick={handleShowFullRelatedList}>View All</a>
+                    <span class="slds-assistive-text">entity type</span>
+                </footer>
+            </template>
+            
+            </article>
+        </lightning-layout-item>
+    </lightning-layout>
+    </template>
+</template>

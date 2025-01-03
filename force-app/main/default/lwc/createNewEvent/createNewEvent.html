@@ -1,0 +1,92 @@
+<template>
+    <div class="spinner-position div-width slds-col slds-size_1-of-1 slds-large-size_8-of-12">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" variant="brand">
+            </lightning-spinner>
+        </template>
+            <table> 
+                <tr>
+                    <td colspan="2" >
+                        <section class="test-id__section-header-container slds-section__title slds-theme--shade slds-m-bottom_small title-background">
+                            <h3 class="slds-p-horizontal--small">Event Information</h3>
+                        </section>
+                    </td> 
+                </tr>
+                <tr>
+                    <td class="child-width td-child1" >
+                        <label class="slds-form-element__label labels-color">
+                            <abbr class="slds-required" title="required">*</abbr>
+                            Subject
+                        </label>
+                        <lightning-combobox
+                            name="progress"
+                            value={selectedSubject}
+                            variant="label-hidden"
+                            options={subjectVals}
+                            class="custom-combo-style"
+                            onchange={handleSubjectChange} 
+                            required >
+                        </lightning-combobox>
+                    </td>
+                    <td class="child-width td-child2">
+                        <label class="slds-form-element__label labels-color">
+                            <abbr class="slds-required" title="required">*</abbr>
+                            Setup By
+                        </label>
+                        <template if:true={isUserSelected}>
+                            <c-custom-lookup style={isError} obj-name="User" is-value-selected={isUserSelected} selected-name={selectedUserName} records={allUserRecords} all-records={allUserRecords} search-placeholder="Search People..." icon-name="standard:user" onlookupselected={handleUserSelection}> </c-custom-lookup>
+                            <template if:true={isUserEmpty}>
+                                <div class="slds-form-element__help lookup-error" id="help-text-327" data-help-text="" aria-live="assertive">Complete this field.</div>
+                            </template>
+                        </template>
+                    </td>
+                </tr>
+                <template if:true={showRelatedContact}>
+                    <tr>
+                        <td class="child-width td-child1" >
+                            <label class="slds-form-element__label labels-color">Name</label>
+                            <c-multi-select-custom-lookup selected-conn-records={selectedContacts} object-name="Contact" icon-name="standard:contact" onselected={handleValueSelcted}></c-multi-select-custom-lookup>
+                        </td>
+                        <td class="child-width td-child2">
+                            <label class="slds-form-element__label labels-color">Related To</label>
+                            <template if:true={fromAccount}>
+                                <c-custom-lookup obj-name="Account" is-value-selected={isValueSelected} selected-name={selectedName} records={accountsData} search-placeholder="Search Accounts..." icon-name="standard:account" onlookupselected={handleAccountSelection}> </c-custom-lookup>
+                            </template>
+                            <template if:true={fromContact}>
+                                <c-custom-lookup obj-name="Account" is-value-selected={isValueSelected} selected-name={selectedName} records={accountsData} search-placeholder="Search Accounts..." icon-name="standard:account" onlookupselected={handleAccountSelection}> </c-custom-lookup>
+                            </template>
+                        </td>
+                    </tr>
+                </template>
+                <tr>
+                    <td class="child-width td-child1" >
+                        <h1 class="date-attr">
+                            <template if:true={onlyDate}>
+                                <abbr class="slds-required" title="required">*</abbr>
+                            </template>Start
+                        </h1>
+                        <lightning-input required value={selectedStartDate} variant={dateVariant} onchange={handleStartDateChange} type={dateFieldType} name="input1" ></lightning-input>
+                    </td>
+                    <td class="child-width td-child2" >
+                        <label class="slds-form-element__label labels-color">All-Day Event </label>
+                        <lightning-input  onchange={handleAllDayEventChange} checked={allDayEvent} type="checkbox" variant="label-hidden" name="input1"></lightning-input>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td class="child-width td-child1">
+                        <h1 class="date-attr">
+                            <template if:true={onlyDate}>
+                                <abbr class="slds-required" title="required">*</abbr>
+                            </template>End</h1>
+                        <lightning-input required value={selectedEndDate} variant={dateVariant} onchange={handleEndDateChange} type={dateFieldType} name="input1" ></lightning-input>
+
+                    </td>
+                    <td class="child-width td-child2">
+                        <lightning-textarea data-field="eventDescription" name="description" label="Description" value={eventDescription} ></lightning-textarea>
+
+                    </td>
+                </tr>
+            </table>
+    </div>
+</template>

@@ -1,0 +1,40 @@
+.groupedIcon span.slds-avatar.slds-avatar_small{
+	height : 100% !important;
+	line-height : 0;
+}
+
+c-manage-all-email-notifications-preferences > section > div > .slds-modal__content > lightning-tabset > div > lightning-tab-bar > ul > li {
+    margin-left: -7.05%;
+}
+
+c-manage-all-email-notifications-preferences > section > div > .slds-modal__content > lightning-tabset > div > lightning-tab-bar > ul > li > a {
+	font-weight: bold !important;
+}
+
+c-add-to-favorites-button > div > section > div > div > div > div > div > lightning-checkbox-group > fieldset > div > span > label > span:after {
+    border-bottom: var(--lwc-borderWidthThick,2px) solid var(--slds-c-checkbox-mark-color-foreground, var(--sds-c-checkbox-mark-color-foreground, white)) !important;
+    border-left: var(--lwc-borderWidthThick,2px) solid var(--slds-c-checkbox-mark-color-foreground, var(--sds-c-checkbox-mark-color-foreground, white)) !important;
+}
+
+c-add-to-favorites-button > div > section > div > div > div > div > div > lightning-checkbox-group > fieldset > div > span.slds-checkbox [type=checkbox]:checked+.slds-checkbox__label .slds-checkbox_faux {
+    --slds-c-checkbox-color-background: #627ecc !important;
+}
+
+c-manage-all-email-notifications-preferences > section > div > div > lightning-tabset > div > slot > lightning-tab > slot > div > div > div > lightning-checkbox-group > fieldset > div > span > label > span:after {
+    border-bottom: var(--lwc-borderWidthThick,2px) solid var(--slds-c-checkbox-mark-color-foreground, var(--sds-c-checkbox-mark-color-foreground, white)) !important;
+    border-left: var(--lwc-borderWidthThick,2px) solid var(--slds-c-checkbox-mark-color-foreground, var(--sds-c-checkbox-mark-color-foreground, white)) !important;
+}
+
+c-manage-all-email-notifications-preferences > section > div > div > lightning-tabset > div > slot > lightning-tab > slot > div > div > div > lightning-checkbox-group > fieldset > div > span.slds-checkbox [type=checkbox]:checked+.slds-checkbox__label .slds-checkbox_faux {
+    --slds-c-checkbox-color-background: #627ecc !important;
+}
+
+.slds-tabs_default__item.slds-active:after, .slds-tabs_default__item.slds-is-active:after, .slds-tabs--default__item.slds-active:after, .slds-tabs--default__item.slds-is-active:after {
+    background-color: #627ecc !important;
+}
+
+c-manage-all-email-notifications-preferences > section > div > .slds-modal__content > lightning-tabset lightning-tab-bar ul {
+    margin-left: 52px;
+    padding-top: 11px;
+    border-bottom-style: none !important;
+}

@@ -1,0 +1,63 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-page-header" role="banner">
+            <div class="slds-grid">
+                <div class="slds-col slds-has-flexi-truncate" style='display:flex'>
+                    <div class="slds-media__body slds-align-middle">
+                        <nav role="navigation" aria-label="Breadcrumbs">
+                            <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <li class="slds-breadcrumb__item slds-line-height--reset"><a
+                                        href={accountNameLink}>Account</a></li>
+                                <template if:true={recNameAvailable}>
+                                    <li class="slds-breadcrumb__item slds-line-height--reset"><a
+                                            href={recordLink}>{recordName}</a></li>
+                                </template>
+                            </ol>
+                        </nav>
+                        <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle"
+                            title="List View"><b>{listTypeName} ( {offset}{plusSign} )</b></h1>
+                    </div>
+                    <template if:true={is13FFiling}>
+                        <div class="searchOuterDiv">
+                            <div class="searchBoxMainDiv  search-in-list slds-m-left_large slds-is-relative ">
+                                <lightning-input onkeydown={checkEnterKeyPress} data-id="searchValue" name="searchValue"
+                                    onfocus={handleInputFocus} onblur={handleInputBlur} onchange={handleOnChange} placeholder="Search" type="search"
+                                    class="searchBoxStylig"></lightning-input>
+                                    <div data-id="searchToolTip" class="slds-popover slds-popover_tooltip slds-nubbin_top-left slds-is-absolute slds-m-top_x-small tooltip slds-fall-into-ground" role="tooltip" id="listviewSearchTooltip"><div class="slds-popover__body">Try Searching for Investment Name, Investment Strategy, Ticker, Asset Class, Sub-Asset Class Or Product Structure</div></div>
+                            </div>
+                        </div>
+                    </template>
+                  
+                    <div class="slds-m-right_x-small lgc--bg custom-margin">
+                    </div>
+                    <div class="slds-m-right_xx-small">
+
+                        <div class="slds-button-group">
+                            <button name="refreshButton" title="Refresh" type="button"
+                                class="slds-button slds-button_icon slds-button_icon-border-filled"
+                                onclick={refreshTable}>
+                                <svg focusable="false" data-key="refresh" aria-hidden="true" class="slds-button__icon">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.37.1#refresh">
+                                    </use>
+                                </svg>
+                                <span class="slds-assistive-text">Refresh</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium">
+            </lightning-spinner>
+        </template>
+        <div class='customViewAll' style="height: 550px">
+            <lightning-datatable columns={columns} data={relatedInvestmentRecords} key-field="Id"
+                show-row-number-column="true" hide-checkbox-column="true" default-sort-direction={defaultSortDirection}
+                sorted-direction={sortedDirection} sorted-by={sortedBy} onsort={updateColumnSorting}
+                enable-infinite-loading="true" wrap-text-max-lines="5" onloadmore={loadMoreData} load-more-offset="50">
+            </lightning-datatable>
+        </div>
+    </div>
+
+</template>

@@ -1,0 +1,57 @@
+<template>
+   <lightning-layout>
+      <lightning-layout-item size="12" style="width:100%">
+         <article class="slds-card lightning-card">
+            <div class="slds-grid slds-page-header forceRelatedListCardHeader" style="padding-top:3px; padding-bottom:3px">
+               <header class="slds-media slds-media_center slds-has-flexi-truncate ">
+                  <template if:false={collapsed}>
+                     <lightning-button-icon onclick={chevronButtonClicked} variant="border-filled" size="small" icon-name="utility:chevrondown"></lightning-button-icon>
+                  </template>
+                  <template if:true={collapsed}>
+                     <lightning-button-icon onclick={chevronButtonClicked} variant="border-filled" size="small" icon-name="utility:chevronright"></lightning-button-icon>
+                  </template>
+                  
+                  <div class="slds-media__body">
+                     <h2 class="slds-card__header-title">
+                           <span style="padding-left:16px">Map&nbsp;of&nbsp;{metroAreaName}</span>
+                     </h2>
+                  </div>
+                  <template if:false={isCommunity}>
+                     <div style = "position: absolute;right: 1%;">
+                        <lightning-button variant="Neutral" label="Clear All" title="Primary action with lighter look"  class="slds-m-left_x-small" onclick= {clearAllButtonClicked} ></lightning-button>
+                        <lightning-button variant="Neutral" label="Refresh" title="Primary action with lighter look"  class="slds-m-left_x-small" onclick= {refreshButtonClicked}  ></lightning-button>
+                     </div>
+                     <div>
+                     </div>
+                  </template>
+                  <template if:true={isCommunity}>
+                     <lightning-button variant="brand-outline" label="Clear&nbsp;All" title="Primary action with lighter look"  class="slds-m-left_x-small" onclick= {clearAllButtonClicked} style = "float:right"></lightning-button>
+                  </template>
+               </header>
+            </div>
+            <template if:false={collapsed}>
+               <lightning-map style = "height:500px" map-markers={mapMarkers} list-view="hidden" zoom-level={zoomlevel}  ></lightning-map>
+            </template>
+         </article>
+      </lightning-layout-item>
+   </lightning-layout>
+
+   <c-accounts-panel-metro-area onselectedallaccountsma={handleselectedAccounts} record-id={recordId}></c-accounts-panel-metro-area>
+   <c-contacts-home-office-in-metro-area onselectedcontactsma={handleselectedcontacts} record-id={recordId}></c-contacts-home-office-in-metro-area>  <!-- All Contacts -->
+   <c-contacts-home-office-not-in-metro-area onselectedcontacts={handleselectedcontacts} record-id={recordId}></c-contacts-home-office-not-in-metro-area>
+   
+   <c-account-type-related-list onitemregister={registerItem} onaccountlistupdated={handleAccountListUpdated} record-id={recordId}></c-account-type-related-list>
+   <template if:true={isMPState}>
+      <c-conferences-related-to-metro-area record-id={recordId}></c-conferences-related-to-metro-area>
+   </template>
+   <template if:true={isMPState}>
+      <template if:true={hideSearches}>
+         <c-marketplace-search-panel-metro-area onselectedsearchesma={handleselectedsearches} record-id={recordId}>
+         </c-marketplace-search-panel-metro-area>
+      </template>
+   </template>
+
+   <template if:true={isMPState}>
+      <c-dakota-content-panel-metro-area record-id={recordId}></c-dakota-content-panel-metro-area>
+   </template>
+</template>

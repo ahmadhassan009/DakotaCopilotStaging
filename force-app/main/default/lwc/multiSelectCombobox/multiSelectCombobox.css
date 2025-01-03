@@ -1,0 +1,34 @@
+.picklist-label-class {
+    display: flex; 
+    margin-left: 20px;
+}
+
+.eachItem:hover {
+    cursor: pointer;
+    background-color: rgb(243, 243, 243);
+}
+
+.lightning-icon-class {
+    margin-left: -16px; 
+    margin-top: 5px;
+}
+
+.div-selected-values {
+    margin-top: 5px;
+}
+
+.scroll-style {
+    overflow-y: overlay;
+}
+
+.icon-class {
+    padding-left: 4px;
+}
+
+.scroll-class {
+    border: 1px solid #d4d4d4;
+    overflow-y: auto;
+    height: 74px;
+    padding: 3px 5px 3px 5px;
+    border-radius: 5px;
+}

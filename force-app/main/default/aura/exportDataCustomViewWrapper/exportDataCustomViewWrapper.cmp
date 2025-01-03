@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute type="String" name="objectName"/>    
+    <aura:attribute name="exportCount" type="Integer"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>    
+    <div class="slds-card">
+        <c:exportDataCustomView objectName="{!v.objectName}" exportCount="{!v.exportCount}" onexportclick="{!c.handleExportClick}" onexportcount="{!c.handleExportCount}" />
+    </div>
+</aura:component>

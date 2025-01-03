@@ -1,0 +1,28 @@
+<template>
+    <template if:true={isLoaded}>
+        <div class="ui-widget">
+            <header class="forceHighlightsPanel forceCommunityRecordHeadline">
+                <div class="slds-page-header slds-page-header_record-home forceHighlightsStencilDesktop forceRecordLayout"
+                    style="height: 67.5px; left: 13px; right: 13px; padding-left: 16px; padding-right: 16px; border-radius: 4px;background:var(--slds-g-color-neutral-base-95, var(--lwc-pageHeaderColorBackground,rgb(243, 243, 243)));">
+                    <div class="slds-grid primaryFieldRow">
+                        <div class="slds-grid slds-col slds-has-flexi-truncate">
+                            <div class="profilePicWrapper slds-media slds-no-space">
+                                <lightning-icon size="medium" icon-name="standard:metrics"
+                                    class="performance_icon slds-media__figure slds-icon forceEntityIcon">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h1>
+                                    <div class="entityNameTitle slds-line-height_reset">
+                                        {sObjectLabel}</div>
+                                    <div class="slds-page-header__title slds-m-right--small slds-align-middle clip-text slds-line-clamp"
+                                        title={recordName}><span class="uiOutputText">{recordName}</span></div>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+    </template>
+</template>

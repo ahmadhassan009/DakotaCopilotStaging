@@ -1,0 +1,38 @@
+<template>
+    <div class="mainBody">
+        <template if:true={isNewFeatureVideoAvailable}>
+            <template if:true={isValidURL}>
+                <div class="slds-m-around_medium slds-p-around_small videoDivStyling">
+                    <div class="parent-div-styling">
+                        <button class="slds-button slds-button_icon button-group" title="Full Screen"
+                            onclick={openFullScreen}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="full-screen-styling">
+                                            <use href={svgURL}></use>
+                                        </svg>
+                        </button>
+                        <iframe width="100%" height="350px" class="iframeStyling"
+                            src={newFeatureVideoUrl}></iframe>
+                    </div>
+                </div>
+            </template>
+            <template if:false={isValidURL}>
+                <div>
+                </br>
+                <strong>
+                    <p style="text-align: center; color: grey;"> Invalid URL.</p>
+                </strong>
+                </br>
+            </div>
+            </template>
+        </template>
+        <template if:false={isNewFeatureVideoAvailable}>
+            <div>
+                </br>
+                <strong>
+                    <p class="videoMsgStyling"> No demo available.</p>
+                </strong>
+                </br>
+            </div>
+        </template>
+    </div>
+</template>

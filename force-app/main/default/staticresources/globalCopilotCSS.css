@@ -1,0 +1,64 @@
+/*This CSS file defines custom styles for a Salesforce Lightning component for Global Copilot, 
+focusing on dimensions of global modal elements. */
+
+.cstm-card-global-action > article {
+    border: none;
+    box-shadow: none;
+}
+
+.global_copilot_cirra_icon {
+    height: 32px;
+    width: 32px;
+    padding: 2px 3px 3px 2px;
+}
+
+/*Making the global copilot modal wider when maximized.*/
+.global_copilot_container > .slds-modal__container {
+    max-width: 100% !important;
+}
+
+/*Increase the dimension's of global copilot horizontally and vertically.*/
+.panel.scrollable.slds-docked-composer.slds-grid.slds-grid--vertical.global_copilot_content_dimensions.slds-is-open {
+    height: 72vh !important;
+    /* width: 50vh !important; */
+}
+
+/*Making the global copilot modal wider when maximized.*/
+.global_copilot_container > .slds-modal__container > .slds-modal__content > .panel.scrollable.slds-docked-composer.slds-grid.slds-grid--vertical.global_copilot_content_dimensions {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+/*Make sure there is only one scroll once chat reaches a specific height.*/
+.global_copilot_container > .slds-modal__container > .slds-modal__content {
+    overflow-y: hidden !important;
+}
+
+/* Custom style sheet for modifying elements within the nested Admin Copilot in Global Copilot*/
+.global_copilot_content_dimensions .cuf-content.scrollable {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.global_copilot_content_dimensions .menu-button-icon,
+.global_copilot_content_dimensions .new-chat-button {
+    margin-left: 0.5rem !important;
+}
+
+.cstm-card-global-action .chat-expanded {
+    padding-right: var(--lwc-spacingSmall, 0.75rem) !important;
+    padding-left: var(--lwc-spacingSmall, 0.75rem) !important;
+}
+
+.global_copilot_content_dimensions .menu-button-icon.disabled {
+    pointer-events: none !important;
+}
+
+.global_copilot_container > .slds-modal__container > .slds-modal__content .menu-button-icon,
+.global_copilot_container > .slds-modal__container > .slds-modal__content .new-chat-button {
+    margin-left: 1.25rem !important;
+}
+
+.global_copilot_container > .slds-modal__container > .slds-modal__content .menu-bar-collapsed {
+    width: 5.5% !important;
+}

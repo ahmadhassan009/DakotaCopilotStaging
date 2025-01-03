@@ -1,0 +1,160 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-backdrop">
+        <div class="slds-modal__container" tabindex="-1"
+            onclick={stopPropagation}>
+            <div class="slds-modal__header slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 content_right">
+                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate h1_styling">My Email Notifications</h1>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 icon_div">
+                        <lightning-icon class="cross-icon1" icon-name="utility:close" size="x-small"
+                            alternative-text="Indicates close" onclick={closeNotificationPopup}>
+                        </lightning-icon>
+                    </div>
+            </div>
+            <div class="slds-modal__content" onclick={stopPropagation}>
+                <template if:true={isPreferenceLoading}>
+                    <div>
+                        <lightning-spinner alternative-text="Loading" size="medium" variant='brand' class='spinner'></lightning-spinner>
+                    </div>
+                </template>
+                <lightning-tabset>
+                    <lightning-tab style="padding-left:4%;" label="SELECTIONS">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div style="display: flex;" class="left-column">
+                                    <div class="slds-form-element cstm_padding_styling">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                            <input type="checkbox" name="checkbox-toggle-16" checked={isAccountToggleOn} onchange={handleAccountToggleClick}/>
+                                            <span id="checkbox-toggle-16" class="slds-checkbox_faux_container">
+                                                <span data-id="account-toggle" class="slds-checkbox_faux cstm_sizing"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h1 style="margin-top: 9px;font-weight: bold;font-size: 13px; padding-left: 1rem;">Accounts</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="searchesRightColumn">
+                                    <lightning-checkbox-group name="LeftAccounts" options={accountUpdatesLeftOptions}
+                                        value={accountsUpdateValues} onchange={handleAccountUpdatesChange}>
+                                    </lightning-checkbox-group>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="searchesRightColumn">
+                                    <lightning-checkbox-group name="RightAccounts" options={accountUpdatesRightOptions}
+                                        value={accountsUpdateValues} onchange={handleAccountUpdatesChange}>
+                                    </lightning-checkbox-group>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin-top: 11px;margin-bottom: 2px;" />
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div style="display: flex;" class="left-column">
+                                    <div class="slds-form-element cstm_padding_styling">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                            <input type="checkbox" name="checkbox-toggle-16" checked={isContactToggleOn} onchange={handleContactToggleClick}/>
+                                            <span id="checkbox-toggle-17" class="slds-checkbox_faux_container">
+                                                <span data-id="contact-toggle" class="slds-checkbox_faux cstm_sizing"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h1 style="margin-top: 9px;font-weight: bold;font-size: 13px; padding-left: 1rem;">Contacts</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="searchesRightColumn">
+                                    <lightning-checkbox-group name="LeftContacts" options={contactUpdatesLeftOptions}
+                                        value={contactsUpdateValues} onchange={handleContactUpdatesChange}>
+                                    </lightning-checkbox-group>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="searchesRightColumn">
+                                    <lightning-checkbox-group name="RightContacts" options={contactUpdatesRightOptions}
+                                        value={contactsUpdateValues} onchange={handleContactUpdatesChange}>
+                                    </lightning-checkbox-group>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin-top: 11px;margin-bottom: 2px;" />
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div style="display: flex;" class="left-column">
+                                    <div class="slds-form-element cstm_padding_styling">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                            <input type="checkbox" name="checkbox-toggle-16" checked={isSearchToggleOn} onchange={handleSearchToggleClick}/>
+                                            <span id="checkbox-toggle-18" class="slds-checkbox_faux_container">
+                                                <span data-id="search-toggle" class="slds-checkbox_faux cstm_sizing"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h1 style="margin-top: 9px;font-weight: bold;font-size: 13px; padding-left: 1rem;">Searches</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="searchesRightColumn">
+                                    <lightning-checkbox-group name="LeftSearches" options={searchesUpdatesLeftOptions}
+                                        value={searchesUpdateValues} onchange={handleSearchesUpdateChange}>
+                                    </lightning-checkbox-group>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="searchesRightColumn">
+                                    <lightning-checkbox-group name="RightSearches" options={searchesUpdatesRightOptions}
+                                        value={searchesUpdateValues} onchange={handleSearchesUpdateChange}>
+                                    </lightning-checkbox-group>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                </lightning-tabset>
+
+            </div>
+            <div class="slds-modal__footer">
+                <lightning-button style="margin-right: 10px;" label="Cancel"
+                    onclick={closeNotificationPopup}></lightning-button>
+                <button class="slds-button slds-button_brand" onclick={savePreferences}
+                    title="Apply Changes">Apply Changes</button>
+            </div>
+        </div>
+    </section>
+    <!-- ***********custom toast msg**********  -->
+    <template if:true={showToast}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="toasMsgStyling">
+                <div class="slds-notify_container slds-is-relative">
+                    <div class={toastMsgClasses} role="status">
+                        <span class="slds-assistive-text">success</span>
+                        <span class={toastMsgIconClasses} title="Description of icon when needed">
+                            <lightning-icon size="medium" icon-name={iconName} alternative-text={alternativeText}
+                                title={title} class="comments-icn"></lightning-icon>
+                        </span>
+                        <div class="slds-notify__content">
+                            <h3 class="slds-text-heading_small ">{toastmessage}</h3>
+                        </div>
+                        <div class="slds-notify__close">
+                            <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close"
+                                onclick={closeToast}>
+                                <lightning-icon size="small" icon-name="utility:close" alternative-text="Close"
+                                    title="Close" class="comments-icn"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+</template>

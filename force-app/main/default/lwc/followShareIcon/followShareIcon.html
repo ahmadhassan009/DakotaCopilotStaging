@@ -1,0 +1,83 @@
+<template>
+    <div class="cstm_btn_styling">
+        <template if:false={hideFollowButton}>
+        <button class="slds-button slds-button_neutral cstm_follow_btn_div" title="Follow"
+            disabled={isFollowButtonDisabled} onclick={addOrRemoveFollowedRecord}>
+            <template if:true={isRecordFollowed}>
+                <lightning-icon data-id="followedIcon" icon-name="utility:check" size="x-small" class="fav_icon_class slds-p-right--xx-small">
+                </lightning-icon>
+            </template>
+            <template if:false={isRecordFollowed}>
+                <lightning-icon data-id="followIcon" icon-name="utility:add" size="x-small" class={cls}>
+                </lightning-icon>
+            </template>
+            <span class="cstm_follow_btn_span">Follow</span>
+        </button>
+    </template>
+        <button class="slds-button slds-button_neutral cstm_share_button" title="Share"
+            onclick={openSharePopUp}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="img_styling">
+                            <use href={imgPath}></use>
+                        </svg>
+            <span class="cstm_share_btn_span">Share</span>
+        </button>
+    </div>
+
+    <template if:true={sharePopup}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-backdrop--open slds-backdrop ">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                    onclick={handleclosepopup}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <c-share-record-link-with-other-m-p-users is-home-page="true" record-id={recordId}
+                    onclosepopup={handleclosepopup}></c-share-record-link-with-other-m-p-users>
+            </div>
+        </section>
+    </template>
+    <!-- <template if:true={followPopup}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-backdrop--open slds-backdrop ">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                    onclick={handlecloseFollowpopup}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <c-follow-modal record-id={recordId} onclosefollowpopup={handlecloseFollowpopup}></c-follow-modal>
+            </div>
+        </section>
+    </template> -->
+    <!-- ***********custom toast msg**********  -->
+    <template if:true={showToastFlag}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="toastMsgStyling">
+                <div class="slds-notify_container slds-is-relative">
+                    <div class={toastMsgClasses} role="status">
+                        <span class="slds-assistive-text">success</span>
+                        <span class={toastMsgIconClasses} title="Description of icon when needed">
+                            <lightning-icon size="medium" icon-name={iconName} alternative-text={alternativeText}
+                                title={title} class="comments-icn"></lightning-icon>
+                        </span>
+                        <div class="slds-notify__content">
+                            <h3 class="slds-text-heading_small ">{toastMessage}</h3>
+                        </div>
+                        <div class="slds-notify__close">
+                            <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close"
+                                onclick={closeToast}>
+                                <lightning-icon size="small" icon-name="utility:close" alternative-text="Close"
+                                    title="Close" class="comments-icn"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</template>

@@ -1,0 +1,122 @@
+c-metro-area-accordion-view .searchDiv .slds-input {
+    line-height: 20px;
+    padding: 0 32px;
+    min-height: 32px;
+    font-size: 12.5px;
+}
+
+c-metro-area-accordion-view .searchDiv svg.slds-input__icon.slds-input__icon_left.slds-icon-text-default {
+    width: 14px;
+    height: 14px;
+    margin-top: -7px;
+    left: 12px;
+}
+
+c-metro-area-accordion-view .searchDiv .slds-button {
+    line-height: 30px;
+    padding: 0 16px;
+    font-size: 13px;
+}
+
+c-metro-area-accordion-view .slds-table_bordered,
+c-metro-area-accordion-view .slds-table--bordered {
+    border-bottom: none !important;
+}
+
+c-metro-area-accordion-view button.slds-button.slds-button_icon.slds-button_icon-border {
+    border: none;
+    height: auto;
+}
+
+/* line height between rows of data table */
+c-metro-area-accordion-view table[role="grid"].slds-table tbody th,
+c-metro-area-accordion-view table[role="grid"].slds-table tbody td {
+    line-height: 29px !important;
+}
+
+c-metro-area-accordion-view table[role="grid"].slds-table tbody th {
+    /* Add space to the left of metro area records */
+    padding-left: 25px;
+}
+
+c-metro-area-accordion-view .selectedFavIcon {
+	stroke-width: 44px;
+    stroke: #00bf58;
+}
+
+c-metro-area-accordion-view .addIconStyling {
+    background-color: #eaeaea;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    padding-top: 4px;
+	width: 20px;
+    height: 20px;
+}
+
+c-metro-area-accordion-view .slds-media__body.slds-m-left--x-small {
+    margin-left: 0px !important
+}
+
+/* hide the column dividers in data table */
+c-metro-area-accordion-view .slds-table_col-bordered td+td,
+c-metro-area-accordion-view .slds-table_col-bordered th+th,
+c-metro-area-accordion-view .slds-table_col-bordered th+td,
+c-metro-area-accordion-view .slds-table_col-bordered td+th,
+c-metro-area-accordion-view .slds-table--col-bordered td+td,
+c-metro-area-accordion-view .slds-table--col-bordered th+th,
+c-metro-area-accordion-view .slds-table--col-bordered th+td,
+c-metro-area-accordion-view .slds-table--col-bordered td+th {
+    border-left: hidden;
+}
+
+/* Add space to the left of metro area column headers */
+c-metro-area-accordion-view table[role="grid"].slds-table thead tr th:nth-child(1) span a {
+    padding-left: 25px;
+}
+
+c-metro-area-accordion-view .slds-table_header-fixed_container.slds-scrollable_x {
+    overflow: hidden !important;
+}
+
+
+c-multi-select-combobox .div-selected-values span.slds-pill {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: -4px;
+}
+
+
+/* Hide borders around button icons */
+c-metro-area-accordion-view .chevronDownClass button.slds-button:focus {
+    box-shadow: none;
+}
+
+c-metro-area-accordion-view .editIconClass button.slds-button_icon:active {
+    box-shadow: none;
+}
+
+c-metro-area-accordion-view .editIconClass button.slds-button_icon:focus {
+    box-shadow: none;
+}
+
+c-metro-area-accordion-view .editIconClass button.slds-button:focus-visible {
+    outline-color: white;
+}
+
+c-metro-area-accordion-view .deleteIconClass button.slds-button_icon:active {
+    box-shadow: none;
+}
+
+c-metro-area-accordion-view .deleteIconClass button.slds-button_icon:focus {
+    box-shadow: none;
+}
+
+c-metro-area-accordion-view .deleteIconClass button.slds-button:focus-visible {
+    outline-color: white;
+}
+c-metro-area-accordion-view .listViewDiv table tbody tr:first-child th a[title='All'] {
+    font-weight: 1000;
+}
+

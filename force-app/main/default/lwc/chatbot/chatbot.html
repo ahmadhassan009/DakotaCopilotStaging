@@ -1,0 +1,16 @@
+<template>
+    <div class="bg">
+        <div class="titleBar">
+            <p class="title">Dakota Copilot</p>
+            <div class="icon-container">
+                <button class="icon-button" title="Minimize" data-id="minimize" onclick={handleCloseClick}>
+                    <span class="icon">−</span>
+                </button>
+                <button class="icon-button" title="Close" data-id="close" onclick={handleCloseClick}>
+                    <span class="icon">×</span>
+                </button>
+            </div>
+        </div>
+        <c-chat-splash-screen class="mainComponent"></c-chat-splash-screen>
+    </div>
+</template>

@@ -1,0 +1,36 @@
+<template>
+    <div style="background: white; border-radius: 4px;" >
+        <template if:true={isDakotaContentVideoAvailable}>
+            <template if:true={isValidURL}>
+                <div style="margin: 0 auto;" class="slds-m-around_medium slds-p-around_small">
+                    <div class = "parent-div-styling-content-video">
+                        <button class="slds-button slds-button_icon button-group-content-video" title="Full Screen" onclick={openFullScreen}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="full-screen-styling-content-video">
+                                <use href={svgURL}></use>
+                            </svg>
+                        </button>
+                        <iframe width="100%" height="280px" style="margin: 0 auto; display: block;" src={dakotaContentVideoURL} sandbox="allow-scripts allow-same-origin"></iframe>
+                    </div>
+                </div>
+            </template>
+            <template if:false={isValidURL}>
+                <div>
+                </br>
+                <strong>
+                    <p style="text-align: center; color: grey;"> Invalid URL.</p>
+                </strong>
+                </br>
+                </div>
+            </template>
+        </template>
+        <template if:false={isDakotaContentVideoAvailable}>
+            <div>
+                </br>
+                <strong>
+                    <p style="text-align: center; color: grey;"> No Video available.</p>
+                </strong>
+                </br>
+            </div>
+        </template>
+    </div>
+</template>

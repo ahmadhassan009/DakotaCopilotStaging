@@ -1,0 +1,99 @@
+<template>
+    <template if:true={showToastOnClassic}>
+        <div class="demo-only" style="height:4rem">
+            <div class="slds-notify_container slds-is-relative">
+                <div class="slds-notify slds-notify_toast slds-theme_warning" role="status">
+                    <lightning-icon icon-name="utility:warning" style="margin-right:12px; margin-bottom:15px;"
+                        alternative-text="Warning!" size="small" title="Warning"></lightning-icon>
+                    <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small ">Duplicate</h2>
+                        <h4>Search value already exists!</h4>
+                    </div>
+                    <div class="slds-notify__close">
+                        <button class="slds-button slds-button_icon" title="Close" onclick={closeToast}>
+                            <lightning-icon icon-name="utility:close" alternative-text="Close!" size="small"
+                                title="Close"></lightning-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <div style="height:100%; background-color:white;">
+        <lightning-card title="Dakota Videos Search" style={headingStyle}>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="medium">
+                </lightning-spinner>
+            </template>
+            <div style="margin-left:10px; height:100%; margin-top:-10px">
+                <div style="width:100%; display:flex;">
+                    <lightning-input onkeydown={checkEnterKeyPress} data-id="searchValue" name="searchValue"
+                        placeholder="Search" type="search" style={searchbarStyle}></lightning-input>
+
+                    <lightning-button name="Search" variant="brand" label="Search" title="Search"
+                        onclick={fetchFilteredDakotaContents} style="padding-right: 5px; padding-top:18px;">
+                    </lightning-button>
+                    <lightning-button name="Search" label="Reset" title="Reset" onclick={resetFilters}
+                        style="padding-top:18px;"></lightning-button>
+                </div>
+                <div class="slds-m-bottom_large slds-m-top--xx-small helpTextStylying">
+                    <span>Try Searching for Bank or RIA or Hedge Fund or Metro Area or Morgan Stanley</span>
+                </div>
+                <template for:each={pillItems} for:item="pill">
+                    <span class="slds-m-right--xx-small pillSpanStyling" key={pill.name}>
+                        <lightning-pill name={pill.name} label={pill.name} onremove={handleItemRemove}>
+                        </lightning-pill>
+                    </span>
+                </template>
+            </div>
+            <template if:false={isCommunity}>
+                <div class="showCountOuterDivStyling">
+                    <h3>  
+                        <div class="showCountInnerDivStyling">
+                            <span class="slds-form-element__label slds-no-flex">Showing {currentCount} of
+                                {totalRecordCount}</span>
+                        </div>
+                    </h3>
+                    <br /><br />
+
+                    <c-custom-datatable class="dataTable" data={allDakotaContentRecords}
+                        columns={dakotaContentLineColumns} key-field="Id" max-column-width="2000" hide-checkbox-column
+                        show-row-number-column enable-infinite-loading onloadmore={handleLoadMore}
+                        default-sort-direction={defaultSortDirection} onsort={onHandleSort} sorted-by={sortedField}
+                        sorted-direction={sortedDirection} onrowaction={handleRowAction}>
+                    </c-custom-datatable>
+
+                </div>
+            </template>
+            <template if:true={isCommunity}>
+                <div style="width:100%; height: 680px;">
+                    <h3>  
+                        <div style="float:right;
+                                padding-right: 10px;">
+                            <span class="slds-form-element__label slds-no-flex">Showing {offset} of
+                                {totalRecordCount}</span>
+                        </div>
+                    </h3>
+                    <br /><br />
+                    <c-custom-datatable 
+                        class="dataTable" 
+                        data={allDakotaContentRecords}
+                        columns={dakotaContentLineColumns} 
+                        key-field="Id" 
+                        max-column-width="2000" 
+                        hide-checkbox-column
+                        show-row-number-column 
+                        enable-infinite-loading 
+                        onloadmore={handleLoadMore}
+                        default-sort-direction={defaultSortDirection} 
+                        onsort={onHandleSort} 
+                        sorted-by={sortedField}
+                        sorted-direction={sortedDirection} 
+                        onrowaction={handleRowAction} 
+                        load-more-offset="5">
+                    </c-custom-datatable>
+                </div>
+            </template>
+        </lightning-card>
+    </div>
+</template>  

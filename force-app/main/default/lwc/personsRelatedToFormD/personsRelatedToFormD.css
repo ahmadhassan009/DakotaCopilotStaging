@@ -1,0 +1,21 @@
+.headerSyle
+{
+    display: block;
+    height: fit-content;
+}
+
+.layoutWidth
+{
+    width: 100%;
+}
+
+.headingStlye
+{
+    font-weight: bold;
+}
+
+.viewAllAlignment {
+    text-align: center;
+    height: 55px;
+    padding-top: 25px;
+}

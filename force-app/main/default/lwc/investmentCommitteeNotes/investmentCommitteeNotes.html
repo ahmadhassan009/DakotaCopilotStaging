@@ -1,0 +1,59 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12" style="width:100%">
+            <article class="slds-card lightning-card">
+                <div class="componentStyling slds-modal__content content-div">
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium">
+                        </lightning-spinner>
+                    </template>
+                    <div if:true={displayPage}>
+                        <div id="popup" class="popupDiv">
+                            <a onclick={closePDF} class="closeDiv">×</a>
+                            <div class="iframeDiv">
+                                <iframe class="iframe" src={pageUrl} scrolling="true" id="theIframe"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <lightning-card title="Public Plan Minutes" data-id="mainCmp">
+                        <div class="searchDiv">
+                            <lightning-input data-id="searchValue" name="searchValue" placeholder="Search" type="search" onkeydown={searchManagerPrestOnEnter} class="searchbarStyle"></lightning-input>
+                            <lightning-button name="Search" variant="brand" label="Search" title="Search" onclick={fetchSearchResults} class="searchButton"></lightning-button>
+                            <lightning-button name="Reset" label="Reset" title="Reset" onclick={resetFilters} class="resetButton"></lightning-button>
+                            <lightning-button name="generatePDF " variant="brand" label="Generate PDF" title="Generate PDF" onclick={openPDF} class="genPDFButton"></lightning-button>
+                        </div>
+                        <div class="helpText">
+                            <span>Try Searching for Pension name</span>
+                        </div>
+
+                        <div class="notesDiv">
+                            <h3>  
+                                <div style="float:right;padding-right: 10px;">
+                                    <span class="slds-form-element__label slds-no-flex">Showing {offset} of {totalNumberOfRows}</span>
+                                </div>
+                            </h3>
+                            <br/><br/>
+                            <lightning-datatable 
+                                class="dataTable" 
+                                key-field="Id" 
+                                data={icnotes} 
+                                columns={columns} 
+                                show-row-number-column
+                                default-sort-direction={defaultSortDirection} 
+                                sorted-direction={sortDirection} 
+                                sorted-by={sortedBy}
+                                onsort={onHandleSort} 
+                                enable-infinite-loading="true" 
+                                onloadmore={loadMoreData} 
+                                load-more-offset="20"
+                                wrap-text-max-lines = "5">
+                            </lightning-datatable>
+                        </div>
+                        
+                    </lightning-card>
+                </div>
+            </article>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

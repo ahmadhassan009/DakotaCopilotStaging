@@ -1,0 +1,30 @@
+.headerStyle {
+    display:flex;
+}
+
+.dataTableHeight {
+    height: 790px;
+}
+
+
+.parentDiv{
+    position: relative;
+}
+
+.headerBanner{
+    border-radius: 5px 5px 0 0;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    margin-right: -1px;
+}
+
+.footerBottom{
+    height: 24px !important;
+    background-color: white !important;
+    border-radius: 0px 0px 5px 5px !important;
+    text-align: center !important;
+    padding-top: 10px !important;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    color: rgb(34, 34, 34) !important;
+}

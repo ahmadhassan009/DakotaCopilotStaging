@@ -1,0 +1,61 @@
+<template>
+    <template if:true={recordsExists}>        
+        <lightning-layout class="blockMargin">
+            <lightning-layout-item size="12">
+                <article class="slds-card lightning-card">
+                    <div class="forceRelatedListCardHeader slds-grid slds-p-around--small slds-p-left--x-large slds-page-header">
+                        <header
+                            class="slds-media slds-media_center slds-has-flexi-truncate slds-p-left--large">
+                            <template if:false={collapsed}>
+                                <lightning-button-icon onclick={ChevronButtonClicked}
+                                    variant="border-filled" size="small"
+                                    icon-name="utility:chevrondown"></lightning-button-icon>
+                            </template>
+                            <template if:true={collapsed}>
+                                <lightning-button-icon onclick={ChevronButtonClicked}
+                                    variant="border-filled" size="small"
+                                    icon-name="utility:chevronright"></lightning-button-icon>
+                            </template>
+
+                            <div class="slds-media__body slds-p-left--x-small">
+                                <h2 class="slds-card__header-title">
+                                    <a class="slds-card__header-link headingStlye"
+                                        onclick={handleShowFullRelatedList}>
+                                        <span class="fontStyle">{sectionDataLabel}</span>
+                                    </a>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium">
+                        </lightning-spinner>
+                    </template>
+                    <template if:false={collapsed}>
+                        <div>
+                            <lightning-datatable 
+                                columns={columns}
+                                data={data} 
+                                key-field="Id"
+                                onrowaction={handleRowAction}
+                                show-row-number-column="true" 
+                                enable-infinite-loading="false" 
+                                wrap-text-max-lines = "5"
+                                hide-checkbox-column
+                                default-sort-direction={defaultSortDirection}
+                                sorted-direction={sortedDirection}
+                                sorted-by={sortedBy}
+                                onsort={updateColumnSorting}>
+                            </lightning-datatable>
+                        </div>
+                        <footer class="slds-card__footer viewAllAlignment">
+                            <a onclick={handleShowFullRelatedList}>View All</a>
+                            <span class="slds-assistive-text">entity type</span>
+                        </footer>
+                    </template>
+                </article>
+            </lightning-layout-item>
+        </lightning-layout>        
+    </template>
+ </template>

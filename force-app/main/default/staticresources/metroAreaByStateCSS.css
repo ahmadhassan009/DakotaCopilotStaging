@@ -1,0 +1,75 @@
+/** Styling button as URL Start **/
+button[name="StateCell"] {
+    color: var(--lwc-brandTextLink,rgb(53, 88, 214));
+    text-decoration: none;
+    transition: color .1s linear;
+    border: none;
+    padding: 0;
+    background-color: #f3f4f500;
+}
+
+button[name="StateCell"]:hover{
+    color: var(--lwc-brandTextLinkActive,#2647bc);
+    text-decoration: underline;
+    background-color: rgb(241 241 241);
+}
+
+button[name="StateCell"]:focus{
+    color: var(--lwc-brandTextLinkActive,#2647bc);
+    text-decoration: underline;
+    background-color: rgb(241 241 241);
+}
+
+/** Styling button as URL End **/
+
+/** Reducing height of button in the datatable**/
+.buttonHeight lightning-button {
+    --sds-c-button-line-height : 1;
+    text-decoration: none;
+}
+
+c-metro-area-states-all-accounts .related-list .slds-table tr td:last-child {
+    display: none;
+}
+
+c-metro-area-states-all-contacts .related-list .slds-table tr td:last-child {
+    display: table-cell;
+}
+
+c-metro-area-states-contacts .related-list .slds-table tr td:last-child {
+    display: none;
+}
+
+c-metro-area-states-all-acc-types .related-list .slds-table tr td:last-child {
+    display: none;
+}
+
+c-metro-area-states-all-accounts-view-all .related-list .slds-table tr td:last-child {
+    display: table-cell;
+}
+
+c-metro-area-states-all-contacts-view-all .related-list .slds-table tr td:last-child {
+    display: table-cell;
+}
+
+c-metro-area-states-specific-acc-types-view-all .related-list .slds-table tr td:last-child {
+    display: table-cell;
+}
+
+c-dakota-state-content-panel-metro-area .related-list .slds-table tr td:last-child {
+    display: none;
+}
+
+c-metro-area-states-all-content-view-all .related-list .slds-table tr td:last-child {
+    display: table-cell;
+}
+c-metro-area-states-marketplace-searches .related-list .slds-table tr td:last-child {
+    display: none;
+}
+c-metro-area-states-searches-view-all .related-list .slds-table tr td:last-child {
+    display: table-cell !important;
+}
+
+c-all-fund-service-providers .related-list .slds-table tr td:last-child {
+    display: table-cell !important;
+}

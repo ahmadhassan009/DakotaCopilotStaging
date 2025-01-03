@@ -1,0 +1,145 @@
+.help-main {
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* height: 58vh; */
+    height: calc(100% - 70px);
+}
+
+.help-main::-webkit-scrollbar {
+    width: 6px;
+}
+
+.help-main::-webkit-scrollbar-track {
+    background: #ddd;
+}
+
+.help-main::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+}
+
+.message-gif-div {
+    height: 8vh;
+    width: 30vh;
+    margin-top: 10vh;
+    margin-bottom: 25px;
+}
+
+.message-gif-div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.seaches-main-div {
+    margin-top: 10vh;
+    width: 100%;
+}
+
+.bg{
+    width: 100%;
+    /* height: 58vh; */
+    height: calc(100% - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color:rgb(255, 255, 255) !important;
+    border-radius: 0px;
+}
+
+.msgs-box-chat-message{
+    width: 100%;
+    height: calc(100% - 10px);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    overflow: auto;
+}
+
+.help-text{
+    font-weight: 600;
+    text-align: center;
+    color: #939393;
+    line-height: 19px;
+    font-size: 16px;
+}
+
+.txt-box{
+    width: 100%;
+    height: 70px;
+}
+
+.popular-text{
+    text-align: center;
+    color: #939393;
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 1vh;
+}
+.seaches-div{
+    height: 122px;
+    background-color: #FFF;
+}
+
+.prompt-div{
+    height: 38px;
+    background-color: #F3F3F3;
+    border-radius: 9px;
+    Padding: 4px, 14px, 4px, 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: none;
+}
+.prompt-stying{
+    margin-bottom: 5px;
+}
+.prompt-text{
+    font-weight: 400;
+    text-align: left;
+    color: #444444;
+    line-height: 19px;
+    font-size: 12px;
+    flex: 1;
+    padding: 10px;
+
+}
+
+.img-icon{
+    margin-right: 10px;
+    width: 12px;
+    height:12px;
+}
+
+.chat-history-how-can-help{
+    /* height: 58vh; */
+    /* height: calc(100% - 70px); */
+    width: 100%;
+    display: block;
+    height: 100%;
+}
+
+.hidden{
+    display:none;
+    width: 100%;
+    height: 100%;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.visible{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}

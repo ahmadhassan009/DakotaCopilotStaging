@@ -1,0 +1,87 @@
+.icon{
+    align-self: end;
+    bottom: 2px;
+    position: relative;
+}
+.header{
+    align-self: end
+}
+
+.datatableHeightDefault{
+    height: 550px; 
+    background-color: #f3f3f3;
+}
+
+.requested-Prompt-container{
+    gap:5px;
+    display: flex;
+}
+.requested-Prompt-text{
+    margin-top: 12px; 
+    color:rgb(24,24,24); 
+    line-height:18px;
+     margin-bottom:12px; 
+     font-size:12px;
+}
+
+.no-records {
+    display: flex;
+    justify-content: center; /* Horizontally centers the text */
+    align-items: center; /* Vertically centers the text */
+    height: 100%; /* Ensures it takes up the full height of the parent container */
+    color: rgb(24,24,24); /* Grey color (can be adjusted) */
+    font-size: 13px; /* Adjust font size */
+    font-family: "Salesforce Sans", Arial, sans-serif; /* Matches Salesforce font */
+    text-align: center; /* Ensures text alignment in the center */
+}
+
+/* .datatableHeightSF{
+    min-height: calc(100% - 173px); 
+    background-color: #f3f3f3;
+} */
+
+/* Styles for screens with a height less than or equal to 600px */
+@media screen and (max-height: 800px) {
+    .datatableHeightSF{
+        height: 400px; 
+        background-color: #f3f3f3;
+    }
+
+    .datatableDivHeightSF{
+        height: 390px;
+        overflow-y: auto;
+    }
+
+    .datatableHeightCommunity{
+        height: 400px; 
+        background-color: #f3f3f3;
+    }
+
+    .datatableDivHeightCommunity{
+        height: 390px;
+        overflow-y: auto;
+    }
+}
+
+/* Styles for screens with a height greater than 600px */
+@media screen and (min-height: 801px) {
+    .datatableHeightSF{
+        height: 600px; 
+        background-color: #f3f3f3;
+    }
+
+    .datatableDivHeightSF{
+        height: 590px;
+        overflow-y: auto;
+    }
+
+    .datatableHeightCommunity{
+        height: 650px; 
+        background-color: #f3f3f3;
+    }
+
+    .datatableDivHeightCommunity{
+        height: 600px;
+        overflow-y: auto;
+    }
+}

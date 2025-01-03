@@ -1,0 +1,105 @@
+.table-borders{
+    border-top-style: solid;
+    border-top-color: darkgray;
+    border-top-width: 2px;
+}
+
+.table-header{
+    color: rgb(1, 118, 211);
+    font-size: 20px;
+}
+
+.table-col{
+    width:50%; 
+}
+
+.h2-div{
+    font-weight: 500;
+    font-size: 15px;
+    text-align: right
+}
+
+.table-border{
+    border-color: lightgray;
+    border-width: 2px;
+}
+
+.table-text-align{
+    text-align: right;
+}
+
+.notes-row{
+    padding-top: 10px;
+    font-size: 0.8125rem; 
+    font-family: var(--lwc-fontFamily,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol');
+    font-weight: regular;
+    border-bottom: none !important;
+    word-break: break-all;
+}
+
+table.main-table tr:last-child td {
+    border-bottom: none !important;
+}
+
+.wrapper {
+    height:350px !important;
+}
+.dot {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(20%,-55%);
+}
+@media(max-width:1200px){
+    table.main-table > tbody > tr:first-child{
+        display: flex;
+        flex-direction: column;
+    }
+    table.main-table > tbody > tr:first-child > td:first-child{
+        padding-bottom:15px;
+    }
+}
+
+table.main-table {
+    flex: 1 1 auto;
+    display: table;
+}
+
+table.main-table > tbody{
+    max-width:100%;
+    width:100%;
+}
+
+.slds-table_bordered, .slds-table--bordered {
+    border-top:none !important;
+    border-bottom: none !important;
+}
+
+table.chart > tbody > tr:first-child > td{
+    border-top: none !important;
+}
+
+.slds-table_bordered tbody td, .slds-table_bordered tbody th, .slds-table--bordered tbody td, .slds-table--bordered tbody th {
+    border-top: var(--lwc-borderWidthMedium,2px) solid var(--lwc-colorBorder,rgb(229, 229, 229));
+}
+
+.table-div{
+    height: 450px;
+    overflow-y: auto;
+}
+
+.table-margin{
+    margin-top: 12px;
+}
+
+.date-style{
+    text-align-last: end;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 13px;
+    padding-right: 25px;
+}

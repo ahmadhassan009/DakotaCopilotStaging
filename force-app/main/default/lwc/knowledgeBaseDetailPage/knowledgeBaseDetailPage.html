@@ -1,0 +1,31 @@
+<template>
+    <lightning-record-view-form record-id={recordId} object-api-name="Knowledge_Base__c">
+        <div class="slds-grid slds-wrap slds-p-around--large slds-card">
+            <div class="slds-col slds-size_1-of-2">
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Knowledge Base Name</label>
+                    <div class="minHeight">
+                        <lightning-output-field variant="label-hidden"
+                            field-name="Name"></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Video/Document Link</label>
+                    <div class="minHeight">
+                        <lightning-output-field variant="label-hidden"
+                            field-name="Video_Document_Link__c"></lightning-output-field>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2 right-column">
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Type </label>
+                    <div class="minHeight">
+                        <lightning-output-field variant="label-hidden"
+                            field-name="Type__c"></lightning-output-field>
+                    </div>                               
+                </div>
+            </div>
+        </div>
+    </lightning-record-view-form>
+</template>

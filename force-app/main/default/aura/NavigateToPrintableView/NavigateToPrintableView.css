@@ -1,0 +1,9 @@
+.THIS .renderWindowStyling{
+    position:absolute;
+    top:47%;
+    left:30%;
+    font-weight:bold;
+}
+.THIS .slds-backdrop--open {
+    visibility: hidden !important;
+}

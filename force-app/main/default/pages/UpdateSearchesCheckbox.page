@@ -1,0 +1,2 @@
+<apex:page standardController="Marketplace_Searches__c" extensions="UpdateSearchesCheckboxController" action="{!UpdateSearchesCheckbox}" lightningStylesheets="false">
+</apex:page>

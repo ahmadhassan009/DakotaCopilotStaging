@@ -1,0 +1,453 @@
+<template>
+    <div class={iconDivClass} style={favIconPlacement}>
+        <template if:false={isFavRecord}>
+            <button disabled={isDisabled} type="button" style={favIconStyling} title={favIconTitle} class="slds-button slds-button_icon slds-button_icon-border 
+                        slds-m-left--xx-small slds-m-right--xx-small" onclick={handleFavIconClick}>
+                <lightning-icon size="small" icon-name="utility:add" alternative-text="follow">
+                </lightning-icon>
+            </button>
+        </template>
+        <template if:true={isFavRecord}>
+            <button disabled={isDisabled} type="button" style="float: left !important;" class="slds-button slds-button_icon slds-button_icon-border favIconBorder 
+            favoriteIcon slds-m-left--xx-small slds-m-right--xx-small" onclick={handleFavIconClick}>
+                <lightning-icon size="small" icon-name="utility:add" class="unfavIconColor" alternative-text="Unfollow"
+                    title="Unfollow">
+                </lightning-icon>
+            </button>
+        </template>
+        <div class="slds-p-left_xx-large slds-p-bottom_small">
+            <button disabled={isDropDownDisabled} type="button"
+                class="slds-button slds-button_icon slds-button_icon-border dropDownButton" onclick={handleDropDown}>
+                <lightning-icon size="xx-small" icon-name="utility:down">
+                </lightning-icon>
+            </button>
+        </div>
+        <img style="cursor: pointer; width: 42px; padding-left: 5px; height: 30px; margin-top: -51px; margin-left: 60px;"
+            src={notificationIconName} title="Email Notifications" onclick={handleNotificationIconClick} />
+        <template if:true={isModalOpen}>
+            <template if:true={favoritesExist}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open favModalPosition"
+                    style={rightMargin} onclick={parentSectionClicked}>
+                    <div class="slds-dropdown slds-dropdown--right followListModal dropDownDiv" style={dropdownMargin}
+                        tabindex="-1" onclick={stopPropagation}>
+                        <div class="slds-card">
+                            <div class="slds-m-bottom_medium slds-m-left_small slds-m-right_small"
+                                onclick={stopPropagation}>
+                                <lightning-input onkeyup={handleSearch} name="enter-search" type="search"
+                                    placeholder="Find a followed item" onchange={handleSearch}>
+                                </lightning-input>
+                            </div>
+                            <template if:true={favPopUpSpinner}>
+                                <div>
+                                    <lightning-spinner alternative-text="Loading" variant="brand" size="small"
+                                        class="spinner"></lightning-spinner>
+                                </div>
+                            </template>
+                            <div class="slds-modal__content slds-m-left_small slds-m-right_small followListContent"
+                                onclick={stopPropagation} onscroll={onScroll}>
+                                <template if:true={showNoResultsFoundPopup}>
+                                    <center>
+                                        <h1 class="slds-m-around_medium">No items to display</h1>
+                                    </center>
+                                </template>
+                                <template if:false={showNoResultsFoundPopup}>
+                                    <span>MY FOLLOWED ITEMS</span>
+                                    <template for:each={recordsForUI} for:item="fav">
+                                        <div class="slds-m-top--x-small slds-m-bottom--x-small" key={fav.Target_Id__c}>
+                                            <article class="favoriteListArticle" onclick={navigateToRecord}
+                                                data-id={fav.Target_Id__c}>
+                                                <div>
+                                                    <header class="slds-media slds-media_center">
+                                                        <div class="slds-media__figure">
+                                                            <lightning-avatar size="small" src={fav.Icon_Url__c}
+                                                                style={fav.Icon_Color__c} class="groupedIcon">
+                                                            </lightning-avatar>
+                                                        </div>
+                                                        <div class="slds-truncate">
+                                                            <span
+                                                                title={fav.Follow_Record_Name__c}>{fav.Follow_Record_Name__c}</span>
+                                                            <div>
+                                                                <span>{fav.Subtitle__c}</span>
+                                                            </div>
+                                                        </div>
+                                                    </header>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                            <footer class="slds-card__footer">
+                                <span>
+                                    <lightning-icon size="xx-small" icon-name="utility:delete"
+                                        class="slds-m-right_x-small slds-m-bottom_xx-small"
+                                        alternative-text="Remove Followed Items" title="Remove Followed Items">
+                                    </lightning-icon>
+                                </span>
+                                <a onclick={handleEditFavorites}>
+                                    <span>Remove Followed Items</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </div>
+                </section>
+            </template>
+        </template>
+        <template if:true={showNoFavoritesExistPopup}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open favModalPosition"
+                style={rightMargin} onclick={parentSectionClicked}>
+                <div class="slds-dropdown slds-dropdown--right followListModal dropDownDiv" tabindex="-1"
+                    onclick={stopPropagation}>
+                    <div class="slds-modal__content slds-m-left_small slds-m-right_small" onclick={stopPropagation}>
+                        <h1>Followed Items</h1>
+                        <center>
+                            <img src="/img/setup/OpenRoad.svg" aria-hidden="true" alt=""
+                                class="slds-illustration__svg slds-p-vertical_medium" data-aura-rendered-by="720:0">
+                            <h1 class="slds-m-around_medium">No followed items yet</h1>
+                            <p>You don't have any followed items yet, but you should add some!
+                                Followed Items are shortcuts to the things you use the most.
+                                When you're on a record or list view that you like, just click the add icon.</p>
+                        </center>
+                    </div>
+                </div>
+            </section>
+        </template>
+
+        <template if:true={showEditFavoritesPopup}>
+            <section class="slds-modal slds-fade-in-open editFollowPopup">
+                <div class="slds-modal__container slds-is-relative">
+                    <template if:true={favPopUpSpinner}>
+                        <div>
+                            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                        </div>
+                    </template>
+                    <div class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closePopup}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h1 class="slds-modal__title">Unfollow</h1>
+                    </div>
+                    <div class="slds-modal__content" onscroll={onScroll}>
+                        <div class="slds-border--bottom">
+                            <div class="editFollowSearchbox">
+                                <lightning-input name="enter-search" type="search" placeholder="Find a followed item"
+                                    onchange={handleSearch} onkeyup={handleSearch}>
+                                </lightning-input>
+                            </div>
+
+                        </div>
+                        <template if:true={showNoResultsFoundPopup}>
+                            <center>
+                                <h1 class="slds-m-around_medium">No items to display</h1>
+                            </center>
+                        </template>
+                        <template if:false={showNoResultsFoundPopup}>
+                            <template for:each={recordsForUI} for:item="fav">
+                                <div key={fav.Target_Id__c} class="slds-border--bottom">
+                                    <article class="favoriteListArticle">
+                                        <div class="slds-grid slds-m-left--x-small">
+                                            <header class="slds-media slds-media_center slds-size--11-of-12"
+                                                onclick={navigateToRecord} data-id={fav.Target_Id__c}>
+                                                <div class="slds-media__figure">
+                                                    <lightning-avatar size="small" src={fav.Icon_Url__c}
+                                                        style={fav.Icon_Color__c} class="groupedIcon">
+                                                    </lightning-avatar>
+                                                </div>
+                                                <div>
+                                                    <span>{fav.Follow_Record_Name__c}</span>
+                                                    <div>
+                                                        <span>{fav.Subtitle__c}</span>
+                                                    </div>
+                                                </div>
+                                            </header>
+                                            <div
+                                                class="deleteFavoriteIcon slds-align--absolute-center slds-size--1-of-12">
+                                                <lightning-icon size="xx-small" icon-name="utility:close"
+                                                    alternative-text="Click To Unfollow Items"
+                                                    title="Click To Unfollow Items" onclick={openDeleteFavoriteModal}
+                                                    data-id={fav.Target_Id__c} data-name={fav.Follow_Record_Name__c}
+                                                    data-subtitle={fav.Subtitle__c}>
+                                                </lightning-icon>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_brand" onclick={closePopup}>Done</button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <template if:true={isDeleteFavoriteModalOpen}>
+            <section class="slds-modal slds-fade-in-open greyBackground">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeDeleteFavoriteModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Unfollow
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <center>
+                            <p>Are you sure you want to unfollow "{favToBeRemovedName}"?</p>
+                        </center>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeDeleteFavoriteModal}
+                            title="Cancel">Cancel</button>
+                        <button class="slds-button slds-button_brand" onclick={removeFromFavoritesList}
+                            title="OK">OK</button>
+                    </footer>
+                </div>
+            </section>
+        </template>
+
+        <!-- ***********custom toast msg**********  -->
+        <template if:true={showToast}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="toasMsgStyling">
+                    <div class="slds-notify_container slds-is-relative">
+                        <div class={toastMsgClasses} role="status">
+                            <span class="slds-assistive-text">success</span>
+                            <span class={toastMsgIconClasses} title="Description of icon when needed">
+                                <lightning-icon size="medium" icon-name={iconName} alternative-text={alternativeText}
+                                    title={title} class="comments-icn"></lightning-icon>
+                            </span>
+                            <div class="slds-notify__content">
+                                <h3 class="slds-text-heading_small ">{toastmessage}</h3>
+                            </div>
+                            <div class="slds-notify__close">
+                                <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close"
+                                    onclick={closeToast}>
+                                    <lightning-icon size="small" icon-name="utility:close" alternative-text="Close"
+                                        title="Close" class="comments-icn"></lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </template>
+
+        <template if:true={openNotificationsPopUp}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open favModalPosition"
+                style={rightMargin} onclick={parentSectionClicked}>
+                <div class="slds-dropdown slds-dropdown--right dropDownDiv notificationModel" tabindex="-1"
+                    style={dropdownMargin} onclick={stopPropagation}>
+                    <div class="slds-modal__content slds-m-left_small slds-m-right_small" onclick={stopPropagation}>
+                        <template if:true={isPreferenceLoading}>
+                            <div>
+                                <lightning-spinner alternative-text="Loading" variant="brand" size="small"
+                                    class="spinner"></lightning-spinner>
+                            </div>
+                        </template>
+                        <div class="cstm_header_div">
+                            <h1 class="cstm_h1_styling">Email Notifications</h1>
+                            <lightning-helptext class="cstm_helptext_styling"
+                                content="Click to select the type of alerts you will receive on followed records and searches.">
+                            </lightning-helptext>
+                            <!-- <div class="manageButton">
+                                <button class="slds-button sld\s-button_neutral cstm_share_button" title="Manage All Preferences"
+                                    onclick={handlePreferencesClick}>
+                                    <lightning-icon icon-name="utility:settings" size="x-small"
+                                        alternative-text="Gear Icon" class="gear-icon"></lightning-icon>
+                                    <span class="manage_all_preferences_styling">Manage All Preferences</span>
+                                </button>
+                            </div> -->
+                        </div>
+                        </br>
+                        <div class="slds-grid slds-wrap cstm_accordian_contact_div_styling">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 cstm_accordian_div_width">
+                                <div style="display: flex; width:100%" class="left-column">
+                                    <div class="slds-form-element cstm_padding_styling">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                            <input type="checkbox" name="checkbox-toggle-16" checked={isAccountToggleOn}
+                                                onchange={handleAccountToggleClick} />
+                                            <span id="checkbox-toggle-16" class="slds-checkbox_faux_container">
+                                                <span data-id="account-toggle"
+                                                    class="slds-checkbox_faux cstm_sizing"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h1 style="margin-top: 9px;font-weight: bold;font-size: 13px;margin-top: 5px;
+                                    margin-bottom: 5px; padding-left: 40px;">Accounts</h1>
+                                    <template if:true={accountCollapsed}>
+                                        <lightning-icon onclick={accountChevronButtonClicked} class="chevron-icon"
+                                            style="margin-top: 8px;margin-left: 73%;cursor:pointer"
+                                            variant="border-filled" size="xx-small" icon-name="utility:chevrondown">
+                                        </lightning-icon>
+                                    </template>
+                                    <template if:false={accountCollapsed}>
+                                        <lightning-icon onclick={accountChevronButtonClicked} class="chevron-icon"
+                                            style="margin-top: 8px;margin-left: 73%;cursor:pointer"
+                                            variant="border-filled" size="xx-small" icon-name="utility:chevronright">
+                                        </lightning-icon>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={accountCollapsed}>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <div class="searchesLeftColumn">
+                                        <lightning-checkbox-group name="LeftAccounts"
+                                            options={accountUpdatesLeftOptions} value={accountsUpdateValues}
+                                            onchange={handleAccountUpdatesChange}></lightning-checkbox-group>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <div class="searchesRightColumn">
+                                        <lightning-checkbox-group name="RightAccounts"
+                                            options={accountUpdatesRightOptions} value={accountsUpdateValues}
+                                            onchange={handleAccountUpdatesChange}></lightning-checkbox-group>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                        </template>
+
+                        <div class="slds-grid slds-wrap cstm_accordian_contact_div_styling">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div style="display: flex;" class="left-column">
+                                    <div class="slds-form-element cstm_padding_styling">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                            <input type="checkbox" name="checkbox-toggle-16" checked={isContactToggleOn}
+                                                onchange={handleContactToggleClick} />
+                                            <span id="checkbox-toggle-17" class="slds-checkbox_faux_container">
+                                                <span data-id="contact-toggle"
+                                                    class="slds-checkbox_faux cstm_sizing"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h1 style="margin-top: 9px;font-weight: bold;font-size: 13px;margin-top: 5px;
+                                    margin-bottom: 5px; padding-left: 40px;">Contacts</h1>
+                                    <template if:true={contactCollapsed}>
+                                        <lightning-icon onclick={contactChevronButtonClicked} class="chevron-icon"
+                                            style="margin-top: 8px;margin-left: 157.63%;cursor:pointer"
+                                            variant="border-filled" size="xx-small" icon-name="utility:chevrondown">
+                                        </lightning-icon>
+                                    </template>
+                                    <template if:false={contactCollapsed}>
+                                        <lightning-icon onclick={contactChevronButtonClicked} class="chevron-icon"
+                                            style="margin-top: 8px;margin-left: 157.63%;cursor:pointer"
+                                            variant="border-filled" size="xx-small" icon-name="utility:chevronright">
+                                        </lightning-icon>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={contactCollapsed}>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <div class="searchesLeftColumn">
+                                        <lightning-checkbox-group name="LeftContacts"
+                                            options={contactUpdatesLeftOptions} value={contactsUpdateValues}
+                                            onchange={handleContactUpdatesChange}></lightning-checkbox-group>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <div class="searchesRightColumn">
+                                        <lightning-checkbox-group name="RightContacts"
+                                            options={contactUpdatesRightOptions} value={contactsUpdateValues}
+                                            onchange={handleContactUpdatesChange}></lightning-checkbox-group>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                        </template>
+                        <div class="slds-grid slds-wrap cstm_accordian_contact_div_styling">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div style="display: flex;" class="left-column">
+                                    <div class="slds-form-element cstm_padding_styling">
+                                        <label class="slds-checkbox_toggle slds-grid">
+                                            <input type="checkbox" name="checkbox-toggle-16" checked={isSearchToggleOn}
+                                                onchange={handleSearchToggleClick} />
+                                            <span id="checkbox-toggle-18" class="slds-checkbox_faux_container">
+                                                <span data-id="search-toggle"
+                                                    class="slds-checkbox_faux cstm_sizing"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <h1 style="margin-top: 9px;font-weight: bold;font-size: 13px;margin-top: 5px;
+                                    margin-bottom: 5px; padding-left: 40px;">Searches</h1>
+                                    <template if:true={searchCollapsed}>
+                                        <lightning-icon onclick={searchChevronButtonClicked} class="chevron-icon"
+                                            style="margin-top: 8px; margin-left: 157.63%; cursor:pointer"
+                                            variant="border-filled" size="xx-small" icon-name="utility:chevrondown">
+                                        </lightning-icon>
+                                    </template>
+                                    <template if:false={searchCollapsed}>
+                                        <lightning-icon onclick={searchChevronButtonClicked} class="chevron-icon"
+                                            style="margin-top: 8px; margin-left: 157.63%; cursor:pointer"
+                                            variant="border-filled" size="xx-small" icon-name="utility:chevronright">
+                                        </lightning-icon>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={searchCollapsed}>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <div class="searchesLeftColumn">
+                                        <lightning-checkbox-group name="LeftSearches" class="cstmGroupWidth"
+                                            options={searchesUpdatesLeftOptions} value={searchesUpdateValues}
+                                            onchange={handleSearchesUpdateChange}></lightning-checkbox-group>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <div class="searchesRightColumn">
+                                        <lightning-checkbox-group name="RightSearches" class="cstmGroupWidth"
+                                            options={searchesUpdatesRightOptions} value={searchesUpdateValues}
+                                            onchange={handleSearchesUpdateChange}></lightning-checkbox-group>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="preferences-link slds-grid slds-wrap cstm_footer_width">
+                            <div class="weekly_toggle_div slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-checkbox_toggle slds-grid">
+                                        <input type="checkbox" name="checkbox-toggle-16" checked={isWeeklyToggleOn}
+                                            onchange={handleWeeklyToggleClick} />
+                                        <span id="checkbox-toggle-20" class="slds-checkbox_faux_container">
+                                            <span data-id="weekly-toggle"
+                                                class="slds-checkbox_faux cstm_sizing"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <h1 class="weekly_toggle_styling">Weekly Updates Only</h1>
+                            </div>
+                            <div class="right-section slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <lightning-button style="margin-right: 10px;" label="Cancel"
+                                    onclick={closeNotificationPopup}></lightning-button>
+                                <button class="slds-button slds-button_brand" onclick={savePreferences}
+                                    title="Apply Changes">Apply Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </template>
+        <template if:true={showEditEmailPreferencesPopup}>
+            <c-manage-all-email-notifications-preferences onclosenotificationmodal={closeNotificationModal}>
+            </c-manage-all-email-notifications-preferences>
+        </template>
+    </div>
+</template>

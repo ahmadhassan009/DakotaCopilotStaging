@@ -1,0 +1,20 @@
+.headerStyle {
+    display:flex;
+}
+
+.dataTableHeight {
+    height: 790px;
+}
+
+.popUpBodyHeight
+{
+    height:250px;
+}
+
+.border-round {
+    border-radius: var(--lwc-borderRadiusMedium,0.25rem);
+}
+
+.parent-div {
+    position: relative;
+}

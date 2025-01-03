@@ -1,0 +1,40 @@
+.cstm_btn_styling {
+    z-index: 8;
+    display: none;
+    margin-top: 0.78rem;
+}
+.cstm_share_button {
+    top: 0.35rem;
+    margin-left: 1rem;
+}
+
+.img_styling {
+    width: 17px;
+    height: 17px;
+}
+
+.fav_icon_class {
+    --sds-c-icon-color-foreground-default: #f3f2f2
+}
+
+.fav_icon_disabled_class {
+    --sds-c-icon-color-foreground-default: rgb(201, 201, 201);
+}
+
+.cstm_share_btn_span {
+    padding-left: 6px;
+}
+
+
+/* ***********custom toast msg**********   */
+.comments-icn {
+    --sds-c-icon-color-foreground-default: white; 
+}
+ 
+.toastMsgStyling {
+    height: 4rem;
+    position: fixed;
+    top: 4%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}

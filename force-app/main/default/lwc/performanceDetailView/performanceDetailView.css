@@ -1,0 +1,58 @@
+.minHeight {
+    min-height: 21px;
+    /* padding-bottom: 1px; */
+}
+
+.bgColor {
+    background-color: white;
+}
+
+.messageStyle {
+    text-align: end;
+    color: gray;
+    font-style: italic;
+    margin-top: 30px;
+    right: 22px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.left-column {
+    padding-right: 12px;
+    margin-right: 16px;
+    max-width: 49%;
+}
+
+.paddingLeftColumn {
+    padding-left: 12px;
+}
+
+.paddingRightColumn {
+    padding-right: 12px;
+}
+
+.right-column {
+    padding-left: 12px;
+    margin-left: 16px;
+    max-width: 49%;
+}
+
+.cstm_padding {
+    padding: 16px;
+}
+
+.cstm_margin_unset {
+    margin-top: unset;
+}
+
+.cstm_margin_top {
+    margin-top: 7px;
+}
+
+.cstm_margin_top_div {
+    margin-top: 10px
+}
+
+.cstm_margin_bottom {
+    margin-bottom: 10px;
+}

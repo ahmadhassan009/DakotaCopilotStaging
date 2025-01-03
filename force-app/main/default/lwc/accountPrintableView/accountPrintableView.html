@@ -1,0 +1,126 @@
+<template>
+    <div class="slds-p-around--medium slds-is-relative backgroundStyling">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium">
+            </lightning-spinner>
+        </template>
+        <template if:true={recordsExist}>
+            <div class="slds-m-around--medium slds-clearfix">
+                <lightning-button class="slds-float--right hidePrintButton" name="accountRecord" variant="brand-outline"
+                    label="Back to Account" title="Back to Account" onclick={openAccountRecord}>
+                </lightning-button>
+                <lightning-button class="slds-p-right--x-small slds-float--right hidePrintButton" name="print"
+                    variant="brand" label="Print" title="Print" onclick={openPrintWindow}>
+                </lightning-button>
+            </div>
+            <lightning-layout>
+                <lightning-layout-item size="12">
+                    <article>
+                        <div class="slds-m-left--medium slds-m-right--medium slds-m-bottom_large ">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__figure">
+                                    <lightning-avatar size="large" src="/img/icon/t4v35/standard/account_120.png"
+                                        initials="MS" class="account-icon accountLogoColor" alternative-text="Account">
+                                    </lightning-avatar>
+                                </div>
+                                <div>
+                                    <span class="regularTitleTextSize">Account</span>
+                                    <div class="slds-text-title_bold headerTextSize accountHeaderBorder">
+                                        <span>{recordName}</span>
+                                    </div>
+                                </div>
+                            </header>
+                            <hr>
+                        </div>
+                    </article>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div class="slds-grid slds-wrap slds-m-left--medium slds-m-right--medium slds-m-bottom_large">
+                <template for:each={data} for:item="acc">
+                    <div class="slds-size_1-of-2 slds-m-bottom_medium" key={acc.key}>
+                        <div class="slds-m-right--large">
+                            <h2 class="slds-text-title_bold regularTitleTextSize">{acc.key}</h2>
+                            <div class="pageBreak"><span class="accountValues"
+                                    style={acc.wordBreakProperty}>{acc.value}</span></div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        
+        <template if:true={contactsExists}>
+            <div style="break-after:page"></div>
+            <div class="slds-m-left--medium slds-m-right--medium slds-m-bottom_x-large ">
+                <article>
+                    <div class="slds-m-bottom_small slds-m-right--medium contactHeaderStyle">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate ">
+                            <div class="slds-media__figure">
+                                <lightning-avatar size="medium" src="/img/icon/t4v35/standard/contact_120.png"
+                                    class="contact-icon contactLogoColor" alternative-text="Contact">
+                                </lightning-avatar>
+                            </div>
+                            <div class="slds-media__body slds-text-body_regular">
+                                <div class="slds-text-title_bold slds-card__header-link headerTextSize">
+                                    <span>Contacts</span>
+                                </div>
+                            </div>
+                        </header>
+                    </div>
+                </article>
+                <div class="borderColor slds-p-around_none slds-p-vertical--x-small slds-border_bottom slds-border_top slds-text-title_bold"
+                    key={contact.Id}>
+                    <lightning-layout>
+                        <lightning-layout-item size="3" flexibility="auto"
+                            class="borderColor columnMargin slds-p-around--x-small slds-p-horizontal--medium slds-border_right slds-border_left slds-align--absolute-center">
+                            <div class="custom-box regularTitleTextSize alignText">Contact Name</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="3" flexibility="auto"
+                            class="borderColor columnMargin slds-p-around--x-small slds-border_right slds-align--absolute-center">
+                            <div class="custom-box regularTitleTextSize alignText">Title</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="3" flexibility="auto"
+                            class="borderColor columnMargin slds-p-around--x-small slds-border_right slds-align--absolute-center">
+                            <div class="custom-box regularTitleTextSize alignText">Asset Class Coverage</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="3" flexibility="auto"
+                            class="borderColor columnMargin slds-border_right slds-p-around--x-small slds-align--absolute-center">
+                            <div class="custom-box regularTitleTextSize alignText">Email</div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+
+                <template for:each={relatedContactsRecords} for:item="contact">
+                    <div class="slds-p-around_none" key={contact.Id}>
+                        <lightning-layout>
+                            <lightning-layout-item size="3" flexibility="auto"
+                                class="borderColor slds-p-around--xx-small slds-border_bottom">
+                                <div class="custom-box contactDataTextSize">{contact.Name}</div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="3" flexibility="auto"
+                                class="borderColor slds-p-around--xx-small slds-border_bottom">
+                                <div class="custom-box contactDataTextSize">{contact.Title}</div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="3" flexibility="auto"
+                                class="borderColor slds-p-around--xx-small slds-border_bottom">
+                                <div class="custom-box contactDataTextSize">{contact.Asset_Class_Coverage__c}</div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="3" flexibility="auto"
+                                class="borderColor slds-p-around--xx-small slds-border_bottom wrapEmailColumn">
+                                <div class="custom-box contactDataTextSize">{contact.Email}</div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={contactsNotExists}>
+            <div>
+                </br>
+                <strong>
+                    <p class="slds-align_absolute-center"> No Contacts Found.</p>
+                </strong>
+                </br>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,43 @@
+.comment-div
+{
+   font-size: 1em;
+   font-weight: 400;
+   font-style: normal;
+   word-wrap:break-word; 
+   width: 100%;
+}
+
+.comment-section
+{
+   padding-top: 7px;
+   width: 100%;
+   flex-wrap: nowrap !important;
+}
+
+.comm-div-display
+{
+   display: flex;
+   padding-bottom: 15px;
+}
+
+.scrollContainer {
+   height: 720px;
+   overflow: auto;
+   position: relative;
+}
+.scrollArea {
+   position: relative;
+}
+
+.approval-notes-style {
+   color: #2e844a;
+}
+.approval-notes-date {
+   color: #2e844a;
+   font-size:0.88em;
+}
+
+
+.borderMargin{
+   margin-top: 7px;
+}

@@ -1,0 +1,52 @@
+<template>
+    <template if:true={isInvestment}>
+        <c-investors-related-to-investment-firm-view-all
+        record-id={recordId}>
+        </c-investors-related-to-investment-firm-view-all>
+    </template>
+    <template if:true={isManagerPresentation}>
+        <c-manager-decks-related-to-investment-firm-view-all
+        record-id={recordId}>
+        </c-manager-decks-related-to-investment-firm-view-all>
+    </template>
+    <template if:true={isDakotaContent}>
+        <c-dakota-content-related-to-investment-firm-view-all
+        record-id={recordId}>
+        </c-dakota-content-related-to-investment-firm-view-all>
+    </template>
+    <template if:true={isDakotaNews}>
+        <c-dakota-news-related-to-investment-firm-view-all
+        record-id={recordId}>
+        </c-dakota-news-related-to-investment-firm-view-all>
+    </template>
+    <template if:true={isMarketplaceSearches}>
+        <c-won-searches-related-to-investment-firm-view-all
+        record-id={recordId}>
+        </c-won-searches-related-to-investment-firm-view-all>
+    </template>
+    <template if:true={isFormDOffering}>
+        <c-form-d-filings-related-to-investment-firm-view-all
+        record-id={recordId}>
+        </c-form-d-filings-related-to-investment-firm-view-all>
+    </template>
+    <!-- <template if:true={isFormAdvPrivateFund}>
+        <c-private-funds-related-to-form-adv-view-all
+        record-id={recordId}>
+        </c-private-funds-related-to-form-adv-view-all>
+    </template>
+    <template if:true={isFormAdvOwner}>
+        <c-owners-related-to-form-adv-view-all 
+        record-id={recordId}>
+        </c-owners-related-to-form-adv-view-all>
+    </template>
+    <template if:true={isFormAdvScheduleD}>
+        <c-schedule-d-related-to-form-adv-view-all 
+        record-id={recordId}>
+        </c-schedule-d-related-to-form-adv-view-all>
+    </template> 
+    <template if:true={isFormAdvCustodian}>
+        <c-custodian-related-to-form-adv-view-all 
+        record-id={recordId}>
+        </c-custodian-related-to-form-adv-view-all>
+    </template>  -->
+</template>

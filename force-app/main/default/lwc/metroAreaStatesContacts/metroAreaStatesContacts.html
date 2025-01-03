@@ -1,0 +1,42 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12" style="width:100%">
+            <article class="slds-card lightning-card">
+                <div class="slds-grid slds-page-header forceRelatedListCardHeader" style="padding-top:3px; padding-bottom:3px">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate ">
+                        <template if:false={collapsed}>
+                            <lightning-button-icon onclick={chevronButtonClicked} style = "padding-right: 16px;" variant="border-filled" size="small" icon-name="utility:chevrondown"></lightning-button-icon>
+                        </template>
+                        <template if:true={collapsed}>
+                            <lightning-button-icon onclick={chevronButtonClicked} style = "padding-right: 16px;" variant="border-filled" size="small" icon-name="utility:chevronright"></lightning-button-icon>
+                        </template>
+                        <div class="slds-media__body">
+                            <h2 class="slds-card__header-title">
+                                <a class="slds-card__header-link" onclick={handleShowFullRelatedList}>
+                                    <span>{panelName} </span>
+                                    <span>( {totalRelatedContactCount} )</span>
+                                </a>
+                            </h2>
+                        </div>
+                    </header>
+                </div>
+                <template if:false={collapsed}>
+                    <template if:true={isLoading}>
+                            <lightning-spinner alternative-text="Loading..." size="medium">
+                            </lightning-spinner> 
+                    </template>
+                    <div style={panelStyling} >
+                            <lightning-datatable class="related-list" onrowaction={handleRowAction} columns={columns}
+                                data={relatedContactRecords} key-field="Id"  show-row-number-column="true" hide-checkbox-column="true"
+                                wrap-text-max-lines = "5">
+                            </lightning-datatable> 
+                    </div>
+                    <footer class="slds-card__footer footerStyle ">
+                        <a onclick={handleShowFullRelatedList}>View All</a> 
+                        <span class="slds-assistive-text">entity type</span>
+                    </footer>
+                </template>
+            </article>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

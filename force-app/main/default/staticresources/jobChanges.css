@@ -1,0 +1,36 @@
+lightning-tabset lightning-tab-bar ul li[data-label="Job Changes"] a{
+	font-size: medium !important;
+	font-weight: bold !important;
+	text-decoration: none !important;
+        border-bottom: 3px solid #0171D2 !important;
+}
+
+lightning-tabset lightning-tab-bar ul li[data-label="Role Changes"] a{
+	font-size: 14px !important;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	border-bottom: none !important;
+}
+
+/*general css for both tabs*/
+lightning-tabset lightning-tab-bar ul {
+    margin-left: 52px;
+    padding-top: 11px;
+    border-bottom-style: none !important;
+}
+
+lightning-tabset lightning-tab-bar ul li[data-label="Job Changes"]::after{
+	content: none !important;
+}
+lightning-tabset lightning-tab-bar ul li[data-label="Role Changes"]::after{
+	content: none !important;
+}
+
+.dataTableHeightHomeJR c-custom-datatable table tbody tr{
+	height: 29px !important;
+}
+
+.dataTableHeightJR c-custom-datatable table tbody tr{
+	height: 29px !important;
+}
+

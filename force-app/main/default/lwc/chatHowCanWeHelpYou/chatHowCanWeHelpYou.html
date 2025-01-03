@@ -1,0 +1,55 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner> 
+    </template>
+    <template if:false={isLoading}>
+        <div class={dynamicClass}>      
+            <template if:false={sendButtonClicked}>
+                <main class="help-main">
+                    <div class="message-gif-div">
+                        <img src={messageGif} />
+                    </div>
+                    <div class="help-text">
+                        How can we help You?
+                    </div>
+                    <div class="seaches-main-div">
+                        <div class="popular-text">
+                            Most popular Searches
+                        </div>
+                        <div class="seaches-div">
+                            <button class="prompt-div prompt-stying" data-id="Show me all DC Plan Allocations to Private Credit Strategies, with dates of Investment." 
+                            onclick={handleSend}>
+                                <div class="prompt-text">
+                                    Show me all DC Plan Allocations to Private Credit Strategies, with dates of Investment.
+                                </div>
+                                <img class='img-icon' src={chevronRight} />
+                            </button>
+                            <button class="prompt-div prompt-stying" data-id="Run a report for an account that contains 1000$ aum." onclick={handleSend}>
+                                <div class="prompt-text">
+                                    Run a report for an account that contains 1000$ aum
+                                </div>
+                                <img class='img-icon' src={chevronRight} />
+                            </button>
+                            <button class="prompt-div" data-id ="Retrive all the accounts where type is DCIO." onclick={handleSend}>
+                                <div class="prompt-text">
+                                    Retrive all the accounts where type is DCIO.
+                                </div>
+                                <img class='img-icon' src={chevronRight} />
+                            </button>
+                        </div>
+                    </div>
+                </main>
+            </template>
+            <template if:true={sendButtonClicked}>
+                <div class="bg">
+                    <c-chat-messages class="msgs-box-chat-message" button-text={buttonText} onscrollupdate={handleScrollToBottom}></c-chat-messages>
+                </div>    
+            </template>
+            <c-chat-input class="txt-box" onvaluechange={checkPromptEntered} onupdatevisibility={handleVisibilityUpdate}></c-chat-input>
+        </div>
+        <template if:true={showHistory}>
+            <c-chat-history class="chat-history-how-can-help" onbackbuttonclick={handleBackClick} ondatafromchathistory={handleChatHistorySelected}></c-chat-history>
+        </template>
+    </template>
+</template>

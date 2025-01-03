@@ -1,0 +1,5 @@
+.THIS.lwc-styling{
+    display: flex;
+    height: 0px !important;
+    position: absolute !important;
+}

@@ -1,0 +1,57 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12" style="width:100%">
+           <article class="slds-card lightning-card">
+                <div class="componentStyling slds-modal__content content-div">
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="small">
+                        </lightning-spinner>
+                    </template>
+                    <lightning-card title="Manager Presentations">
+                        <div class="searchDiv">
+                            <lightning-input data-id="searchValue" name="searchValue" onkeydown={searchManagerPrestOnEnter} placeholder="Search" type="search" class="searchbarStyle">
+                            </lightning-input>
+                            <lightning-button name="Search" variant="brand" label="Search" title="Search" onclick={fetchSearchResults} class="searchButton"></lightning-button>
+                            <lightning-button name="Reset" label="Reset" title="Reset" onclick={resetFilters} class="resetButton"></lightning-button>
+                        </div>
+                        <div class="helpText">
+                            <span>Try Searching for key words in the PDF like name of the firm or Private Equity</span>
+                        </div>
+                        <template if:true={mpRecordsExists}>
+                            <div class="filesDiv">
+                                <h3>  
+                                    <div style="float:right;padding-right: 10px;">
+                                        <span class="slds-form-element__label slds-no-flex">Showing {currentCount} of {totalNumberOfRows}</span>
+                                    </div>
+                                </h3>
+                                <br/><br/>
+                                <lightning-datatable
+                                    class="dataTable"
+                                    key-field="Id"
+                                    data={managerPresentationRecords}
+                                    columns={columns}
+                                    show-row-number-column
+                                    hide-checkbox-column
+                                    sorted-by={sortBy}
+                                    sorted-direction={sortDirection}
+                                    onsort={doSorting}
+                                    enable-infinite-loading="true"
+                                    onloadmore={loadMoreData}
+                                    load-more-offset="20" style="padding-top: 15px !important;"
+                                    wrap-text-max-lines = "5" >
+                                </lightning-datatable>
+                            </div>
+                        </template>
+                        <template if:false={mpRecordsExists}>
+                            <div class="filesDiv">
+                                <strong>
+                                    <p class="emptyTableStyling"> No presentations found.</p>
+                                </strong>
+                            </div>
+                        </template>
+                    </lightning-card>
+                </div>
+            </article>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -1,0 +1,190 @@
+<template>
+    <div class="slds-page-header" role="banner">
+        <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate" style = 'display:flex'>
+                <div class="slds-media__body slds-align-middle">                    
+                    <nav role="navigation" aria-label="Breadcrumbs">
+                        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                            <li class="slds-breadcrumb__item slds-line-height--reset"><a href={accountNameLink}>Account</a></li>
+                            <template if:true={recNameAvailable}>
+                                <li class="slds-breadcrumb__item slds-line-height--reset"><a href={recordLink}>{recordName}</a></li>
+                            </template>
+                        </ol>
+                    </nav>
+                    <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="List View"><b>{relatedListName} ( {offset}{plusSign} )</b></h1>
+                </div>
+                <div class="slds-m-right_x-small lgc--bg">
+                    <lightning-button-menu alternative-text="Show menu"   variant="border-filled" icon-name="utility:settings" menu-alignment="right" class="slds-m-left_xx-large">
+                        <lightning-menu-item  value="MenuItemOne" label="LIST VIEW CONTROLS" ></lightning-menu-item>
+                        <lightning-menu-item class=".slds-has-focus" value="MenuItemTwo" label="Reset Column Widths" disabled="true" ></lightning-menu-item>
+                    </lightning-button-menu>
+                </div>
+                <div class="slds-m-right_xx-small">
+                    <div class="slds-button-group">
+                        <button name="refreshButton" title="Refresh" type="button" class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={refreshTable}>
+                            <svg  focusable="false" data-key="refresh" aria-hidden="true" class="slds-button__icon">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.37.1#refresh"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Refresh</span>
+                        </button>
+                    </div>
+                </div>  
+                <div class="slds-page-header__name-switcher">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <button class="slds-button slds-button_neutral " onclick={openModal} >New</button>
+                    </div>
+                </div>
+            </div>                          
+        </div>
+    </div>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner> 
+    </template>
+    <div style="height: 550px">
+        <lightning-datatable
+                            columns={columns}
+                            onrowaction={handleRowAction}
+                            data={relatedContactRecords}
+                            key-field="Id"
+                            show-row-number-column="true"
+                            hide-checkbox-column="true"
+                            default-sort-direction={defaultSortDirection}
+                            sorted-direction={sortedDirection}
+                            sorted-by={sortedBy}
+                            onsort={updateColumnSorting}
+                            enable-infinite-loading="true"
+                            onloadmore={loadMoreData} load-more-offset="50"
+                            wrap-text-max-lines = "5">
+        </lightning-datatable>  
+    </div>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+           <div class="modal-container slds-modal__container" style="width:70%; max-width:840px; min-width:480px;">
+               <!-- Modal/Popup Box LWC header here -->
+               <template if:true={isLoadingCreateCon}>
+                <lightning-spinner alternative-text="Loading..." size="medium">
+                </lightning-spinner> 
+        </template>
+               <header class="slds-modal__header">
+                   <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Contacts</h2>
+               </header>
+               <template if:false={areDetailsVisible}>
+                <div>
+                    <div class="slds-spinner--brand  slds-spinner slds-spinner--medium slds-is-relative" role="alert">
+                      <span class="slds-assistive-text">Loading...</span>
+                      <div class="slds-spinner__dot-a"></div>
+                      <div class="slds-spinner__dot-b"></div>
+                    </div>
+                  </div>
+                </template>
+               <!-- Modal/Popup Box LWC body starts here -->
+               <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-record-edit-form object-api-name="Case"  onsuccess={handleSuccess} onsubmit={handlesubmit} density="comfy" onload={handleLoad}>
+                        <template if:true={areDetailsVisible}>
+                            <section style='background-color:#f3f2f2;' class="test-id__section-header-container slds-section__title slds-theme--shade slds-m-bottom_small">
+                                <h3 class="slds-p-horizontal--small">Contact Information</h3>
+                            </section>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input-field field-name="First_Name__c" required="true">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Contact_Last_Name__c" required="true">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Status" required="true">
+                                    </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <label for="emailFieldid" class="slds-form-element__label email-Label">Email (Preferred)</label>
+                                    <div class="email">
+                                    <lightning-input-field id="emailFieldid" field-name="Email__c" variant="label-hidden">
+                                    </lightning-input-field>
+                                    </div>
+                                    <lightning-input-field class="slds-m-top_x-small" field-name="Phone__c">
+                                    </lightning-input-field> 
+                                </div>
+                            </div>
+                            <section style='background-color:#f3f2f2;' class="test-id__section-header-container slds-section__title slds-theme--shade slds-m-bottom_small">
+                                <h3 class="slds-p-horizontal--small">Additional Information</h3>
+                            </section>
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-2">
+                                    
+                                    <lightning-input-field field-name="Title__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Contact_Type__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Asset_Class_Coverage__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="LinkedIn_URL__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Metro_Area__c">
+                                    </lightning-input-field>
+                                    <lightning-input-field field-name="Biography__c">
+                                        </lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+
+                                    <lightning-input-field field-name="Mailing_Street__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Mailing_City__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Mailing_State__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Mailing_Zip_Postal_Code__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="Mailing_Country__c">
+                                        </lightning-input-field>
+                                    <lightning-input-field field-name="AccountId" disabled='true' value={recordId}>
+                                        </lightning-input-field>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="slds-align_absolute-center" style="height:5rem">
+                            <lightning-button
+                                        name="Cancel"
+                                        label="Cancel" onclick={closeModal}>
+                            </lightning-button>
+                            <div class="slds-m-left_small">
+                                <lightning-button
+                                                type="submit"
+                                                name="submit"
+                                                variant="brand"
+                                                label="Save">
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </lightning-record-edit-form>
+               </div>
+           </div>
+       </section>
+       <div class="slds-backdrop slds-backdrop_open"></div>
+     </template>
+    <template if:true={showToast}>
+       <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+           <div class="demo-only" style="height:4rem; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+               <div class="slds-notify_container slds-is-relative">
+                    <div class="slds-notify slds-notify_toast slds-theme_success" role="status">
+                        <span class="slds-assistive-text">success</span>
+                        <span class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-no-flex slds-align-top" title="Description of icon when needed">
+                            <lightning-icon size="medium" icon-name="utility:success" alternative-text="Success" title="Success" class="comments-icn"></lightning-icon>
+                        </span>
+                        <div class="slds-notify__content">
+                        <h2 class="slds-text-heading_small ">Hi{userFirstName},</h2>
+                        <h3 class="slds-text-heading_small ">Your contact submission is being reviewed and will be created shortly. You will receive a confirmation email once the contact has been added successfully.</h3>
+                        </div>
+                        <div class="slds-notify__close">
+                        <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick={closeToast}>
+                            <lightning-icon size="small" icon-name="utility:close" alternative-text="Close" title="Close" class="comments-icn"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        </div>
+                    </div>
+               </div>
+           </div>
+       </section>
+   </template>
+   <template if:true={showToast2}>
+    <c-custom-toast-message toastmessage={toastmessage} title={title} alternative-text={alternativeText} icon-name={iconName} toast-msg-classes={toastMsgClasses} toast-msg-icon-classes={toastMsgIconClasses} ></c-custom-toast-message>
+  </template>
+</template>

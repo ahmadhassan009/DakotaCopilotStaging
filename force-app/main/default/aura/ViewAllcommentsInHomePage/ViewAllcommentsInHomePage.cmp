@@ -1,0 +1,23 @@
+<aura:component  implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute type="String" name="recordId"/>
+    <aura:attribute type="String" name="recordName"/>
+    <aura:attribute type="String" name="objectName"/>    
+    <aura:attribute type="Boolean" name="homePage"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>    
+
+    <aura:if isTrue="{!v.homePage == true}">
+        <c:commentsRelatedtoAccConHomepageViewAll></c:commentsRelatedtoAccConHomepageViewAll>
+        </aura:if>
+
+        <aura:if isTrue="{!v.homePage == false}">
+            <c:commentsRelatedtoAccountsContactsViewAll 
+            recordId="{!v.recordId}"
+            objectApiName="{!v.objectName}"
+            recordName="{!v.recordName}"
+            isCommunity="false"
+            ></c:commentsRelatedtoAccountsContactsViewAll>
+            
+        </aura:if>
+
+    
+</aura:component>

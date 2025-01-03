@@ -1,0 +1,123 @@
+<template>
+    <article class="slds-card slds-p-left_medium slds-p-right_medium slds-p-top_medium slds-p-bottom_medium">
+        <template if:true={isLoading}>
+            <lightning-spinner size="small" alternative-text="Loading...">
+            </lightning-spinner> 
+        </template>
+        <div class="slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div>
+                    <lightning-icon size="small" icon-name="standard:note" alternative-text="Member Comments" title="Member Comments"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                    <a onclick={handleShowFullCommentList} class={headingLinkClass} title="Member Comments">
+                        <b><span class="slds-p-left--small">Member Comments</span>
+                        <span> ({offset}{plusSign})</span></b>
+                    </a>
+                    </h2>
+                </div>
+            </header>
+        </div> 
+        
+        <lightning-textarea class="comment-textarea" data-field="newComment" placeholder="Feel free to make an anonymous comment"  value={newComment}>
+        </lightning-textarea>
+
+        <lightning-button  variant="brand" class="button-style" label="Add Comment" onclick={saveComment}>
+        </lightning-button>
+        
+        </br><span class="comment-separation"></span>
+        <template for:each={comments} for:item="comment">
+            <div class="comm-div-display" key={comment.Id}>
+                <div class="slds-grid slds-wrap comment-section">
+                    <div>
+                        <lightning-icon size="medium" icon-name="standard:user" alternative-text="Member Comments" class="slds-m-right_small"></lightning-icon>
+                    </div>
+                    <div class="comment-div">
+                        <p><lightning-formatted-text value={comment.name} ></lightning-formatted-text></p>
+                        <div class="slds-m-top_xxx-small">
+                            <p style="font-size:0.88em; color:blue;">by <b> Anonymous </b>On {comment.commentTime}</p>
+                        </div>
+                        <template if:true={comment.approvalNotes}>
+                            <p class="approval-notes-style">{comment.approvalNotes}</p>
+                            <template if:true={comment.approvalNotesDate}>
+                                <p class="approval-notes-date">
+                                    by <b>Dakota </b>
+                                    On {comment.approvalNotesDate}
+                                </p>
+                            </template>
+                        </template>
+                    </div>
+                </div> 
+                <template if:true={comment.isEditDeleteAccessPresent}>         
+                <div class="slds-p-left_medium slds-p-top_small lgc-bg">
+                    <lightning-button-menu data-item={comment.Id} onselect={handleOnselect} alternative-text="Show menu" menu-alignment="auto">
+                        <lightning-menu-item  value={comment.name} label="Edit" ></lightning-menu-item>
+                        <lightning-menu-item  value="Delete" label="Delete" ></lightning-menu-item>
+                    </lightning-button-menu>
+                </div>
+                </template>
+            </div>
+        </template>
+        <footer class="slds-card__footer footer-div">
+            <a onclick={handleShowFullCommentList} >View All</a>
+            <span class="slds-assistive-text">entity type</span>
+        </footer> 
+    </article>
+      <!-- DELETE POPUP  -->
+    <div class="slds-m-around--xx-large" style="margin:0px!important; z-index : 1 ">
+            <template if:true={deletePopup}>         
+            <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                <div class="slds-modal__container" style="height:110%!important" role="document" tabindex="0">                   
+                    <div class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Comment</h2>
+                        
+                    </div>
+                    <div class="slds-modal__content slds-p-around--medium">                    
+                        <form class="slds-form--stacked">
+                            <div class="slds">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col--padded slds-medium-size--1-of-2">
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                Are you sure you want to delete this comment?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeDeletePopup}></lightning-button>
+                        <lightning-button variant="brand" label="Delete" onclick={deleteComment}></lightning-button>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open"></div>
+        </template>
+    </div>
+
+     <!-- UPDATE POPUP  -->
+     <div class="slds-m-around--xx-large" style="margin:0px!important; z-index : 1 ">
+        <template if:true={editPopup}>         
+            <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                <div class="slds-modal__container" style="height:110%!important" role="document" tabindex="0">                   
+                    <div class="slds-modal__header">
+                        <h2 class="slds-text-heading_medium slds-hyphenate">Edit Comment</h2>                   
+                    </div>
+
+                    <div class="slds-modal__content slds-p-around--medium">                    
+                        <lightning-textarea  name="updateComment" value={updateComment}  onchange={setUpdatedComm}>
+                        </lightning-textarea>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeEditPopup}></lightning-button>
+                        <lightning-button variant="brand" label="Save" onclick={updateComments}></lightning-button>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open"></div>
+        </template>
+    </div>
+</template>

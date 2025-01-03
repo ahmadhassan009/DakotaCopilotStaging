@@ -1,0 +1,58 @@
+.slds-modal
+{
+    margin-left: 70%;
+    margin-top: 14%;
+    margin-bottom: 100%;
+}
+
+.video-div{
+    position: relative;
+    margin-top: 40px;
+    overflow: inherit;
+    padding: 5px;
+    background: #eeeeee;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+}
+.button-group {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: -28px;
+    right: -1px;
+    padding: 2px;
+    border-radius: 5px;
+    background: #eee;
+    border: 1px solid #ccc;
+}
+.video-buttons {
+    color: #eeeeee;
+    --sds-c-icon-color-foreground: #706E6B;
+}
+.full-screen-styling{
+    width: 16px;
+    height: 16px;
+    margin-top: 4px;
+    margin-left: 3px;
+}
+.vertical-separater {
+    border-left: 1px solid #706E6B;
+    height: 22px;
+}
+.showCountOuterDivStyling {
+    width:100%; 
+    height:590px;
+}
+.showCountInnerDivStyling {
+    float: right;
+    padding-right: 10px;
+}
+.pillSpanStyling {
+    width:70%;
+}
+.helpTextStylying {
+    font-style: italic;
+    color: #6B6D70;
+    font-size: 11px;
+}

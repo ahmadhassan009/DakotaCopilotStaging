@@ -1,0 +1,25 @@
+.modal-container 
+{
+    width: 70%; 
+    max-width: 840px; 
+    min-width: 480px;
+}
+
+.modal-content
+{
+    position: relative;
+}
+
+.popup-button
+{
+   padding-right: 5px;
+}
+.modal-popup {
+    margin:0px!important; 
+    z-index : 1;
+}
+.custom-table-height {
+    height: 790px; 
+    border-collapse: 
+    collapse;
+}

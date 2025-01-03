@@ -1,0 +1,12 @@
+.THIS .outer-modal{
+    margin: 0px!important;
+    z-index : 1;
+}
+.THIS .inner-modal{
+    width: 131.5%; 
+    max-width: 852px; 
+    margin-left: -15.5%;
+}
+.THIS .modal-footer{
+   margin: unset;
+}

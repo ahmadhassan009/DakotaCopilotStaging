@@ -1,0 +1,40 @@
+c-meeting-materials-manager-presentation-related-to-account .slds-scrollable_y, .slds-scrollable--y{
+    width: 99.5% !important;
+}
+
+c-meeting-materials-manager-presentation-related-to-account .slds-scrollable_x, .slds-scrollable--x{
+    overflow-x: hidden;
+}
+
+c-meeting-materials-manager-presentation-related-to-account .slds-table_bordered, .slds-table--bordered {
+    width: 99.85% !important;
+}
+
+c-meeting-materials-related-to-account-view-all .slds-scrollable_y, .slds-scrollable--y{
+    width: 99.5% !important;
+}
+
+c-meeting-materials-related-to-account-view-all .slds-scrollable_x, .slds-scrollable--x{
+    overflow-x: hidden;
+}
+
+c-meeting-materials-related-to-account-view-all table > thead > tr > th div.slds-cell-fixed.slds-has-button-menu{
+    width: 94.5% !important;
+}
+
+c-meeting-materials-related-to-account-view-all .slds-table_bordered, .slds-table--bordered {
+    width: 99.85% !important;
+}
+
+c-meeting-materials-manager-presentation-related-to-account table > thead > tr > th div.slds-cell-fixed.slds-has-button-menu{
+    width: calc(100% - 48px) !important;
+}
+
+c-meeting-materials-manager-presentation-related-to-account table > thead th:first-child{
+width: 52px !important;
+}
+
+c-meeting-materials-manager-presentation-related-to-account table > thead > tr > th:last-child {
+	width: calc(100% - 52px) !important;
+}
+

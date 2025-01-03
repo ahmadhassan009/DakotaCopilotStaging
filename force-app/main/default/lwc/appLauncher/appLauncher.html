@@ -1,0 +1,12 @@
+<template>
+    <template if:true={showWelcome}>
+        <c-welcome-mat ongetwelcomematinteraction = {handleNextMessages} ></c-welcome-mat>
+    </template>
+    <!-- Pop-up message notifications -->
+    <template if:true={notificationViewStatus}>
+        <c-message-pop-up ongetnotificationinteraction = {handleNextMessageNotification} 
+        current-notification-type={currentNotification} 
+        user-first-name={userFirstName} 
+        current-notification-metadata={currentNotificationMetadata}></c-message-pop-up>
+    </template>
+</template>

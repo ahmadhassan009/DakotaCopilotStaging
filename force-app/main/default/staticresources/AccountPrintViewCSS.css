@@ -1,0 +1,15 @@
+/* Set width of field if number of fields are odd in layout*/
+.slds-form .record-form-spinner-holder > div:last-child > div:nth-child(odd):last-child{
+    max-width:50%;
+}
+.slds-tabs_default__link{
+    font-weight: bold !important;
+    font-size: 1rem;
+}
+.slds-form-element__label{
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'SalesforceSanRegular';
+    src: url("/resource/SalesforceSansRegular");
+}

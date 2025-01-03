@@ -1,0 +1,28 @@
+.headerStyle
+{
+    display: block;
+    /* height: 66.5455px; */
+    left: 13px;
+    right: 13px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 4px;
+}
+
+.layoutWidth
+{
+    width: 100%;
+}
+
+.stateDetails {
+    /* padding-top: 25px;
+    padding-left: 25px;
+    padding-bottom: 25px; */
+    margin-top: 10px;
+    /* margin-bottom: 10px;
+    background: #fff; */
+}
+
+.headingStyle {
+    margin-top: 5px;
+}

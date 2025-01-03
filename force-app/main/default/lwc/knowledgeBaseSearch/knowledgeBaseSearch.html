@@ -1,0 +1,28 @@
+<template>
+    <div class={componentStyling}>
+        <h2 class="headingStyling"> {portalName} Help Topics </h2>
+        <lightning-input onchange={fetchSearchResults} data-id="searchValue" name="searchValue" placeholder="Search"
+            type="search" class="searchbarStyle"></lightning-input>
+        <div class="tableStyling">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="small">
+                </lightning-spinner>
+            </template>
+            <template if:true={kbRecordsExists}>
+                <template for:each={knowledgebaseRecords} for:item="knowledgebase">
+                    <p key={knowledgebase.Id} class="rowStyling">
+                        <a target="_blank" href={knowledgebase.Video_Document_Link__c}>{knowledgebase.Name}</a>
+                    </p>
+                </template>
+            </template>
+            <template if:false={kbRecordsExists}>
+                <div>
+                    </br>
+                    <strong>
+                        <p class="emptyTableStyling"> No help topics found.</p>
+                    </strong>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

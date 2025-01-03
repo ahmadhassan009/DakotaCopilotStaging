@@ -1,0 +1,67 @@
+.labels-color{
+    color: #5A5A5A;
+}
+
+.div-width{
+    width:100%;
+}
+
+.child-width{
+    width:50%;  
+}
+
+.div-height{
+    height:100%;
+}
+
+.truncate-text{
+    overflow-wrap: break-word;
+}
+
+.td-child1{
+    border-bottom: none !important;
+    padding-bottom: 8px;
+}
+
+.td-child2{
+    border-bottom: none !important;
+    padding-left: 15px;
+    padding-bottom: 8px;
+}
+.pill-icon{
+    margin-left: 6px !important;
+}
+
+.disable-fields{
+    pointer-events: none;
+}
+
+.header-attr{
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.header-dist{
+    padding-bottom: 8px;
+}
+
+.date-attr{
+    font-weight: 700;
+    line-height: 18px;
+    font-size: 12px;
+    color: #444444;
+    font-style: normal;
+}
+.spinner-position{
+    position: relative !important;
+}
+
+.lookup-error{
+    color:red;
+}
+
+.title-background {
+    background-color:#f3f2f2;
+}
+.c-create-new-event .custom-combo-style .slds-dropdown-trigger_click.slds-is-open .slds-dropdown{ max-height: 250px; }

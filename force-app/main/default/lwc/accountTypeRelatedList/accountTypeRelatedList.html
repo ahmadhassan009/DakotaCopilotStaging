@@ -1,0 +1,40 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-18-2020
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   11-17-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+
+    <template for:each={section1MetadataToDisplay} for:item="accountMeta">
+        <lightning-layout-item key={accountMeta.Id} size="3">
+            <!-- Start sub-component -->
+            <c-specific-account-type-list onselectedaccounts={handleSelectedAccounts} account-meta={accountMeta}
+                record-id={recordId} record-name={recordName} padding-left={paddingLeft}></c-specific-account-type-list>
+            <!-- End sub-component -->
+        </lightning-layout-item>
+    </template>
+    <template if:true={isCommunity}>
+        <template for:each={accountAssetMetadata} for:item="accountMetaDT">
+            <lightning-layout-item key={accountMetaDT.Id} size="3">
+                
+                <c-specific-account-type-list onselectedaccounts={handleSelectedAccounts}
+                    account-meta={accountMetaDT} record-id={recordId} record-name={recordName}
+                    padding-left={paddingLeft}></c-specific-account-type-list>
+            </lightning-layout-item>
+        </template>
+    </template>
+    <template for:each={section2MetadataToDisplay} for:item="accountMeta">
+        <lightning-layout-item key={accountMeta.Id} size="3">
+            <!-- Start sub-component -->
+            <c-specific-account-type-list onselectedaccounts={handleSelectedAccounts} account-meta={accountMeta}
+                record-id={recordId} record-name={recordName} padding-left={paddingLeft}>
+            </c-specific-account-type-list>
+            <!-- End sub-component -->
+        </lightning-layout-item>
+    </template>
+</template>

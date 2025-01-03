@@ -1,0 +1,20 @@
+<apex:page standardStylesheets="true" lightningStylesheets="true" showHeader="true" sidebar="true" title="Dakota Live! Search">
+    <apex:includeLightning />
+    <div id="DakotaContentSearchDiv">
+        <!-- Lightning Web Component will be included here. -->
+    </div>
+ 
+     <script>
+    var isFromVFPage = "true";
+    $Lightning.use(
+        "c:DakotaContentSearchLightningApp", // Name of Aura Dependency app where c is namespace.
+        function() { // Callback function
+            $Lightning.createComponent(
+                "c:dakotaContentSearch", // Name of Lightning Component where c is namespace.
+                {}, // attribute parameters
+                "DakotaContentSearchDiv" // Id of the element where Lightning Component will be rendered.
+            );
+        }
+    );
+     </script>
+</apex:page>

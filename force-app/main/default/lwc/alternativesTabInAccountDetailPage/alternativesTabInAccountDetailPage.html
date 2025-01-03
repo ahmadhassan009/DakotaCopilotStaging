@@ -1,0 +1,203 @@
+<template>
+
+    <article class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <template if:true={isLoading}>
+                <div style="min-height: 75px;">
+                    <div role="status" class="slds-spinner slds-spinner_brand slds-spinner_medium">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </template>
+            <template if:false={isLoading}>
+                <lightning-record-view-form record-id={recordId} object-api-name="Account">
+                    <div class="slds-grid slds-wrap cardStyling">
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-border_bottom leftColumnDivStyling">
+                                <label class="slds-form-element__label" for="form-element-01">Private
+                                    Equity</label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Private_Equity__c"></lightning-output-field>
+                                </div>
+                            </div>
+                            <template if:true={isPrivateEquityAverageTicketSize}>
+                                <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                    <label class="slds-form-element__label" for="form-element-01">Private
+                                        Equity Avg Ticket
+                                        Size
+                                    </label>
+                                    <div class="minHeight">
+                                        <lightning-output-field variant="label-hidden"
+                                            field-name="Private_Equity_Average_Ticket_Size__c"></lightning-output-field>
+                                    </div>
+                                </div>
+                            </template>
+                            <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">Hedge Funds
+
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Hedge_Funds__c"></lightning-output-field>
+                                </div>
+                            </div>
+                            <template if:true={isHedgeFundAvgTicketSize}>
+                                <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                    <label class="slds-form-element__label" for="form-element-01">Hedge
+                                        Funds Avg Ticket
+                                        Size
+                                    </label>
+                                    <div class="minHeight">
+                                        <lightning-output-field variant="label-hidden"
+                                            field-name="Hedge_Fund_Avg_Ticket_Size__c"></lightning-output-field>
+                                    </div>
+                                </div>
+                            </template>
+                            <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">Private Credit
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Private_Credit__c"></lightning-output-field>
+                                </div>
+                            </div>
+                            <template if:true={isPrivateCreditAverageTicketSize}>
+                                <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                    <label class="slds-form-element__label" for="form-element-01">Private
+                                        Credit Avg Ticket
+                                        Size
+
+                                    </label>
+                                    <div class="minHeight">
+                                        <lightning-output-field variant="label-hidden"
+                                            field-name="Private_Credit_Average_Ticket_Size__c"></lightning-output-field>
+                                    </div>
+                                </div>
+                            </template>
+                            
+                            <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">Private Real
+                                    Estate
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Private_Real_Estate__c"></lightning-output-field>
+                                </div>                                
+                            </div>
+                            <template if:true={isPrivateRealEstateAverageTicketSize}>
+                                <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                    <label class="slds-form-element__label" for="form-element-01">Private
+                                        Real Estate Avg
+                                        Ticket
+                                        Size
+                                    </label>
+                                    <div class="minHeight">
+                                        <lightning-output-field variant="label-hidden"
+                                            field-name="Private_Real_Estate_Average_Ticket_Size__c"></lightning-output-field>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">Real Assets
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Real_Assets__c"></lightning-output-field>
+                                </div>
+                            </div>
+                            <template if:true={isRealAssetsAverageTicketSize}>
+                                <div class="slds-border_bottom slds-m-top_medium leftColumnWidth">
+                                    <label class="slds-form-element__label" for="form-element-01">Real
+                                        Assets Avg Ticket
+                                        Size
+                                    </label>
+                                    <br>
+                                    <div class="minHeight">
+                                        <lightning-output-field variant="label-hidden"
+                                            field-name="Real_Assets_Average_Ticket_Size__c"></lightning-output-field>
+                                    </div>
+                                </div>
+                            </template>
+                            
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2 right-column">
+                            <div class="slds-border_bottom rightColumnDivStyling">
+                                <label class="slds-form-element__label" for="form-element-01">Liquid
+                                    Alternatives
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Liquid_Alternatives__c"></lightning-output-field>
+                                </div>                               
+                            </div>
+                            
+                            <div class="slds-border_bottom slds-m-top_medium rightColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">Cryptocurrency</label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Cryptocurrency__c"></lightning-output-field>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-border_bottom slds-m-top_medium rightColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">1031 Exchange
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="X1031_Exchange__c"></lightning-output-field>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-border_bottom slds-m-top_medium rightColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">Alternative
+                                    Platform
+                                    Description
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Alternative_Platform_Description__c"></lightning-output-field>
+                                </div>
+                            </div>
+
+                            <div class="slds-border_bottom slds-m-top_medium rightColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">Venture
+                                    Capital
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Venture_Capital__c"></lightning-output-field>
+                                </div>
+                            </div>
+
+                            <div class="slds-border_bottom slds-m-top_medium rightColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">Co-Investments                                   
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="Co_Investments__c"></lightning-output-field>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-border_bottom slds-m-top_medium rightColumnWidth">
+                                <label class="slds-form-element__label" for="form-element-01">LP Power User
+                                </label>
+                                <div class="minHeight">
+                                    <lightning-output-field variant="label-hidden"
+                                        field-name="LP_Power_User__c"></lightning-output-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-record-view-form>
+            </template>
+
+        </div>
+
+    </article>
+
+</template>

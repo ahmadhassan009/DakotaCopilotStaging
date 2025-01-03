@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="showTabulatorData" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.handlePageReferenceChange}"/>
+    <aura:if isTrue="{!v.showTabulatorData}">
+        <c:tabulatorData />
+    </aura:if>
+</aura:component>

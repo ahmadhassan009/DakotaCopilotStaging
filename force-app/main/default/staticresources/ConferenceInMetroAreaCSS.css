@@ -1,0 +1,26 @@
+/** Styling button as URL Start **/
+button[name="RegLinkCell"] {
+    color: var(--lwc-brandTextLink,rgb(53, 88, 214));
+    text-decoration: none;
+    transition: color .1s linear;
+}
+
+button[name="RegLinkCell"]:hover{
+    color: var(--lwc-brandTextLinkActive,#2647bc);
+}
+
+button[name="RegLinkCell"]:focus{
+    color: var(--lwc-brandTextLinkActive,#2647bc);
+}
+
+[kx-scope=button][kx-type=underline]:hover:after, [kx-scope=button][kx-type=underline]:focus:after {
+    transform: scaleX(0) !important;
+}
+/** Styling button as URL End **/
+
+/** Reducing height of button in the datatable**/
+.buttonHeight lightning-button {
+    --sds-c-button-line-height : 1;
+    text-decoration: underline;
+    text-decoration-color: #2647bc;
+}

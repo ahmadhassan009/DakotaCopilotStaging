@@ -1,0 +1,10 @@
+<aura:component controller="TrialActivateDeactivateController" implements="force:lightningQuickActionWithoutHeader,force:appHostable,lightning:actionOverride,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}" /> 
+    <aura:attribute name = "Spinner" type="boolean" default="false"/>
+    <div style="top:9em;" class="slds-is-relative">
+        <aura:if isTrue="{!v.Spinner}">
+            <lightning:spinner variant="brand" size="medium" />
+            <p class="custom-loading-text">Processing...</p>
+        </aura:if>	
+    </div>
+</aura:component>

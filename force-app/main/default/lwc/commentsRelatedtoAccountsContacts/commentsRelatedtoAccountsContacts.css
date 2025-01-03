@@ -1,0 +1,88 @@
+.comment-div
+{
+   font-size: 1em;
+   font-weight: 400;
+   font-style: normal;
+   word-wrap:break-word; 
+   width: calc(100% - 44px);
+}
+
+.button-style
+{
+   float:right;
+   position: relative; 
+   top: 20px;
+}
+
+.popup-button
+{
+   padding-right: 5px;
+}
+
+.comment-section
+{
+   padding-top: 7px;
+   width: 100%;
+   flex-wrap: nowrap !important;
+   max-width: calc(100% - 48px);
+}
+
+.text-area-div
+{
+   position: inherit; 
+   margin-left: 11px;
+   margin-right: 11px; 
+   margin-bottom: 10px;
+}
+
+.comm-div-display
+{
+   display: flex;
+   padding-bottom: 15px;
+}
+
+.title-div
+{
+   font-size: 16.5px;
+}
+
+.footer-div
+{
+   text-align: center;
+}
+
+.approval-notes-style {
+   color: #2e844a;
+}
+
+.approval-notes-date {
+   color: #2e844a;
+   font-size:0.88em;
+}
+
+.comment-separation {
+   display: block;
+   height: 35px;
+}
+
+@media (max-width: 1115px) { 
+   .bounce-email-text {
+      top:-40px;
+   }
+ }
+
+ .heading-link-class {
+   z-index: 1;
+ }
+
+ .comment-textarea {
+   display: flex; 
+   top: 15px; 
+   left: -8px;
+   width: 101%;
+ }
+
+ .mail-link {
+   color: white;
+   text-decoration-line: underline;
+}

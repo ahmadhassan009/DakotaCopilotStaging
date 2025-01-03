@@ -1,0 +1,85 @@
+c-insurance-account-tabset lightning-tabset ul li a {
+    font-size:initial;
+    text-decoration:unset;
+
+}
+c-insurance-account-tabset lightning-tabset ul li lightning-button-menu button{
+    font-size:initial;
+    text-decoration:unset;
+
+}
+c-insurance-account-tabset lightning-tabset ul{
+    border-bottom-style: solid !important;
+    margin: unset !important;
+    padding-top: unset !important;
+
+}
+
+
+c-insurance-account-tabset lightning-tabset ul li lightning-button-menu lightning-primitive-icon{
+ display: none;
+
+}
+
+c-insurance-account-tabset lightning-tabset ul li.slds-tabs_default__item.slds-is-active{
+    padding:unset;
+
+}
+c-insurance-account-tabset lightning-tabset ul li.slds-tabs_default__item.slds-is-active::after {
+    background:rgb(0, 112, 210);
+    text-decoration:unset;
+}
+
+c-insurance-account-tabset lightning-tabset ul li.slds-tabs_default__item.slds-is-active a.slds-tabs_default__link {
+    font-weight:bold
+}
+c-insurance-account-tabset lightning-tabset ul li.slds-tabs_default__item {
+    padding:unset;
+}
+c-insurance-account-tabset lightning-tabset ul li {
+    margin-right:15px;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="General Information"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="Insurance Details"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="Platform Details"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="Investment Structures"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="Consultants"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="Equities"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="Fixed Income"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="Alternatives"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tabset lightning-tab-bar ul li[data-label="Additional Webpages"] a{
+	text-decoration: none !important;
+}
+
+c-insurance-account-tabset lightning-tab lightning-record-view-form .paddingClass .slds-col.slds-size_1-of-2.left-column {
+    padding-left: unset;
+}
+
+c-insurance-account-tabset lightning-tab  lightning-record-view-form .paddingClass .slds-col.slds-size_1-of-1.full-width-bottom-fields {
+    padding-left: unset;
+}

@@ -1,0 +1,11 @@
+lightning-tabset lightning-tab-bar ul li[data-label="Job Changes"] a{
+	font-size: 14px !important;
+	font-weight: bold !important;
+	border-bottom: none !important;
+}
+
+lightning-tabset lightning-tab-bar ul li[data-label="Role Changes"] a{
+	font-size: medium !important;
+	font-weight: bold !important;
+	border-bottom: 3px solid #0171D2 !important;
+}

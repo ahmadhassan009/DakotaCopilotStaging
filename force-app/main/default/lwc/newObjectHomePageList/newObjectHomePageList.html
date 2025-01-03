@@ -1,0 +1,22 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner> 
+    </template>
+    <div class=dataTableHeightHome>
+        <c-custom-datatable
+            key-field="Id"
+            data={data}
+            columns={columns}
+            show-row-number-column="true" 
+            enable-infinite-loading="true"
+            hide-checkbox-column 
+            default-sort-direction={defaultSortDirection}
+            sorted-direction={sortedDirection}
+            sorted-by={sortedBy}
+            onsort={updateColumnSorting}
+            onloadmore={loadMoreData} 
+            load-more-offset="50">
+        </c-custom-datatable>
+    </div>
+</template>

@@ -1,0 +1,342 @@
+<template> 
+    <template if:false={doesNotHasPermission}> 
+        <div class="slds-card boundry"> 
+            <template if:true={isLoading}>     
+                <lightning-spinner 
+                    alternative-text="Loading..."  size="medium">
+                </lightning-spinner> 
+            </template>       
+            <template if:true={recordExist}> 
+                <div class="slds-grid slds-page-header forceRelatedListCardHeader headerSyle">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure">
+                            <template if:true={eventRecord}>
+                                <lightning-icon size="medium"  icon-name="standard:event">
+                                </lightning-icon>    
+                            </template>
+                            <template if:true={taskRecord}>
+                                <lightning-icon size="medium" icon-name="standard:task">
+                                </lightning-icon>
+                            </template>
+                        </div>
+                        <div class="slds-media__body">
+                            <h1>
+                                <div class="recordBannerTextColor slds-line-height--reset">{detailPage}</div>
+                                <div class="slds-page-header__title"> {contentName} </div>
+                            </h1>
+                        </div>
+                        
+                        <template if:true={getAccess}>
+                            <div class="editButton">
+                                <lightning-button label="Edit" onclick={handleEditClick}></lightning-button>
+                            </div>
+                            <div class="deleteButton">
+                                <lightning-button label="Delete" onclick={handleDeleteClick}></lightning-button>
+                            </div>                        
+                        </template> 
+                    </header>
+                </div>
+                        
+                <div class="separater-div"></div>
+            </template> 
+    
+            <template if:true={eventRecord}>
+                <div class="detailForm">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-wrap slds-form-element_readonly minHeight">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Subject</label>
+                                    <div class="slds-form-element__control  fontSize">
+                                    <span>{eventRecord.Subject}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Setup By</label>
+                                    <template if:true={eventRecord.Set_Up_By_new__c}>
+                                        <div class="slds-form-element__control fontSize">
+                                            <span><lightning-formatted-url value={setUpByLink} label={eventRecord.Set_Up_By_new__r.Name} tooltip={eventRecord.Set_Up_By_new__r.Name} target="_self"></lightning-formatted-url></span>
+                                        </div>
+                                    </template>                            
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-wrap slds-form-element_readonly minHeight">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Name</label>
+                                    <template if:true={eventRecord.WhoId}>
+                                        <div class="slds-form-element__control fontSize">
+                                            <span><lightning-formatted-url value={nameLink} label={eventRecord.Who.Name} tooltip={eventRecord.Who.Name} target="_self"></lightning-formatted-url>{contactCount}</span>
+                                        </div>
+                                    </template>                            
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Related To</label>
+                                    <template if:true={eventRecord.WhatId}>
+                                        <div class="slds-form-element__control fontSize">
+                                            <span><lightning-formatted-url value={relatedToLink} label={eventRecord.What.Name} tooltip={eventRecord.What.Name} target="_self"></lightning-formatted-url></span>
+                                        </div>
+                                    </template>                            
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+    
+                    <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-wrap slds-form-element_readonly minHeight">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                <label class="slds-form-element__label">Start</label>
+                                <div class="slds-form-element__control fontSize">
+                                    <span>{eventRecord.StartDateTime}</span>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">All-Day Event</label>
+                                <div class="slds-form-element__control fontSize">
+                                    <span> <lightning-input type="checkbox" checked={eventRecord.IsAllDayEvent} disabled="true"></lightning-input></span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+    
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-wrap slds-form-element_readonly minHeight">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">End</label>
+                                    <div class="slds-form-element__control fontSize">
+                                        <span>{eventRecord.EndDateTime}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Description</label>
+                                    <div class="slds-form-element__control fontSize">
+                                        <span><lightning-formatted-rich-text value={eventRecord.Description}>
+                                        </lightning-formatted-rich-text></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>                   
+                    
+                </div>
+            </template>
+    
+            <!-- ****************************************  Task  ********************************** -->
+    
+            <template if:true={taskRecord}>
+                <div class="detailForm">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-wrap slds-form-element_readonly minHeight">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Subject</label>
+                                    <div class="slds-form-element__control  fontSize">
+                                    <span>{taskRecord.Subject}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Setup By</label>
+                                    <template if:true={taskRecord.Set_Up_By_new__c}>
+                                        <div class="slds-form-element__control fontSize">
+                                            <span><lightning-formatted-url value={setUpByLink} label={taskRecord.Set_Up_By_new__r.Name} tooltip={taskRecord.Set_Up_By_new__r.Name} target="_self"></lightning-formatted-url></span>
+                                        </div>
+                                    </template>                          
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-wrap slds-form-element_readonly minHeight">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Name</label>
+                                    <template if:true={taskRecord.WhoId}>
+                                        <div class="slds-form-element__control fontSize">
+                                            <span><lightning-formatted-url value={nameLink} label={taskRecord.Who.Name} tooltip={taskRecord.Who.Name} target="_self"></lightning-formatted-url>{contactCount}</span>
+                                        </div>
+                                    </template>                           
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Related To</label>
+                                    <template if:true={taskRecord.WhatId}>
+                                        <div class="slds-form-element__control fontSize">
+                                            <span><lightning-formatted-url value={relatedToLink} label={taskRecord.What.Name} tooltip={taskRecord.What.Name} target="_self"></lightning-formatted-url></span>
+                                        </div>
+                                    </template>                            
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+    
+                    <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-wrap slds-form-element_readonly minHeight">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Due Date</label>
+                                    <div class="slds-form-element__control  fontSize">
+                                        <span>{taskRecord.ActivityDate}</span>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">Priority</label>
+                                <div class="slds-form-element__control fontSize">
+                                    <span>{taskRecord.Priority}</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+    
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-wrap slds-form-element_readonly minHeight">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Status</label>
+                                    <div class="slds-form-element__control fontSize">
+                                        <span>{taskRecord.Status}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">Comments</label>
+                                    <div class="slds-form-element__control fontSize">
+                                    <span><lightning-formatted-rich-text value={taskRecord.Description}>
+                                    </lightning-formatted-rich-text></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>    
+                </div>
+            </template>
+
+            <!-- DELETE POPUP  -->
+            <div class="slds-m-around--xx-large modal-popup">
+                <template if:true={deletePopup}>         
+                    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                        <div class="slds-modal__container"  role="document" tabindex="0">                   
+                            <div class="slds-modal__header">
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete Activity</h2>                   
+                            </div>
+                            <div class="slds-modal__content slds-p-around--medium">                    
+                                <form class="slds-form--stacked">
+                                    <div class="slds">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="slds-col--padded slds-medium-size--1-of-2">
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__control">
+                                                        Are you sure you want to delete this activity?
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="slds-modal__footer">
+                                <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeDeletePopup}></lightning-button>
+                                <lightning-button variant="brand" label="Delete" onclick={deleteRow}></lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open"></div>
+                </template>
+            </div>
+
+    
+            <!-- Edit Task POPUP  -->
+            <div class="slds-m-around--xx-large modal-popup">
+                <template if:true={editTaskPopup}>         
+                    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                        <div class="slds-modal__container modal-container-width" role="document" tabindex="0">                   
+                            <div class="slds-modal__header">
+                                <h2  class="slds-text-heading_medium slds-hyphenate">Edit {taskRecord.Subject}</h2>                   
+                            </div>
+                            <div  class="slds-scrollable_y">
+                                <div class="slds-modal__content slds-p-around--medium modal-content-overflow">   
+                                    <c-create-new-task org-id={orgId} selected-owner-id={taskRecord.OwnerId} selected-owner-name={taskRecord.Owner.Name} selected-related-to-name={whatName} selected-related-to-id={whatId} account-id={objectId} task-id={recordId} selected-status={taskRecord.Status} selected-priority={taskRecord.Priority} selected-subject={taskRecord.Subject} selected-due-date={activityDate} task-description={taskRecord.Description} task-setup-by-id={taskRecord.Set_Up_By_new__c} task-setup-by-name={taskRecord.Set_Up_By_new__r.Name} onsaved={handleSave}></c-create-new-task>  
+                                </div>
+                            </div>
+                            
+                            <div class="slds-align_absolute-center slds-modal__footer modal-footer">
+                                <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeEditPopup}></lightning-button>
+                                <div class="slds-m-left_small">
+                                    <lightning-button variant="brand" label="Save" onclick={saveTask}></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open"></div>
+                </template>
+            </div>
+    
+            <!-- Edit Event POPUP  -->
+            <div class="slds-m-around--xx-large modal-popup">
+                <template if:true={editEventPopup}>         
+                    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                        <div class="slds-modal__container modal-container-width"  role="document" tabindex="0">                   
+                            <div class="slds-modal__header">
+                                <h2  class="slds-text-heading_medium slds-hyphenate">Edit {eventRecord.Subject}</h2>                   
+                            </div>
+                            <div  class="slds-scrollable_y">
+                                <div class="slds-modal__content slds-p-around--medium modal-content-overflow">   
+                                    <c-create-new-event org-id={orgId} selected-owner-id={eventRecord.OwnerId} selected-owner-name={eventRecord.Owner.Name} selected-related-to-name={whatName} selected-related-to-id={whatId} event-id={recordId} account-id={objectId} all-day-event={eventRecord.IsAllDayEvent} selected-end-date={endDateTime} selected-start-date={startDateTime} selected-subject={eventRecord.Subject} event-description={eventRecord.Description} event-setup-by-id={eventRecord.Set_Up_By_new__c} event-setup-by-name={eventRecord.Set_Up_By_new__r.Name} onsaved={handleSave}></c-create-new-event>  
+                            </div> 
+                            </div>
+                            
+                            <div class="slds-align_absolute-center slds-modal__footer modal-footer">
+                                <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeEditPopup}></lightning-button>
+                                <div class="slds-m-left_small">
+                                    <lightning-button variant="brand" label="Save" onclick={saveEvent}></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open"></div>
+                </template>
+            </div>
+        </div>        
+    </template>
+
+    <template if:true={doesNotHasPermission}>
+        <c-no-permissions-template does-not-has-permission={doesNotHasPermission}></c-no-permissions-template>
+    </template>
+
+</template>

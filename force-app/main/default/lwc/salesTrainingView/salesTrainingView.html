@@ -1,0 +1,368 @@
+<template>
+    <div class="parentDivHeight">
+        <lightning-card title="Sales Training Search">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="medium">
+                </lightning-spinner>
+            </template>
+            <div class="titleMainDivStyle" onclick={closeColumnMenuPopup}>
+                <div class="searchBoxMainDiv">
+                    <lightning-input onkeydown={checkEnterKeyPress} data-id="searchValue" name="searchValue"
+                        onchange={handleOnChange} placeholder="Search by Content/Title/Category/What you will learn"
+                        type="search" class="searchBoxStylig"></lightning-input>
+                    <lightning-button name="Search" variant="brand" label="Search" title="Search"
+                        onclick={fetchSearchedRecords} class="searchButtonStyle">
+                    </lightning-button>
+                    <lightning-button name="Reset" label="Reset" title="Reset" onclick={resetFilters}
+                        class="resetButton"></lightning-button>
+                </div>
+            </div>
+            <div class="slds-table-wrapper slds-m-top--x-large slds-m-left--small customTableMainDiv">
+
+                <table aria-multiselectable="true" class="slds-table slds-table_fixed-layout slds-table_resizable-cols"
+                    role="grid">
+                    <thead>
+                        <tr class="slds-line-height_reset borderBottom">
+
+                            <th aria-sort="ascending"
+                                class="slds-is-resizable slds-is-sortable slds-is-sorted slds-is-sorted_desc slds-cell_action-mode chapterNumColumnWidth"
+                                scope="col">
+                                <a class="slds-th__action slds-text-link_reset paddingLeft" role="button" tabindex="0"
+                                    onclick={handleSortByChapterNum}>
+                                    <span class="slds-assistive-text">Sort by: </span>
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                        <span class="slds-icon_container slds-icon-utility-arrowup">
+                                            <svg class="slds-icon slds-icon-text-default" style={chapterNumSortIcon}
+                                                aria-hidden="true">
+                                                <template if:true={chapterNumArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowup">
+                                                    </use>
+                                                </template>
+                                                <template if:false={chapterNumArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown">
+                                                    </use>
+                                                </template>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                            </th>
+
+
+                            <th aria-sort="ascending"
+                                class="slds-is-resizable slds-is-sortable slds-is-sorted slds-is-sorted_desc slds-cell_action-mode borderRight contentColumnWidth"
+                                scope="col">
+                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0"
+                                    onclick={handleSortByContent}>
+                                    <span class="slds-assistive-text">Sort by: </span>
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                        <span class="slds-truncate" title="Content">Content</span>
+                                        <span class="slds-icon_container slds-icon-utility-arrowup">
+                                            <svg class="slds-icon slds-icon-text-default" style={contentSortIcon}
+                                                aria-hidden="true">
+                                                <template if:true={contentArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowup">
+                                                    </use>
+                                                </template>
+                                                <template if:false={contentArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown">
+                                                    </use>
+                                                </template>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                                <button
+                                    class="slds-button slds-button_icon slds-th__action-button slds-button_icon-x-small"
+                                    aria-haspopup="true" tabindex="-1" title="Show Content column actions"
+                                    data-id="topic" onclick={handleMenuIconClick}>
+                                    <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
+                                        aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevrondown"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Show Content column actions</span>
+                                </button>
+                                <template if:true={showMenuForContent}>
+                                    <div class="slds-dropdown slds-dropdown_right">
+                                        <ul class="slds-dropdown__list" role="menu" data-id="topic">
+                                            <li class="slds-dropdown__item" role="presentation" data-id="clip">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Clip
+                                                    Text</a>
+                                            </li>
+                                            <li class="slds-dropdown__item" role="presentation" data-id="wrap">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Wrap
+                                                    Text</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </template>
+                                <span class="slds-assistive-text" aria-live="polite" aria-atomic="true">Sorted
+                                    ascending</span>
+                            </th>
+
+                            <th aria-sort="descending"
+                                class="slds-is-resizable slds-is-sortable slds-cell_action-mode slds-is-sorted_desc borderRight titleColumnWidth"
+                                scope="col">
+                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0"
+                                    onclick={handleSortbyTitle}>
+                                    <span class="slds-assistive-text">Sort by: </span>
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                        <span class="slds-truncate" title="Title">Title</span>
+                                        <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                            <svg class="slds-icon slds-icon-text-default " style={titleSortIcon}
+                                                aria-hidden="true" data-id="titleColumn">
+                                                <template if:true={titleArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowup">
+                                                    </use>
+                                                </template>
+                                                <template if:false={titleArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown">
+                                                    </use>
+                                                </template>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                                <button
+                                    class="slds-button slds-button_icon slds-th__action-button slds-button_icon-x-small"
+                                    aria-haspopup="true" tabindex="-1" title="Show Title column actions" data-id="title"
+                                    onclick={handleMenuIconClick}>
+                                    <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
+                                        aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevrondown"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Show Title column actions</span>
+                                </button>
+
+                                <template if:true={showMenuForTitle}>
+                                    <div class="slds-dropdown slds-dropdown_right">
+                                        <ul class="slds-dropdown__list" role="menu" data-id="title">
+                                            <li class="slds-dropdown__item" role="presentation" data-id="clip">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Clip
+                                                    Text</a>
+                                            </li>
+                                            <li class="slds-dropdown__item" role="presentation" data-id="wrap">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Wrap
+                                                    Text</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </template>
+                            </th>
+                            <th aria-sort="none"
+                                class="slds-is-resizable slds-is-sortable slds-cell_action-mode borderRight numOfViewsColumnWidth"
+                                scope="col">
+                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0"
+                                    onclick={handleSortByNumOfViews}>
+                                    <span class="slds-assistive-text">Sort by: </span>
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                        <span class="slds-truncate" title="Views">Views</span>
+                                        <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                            <svg class="slds-icon slds-icon-text-default " style={numOfViewsSortIcon}
+                                                aria-hidden="true">
+                                                <template if:true={numOfViewsArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowup">
+                                                    </use>
+                                                </template>
+                                                <template if:false={numOfViewsArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown">
+                                                    </use>
+                                                </template>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                                <button
+                                    class="slds-button slds-button_icon slds-th__action-button slds-button_icon-x-small"
+                                    aria-haspopup="true" tabindex="-1" title="Show Views column actions"
+                                    data-id="numOfViews" onclick={handleMenuIconClick}>
+                                    <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
+                                        aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevrondown"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Show Views column actions</span>
+                                </button>
+                                <template if:true={showMenuForNumOfViews}>
+                                    <div class="slds-dropdown slds-dropdown_right">
+                                        <ul class="slds-dropdown__list" role="menu" data-id="numOfViews">
+                                            <li class="slds-dropdown__item" role="presentation" data-id="clip">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Clip
+                                                    Text</a>
+                                            </li>
+                                            <li class="slds-dropdown__item" role="presentation" data-id="wrap">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Wrap
+                                                    Text</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </template>
+
+                            </th>
+                            <th aria-sort="none"
+                                class="slds-is-resizable slds-is-sortable slds-cell_action-mode borderRight categoryColumnWidth"
+                                scope="col">
+                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0"
+                                    onclick={handleSortByCategory}>
+                                    <span class="slds-assistive-text">Sort by: </span>
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                        <span class="slds-truncate" title="Category">Category</span>
+                                        <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                            <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon "
+                                                style={categorySortIcon} aria-hidden="true">
+                                                <template if:true={categoryArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowup">
+                                                    </use>
+                                                </template>
+                                                <template if:false={categoryArrowUp}>
+                                                    <use
+                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowdown">
+                                                    </use>
+                                                </template>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                                <button
+                                    class="slds-button slds-button_icon slds-th__action-button slds-button_icon-x-small"
+                                    aria-haspopup="true" tabindex="-1" title="Show Category column actions"
+                                    data-id="category" onclick={handleMenuIconClick}>
+                                    <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
+                                        aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevrondown"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Show Category column actions</span>
+                                </button>
+                                <template if:true={showMenuForCategory}>
+                                    <div class="slds-dropdown slds-dropdown_right">
+                                        <ul class="slds-dropdown__list" role="menu" data-id="category">
+                                            <li class="slds-dropdown__item" role="presentation" data-id="clip">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Clip
+                                                    Text</a>
+                                            </li>
+                                            <li class="slds-dropdown__item" role="presentation" data-id="wrap">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Wrap
+                                                    Text</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </template>
+                            </th>
+                            <th aria-sort="none"
+                                class="slds-is-resizable slds-is-sortable slds-cell_action-mode borderRight whatYouWillLearnColumnWidth"
+                                scope="col">
+                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                                    <span class="slds-assistive-text">Sort by: </span>
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                        <span class="slds-truncate" title="What you will learn">What you will
+                                            learn</span>
+                                    </div>
+                                </a>
+                                <button
+                                    class="slds-button slds-button_icon slds-th__action-button slds-button_icon-x-small"
+                                    aria-haspopup="true" tabindex="-1" title="Show What you will learn column actions"
+                                    data-id="WhatWillYouLearn" onclick={handleMenuIconClick}>
+                                    <svg class="slds-button__icon slds-button__icon_hint slds-button__icon_small"
+                                        aria-hidden="true">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevrondown"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Show What you will learn column actions</span>
+                                </button>
+                                <template if:true={showMenuForWhatWillYouLearn}>
+                                    <div class="slds-dropdown slds-dropdown_right">
+                                        <ul class="slds-dropdown__list" role="menu" data-id="WhatWillYouLearn">
+                                            <li class="slds-dropdown__item" role="presentation" data-id="clip">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Clip Text</a>
+                                            </li>
+                                            <li class="slds-dropdown__item" role="presentation" data-id="wrap">
+                                                <a href="javascript:void(0);" class="slds-dropdown__item-action"
+                                                    role="menuitem" tabindex="-1"
+                                                    onclick={applyTextPropertyOnColumn}>Wrap Text</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </template>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody onclick={closeColumnMenuPopup}>
+                        <template for:each={allSalesTrainingRecords} for:item="stRecord">
+                            <tr class="slds-hint-parent borderBottom borderRight rowBorderTop" key={stRecord.topic}>
+                            </tr>
+                            <template for:each={stRecord._children} for:item="childRecord">
+                                <tr class="slds-hint-parent" key={childRecord.chapterNumber}>
+                                    <td data-label="Group" data-id="chapterNumber" colspan="1"
+                                        class="slds-cell_action-mode slds-cell-wrap" role="gridcell">
+                                        <div class={contentTextProperty}>{childRecord.chapterNumber}</div>
+                                    </td>
+                                    <td data-label="Group" data-id="topic" colspan="1"
+                                        class="slds-cell_action-mode slds-cell-wrap borderRight" role="gridcell">
+                                        <div class={contentTextProperty} title={childRecord.topic}>{childRecord.topic}
+                                        </div>
+                                    </td>
+                                    <td data-label="Title"
+                                        class="slds-cell_action-mode slds-cell-wrap borderBottom borderLeft borderRight"
+                                        role="gridcell" data-id={childRecord.id}>
+                                        <div class={titleTextProperty} title={childRecord.title}>
+                                            <a href={childRecord.video_document_link} target="_blank"
+                                                onclick={handleLinkClick} oncontextmenu={handleContextMenu}
+                                                data-record-id={childRecord.id}>{childRecord.title}
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td data-label="Views" data-id="num_of_views"
+                                        class="slds-cell_action-mode slds-cell-wrap borderBottom borderRight"
+                                        role="gridcell">
+                                        <div class={numOfViewsTextProperty} title={childRecord.num_of_views}>
+                                            {childRecord.num_of_views}</div>
+                                    </td>
+                                    <td data-label="Category" data-id="category"
+                                        class="slds-cell_action-mode slds-cell-wrap borderBottom borderRight"
+                                        role="gridcell">
+                                        <div class={categoryTextProperty} title={childRecord.category}>
+                                            {childRecord.category}</div>
+                                    </td>
+                                    <td data-label="What you will learn" data-id="what_will_you_learn"
+                                        class="slds-cell_action-mode slds-cell-wrap borderBottom borderRight"
+                                        role="gridcell">
+                                        <div class={whatWillYouLearnTextProperty}
+                                            title={childRecord.what_will_you_learn}>
+                                            {childRecord.what_will_you_learn}
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </template>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </lightning-card>
+    </div>
+</template>

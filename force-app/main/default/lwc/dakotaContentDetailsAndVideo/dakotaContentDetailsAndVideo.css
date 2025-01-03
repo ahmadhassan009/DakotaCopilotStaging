@@ -1,0 +1,5 @@
+.this .lightning-output-field div lightning-formatted-text
+{
+    border-bottom: 1px solid;
+    border-color: rgb(0, 114, 206)
+}

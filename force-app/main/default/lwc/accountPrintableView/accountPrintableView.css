@@ -1,0 +1,95 @@
+@media print {
+  .hidePrintButton {
+    display: none;
+  }
+
+  .accountLogoColor {
+    background-color: #7F8DE1 !important;
+  }
+
+  .contactLogoColor {
+    background-color: #A094ED !important;
+  }
+
+  hr {
+    background: linear-gradient(to right, #679ED5, #A7CBEE) !important;
+    height: 3px !important;
+  }
+
+  .backgroundStyling {
+    padding: 0% !important;
+  }
+  .backgroundStyling {
+    -webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+    color-adjust: exact !important;  /*Firefox*/
+  }
+}
+
+.backgroundStyling {
+  min-height:800px;
+  background-color: #FFF;
+  border-radius: 5px;
+}
+
+.wrapEmailColumn {
+  overflow-wrap: break-word !important;
+}
+
+.custom-box {
+  color: rgb(24, 24, 24) !important;
+}
+
+hr {
+  height: 4px;
+  background: linear-gradient(to right, #679ED5, #A7CBEE);
+  margin-top: 20px;
+  border-top: none;
+}
+
+.headerTextSize {
+  font-size: 26px;
+  color: rgb(24, 24, 24) !important;
+}
+
+.regularTitleTextSize {
+  font-size: 16px;
+  color: rgb(24, 24, 24) !important;
+}
+
+.accountValues {
+  font-size: 15px;
+  color: rgb(24, 24, 24) !important;
+  white-space: pre-line;
+}
+
+.contactDataTextSize {
+  font-size: 11px;
+}
+
+.borderColor {
+  border-color: #ADD8E6;
+}
+
+.accountLogoColor {
+  background-color: #5867E8 !important;
+}
+.contactLogoColor {	
+  background-color: #9602C7 !important;	
+}
+
+.contactHeaderStyle {
+  display: block;
+  height: fit-content;
+}
+
+.accountHeaderBorder {
+  margin-top: -5px;
+}
+
+.columnMargin {
+  margin : 0 !important;
+}
+
+.alignText {
+  text-align: center;
+}

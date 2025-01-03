@@ -1,0 +1,619 @@
+.dropdownOptionStyling{
+    height: 18px;
+    width: 20px;
+}
+.dropdownStyling{
+    display: flex;
+}
+.headerStyle {
+    display:flex;
+}
+
+.dataTableHeight {
+    height: 790px;
+}
+
+.popUpBodyHeight
+{
+    height:250px;
+}
+
+.headerAllignment{
+    margin-left: -1px;
+    margin-bottom: -1px;
+    margin-right: -1px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.unfollowButton{
+    background-color:black;
+}
+.followButton{
+    width: 108px;
+}
+.unfollowText{
+    color:#f3f2f2;
+}
+
+.fav_icon_class {
+    --sds-c-icon-color-foreground-default: #f3f2f2
+}
+
+.parentDiv{
+    position: relative;
+}
+
+.footerBottom{
+    height: 10px;
+    background-color: white;
+    border-radius: 0px 0px 5px 5px;
+}
+
+/**  This is  **/
+
+.componentStyling {
+    border-collapse: separate;
+    border-radius: 5px;
+    height: 100%;
+    padding: 0px;
+    overflow: initial;
+}
+
+.marginTop {
+    margin-top: 116px;
+}
+
+.FontStyling {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.headingStyling {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-left: 16px;
+    padding-top: 16px;
+    background-color: rgb(243, 243, 243);
+}
+
+.emptyTableStyling {
+    text-align: center;
+    color: grey;
+    margin: 15%;
+}
+
+.header-div {
+    height: 18px;
+}
+
+.headerPanel {
+    background-color: rgb(243, 243, 243);
+}
+
+.datatableClass {
+    border-top: 1px solid lightgray;
+}
+
+.searchbarStyle {
+    margin-left: 5px;
+    padding-right: 5px;
+    width: 397px;
+}
+
+.searchDiv {
+    margin-bottom: 2px;
+    margin-top: -34px;
+    display: flex;
+}
+
+.settingButton {
+    padding-right: 4px;
+}
+
+
+.searchButton {
+    padding-right: 5px;
+    padding-top: 19px;
+}
+
+.resetButton {
+    padding-top: 19px;
+}
+
+.searchMainDiv {
+    float: right;
+    display: inline-block;
+}
+
+.statusSpan {
+    color: #5a5a5a;
+    font-size: 0.75rem;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.statusDiv {
+    display: inline-block;
+
+}
+
+.mainHeader {
+    padding-bottom: 12px !important;
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+}
+
+.rowHeader {
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-filter-container {
+    position: inherit;
+    display: flex;
+    justify-content: flex-end;
+    /* Align the button to the right */
+    align-items: center;
+}
+
+.popover-menu {
+    position: absolute;
+    top: 78px;
+    right: 26px;
+    width: 17%;
+    height: 680px;
+    overflow: visible;
+    border-bottom-right-radius: 5px;
+}
+
+/*To be removed*/
+.popover-menu-copy {
+    position: absolute;
+    top: 0px;
+    /* Adjust as needed to align with the trigger element */
+    right: 750px;
+    z-index: 98;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    width: 321px;
+    min-height: calc(100vh - 224px);
+}
+
+/* .dropdown-container {
+    position: relative;
+    z-index: 10000;
+} */
+
+.dark-grey {
+    color: rgb(201, 201, 201);
+}
+
+.black {
+    color: black;
+}
+
+a.dynamic-item {
+    pointer-events: none;
+}
+
+lightning-combobox.slds-form-element button.slds-combobox__input {
+    box-shadow: none;
+}
+
+.list-view-controls {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    color: rgb(68, 68, 68);
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+
+}
+
+.back-brop-custom-class {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.custom-icon {
+    background-color: #00B2AA;
+    border-radius: 15%;
+    width: 35px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon_custom_class {
+    --sds-c-icon-color-foreground-default: white;
+}
+
+.filesDiv {
+    background-color: white;
+    border-radius: 5px;
+    height: 680px !important;
+}
+
+.filterContentWrapper {
+    height: calc(100vh - -44px);
+    overflow: auto;
+    max-height: 670px;
+    background-color: white !important;
+}
+
+.complete-filter {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    padding: 12px 12px 0;
+}
+
+.header-section {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgb(229, 229, 229);
+    /* Add styles for header section here */
+    padding: 0 12px 12px;
+    border-bottom: 1px solid rgb(229, 229, 229);
+    margin: 0 -12px 12px;
+    justify-content: space-between;
+}
+
+.header-section-buttons {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgb(229, 229, 229);
+    /* Add styles for header section here */
+    padding: 0 12px 12px;
+    border-bottom: 1px solid rgb(229, 229, 229);
+    margin: 0 -12px 12px;
+    justify-content: end;
+}
+
+.subHeading {
+    padding: 0px 0 8px;
+    font-size: 13px;
+    color: rgb(68, 68, 68);
+}
+
+.header-title {
+    flex-grow: 1;
+}
+
+.feildDetailWrapper {
+    position: absolute;
+    top: 120px;
+    right: calc(100% + 12px);
+    display: block;
+    width: 400px;
+    background-color: white;
+    border: 1px solid #b6b6b6;
+    border-radius: 5px;
+    padding: var(--lwc-spacingMedium, 1rem) var(--lwc-spacingMedium, 1rem) var(--lwc-spacingSmall, 0.75rem) var(--lwc-spacingMedium, 1rem);
+    z-index: 10000;
+}
+
+.feildDetailWrapper .slds-form-element {
+    margin-bottom: var(--lwc-spacingXLarge, 2rem);
+}
+
+.remove-all {
+    float: right;
+}
+
+.filterWrapper {
+    background-color: white !important;
+    height: 200px;
+    text-align: initial;
+    flex-grow: 1;
+    min-height: 100px;
+
+}
+
+.add-filter-logic {
+    float: left;
+    padding: 12px;
+    font-size: 13px;
+    color: #0000ee;
+}
+
+.my-textarea {
+    color: #000;
+    border-color: #ccc;
+    margin: 0 12px;
+}
+
+.filterButton {
+    padding-bottom: var(--lwc-spacingSmall, 0.75rem);
+    display: flow-root;
+    padding-top: 10px;
+}
+
+.filterButton>a {
+    font-size: 13px;
+    color: #0000ee;
+}
+
+.filterSubHeading {
+    padding: var(--lwc-spacingSmall, 0.75rem);
+}
+
+.filterSubHeading .remove-all {
+    font-size: 13px;
+    color: #0000ee;
+}
+
+.filterLogic {
+    color: black;
+    font-size: 13px;
+    margin-right: var(--lwc-spacingXxSmall, 0.25rem);
+}
+
+.feildDetailWrapper .footer {
+    text-align: right;
+}
+
+.feildDetailWrapper .footer button {
+    width: 100px;
+    font-size: 13px;
+}
+
+.hide {
+    display: none !important;
+}
+
+.filter-logic-error {
+    color: var(--lwc-colorTextError, rgb(234, 0, 30));
+    margin-top: var(--lwc-spacingXxxSmall, 0.125rem);
+    margin-left: 17px;
+    font-size: 11px;
+}
+
+.filter-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.filter-wrapper .index-number {
+    padding-right: 5px;
+}
+
+.filter-wrapper .box {
+    width: 100%;
+}
+
+.chaipiclass {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.custom-text-color {
+    color: rgb(1, 118, 211) !important
+}
+
+/* .filterButton .slds-text-link.custom-text-color {
+    z-index: 10000;
+    position: relative;
+}
+
+.filterWrapper .slds-text-link.custom-text-color {
+    z-index: 10000;
+    position: relative;
+} */
+
+.spinnerStyling {
+    z-index: 99999;
+}
+
+.mainDivHeight {
+    height: 100%;
+}
+
+.textCenter {
+    text-align: center
+}
+
+.popButtonMargin {
+    margin-right: 5px;
+}
+
+.noMargin {
+    margin: 0;
+}
+
+.backDropHeight {
+    height: 100%;
+}
+
+.filterContainerWidth {
+    width: 15%;
+}
+
+.displayStyle {
+    display: contents;
+}
+
+.redColorText {
+    color: red
+}
+
+.footerPadding {
+    padding-top: 15px;
+}
+
+.cardTextAlignment {
+    text-align: left;
+}
+
+.filterWrapperMargin {
+    margin-top: 10px;
+}
+
+.closeIconRight {
+    float: right;
+}
+
+.filterButtonColor {
+    --sds-c-icon-color-foreground-default: #f3f2f2;
+}
+
+
+.unFilterButtonColor {
+    --sds-c-icon-color-foreground-default: #0d70a5;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 109px;
+    background-color: rgb(245 245 245);
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 11px 0;
+    position: absolute;
+    z-index: 10;
+    top: 123%;
+    left: 50%;
+    margin-left: -52px;
+    height: 35px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent rgb(245 245 245) transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.headerButtonsDiv {
+    background-color: white;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -12px;
+    margin-bottom: 0px;
+    height: 0px;
+}
+
+.FilterButtonStyling {
+    border: 1px solid rgb(0, 97, 149);
+    border-radius: 4px;
+    height: 32px;
+    width: 33px;
+    background-color: #0d70a5;
+    margin-top: 4px;
+}
+
+.UnFilterButtonStyling {
+    border: 1px solid rgb(0, 97, 149);
+    border-radius: 4px;
+    height: 32px;
+    width: 33px;
+    background-color: white;
+    /*margin-top: 14px;*/
+}
+
+.ExportButtonStyling {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 32px;
+    width: 152px;
+    margin-right: 8px;
+}
+
+.applyFilterButton {
+    width: 100%;
+    background-color: #198754;
+    display: block;
+    border: 1px solid #198754;
+}
+
+.filterIconStyling {
+    float: right;
+    margin-top: 8px;
+}
+
+.truncateValue {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+}
+
+.filterValueStyling {
+    word-break: break-all;
+}
+
+.FilterHeadingFont {
+    font-size: 16px;
+}
+
+.listBoxMaxHeight {
+    max-height: 40vh;
+}
+
+.checkIconColor {
+    color: #808080 !important;
+}
+
+.slds-has-error {
+    --slds-c-input-color-border: #ea001e;
+    --slds-c-input-shadow: #ea001e 0 0 0 1px inset;
+    --slds-c-input-color-background: var(--slds-c-input-color-background, var(--sds-c-input-color-background, white));
+    --slds-c-input-text-color: var(--slds-c-input-text-color, var(--sds-c-input-text-color), #74747);
+}
+
+
+.slds-listbox__option-header {
+    font-size: 0.8rem !important;
+    font-weight: 550;
+}
+
+.btn-styling {
+    height: 21px;
+    width: 22px;
+    padding-right: 3.25px;
+    padding-left: 1px;
+}
+
+.dropdownHeight{
+    max-height: 350px;
+    overflow: auto;
+    width: 600px !important;
+    padding-top: 10px;
+}
+
+.listViewText{
+    font-family: Salesforce Sans;
+    font-weight: 400;
+    color: #8d8d8d;
+    font-size: 12px;
+    line-height: 15px;
+    margin-left: 10px;
+}

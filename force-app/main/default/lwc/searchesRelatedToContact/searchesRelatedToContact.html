@@ -1,0 +1,48 @@
+<template>
+    <template if:true={recordsExist}>
+        <lightning-layout>
+            <lightning-layout-item size="12" style="width:100%">
+                <article class="slds-card slds-card_boundary">
+                    <div class="slds-grid slds-page-header forceRelatedListCardHeader headerSyle">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <lightning-icon size="small" icon-name="custom:custom39" alternative-text="Marketplace Searches">
+                                </lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <a class="slds-card__header-link headingStlye" onclick={handleShowFullRelatedList}>
+                                        <span>Searches ({totalRecords})</span>
+                                    </a>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium">
+                        </lightning-spinner> 
+                    </template>
+                    <div>
+                            <lightning-datatable 
+                                columns={columns}
+                                data={relatedSearchesRecords} 
+                                key-field="Id"
+                                wrap-text-max-lines = "5"
+                                show-row-number-column="true" 
+                                enable-infinite-loading="false"
+                                hide-checkbox-column
+                                default-sort-direction={defaultSortDirection}
+                                sorted-direction={sortedDirection}
+                                sorted-by={sortedBy}
+                                onsort={updateColumnSorting}>
+                            </lightning-datatable>
+                    </div>
+                    <footer class="slds-card__footer ">
+                        <a onclick={handleShowFullRelatedList}>View All</a>
+                        <span class="slds-assistive-text">entity type</span>
+                    </footer>
+                </article>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

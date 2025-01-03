@@ -1,0 +1,15 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes,force:appHostable,lightning:actionOverride,flexipage:availableForRecordHome,force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global" >
+    <ltng:require styles="{!$Resource.globalCopilotCSS}" />
+    <aura:attribute
+        name="cirraIconPath"
+        type="String"
+        default="{!$Resource.CopilotButtonIcon}"
+    />    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+
+    
+    <!-- Your component content -->
+    <c:chatbot recordId="{!v.recordId}" />
+
+</aura:component>

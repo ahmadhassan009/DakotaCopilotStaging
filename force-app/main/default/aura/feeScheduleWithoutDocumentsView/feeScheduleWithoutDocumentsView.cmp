@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute type="String" name="recordId"/>
+    <aura:attribute type="String" name="recordName"/>
+    <aura:attribute type="Boolean" name="isCommunity"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>    
+    <div class="slds-card">
+        <c:feeScheduleWithoutDocumentsViewAll recordId="{!v.recordId}" recordName="{!v.recordName}" isCommunity="{!v.isCommunity}"/>
+    </div>
+</aura:component>

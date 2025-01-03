@@ -1,0 +1,88 @@
+<template>
+    <lightning-layout>
+       <lightning-layout-item size="12" class="layoutWidth">
+          <article class="slds-card slds-card_boundary">
+             <div class="slds-grid slds-page-header forceRelatedListCardHeader headerStyle">
+               <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                  <div class="slds-media__figure">
+                     <lightning-icon icon-name="standard:insights" alternative-text="New Features" title="New Features"></lightning-icon>
+                  </div>
+                  <div class="slds-media__body">
+                     <h2 class="slds-card__header-title">
+                        <p class="slds-card__header-link slds-truncate" title="New Features">
+                           <a class="slds-card__header-link font-properties" onclick={handleViewAll}>
+                              <b><span class="title-div">New Features ({offset}{plusSign})</span></b>
+                           </a>
+                        </p>
+                     </h2>
+                  </div>
+               </header>
+             </div>
+             <div class="slds-border_bottom borderMargin"></div>
+             <template if:true={recordsExists}>
+               <div class="card-height scrollContainer" >
+                   <div class="scrollArea">
+                      <div class="spinner-height">
+                         <template if:true={isLoading}>
+                            <lightning-spinner class ="spinner" alternative-text="Loading..." size="Large"></lightning-spinner>
+                         </template>
+                      </div>
+                      <template if:false={isLoading}>
+                         <template if:true={data}>
+                            <template for:each={data} for:item="feature">
+                               <div class="newsRecords" key={feature.Id}>
+                                  <p class="record-css">
+                                     <a href={feature.Id}><strong>{feature.title}</strong></a> 
+                                     <template if:true={feature.date}>&nbsp;|&nbsp;
+                                        <lightning-formatted-date-time value={feature.date} year="numeric" month="numeric" day="numeric"></lightning-formatted-date-time>
+                                     </template>&nbsp;|&nbsp;
+                                    <a class="link-color" target={feature.demo} onclick={handleRowAction}>View Demo</a>
+                                  </p>
+                                  <lightning-formatted-rich-text value={feature.description}>
+                                  </lightning-formatted-rich-text>
+                                  <p>
+                                    <template if:true={feature.desLength}>
+                                        <a class="link-color" href={feature.Id}>Read More</a>
+                                    </template>
+                                </p>
+                                  <div class="slds-border_bottom  newsRecordbottom">
+                                     <br>
+                                  </div>
+                               </div>
+                            </template>
+                         </template>
+                      </template>
+                   </div>
+                </div>
+             </template>
+             <footer class="slds-card__footer footer-div">
+               <a onclick={handleViewAll} >View All</a>
+               <span class="slds-assistive-text">entity type</span>
+            </footer> 
+             <template if:false={recordsExists}>
+                <div class="card-height-no-record">
+                   <b><span >No new features.</span></b>
+                </div>
+             </template>
+             <template if:true={previewVideoPopup}>
+                <div class="slds">
+                   <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                      <div class="slds-modal__container">
+                         <div class="slds-modal__header videoPopup">
+                            <lightning-button-icon  icon-name="utility:close"
+                               onclick={closePreviewVideoPopup}
+                               alternative-text="Close"
+                               variant="bare-inverse"
+                               class="slds-modal__close videoPopupCancel">
+                            </lightning-button-icon>
+                            <c-video-popup-for-new-feature  new-feature-video-url={DemoUrl}></c-video-popup-for-new-feature>
+                         </div>
+                      </div>
+                   </section>
+                   <div class="slds-backdrop slds-backdrop--open" id="backdrop"></div>
+                </div>
+             </template>
+          </article>
+       </lightning-layout-item>
+    </lightning-layout>
+ </template>

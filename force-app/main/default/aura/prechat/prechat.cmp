@@ -1,0 +1,20 @@
+<aura:component implements="lightningsnapin:prechatUI" controller="BotPreChatController" >
+    <aura:attribute name="userId" access="PRIVATE" type="string" default="-"/>
+    <aura:attribute name="firstName" access="PRIVATE" type="string" />
+    <aura:attribute name="lastName" access="PRIVATE" type="string" />
+    <aura:attribute name="email" access="PRIVATE" type="string" />
+  
+    <!-- Contains methods for getting pre-chat fields, starting a chat, and validating fields -->
+    <lightningsnapin:prechatAPI aura:id="prechatAPI"/>
+
+    <!-- After this component has rendered, call the controller's onRender function -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:renderIf isTrue="{!empty(v.userId)}">
+        <lightning:input type="text" value="{!v.firstName}" label="First Name *" />
+        <lightning:input type="text" value="{!v.lastName}" label="Last Name *" />
+        <lightning:input type="text"  value="{!v.email}" label="Email *" />
+          
+        <lightning:button label="Start Chat!" onclick="{!c.onStartButtonClick}"/>
+    </aura:renderIf>
+</aura:component>

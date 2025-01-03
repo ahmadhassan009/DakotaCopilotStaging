@@ -1,0 +1,25 @@
+<template>
+    <div class="myGrid" lwc:dom="manual"></div>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner> 
+    </template>
+    <div style="width: 100%">
+        <template if:false={isLoading}>
+            <div class="record-container">
+                <lightning-datatable
+                    columns={columns}
+                    data={resultantRecords}
+                    key-field="Id"
+                    hide-checkbox-column="true">            
+                </lightning-datatable>  
+                <div class="total-records-container">
+                    <p>Total Records:</p> 
+                    <p>{recordCount}</p>
+                    <p>out of</p>
+                    <p>{totalRecordCount}</p>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

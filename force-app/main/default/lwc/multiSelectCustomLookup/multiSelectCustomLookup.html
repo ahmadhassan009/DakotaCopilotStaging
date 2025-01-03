@@ -1,0 +1,41 @@
+<template>
+    <div>
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <div class="slds-combobox_container">
+                    <div id="box" class={txtclassname} aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">    
+                            <lightning-input onclick={searchField} onblur={onBlur} required={required} type="search" data-id="userinput" variant="label-hidden" name="searchText" onchange={searchField} class="leftspace" placeholder="Search Contacts..."></lightning-input>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                            <template for:each={selectedRecords} for:item="serecord">
+                                <span key={serecord.Id}>
+                                <lightning-pill class="input-div" label={serecord.Name} name={serecord.Id} onremove={removeRecord}>
+                                    <lightning-icon icon-name={iconName} variant="circle" alternative-text={serecord.Name}></lightning-icon>
+                                </lightning-pill>
+                                </span>
+                            </template>
+                        </div>
+            
+                         <!-- Drop down section : Start -->
+                        <template if:true={showDropDown}>
+                            <div id="listbox-id-1" class="input-div slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
+                                <ul class="ul-div slds-listbox slds-listbox_vertical" role="presentation">
+                                
+                                    <template for:each={searchRecords} for:item="record">
+                                        <li title={record.Name} key={record.Id} onclick={setSelectedRecord} data-id={record.Id} role="presentation" data-name={record.Name}>
+                                            <span class="slds-lookup__item-action slds-lookup__item-action--label" role="option">
+                                                <lightning-icon class="ul-div slds-icon slds-icon--small" icon-name={iconName} alternative-text='' size="small"></lightning-icon>
+                                                <span class="slds-truncate">{record.Name}</span>
+                                            </span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,109 @@
+<template>
+    <div class="parentDiv">
+        <template if:true={showSearch}>
+            <div class="slds-page-header headerColor" role="banner">
+                <div class="slds-grid">
+                    <div class="slds-col slds-has-flexi-truncate headerStyle">
+                        <div class="slds-media__body slds-align-middle">
+                            
+                            <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title={title}>
+                                <span class="iconPosition">
+                                    <lightning-icon size="medium" icon-name="standard:contact"  class="contact-icon iconBackgroundColor"></lightning-icon>
+                                </span>
+                                <div class="titlePosition">
+                                    <div class="slds-breadcrumb__item slds-text-title_caps">
+                                        <span class="slds-var-p-right_x-small caps">Updates</span>
+                                    </div>
+                                    <span>{headerTitle} ( {offset}{plusSign} )</span>
+                                </div>                        
+                            </h1>
+                        </div>
+
+                        <!-- <template if:true={isNotHomePage}>
+                            <lightning-button class="followButtonPosition" variant="neutral" label="Follow Updates" onclick={handleFollowUpdates}></lightning-button>
+                            <lightning-button class="shareButtonPosition" variant="neutral" label="Share Updates" onclick={handleShareUpdates}></lightning-button>
+                        </template> -->
+                        <div class="searchPosition">
+                            <lightning-input data-id="searchValue" name="searchValue" onkeydown={searchUpdatesOnEnter} placeholder="Search this list..." type="search" class="searchbarStyle">
+                            </lightning-input>
+                        </div>
+                        
+                        <div class="slds-m-right_xx-small">
+                            <div class="slds-button-group">
+                                <button name="refreshButton" title="Refresh" type="button"
+                                    class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={refreshTable}>
+                                    <svg focusable="false" data-key="refresh" aria-hidden="true" class="slds-button__icon">
+                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg?cache=9.37.1#refresh">
+                                        </use>
+                                    </svg>
+                                    <span class="slds-assistive-text">Refresh</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template> 
+
+        <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..."  size="medium">
+                </lightning-spinner> 
+        </template> 
+        <div class={tableHeight}> 
+            <template if:true={isNotHomePage}>
+                <c-custom-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                show-row-number-column={isNotHomePage}
+                enable-infinite-loading="true"
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortedDirection}
+                sorted-by={sortedBy}
+                onsort={updateColumnSorting}
+                onloadmore={loadMoreData} 
+                onrowaction={handleRowAction}
+                load-more-offset="50"                    
+                selected-rows={selectedIds}
+                onrowselection ={hanldeRecordSelected}>
+                </c-custom-datatable>
+            </template> 
+            <template if:false={isNotHomePage}>
+                <c-custom-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                show-row-number-column={isNotHomePage}
+                enable-infinite-loading="true"
+                hide-checkbox-column 
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortedDirection}
+                sorted-by={sortedBy}
+                onsort={updateColumnSorting}
+                onloadmore={loadMoreData} 
+                onrowaction={handleRowAction}
+                load-more-offset="50">
+                </c-custom-datatable>
+            </template>   
+        </div>
+    </div>
+    <template if:true={sharePopup}>
+        <section class="slds-modal slds-fade-in-open slds-backdrop--open slds-backdrop">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                title="Close" onclick={handleclosepopup}>
+                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                    size="small"></lightning-icon>
+                <span class="slds-assistive-text">Close</span>
+            </button>
+                <c-share-record-link-with-other-m-p-users onremovespinner={handleremoveSpinner} onclosepopup ={handleclosepopup} record-id={conRecordId} is-home-page={isNotHomePage}></c-share-record-link-with-other-m-p-users>
+            </div>
+        </section>
+    </template>
+    <template if:true={showToast}>
+        <c-custom-toast-message toastmessage={toastmessage} title={title} alternative-text={alternativeText} icon-name={iconName} toast-msg-classes={toastMsgClasses} toast-msg-icon-classes={toastMsgIconClasses} ></c-custom-toast-message>
+    </template>
+
+    <!-- <c-mass-follow-list></c-mass-follow-list>
+    <c-mass-share-list-view-popup></c-mass-share-list-view-popup> -->
+</template>

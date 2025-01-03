@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>*</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexComponent</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexTestSuite</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>StaticResource</name>
+    </types>
+        <types>
+        <members>User</members> <!-- Retrieves all fields from User object -->
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>User.Enable_Dakota_Copilot__c</members> <!-- Retrieves specific custom field from User -->
+        <name>CustomField</name>
+    </types>
+        <types>
+        <members>User.Copilot_Exported_Reports_Count__c</members> <!-- Retrieves specific custom field from User -->
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>*</members> <!-- Retrieves all Remote Site Settings -->
+        <name>RemoteSiteSetting</name>
+    </types>
+    <version>61.0</version>
+</Package>

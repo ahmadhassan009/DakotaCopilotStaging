@@ -1,0 +1,43 @@
+<template>
+    <template if:true={showNotification}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small" aria-labelledby="welcome-mat-130-label" aria-describedby="welcome-mat-130-content" aria-modal="true">
+            <div class="slds-modal__container message-popup">
+                <div class="slds-modal__content message-content" id="welcome-mat-120-content">
+                    <div class="slds-welcome-mat slds-welcome-mat_info-only">
+                        <div class="slds-welcome-mat__content slds-grid message-main-mat">
+                            <div class="slds-welcome-mat__info message-mat">
+                                <div class="slds-welcome-mat__info-content">
+                                    <h2 class="slds-welcome-mat__info-title" id="welcome-mat-121-label">{messageTitle}</h2>
+                                    <div class="slds-welcome-mat__info-description slds-text-longform trialDiv">
+                                        <p>{messageDescription}</p>
+                                        </br>
+                                        <p class={conclusionStyle}>
+                                            <lightning-formatted-rich-text
+                                                value={messageConclusion}
+                                            ></lightning-formatted-rich-text>
+                                        </p>
+                                    </div>
+                                    <template if:true={showTermsAndCond}>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-checkbox termsCondDiv">
+                                                <input type="checkbox" name="options1" id="termsAndConditions" disabled={termsAndCondCheckboxDisabledFlag} value="termsAndConditions" data-id="termsAndConditions" onchange={saveMessagePopupStatus}/>
+                                                <label class="slds-checkbox__label" for="termsAndConditions">
+                                                <span class="slds-checkbox_faux termsCondCheckbox"></span>
+                                                <span class="slds-form-element__label">{termsAndCondText} <a href={termsAndCondURL} target="_blank"> Dakota Marketplace Personalization Agreement</a></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div class="slds-welcome-mat__info-actions">
+                                        <button class="slds-button slds-button_brand" onclick={processMessagePopupStatus} disabled={showMessagePopupButton} >{messageAction}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

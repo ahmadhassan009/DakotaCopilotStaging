@@ -1,0 +1,19 @@
+.headerStyle {
+    display:flex;
+}
+
+.dataTableHeight {
+    height: 790px;
+    border-radius: 0 0 5px 5px;
+}
+
+.parentDiv{
+    position: relative;
+}
+
+.headerBanner{
+    border-radius: 5px 5px 0 0;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    margin-right: -1px;
+}

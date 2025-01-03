@@ -1,0 +1,17 @@
+<apex:page standardController="Investment__c" showheader="false">
+    <style>
+        .messageStyle
+        {
+        font-size:14px;
+        text-align:end;
+        color:gray;
+        font-style:italic;
+        position:absolute;
+        bottom:0;
+        right:0;
+        }
+    </style>
+    <div class="messageStyle">
+        <apex:outputText rendered="{!IF(Investment__c.Source__c ='SEC-API',true,false)}"> Data sourced via sec-api.io </apex:outputText>
+    </div>
+</apex:page>

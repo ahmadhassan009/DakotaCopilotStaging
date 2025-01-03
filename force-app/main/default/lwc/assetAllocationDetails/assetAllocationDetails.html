@@ -1,0 +1,187 @@
+<template>
+    <div class={displayCmp}>
+        <lightning-layout>
+            <lightning-layout-item size="12" style="width:100%">
+                <article class="slds-card slds-card_boundary">
+                    <div class="slds-grid slds-page-header forceRelatedListCardHeader"
+                        style="display:block; height:fit-content;">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate ">
+                            <div class="slds-media__figure">
+                                <lightning-icon size="small" icon-name="custom:custom57"
+                                    alternative-text="Current Asset Allocation"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <span class="slds-card__header-link" onclick={handleShowFullRelatedList}
+                                        style="font-weight: bold">
+                                        <span>Current Asset Allocation</span>
+                                    </span>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div if:true={isLoading} class="demo-only" style="height:6rem;position:relative">
+                        <div class="slds-spinner_container">
+                            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_delayed">
+                                <span class="slds-assistive-text">Loading</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='asset-allocation-div table-div slds-box slds-theme_default'>
+                        <table class="main-table">
+                            <tbody>
+                                <template if:true={asOfDateExist}>
+                                    <tr>
+                                        <td colspan="2" class="date-style">
+                                            As of <lightning-formatted-date-time value={asOfDate}>
+                                            </lightning-formatted-date-time>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td class="table-col">
+                                        <template if:true={dataSetExist}>
+                                            <table class="chart slds-table slds-table_bordered">
+                                                <tr for:each={mapData} for:item="item" key={item.key}>
+                                                    <td>
+                                                        <div class="dot" style={item.color}></div>
+                                                    </td>
+                                                    <td>{item.key}</td>
+                                                    <td class="table-text-align">{item.value}%</td>
+                                                </tr>
+                                            </table>
+                                        </template>
+                                    </td>
+                                    <td class="table-col">
+                                        <div class="wrapper" style="height:350px; width:560px; max-width:100%;">
+                                            <canvas class="pie-chart"></canvas>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <template if:true={notesExist}>
+                                    <tr>
+                                        <td colspan="2" class="notes-row">
+                                            <b>Note: </b>
+                                            <lightning-formatted-rich-text value={notes}>
+                                            </lightning-formatted-rich-text>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <template if:true={isScriptLoadError}>
+                        <div class='asset-allocation-div slds-box slds-theme_default'>
+                            <table class="main-table">
+                                <tr>
+                                    <td class="table-col">
+                                        <div
+                                            style="margin-top: 10px !important; margin-bottom: 10px !important; color:red;">
+                                            <p>There is an Issue in Loading Component. Please refresh and try again.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </template>
+                </article>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+
+    <div class={displayCmpTarget}>
+        <lightning-layout class="table-margin">
+            <lightning-layout-item size="12" style="width:100%">
+                <article class="slds-card slds-card_boundary">
+                    <div class="slds-grid slds-page-header forceRelatedListCardHeader"
+                        style="display:block; height:fit-content;">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate ">
+                            <div class="slds-media__figure">
+                                <lightning-icon size="small" icon-name="custom:custom57"
+                                    alternative-text="Target Asset Allocation"> </lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">
+                                    <span class="slds-card__header-link" onclick={handleShowFullRelatedList}
+                                        style="font-weight: bold">
+                                        <span>Target Asset Allocation</span>
+                                    </span>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div if:true={isLoading} class="demo-only" style="height:6rem;position:relative">
+                        <div class="slds-spinner_container">
+                            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_delayed">
+                                <span class="slds-assistive-text">Loading</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='asset-allocation-div table-div slds-box slds-theme_default'>
+                        <table class="main-table">
+                            <tbody>
+                                <template if:true={asOfDateTargetExist}>
+                                    <tr>
+                                        <td colspan="2" class="date-style">
+                                            As of <lightning-formatted-date-time value={asOfDateTarget}>
+                                            </lightning-formatted-date-time>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td class="table-col">
+                                        <template if:true={dataSetTargetExist}>
+                                            <table class="chart slds-table slds-table_bordered">
+                                                <tr for:each={mapDataTarget} for:item="item" key={item.key}>
+                                                    <td>
+                                                        <div class="dot" style={item.color}></div>
+                                                    </td>
+                                                    <td>{item.key}</td>
+                                                    <td class="table-text-align">{item.value}%</td>
+                                                </tr>
+                                            </table>
+                                        </template>
+                                    </td>
+                                    <td class="table-col">
+                                        <div class="wrapper" style="height:350px; width:560px; max-width:100%;">
+                                            <canvas class="pie-chart-target"></canvas>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <template if:true={notesTargetExist}>
+                                    <tr>
+                                        <td colspan="2" class="notes-row">
+                                            <b>Note: </b>
+                                            <lightning-formatted-rich-text value={notesTarget}>
+                                            </lightning-formatted-rich-text>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <template if:true={isScriptLoadError}>
+                        <div class='asset-allocation-div slds-box slds-theme_default'>
+                            <table class="main-table">
+                                <tr>
+                                    <td class="table-col">
+                                        <div
+                                            style="margin-top: 10px !important; margin-bottom: 10px !important; color:red;">
+                                            <p>There is an Issue in Loading Component. Please refresh and try again.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </template>
+                </article>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

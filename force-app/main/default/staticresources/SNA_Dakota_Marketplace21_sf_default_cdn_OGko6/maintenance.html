@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en_US">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript">
+            {errorHandlerScript}
+        </script>
+        
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">!function(){const e={documentCreateElement:Document.prototype.createElement,elementSetAttribute:Element.prototype.setAttribute,elementAttachShadow:Element.prototype.attachShadow,elementAppendChild:Element.prototype.appendChild,htmlelementAddEventListener:Element.prototype.addEventListener,iframeContentDocumentGet:Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype,"contentDocument").get,iframeContentWindowGet:Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype,"contentWindow").get};Object.freeze(e),Object.defineProperty(window,"originalDomApis",{writable:!1,value:e});const t=window.frames;Object.defineProperty(window,"frames",{get:function(){const e=[];for(let n=0;n<t.length;n++)try{t[n].frameElement.getRootNode().nodeType===Node.DOCUMENT_FRAGMENT_NODE||e.push(t[n])}catch(o){e.push(t[n])}return e.length===t.length?t:e}})}();</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">!function(){"use strict";window.isBrowserSupportedByWebruntime=function(){const n="performance"in window&&"mark"in window.performance,e="customElements"in window;return n&&e}()}();
+</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">globalThis.lwcRuntimeFlags = { ...globalThis.lwcRuntimeFlags, ENABLE_SLOT_FORWARDING_FIX: true };
+globalThis.lwcRuntimeFlags = globalThis.lwcRuntimeFlags || {};
+globalThis.lwcRuntimeFlags.DISABLE_NATIVE_CUSTOM_ELEMENT_LIFECYCLE = true;
+globalThis.LWR = globalThis.LWR || {};
+globalThis.LWR.customInit = (lwr) => {
+
+        LWR.define('@app/apexApiBasePath', [], function() { return "webruntime/api"; });
+        LWR.define('@app/apiBasePath', [], function() { return "webruntime/api"; });
+        LWR.define('@app/basePath', [], function() { return ""; });
+        LWR.define('@app/deployTarget', [], function() { return null; });
+        LWR.define('@app/guestUuidCookieName', [], function() { return null; });
+        LWR.define('@app/isDesignMode', [], function() { return false; });
+        LWR.define('@app/isPreviewMode', [], function() { return false; });
+        LWR.define('@app/routes', [], function() { return [{"label":"Service Not Available","isPublic":true,"viewId":"d6dca4f7-b98c-41e8-ba80-96a85f76bb61","hasVanityURL":false,"patternMap":{},"id":"c0f9f47f-b7c5-4ce7-a3fe-4b4a8678d980","path":"/maintenance.html","view":"service_Not_Available","isRoot":true,"isDefault":true,"page":{"type":"comm__namedPage","attributes":{"name":"Service_Not_Available"}}}]; });
+        LWR.define('@app/templateDevName', [], function() { return "sna-aura-lwr-shell-template"; });
+        LWR.define('@app/uiBasePath', [], function() { return ""; });
+        LWR.define('@app/versionKey', [], function() { return "0DB3m000000TY7F:11"; });
+        LWR.define('@app/viewToThemeLayoutMap', [], function() { return {"service_Not_Available":"serviceNotAvailable"}; });
+        LWR.define('@salesforce/i18n/lang', [], function() { return "en_US"; });
+        LWR.define('@salesforce/site/Id', [], function() { return "0DM3m000000H9kxGAC"; });
+        LWR.define('@salesforce/webstore/Id', [], function() { return null; });
+lwr.define("webruntime/dispatcher", [], function(){ return function o11yDipatcherInit(dispatcher) { typeof lwr !== 'undefined' && lwr.attachDispatcher(dispatcher); };});
+LWR.define('@salesforce/user/Id', ['@app/user'], function(m) { return (m && typeof m === 'object' && 'default' in m ? m.default : m)['id'] });
+LWR.define('@salesforce/user/isGuest', ['@app/user'], function(m) { return (m && typeof m === 'object' && 'default' in m ? m.default : m)['isGuest'] });
+lwr.initializeApp();
+globalThis.process = { env: { NODE_ENV: "dev" } };};</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">globalThis.LWR = globalThis.LWR || {};
+Object.assign(globalThis.LWR, {
+  "bootstrapModule": "@lwrjs/app-service/communities_app/module/amd/v/0_13_10",
+  "autoBoot": false,
+  "rootComponents": [
+    "webruntime/app/v/1"
+  ],
+  "requiredModules": [
+    "lwc/v/7_1_5",
+    "@lwrjs/app-service/communities_app/module/amd/v/0_13_10"
+  ],
+  "importMappings": {
+    "default": "webruntime/component/latest/prod/en_US/",
+    "imports": {
+      "/webruntime/component/latest/prod/en_US/lwc": "webruntime/framework/6a3c3d3354/prod/lwr_lwc",
+      "@app/csrfToken": "webruntime/module/@app/csrfToken",
+      "@app/loginPath": "webruntime/module/@app/loginPath",
+      "@app/user": "webruntime/module/@app/user",
+      "@perm/": "webruntime/perm/",
+      "@salesforce/client/formFactor": "webruntime/module/@salesforce/client/formFactor",
+      "@salesforce/customPermission/": "webruntime/perm/custom/",
+      "@salesforce/featureFlag/": "webruntime/module/@salesforce/featureFlag/",
+      "@salesforce/user/Id": "webruntime/module/@salesforce/user/Id",
+      "@salesforce/user/isGuest": "webruntime/module/@salesforce/user/isGuest",
+      "@salesforce/userPermission/": "webruntime/perm/",
+      "@udd/": "webruntime/module/@udd/",
+      "@view/serviceNotAvailable": "webruntime/view/cebbbc5505bfa82993839594f3e05579/prod/en_US/serviceNotAvailable_view",
+      "@view/service_Not_Available": "webruntime/view/b24260bb23496eee553dabdf64ffb517/prod/en_US/service_Not_Available_view",
+      "mobileruntime/hybridAppManager": "webruntime/framework/39b4ba9890/prod/lwr_mobile",
+      "o11y/collectors": "webruntime/component/75a3386fcd3b62a11beb274c29ca0925/prod/en_US/o11y/collectors_cmp",
+      "o11y/simple_collector": "webruntime/component/8afd643882253eddd321233169c9db43/prod/en_US/o11y/simple_collector_cmp"
+    }
+  }
+});</script>
+        <script src="webruntime/framework/f6ea60171e/prod/lwr_loader"></script>
+        <script src="webruntime/framework/3ae27cd198/prod/lwr_bootstrap"></script>
+        <script src="webruntime/framework/294fb30cde/prod/lwr_app_bootstrap_hook"></script>
+        <script src="webruntime/framework/6a3c3d3354/prod/lwr_lwc"></script>
+        <script src="webruntime/framework/ba22f7bedc/prod/lwr_app"></script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('lwc', ['lwc/v/7_1_5'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">
+        LWR.define('@app/authenticationCookieName', [], function() { return "__Secure-has-sid"; });
+        LWR.define('@app/extraRouteParams', [], function() { return {}; });
+        LWR.define('@app/imageOpt', [], function() { return "none"; });
+        LWR.define('@app/isMobileAppMode', [], function() { return false; });
+        LWR.define('@app/user', [], function() { return {"isGuest":true,"id":null,"csrfToken":null}; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/apexApiBasePath/v/1', ['@app/apexApiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/apiBasePath/v/1', ['@app/apiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/authenticationCookieName/v/1', ['@app/authenticationCookieName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/basePath/v/1', ['@app/basePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/csrfToken/v/1', ['@app/csrfToken'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/deployTarget/v/1', ['@app/deployTarget'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/extraRouteParams/v/1', ['@app/extraRouteParams'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/guestUuidCookieName/v/1', ['@app/guestUuidCookieName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/imageOpt/v/1', ['@app/imageOpt'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/isDesignMode/v/1', ['@app/isDesignMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/isMobileAppMode/v/1', ['@app/isMobileAppMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/isPreviewMode/v/1', ['@app/isPreviewMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/o11yApiEndpoint/v/1', ['@app/o11yApiEndpoint'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/o11yConfiguration/v/1', ['@app/o11yConfiguration'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/o11yFalconEnabled/v/1', ['@app/o11yFalconEnabled'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/o11yGuestToken/v/1', ['@app/o11yGuestToken'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/o11ySamplingRate/v/1', ['@app/o11ySamplingRate'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/routes/v/1', ['@app/routes'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/templateDevName/v/1', ['@app/templateDevName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/uiBasePath/v/1', ['@app/uiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/user/v/1', ['@app/user'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/versionKey/v/1', ['@app/versionKey'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@app/viewToThemeLayoutMap/v/1', ['@app/viewToThemeLayoutMap'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@salesforce/i18n/lang/v/1', ['@salesforce/i18n/lang'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@salesforce/site/Id/v/1', ['@salesforce/site/Id'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('@salesforce/webstore/Id/v/1', ['@salesforce/webstore/Id'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="6a65d543-190d-4b2a-9dac-3880e4da0278">LWR.define('webruntime/dispatcher/v/1', ['webruntime/dispatcher'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script src="webruntime/view/b24260bb23496eee553dabdf64ffb517/prod/en_US/service_Not_Available_view"></script>
+        <script src="webruntime/view/cebbbc5505bfa82993839594f3e05579/prod/en_US/serviceNotAvailable_view"></script><style type="text/css" id="webruntime-branding">:root{--dxp-g-brand:rgb(16, 33, 56);--dxp-c-link-text-color:#3558D6;--dxp-c-link-text-color-hover:#135F90;--dxp-c-link-text-color-active:#135F90;--dxp-g-neutral-contrast-3:#fff;--dxp-s-body-font-family:Salesforce Sans;--dxp-g-neutral-contrast-2:#000;--dxp-g-neutral:#ecebea;--dxp-g-neutral-contrast-1:#000;--dxp-g-root:rgb(176, 196, 223);--dxp-g-root-contrast-1:rgb(14, 14, 14);--dxp-g-root-contrast:#222222;--dxp-g-root-contrast-2:rgb(0, 0, 0);--dxp-g-root-contrast-3:rgb(0, 0, 0);--dxp-g-neutral-contrast:#000;--dxp-g-root-1:rgb(147, 174, 211);--dxp-g-root-2:rgb(89, 131, 188);--dxp-g-root-3:rgb(44, 72, 110);--dxp-g-brand-contrast-1:rgb(255, 255, 255);--dxp-g-brand-contrast:rgb(255, 255, 255);--dxp-g-neutral-3:rgb(118, 113, 107);--dxp-g-neutral-2:rgb(178, 174, 170);--dxp-g-brand-contrast-3:rgb(255, 255, 255);--dxp-g-sna-heading-font-family:Salesforce Sans;--dxp-g-brand-contrast-2:rgb(255, 255, 255);--dxp-g-neutral-1:rgb(217, 215, 213);--dxp-g-brand-1:rgb(7, 14, 24);--dxp-g-brand-2:rgb(0, 0, 0);--dxp-g-brand-3:rgb(0, 0, 0);--dxp-g-brand-h:215;--dxp-g-brand-s:56%;--dxp-g-brand-l:14%;--dxp-g-brand-a:1.0;--dxp-c-link-text-color-h:227;--dxp-c-link-text-color-s:66%;--dxp-c-link-text-color-l:52%;--dxp-c-link-text-color-a:1.0;--dxp-c-link-text-color-hover-h:204;--dxp-c-link-text-color-hover-s:77%;--dxp-c-link-text-color-hover-l:32%;--dxp-c-link-text-color-hover-a:1.0;--dxp-c-link-text-color-active-h:204;--dxp-c-link-text-color-active-s:77%;--dxp-c-link-text-color-active-l:32%;--dxp-c-link-text-color-active-a:1.0;--dxp-g-neutral-h:30;--dxp-g-neutral-s:5%;--dxp-g-neutral-l:92%;--dxp-g-neutral-a:1.0;--dxp-g-root-h:214;--dxp-g-root-s:42%;--dxp-g-root-l:78%;--dxp-g-root-a:1.0;--dxp-g-root-contrast-h:0;--dxp-g-root-contrast-s:0%;--dxp-g-root-contrast-l:13%;--dxp-g-root-contrast-a:1.0;--dxp-g-neutral-contrast-h:0;--dxp-g-neutral-contrast-s:0%;--dxp-g-neutral-contrast-l:0%;--dxp-g-neutral-contrast-a:1.0;--dxp-g-brand-contrast-h:0;--dxp-g-brand-contrast-s:0%;--dxp-g-brand-contrast-l:100%;--dxp-g-brand-contrast-a:1.0;}</style>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109287625-13"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    /** DSC-1346: Remember Me Functionality **/
+    if (localStorage.dkCommunityUsername && localStorage.dkCommunityPassword && localStorage.dkRememberMecheckbox == "on")
+    {          
+        localStorage.dkCommunityUsernamePermanent = localStorage.dkCommunityUsername;
+        localStorage.dkCommunityPasswordPermanent = localStorage.dkCommunityPassword;
+    }
+    
+    //Google Analytics Script
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    $(window).on('load', function() {
+        switchState(false);
+       // sendToGA();
+    });
+
+    var isCustomButtonUiSet = false;
+    var isCustomFavoriteUISet = false;
+    $(document).ready(function(e) {
+        // This Function sets a UI of Follow Button
+        if(!isCustomButtonUiSet) {
+            loadFollowToShareIcon();
+        }
+        // SET FAVORITE DIV UI
+        if (!isCustomFavoriteUISet) {
+            setFavoriteDIVUI();
+        }
+        //DSC-1343 
+        if (!isBinded) {
+        	bindClick();
+        }
+    });
+
+    //DSC-1343 
+    var isBinded = false;
+    function bindClick() {
+        setTimeout(() => {            
+			document.addEventListener('click', function(event) {
+			    // Handle the click event
+			    if (location?.href?.indexOf('mass-follow-list-view-all') > -1) {                   
+			    	$('#CustomerPortalTemplate > .cCenterPanel .siteforceSldsOneColLayout.siteforceContentArea > .slds-col--padded.contentRegion.comm-layout-column')?.find('c-mass-follow-list-view-all')?.[0]?.handleShowOptionsClose(event);
+			    }
+			});			
+			isBinded = true;
+            if (!isBinded) {
+            	bindClick();
+            }
+        }, "1000")
+    }
+                    
+    function loadFollowToShareIcon() {
+        setTimeout(() => {
+            const elem = document.querySelectorAll('.slds-page-header__title.slds-m-right--small.slds-align-middle.clip-text.slds-line-clamp > span');
+            if (elem?.length > 0 && !isCustomButtonUiSet) {
+                let lwc = document.querySelectorAll('c-follow-share-icon');
+                if(lwc?.length > 0) {
+                    isCustomButtonUiSet = true;
+                    lwc[0].setButtonProperties(elem[0].offsetWidth);
+                }
+            } else if (!isCustomButtonUiSet) {
+                loadFollowToShareIcon();    
+            }
+        }, "500")
+    }
+                    
+    function setFavoriteDIVUI() {
+        setTimeout(() => {
+            var elem = $('.cHeaderTopInternalWrapper')?.find('.selfServiceUserProfileMenu');
+            if (elem?.length > 0 && !isCustomFavoriteUISet) {
+                let lwc = document.querySelectorAll('c-add-to-favorites-button');
+                if (lwc?.length > 0) {
+                    isCustomFavoriteUISet = true;
+                    lwc[0].setNotificationButtonStyling(elem?.width());
+                } else if (!isCustomFavoriteUISet) {
+                	setFavoriteDIVUI();    
+            	}
+            } else if (!isCustomFavoriteUISet) {
+                setFavoriteDIVUI();    
+            }
+        }, "500")
+    }
+                   
+    $(window).focus(function() {
+		switchState(true);
+    });
+    
+    let lastUrl = location.href; 
+    new MutationObserver(() => {
+        isCustomButtonUiSet = false;
+        isCustomFavoriteUISet = false;
+        loadFollowToShareIcon();
+        setFavoriteDIVUI();
+        const url = location.href;
+                if (url!==lastUrl && (url.includes('/s/account/Account') || url.includes('/s/contact/Contact') 
+                 || url.includes('marketplace-searches/Marketplace_Searches__c/Default') || url.includes('investment/Investment__c/Default') 
+                 || url.includes('university-alumni/University_Alumni__c/Default')
+                 || url.includes('/s/update/Update__c')
+                 || url.includes('form-d-offering/Form_D_Offering__c/Default'))) {
+            lastUrl = url;
+            if(document.querySelector('c-add-to-favorites-button') != undefined) {
+				document.querySelector('c-add-to-favorites-button').changeInURL();
+            }
+        }
+        if (url!==lastUrl) {
+            lastUrl = url;
+            sendToGA();
+        }
+                
+                
+        if (url.includes('/s/view-contactshomeoffice') || url.includes('/s/view-accountrelatedcontacts') )
+		{
+			if(document.querySelector('c-add-to-favorites-button') != undefined) {
+				document.querySelector('c-add-to-favorites-button').markContactsViewAllListViewAsNotFavourite();
+			}
+		}
+        //DSC-940-946---------This will stop working id the form550 additional section gets removed to API name of button gets updated
+        if(url.includes('/s/account/') && document.querySelector('c-form5500-additional-section') != undefined)
+        {
+            $('.branding-actions li[data-target-selection-name="sfdc:QuickAction.Account.Past_Form_5500"]').css("display", 'block');
+        }
+         //DSC-1343       
+        if ((url?.includes('s/account') || url?.includes('s/contact')|| url?.includes('/s/mass-follow-list-view-all')) && $('c-mass-follow')?.length > 0 && $('c-mass-follow')?.[0]?.rawFilter == '') {
+            let savedFilters = localStorage?.getItem('objectHomeStateManager');
+            if (savedFilters) {
+                $('c-mass-follow')?.[0]?.setRawFilter(savedFilters);
+            }
+  		}            
+        //DSC-947
+        if(url.includes('/s/dakota-news/'))
+        {
+            $('img').css("background", '#F3F2F2');
+        }
+        //DSC-1051
+        if(url.includes('/s/mp-new-features/'))
+        {
+            $('img').css("background", '#CB65FF');
+            $('img').css("border-radius", '5px');
+            $('.profilePicWrapper div').css("background", 'none');            
+        }
+        
+    }).observe(document, {subtree: true, childList: true});
+    
+    //To set portal state field of user
+    function switchState(isFocused)
+    {
+        var setPortalState = localStorage.getItem('portalState');
+        var currentURLPortalState = location.pathname.split('/')[1];
+        var isSyncedPortalState = (setPortalState==currentURLPortalState);
+        if(isSyncedPortalState==false && document.querySelector('c-app-launcher')!=null)
+        {
+            if(setPortalState!=null && setPortalState!='dakotaMarketplace' && isFocused==true)
+            {
+                window.location.pathname='everest';
+            }
+            else if(isFocused==false)
+            {
+                localStorage.setItem('portalState', currentURLPortalState);
+                document.querySelector('c-app-launcher').checkAndUpdatePortalState();
+            }
+        }
+    }
+    //-------------------------------------------DO NOT DISABLE "Show Nicknames" feature For Community, as it would impact Google analytics------------------------------------------
+    //DSC-968  user email contains 'Dakota'
+    var communityUserEmail = '';
+    function sendToGA(){
+        //DSC-968  user email contains 'Dakota'
+        if(sessionStorage.getItem("userInfoEmailGA") != "undefined") {
+            communityUserEmail = sessionStorage.getItem("userInfoEmailGA");
+        }
+        //For Accounts
+        if( location.pathname.includes('/001') && !location.pathname.includes('relatedlist') && !location.pathname.includes('related') && 
+           (!location.pathname.includes('/detail') || location.pathname.includes('/s/detail')) )
+        {
+            (function lookForAccountRecord(i) {
+                setTimeout(function() {
+                    var accountName = document.title.split(': ')[1];
+                    if(accountName!=undefined && accountName!='' && $('.profileName').length>0)
+                    {
+                        var communityUserNickname = $('.profileName')[0].innerText;
+                        if(communityUserEmail && !communityUserEmail.includes('rolustech') && !communityUserEmail.includes('dakota'))  //DSC-968 ->  !communityUserEmail.contains  'Dakota' 
+                        {
+                            console.log(' sendToGA TO GA-1!!!!!!!!');
+                           gtag('config', 'UA-109287625-13', {
+                                'page_title' : 'Account Name: '+accountName,
+                                'page_path' : location.pathname
+                            });
+
+                            var accountType = document.title.split(': ')[2];
+                            if(accountType!=undefined && accountType!='')
+                            {
+                                gtag('config', 'UA-109287625-13', {
+                                    'page_title' : 'Account Type: '+accountType,
+                                    'page_path' : location.pathname
+                                });
+                            }
+                        }
+                    }
+                    else if(document.title!='Error')
+                    {
+                        if (--i) lookForAccountRecord(i);
+                    }
+                }, 3000)
+            })(10);
+        }
+        //For Contacts
+        else if( location.pathname.includes('/003') && !location.pathname.includes('relatedlist') && !location.pathname.includes('related') && 
+           (!location.pathname.includes('/detail') || location.pathname.includes('/s/detail')) )
+        {
+            sendRecordToGA('Contact Name: ', true);
+        }
+        //For Searches
+        else if( location.pathname.includes('/a3N') && !location.pathname.includes('relatedlist') && !location.pathname.includes('related') && 
+           (!location.pathname.includes('/detail') || location.pathname.includes('/s/detail')) )
+        {
+            sendRecordToGA('Marketplace Search Name: ', true);
+        }
+        //For Investment Strategy
+        else if( location.pathname.includes('/a4J') && !location.pathname.includes('relatedlist') && !location.pathname.includes('related') && 
+           (!location.pathname.includes('/detail') || location.pathname.includes('/s/detail')) )
+        {
+            sendRecordToGA('Investment Strategy Name: ', true);
+        }
+        //For Investment
+        else if( location.pathname.includes('/a4K') && !location.pathname.includes('relatedlist') && !location.pathname.includes('related') && 
+           (!location.pathname.includes('/detail') || location.pathname.includes('/s/detail')) )
+        {
+            sendRecordToGA('Investment Name: ', true);
+        }
+        //For Dakota Content
+        else if( location.pathname.includes('/a41') && !location.pathname.includes('relatedlist') && !location.pathname.includes('related') && 
+           (!location.pathname.includes('/detail') || location.pathname.includes('/s/detail')) )
+        {
+            sendRecordToGA('Dakota Content Name: ', true);
+        }
+        //For Marketplace Academy's Knowledge base
+        else if( location.pathname.includes('/a4u') && !location.pathname.includes('relatedlist') && !location.pathname.includes('related') && 
+           (!location.pathname.includes('/detail') || location.pathname.includes('/s/detail')) )
+        {
+            sendRecordToGA('Knowledge Base Name: ', true);
+        }
+        //For Manager presentation 
+        else if( location.pathname.includes('/a57') && !location.pathname.includes('relatedlist') && !location.pathname.includes('related') && 
+                (!location.pathname.includes('/detail') || location.pathname.includes('/s/detail')) )
+        {
+            sendRecordToGA('Manager Presentation Name: ', true);
+        }
+        //For Account Printable View 
+        else if( location.pathname.includes('account-print-view?recordId=001'))
+        {
+            sendRecordToGA('Account Print View: ', true);
+        }
+        //For other Page views 
+        else if(!location.pathname.includes('/detail'))
+        {
+            sendRecordToGA(null, false);
+        }
+    }
+    
+    function sendRecordToGA(objectName, isSpecificObject){
+        (function lookForObjectRecord(i) {
+            setTimeout(function() {
+                if(isSpecificObject)
+                {
+                    var recordName = document.title.split(': ')[1];
+                    if(recordName!=undefined && recordName!='' && $('.profileName').length>0)
+                    {
+                        var communityUserNickname = $('.profileName')[0].innerText;
+                        if(communityUserEmail && !communityUserEmail.includes('rolustech') && !communityUserEmail.includes('dakota'))  //DSC-968 ->  !communityUserEmail.contains  'Dakota' 
+                        {
+                            console.log(' sendToGA TO GA-2!!!!!!!');
+                            gtag('config', 'UA-109287625-13', {
+                                'page_title' : objectName+recordName,
+                                'page_path' : location.pathname
+                            });
+                        }
+                    }
+                    else if(document.title!='Error')
+                    {
+                        if (--i) lookForObjectRecord(i);
+                    }
+                }
+                else
+                {
+					if($('.profileName').length>0)
+                    {
+                        var communityUserNickname = $('.profileName')[0].innerText;
+                        if(communityUserEmail && !communityUserEmail.includes('rolustech') && !communityUserEmail.includes('dakota'))  //DSC-968 ->  !communityUserEmail.contains  'Dakota' 
+                        {
+                            console.log(' sendToGA TO GA-3!!!!!!!');
+							gtag('config', 'UA-109287625-13');
+                        }
+                    }
+                    else
+                    {
+                        if (--i) lookForObjectRecord(i);
+                    }
+                }
+            }, 3000)
+        })(10);
+    }
+    
+    // Copy sessionStorage from one tab to another
+    var sessionStorage_transfer = function(event) {
+        if(!event) { event = window.event; } // ie suq
+        if(!event.newValue) return;          // do nothing if no value to work with
+        if (event.key == 'getSessionStorage') {
+            // another tab asked for the sessionStorage -> send it
+            localStorage.setItem('sessionStorage', JSON.stringify(sessionStorage));
+            // the other tab should now have it, so we're done with it.
+            localStorage.removeItem('sessionStorage'); // <- could do short timeout as well.
+        } else if (event.key == 'sessionStorage' && !sessionStorage.length) {
+            // another tab sent data <- get it
+            var data = JSON.parse(event.newValue);
+            for (var key in data) {
+                sessionStorage.setItem(key, data[key]);
+            }
+        }
+    };
+
+    // listen for changes to localStorage
+    if(window.addEventListener) {
+        window.addEventListener("storage", sessionStorage_transfer, false);
+    } else {
+        window.attachEvent("onstorage", sessionStorage_transfer);
+    };
+
+
+    // Ask other tabs for session storage (this is ONLY to trigger event)
+    if (!sessionStorage.length) {
+        localStorage.setItem('getSessionStorage', 'foobar');
+        localStorage.removeItem('getSessionStorage', 'foobar');
+    };
+    
+    (function lookForUserMenu(i) {
+        setTimeout(function() {
+            var profileMenu = $('.cHeaderTopInternalWrapper').find('.selfServiceUserProfileMenu');
+            var joinNowDiv = $('.joinNowDiv'); 
+            if(profileMenu.length==1 && joinNowDiv.length==1 && window?.innerWidth > 768)
+            {
+                $(".cProfileMenu").before(joinNowDiv);
+                $('.joinNowDiv')[0].style.removeProperty('display');
+            }
+            else {
+                if (--i) lookForUserMenu(i);
+            }
+        }, 500)
+    }
+    )(40);
+    //DSC-827: MFA Popup
+    var concurrentSessionEvent = function(event) {
+        if(event && event.data && event.data.key == 'concurrentSession') {
+          $('#CustomerPortalTemplate').css("z-index", 99999);
+           sessionStorage.setItem("userInfoForGA", "Unset");
+         }
+    };
+    
+    var userInfoForGAEvent = function(event) {
+        if(event && event.data && event.data.key == 'userInfoForGA' && sessionStorage.getItem("userInfoForGA")!='Set') {
+            console.log('```````````````````````inv userInfoForGAEvent 2');
+            sessionStorage.setItem("userInfoInvestmentFocusGA", event.data.invFocus);
+            sessionStorage.setItem("userInfoEmailGA", event.data.email);
+            sessionStorage.setItem("userInfoConTypeGA", event.data.conType);
+            sessionStorage.setItem("userInfoRoleGA", event.data.role);
+            sessionStorage.setItem("userInfoForGA", "Set");
+            if(!event.data.email.includes('rolustech') && !event.data.email.includes('dakota') && event?.data?.invFocus)  //DSC-968 ->  !communityUserEmail.contains  'Dakota' 
+            {
+                 /*console.log('*********************** ==Sending Community User Info to GA==*****************************', {
+                          'member_inv_focus': event.data.invFocus,
+                          'member_type': event.data.conType,
+                          'member_role': event.data.role,
+                    });*/
+                    /*console.log('*********************** ==Sending Community User Info to GA==*****************************');
+                    if(event.data.invFocus)console.log(event.data.invFocus);
+                    if(event.data.conType)console.log(event.data.conType);
+                    if(event.data.role)console.log(event.data.role);
+                     console.log('*********************** ==End==*****************************');*/
+                /*gtag('config', 'UA-109287625-13', {
+                     'page_title' : 'Investment Focus: '+event.data.invFocus, // i.e. Investment Focus: Long-only fixed income
+                     'page_path' : location.pathname // i.e. /dakotaMarketplace/s/
+                });*/
+                /*gtag('config', 'UA-109287625-13', {
+                          'member_inv_focus': event.data.invFocus,
+                          'member_type': event.data.conType,
+                          'member_role': event.data.role,
+                    });*/
+                	console.log(' sendToGA TO GA-4!!!!!!!');
+                   gtag('event', 'page_view', {
+                          'member_inv_focus': event.data.invFocus,
+                          'member_type': event.data.conType,
+                          'member_role': event.data.role,
+                    });
+               /* if(event.data.invFocus) {
+                    
+                    gtag('config', 'UA-109287625-13', {
+                         'member_inv_focus' : event.data.invFocus, // i.e.Long-only fixed income
+                         'page_path' : location.pathname // i.e. /dakotaMarketplace/s/
+                    });
+                    
+                }
+                if(event.data.conType) {
+                    gtag('config', 'UA-109287625-13', {
+                         'member_type' : event.data.conType, 
+                         'page_path' : location.pathname // i.e. /dakotaMarketplace/s/
+                    });
+                   
+                }
+                if(event.data.role) {
+                    
+                    gtag('config', 'UA-109287625-13', {
+                         'member_role' : event.data.conType, 
+                         'page_path' : location.pathname // i.e. /dakotaMarketplace/s/
+                    });
+                }*/
+            }
+         }
+
+    };
+	function renderVideoContent(event) {
+        if (event?.data?.key == 'openVideoContent') {
+        	const obj = event?.data?.details;
+            if (obj?.isModalOpen) {
+                if (document.body?.querySelector('[id="dakota-video-iframe"')?.src == obj.fullUrl) {
+            		return;
+                } else {
+                	document.body?.querySelector('[id="outerDiv"')?.remove();
+                }
+                let fullUrl = obj?.fullUrl;
+                let svgURL = obj?.svgURL;
+            	// Create outer div
+                let outerDiv = document.createElement("div");
+                outerDiv.style.position = "fixed";
+                outerDiv.style.right = "30px";
+                outerDiv.style.bottom = "41px";
+            	outerDiv.style.zIndex = "1";
+            	outerDiv.id = "outerDiv";
+
+                // Create modal content div
+                let modalContentDiv = document.createElement("div");
+                modalContentDiv.classList.add("slds-modal__content", "slds-p-around_medium", "video-div-head");
+                modalContentDiv.id = "modal-content-id-1";
+
+                // Create button group div
+                let buttonGroupDiv = document.createElement("div");
+                buttonGroupDiv.classList.add("button-group-head");
+
+                // Create Full Screen button
+                let fullScreenButton = document.createElement("button");
+                fullScreenButton.classList.add("slds-button", "slds-button_icon", "video-buttons-head");
+                fullScreenButton.title = "Full Screen";
+            	fullScreenButton.setAttribute("style", "--sds-c-icon-color-foreground: #706E6B")
+                fullScreenButton.addEventListener("click", (openFullScreen) => {
+            		window.open(fullUrl)
+                });
+
+                // Create SVG element for Full Screen button
+                var svgFullScreen = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svgFullScreen.classList.add("full-screen-styling-head");
+
+                // Create 'use' element inside SVG
+                let useElement = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                useElement.setAttribute("href", svgURL);
+
+                // Append 'use' element to SVG
+                svgFullScreen.appendChild(useElement);
+
+                // Append SVG to Full Screen button
+                fullScreenButton.appendChild(svgFullScreen);
+
+                // Create vertical separator div
+                let separatorDiv = document.createElement("div");
+                separatorDiv.classList.add("vertical-separater");
+
+                // Create Close button
+                let closeButton = document.createElement("button");
+                closeButton.classList.add("slds-button", "slds-button_icon", "video-buttons-head");
+                closeButton.title = "Close";
+            	closeButton.setAttribute("style", "--sds-c-icon-color-foreground: #706E6B");
+                closeButton.addEventListener("click", (e) => {
+            		document.querySelector('c-dakota-content-search')?.closeVideoContent();
+            		document.body?.querySelector('[id="outerDiv"')?.remove();
+                });
+
+                // Create lightning icon for Close button
+                let lightningIcon = document.createElement("lightning-icon");
+                lightningIcon.setAttribute("icon-name", "utility:close");
+                lightningIcon.setAttribute("class", "slds-icon-utility-close slds-icon_container");
+
+                // Create span element for boundary
+                let boundarySpan = document.createElement("span");
+                boundarySpan.setAttribute("style", "--sds-c-icon-color-background: var(--slds-c-icon-color-background, transparent)");
+                boundarySpan.setAttribute("part", "boundary");
+
+                // Create lightning-primitive-icon element
+                let primitiveIcon = document.createElement("lightning-primitive-icon");
+                primitiveIcon.setAttribute("size", "x-small");
+                primitiveIcon.setAttribute("variant", "inverse");
+
+                // Create SVG element
+                let svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svgElement.setAttribute("class", "slds-icon slds-icon_x-small");
+                svgElement.setAttribute("focusable", "false");
+                svgElement.setAttribute("data-key", "close");
+                svgElement.setAttribute("aria-hidden", "true");
+                svgElement.setAttribute("viewBox", "0 0 520 520");
+                svgElement.setAttribute("part", "icon");
+
+                // Create path element inside SVG
+                let pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                pathElement.setAttribute("d", "M310 254l130-131c6-6 6-15 0-21l-20-21c-6-6-15-6-21 0L268 212a10 10 0 01-14 0L123 80c-6-6-15-6-21 0l-21 21c-6 6-6 15 0 21l131 131c4 4 4 10 0 14L80 399c-6 6-6 15 0 21l21 21c6 6 15 6 21 0l131-131a10 10 0 0114 0l131 131c6 6 15 6 21 0l21-21c6-6 6-15 0-21L310 268a10 10 0 010-14z");
+
+                // Append path to SVG
+                svgElement.appendChild(pathElement);
+
+                // Append SVG to lightning-primitive-icon
+                primitiveIcon.appendChild(svgElement);
+
+                // Append lightning-primitive-icon to span
+                boundarySpan.appendChild(primitiveIcon);
+
+                // Create span element for assistive text
+                let assistiveTextSpan = document.createElement("span");
+                assistiveTextSpan.classList.add("slds-assistive-text");
+                assistiveTextSpan.textContent = "close";
+
+                // Append assistive text to boundary span
+                boundarySpan.appendChild(assistiveTextSpan);
+
+                // Append boundary span to lightning-icon
+                lightningIcon.appendChild(boundarySpan);
+
+                // Create span element for Close button
+                let spanElement = document.createElement("span");
+                spanElement.classList.add("slds-assistive-text");
+                spanElement.textContent = "Close";
+
+                // Append lightning icon and span to Close button
+                closeButton.appendChild(lightningIcon);
+                closeButton.appendChild(spanElement);
+
+                // Append buttons and separator to button group div
+                buttonGroupDiv.appendChild(fullScreenButton);
+                buttonGroupDiv.appendChild(separatorDiv);
+                buttonGroupDiv.appendChild(closeButton);
+
+                // Append button group and iframe to modal content div
+                modalContentDiv.appendChild(buttonGroupDiv);
+
+                let iframe = document.createElement("iframe");
+                iframe.width = "400";
+                iframe.height = "220";
+                iframe.style.border = "1px solid";
+                iframe.src = fullUrl;
+            	iframe.id = 'dakota-video-iframe';
+
+                modalContentDiv.appendChild(iframe);
+
+                // Append modal content div to outer div
+                outerDiv.appendChild(modalContentDiv);
+                document?.body?.appendChild(outerDiv); 
+            }
+        }   
+    };
+    function getIframeURL(event) {
+        if (event?.data?.key == 'getVideoIframeURL') {
+            let fullURL = document.body?.querySelector('[id="dakota-video-iframe"')?.src;
+            document.querySelector('c-dakota-content-search')?.setRenderedURL(fullURL);
+        }
+    };
+	if (window.addEventListener) {
+           	window.addEventListener("message", concurrentSessionEvent, false);
+           	window.addEventListener("message", userInfoForGAEvent, false);
+           	window.addEventListener("message", renderVideoContent, false);
+			window.addEventListener("message", getIframeURL, false);
+    }
+</script>
+        
+        <!-- webruntime-branding-shared stylesheets -->
+        <link rel="stylesheet" href="assets/styles/salesforce-lightning-design-system.min.css?0DB3m000000TY7F:11"/>
+        <link rel="stylesheet" href="assets/styles/dxp-site-spacing-styling-hooks.min.css?0DB3m000000TY7F:11"/>
+        <link rel="stylesheet" href="assets/styles/dxp-styling-hooks.min.css?0DB3m000000TY7F:11"/>
+        <link rel="stylesheet" href="assets/styles/dxp-slds-extensions.min.css?0DB3m000000TY7F:11"/>
+        <!-- webruntime-branding-shared stylesheets -->
+        <link rel="stylesheet" href="assets/styles/styles.css?0DB3m000000TY7F:11"/>
+        <link rel="stylesheet" href="assets/css/fonts-and-custom.css?0DB3m000000TY7F:11"/>
+    </head>
+    <body>
+        <webruntime-app></webruntime-app>
+    </body>
+</html>

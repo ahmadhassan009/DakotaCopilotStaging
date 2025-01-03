@@ -1,0 +1,17 @@
+<template>
+    <span class="iconPosition">
+        <lightning-icon icon-name="standard:contact" size="medium"></lightning-icon>
+    </span>
+    <lightning-tabset>
+        <lightning-tab onactive={handleJobTitle} label="Job Changes">
+            <div class="slds-border_bottom borderMargin"></div>
+            <c-job-and-role-changes type='Job' page='Home'>
+            </c-job-and-role-changes>
+        </lightning-tab>
+        <lightning-tab onactive={handleRoleTitle} label="Role Changes">
+            <div class="slds-border_bottom borderMargin"></div> 
+            <c-job-and-role-changes type='Role' page='Home'>
+            </c-job-and-role-changes>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

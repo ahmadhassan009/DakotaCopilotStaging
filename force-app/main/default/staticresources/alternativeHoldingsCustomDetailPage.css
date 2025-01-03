@@ -1,0 +1,9 @@
+c-alternative-holdings-custom-detail-page lightning-record-view-form lightning-output-field .slds-form-element__label {
+    padding-top: 0px;
+}
+
+c-alternative-holdings-custom-detail-page .slds-grid
+{
+    border-radius: var(--slds-c-card-radius-border, var(--sds-c-card-radius-border, var(--lwc-borderRadiusMedium,0.25rem)));
+
+}

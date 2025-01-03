@@ -1,0 +1,230 @@
+<apex:page id="loginPage" showHeader="false" showChat="false" sidebar="false" standardStylesheets="false" controller="SigninController">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Login | Dakota Marketplace</title>
+        <!-- Bootstrap core CSS -->
+        <link href="{!URLFOR($Resource.include, '_include/css/bootstrap.min.css')}" rel="stylesheet"/>
+        <!-- Custom styles for this template -->
+        <link href="{!URLFOR($Resource.include, '_include/css/signin.css')}" rel="stylesheet" />
+        <style>
+            body{
+                padding: 0;
+                background-color: #fff;
+            }
+            .container-fluid{
+                width: 100%;
+                display: flex;
+            	flex-wrap: wrap;
+            }
+            .no-padding{ padding: 0; }
+            .formWrapper{
+                display: flex;
+            	padding: 90px 15px 8px;
+                align-items: center;
+            	flex-direction: column;
+            }
+            .form-signin{
+                width: 100%;
+                padding: 20px;
+            	margin-top: 20px;
+                max-width: 380px;
+                border-radius: 4px;
+                border: 1px solid #d8dde6;
+            }
+            .fieldLabel{
+                font-size: 12px;
+                font-weight: 500;
+                color: rgb(84, 105, 141);
+            }
+            .rememberMeAllignment{
+                margin-left: 8px;
+                padding-top: 1.05rem;
+            }
+            .rememberMeStyle{
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                margin-top: -10px;
+                border-bottom: 1px solid #f4f4f7;
+                padding-bottom: 8px;
+            }
+            .form-signin input.form-control{
+                padding: 11px;
+                font-size: 13px;
+                margin: 3px 0 16px;
+                border-radius: 4px;
+                border-color: rgb(150, 148, 146);
+            }
+            .form-signin input[type="submit"]{
+                font-size: 13px;
+                background: #000;
+                padding: 11px 24px;
+                border-color: #000;
+                margin-bottom: 16px;
+            }
+            footer{
+            	font-size: 12px;
+            	margin-top: auto;
+            }
+            .footerLink{
+                color: #0070d2;
+                font-size: 12px;
+            }
+            iframe{
+                width: 100%;
+                border: none;
+                min-height: 100vh;
+            }
+            .col-lg-6{ width: 50%; }
+            @media only screen and (min-height: 1200px) {
+                .formWrapper {
+                   padding-top: 275px;
+                }
+            }
+            @media only screen and (max-height: 1200px) {
+                .formWrapper {
+                    padding-top: 215px;
+                }
+            }
+     		@media(max-width: 1024px){
+            	.col-md-12{ width: 100%; }
+            	.formWrapper{ min-height: 100vh; }
+            	.iframeWrapper{ display: none; }
+            }
+            @media only screen and (max-height: 1000px) {
+                .formWrapper {
+                    padding-top: 175px;
+                }
+            }
+            @media only screen and (max-height: 900px) {
+                .formWrapper {
+                    padding-top: 135px;
+                }
+            }
+            @media only screen and (max-height: 736px) {
+                .formWrapper {
+                    padding-top: 95px;
+                }
+            }
+            @media only screen and (max-height: 670px) {
+                .formWrapper {
+                    padding-top: 75px;
+                }
+            }
+            @media only screen and (max-height: 610px) {
+                .formWrapper {
+                   padding-top: 55px;
+                }
+            }
+            .loginErrorMsg {
+                color: rgb(194, 57, 52);
+                font-size: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="col-lg-6 col-md-12 no-padding formWrapper">
+                <apex:image url="{!$Resource.DakotaMarketplaceLogo}" width="180" style="margin-bottom: 17px;" />
+                <apex:form id="loginForm" forceSSL="true" styleClass="form-signin">
+                    <span class="loginErrorMsg"><apex:pageMessage severity="error" summary="{!errorMsg}" rendered="{!isLoginFailed}"/></span>
+                   
+                    <label class="fieldLabel">Username or Email</label>
+                    <apex:inputText required="true" id="login-email" styleClass="form-control un" value="{!usernameOrEmail}"/>
+                    <label class="fieldLabel">Password</label>
+                    <apex:inputSecret id="login-password" styleClass="form-control pw"  value="{!password}"/>                               
+                    <apex:commandButton action="{!login}" onclick="lsRememberMe();" value="Log In" id="login-submit" styleClass="btn btn-lg btn-primary btn-block"/>
+                    <div class="rememberMeStyle">
+                        <apex:inputCheckbox value="{!rememberMe}" id="rememberMe" onchange="updateRememberMe();"/>
+                        <label class="fieldLabel rememberMeAllignment">Remember me</label>   
+                    </div>
+                    <div id="login-option">
+                        <span class="form-signin-forgot"><a class="footerLink" href="./ForgotUI" >Forgot Your Password?</a></span>
+                    </div>
+                </apex:form>
+                <footer class="text-center"> © 2023 dakota.com. All rights reserved. </footer>
+            </div>
+            <div class="col-sm-6 col-xs-12 no-padding">
+              <apex:iframe src="{!iframeURL}"  id="theIframe"/> 
+            </div>
+        </div> 
+        <apex:outputPanel rendered="{!isLoginFailed}">
+            <script>
+                localStorage.dkCommunityUsername = "";
+                localStorage.dkCommunityPassword = "";
+                localStorage.dkRememberMecheckbox = "";
+            </script>
+        </apex:outputPanel>
+    </body>
+    
+    <script src="{!URLFOR($Resource.include, '_include/js/jquery-1.10.2.min.js')}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.un').attr('placeholder','Username or Email');
+            $('.pw').attr('placeholder','{!$Label.site.password}');
+        });
+
+        window.onload = function() 
+        {
+            var data = sessionStorage.getItem('userInfoForGA');
+            if (data) 
+            {
+                if( !sessionStorage.getItem('firstLoad') )
+                {
+                    sessionStorage['firstLoad'] = true;
+                    window.location.reload();
+                }  
+                else
+                {
+                    sessionStorage.removeItem('firstLoad');
+                }
+            }
+        }
+
+        var rmCheck = document.getElementById("loginPage:loginForm:rememberMe"),
+        emailInput = document.getElementById("loginPage:loginForm:login-email"),
+        passInput = document.getElementById("loginPage:loginForm:login-password");
+        rmCheck.setAttribute("checked", "checked");
+
+        if (localStorage.dkRememberMecheckbox && localStorage.dkRememberMecheckbox == "on")
+        {
+            rmCheck.setAttribute("checked", "checked");
+            emailInput.value = localStorage.dkCommunityUsername;
+            passInput.value = localStorage.dkCommunityPassword;
+        } 
+        else if (localStorage.dkRememberMecheckbox && localStorage.dkRememberMecheckbox == "off")
+        {
+            rmCheck.removeAttribute("checked");            
+            emailInput.value = localStorage.dkCommunityUsernamePermanent ? localStorage.dkCommunityUsernamePermanent : "";
+            passInput.value = localStorage.dkCommunityPasswordPermanent ? localStorage.dkCommunityPasswordPermanent : "";
+        }
+        else 
+        {
+            emailInput.value = localStorage.dkCommunityUsernamePermanent ? localStorage.dkCommunityUsernamePermanent : "";
+            passInput.value = localStorage.dkCommunityPasswordPermanent ? localStorage.dkCommunityPasswordPermanent : "";
+        }
+
+        function lsRememberMe() 
+        {
+            if (rmCheck.checked && emailInput.value !== "" && passInput.value!== "")
+            {
+                localStorage.dkCommunityUsername = emailInput.value;
+                localStorage.dkCommunityPassword = passInput.value;
+                localStorage.dkRememberMecheckbox = "on";
+            } 
+            else
+            {
+                localStorage.dkCommunityUsername = "";
+                localStorage.dkCommunityPassword = "";
+                localStorage.dkRememberMecheckbox = "off";
+            }
+        }
+
+        function updateRememberMe()
+        {
+            rmCheck.checked ?  rmCheck.removeAttribute("checked") : rmCheck.setAttribute("checked", "checked");
+        }
+    </script>   
+</apex:page>

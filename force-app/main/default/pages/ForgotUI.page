@@ -1,0 +1,145 @@
+<apex:page id="loginPage" showHeader="false" showChat="false" sidebar="false" standardStylesheets="false" controller="ForgotController">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Forgot Password</title>
+    
+        <!-- Bootstrap core CSS -->
+        <link href="{!URLFOR($Resource.include, '_include/css/bootstrap.min.css')}" rel="stylesheet"/>
+    
+        <!-- Custom styles for this template -->
+        <link href="{!URLFOR($Resource.include, '_include/css/forgot.css')}" rel="stylesheet" />
+        <style>
+        	body{
+            	padding: 0;
+                background-color: #fff;
+            }
+            .contentWrapper > img{
+            	margin: auto auto 44px;
+			    display: block;
+            }
+            .contentTitle{
+                font-size: 24px;
+                margin-top: 16px;
+                margin-bottom: 12px;
+            }
+            .form-forgot{
+                padding: 20px;
+                max-width: 380px;
+                border-radius: 4px;
+            	width: calc(100vw - 30px);
+                border: 1px solid #d8dde6;
+            }
+            .Label,
+            .fieldLabel{
+            	display: block;
+                font-size: 13px;
+                font-weight: 500;
+            	line-height: 24px;
+                color: rgb(84, 105, 141);
+            }
+            .fieldLabel{
+            	font-size: 12px;
+            	margin-bottom: 7px;
+            	line-height: normal;
+            }
+            .form-forgot input[type="text"] {
+                height: auto;
+                padding: 11px;
+                font-size: 13px;
+            	margin-bottom: 12px;
+            	border-color: #969492;
+            }
+            .btn-50{
+            	width: 48%;
+            	font-size: 13px;
+            	padding: 11px 24px;
+            	margin-bottom: 16px;
+            }
+            .btn-dark,
+            .btn-dark:focus,
+            .btn-dark:active{
+            	color: #fff !important;
+            	background-color: #000;
+            }
+            .btn-secondary,
+            .btn-secondary:focus,
+            .btn-secondary:active{
+            	color: #0070d2 !important;
+            	background-color: #fff !important;
+            	border: 1px solid #969492;
+            }
+            .float-left{ float: left; }
+            .float-right{ float: right; }
+            .mb-20{ margin-bottom: 20px; }
+            footer{
+            	bottom: 0;
+                height: 24px;
+            	width: 100vw;
+            	position: fixed;
+            	font-size: 12px;
+                letter-spacing: 0.25px;
+            }
+            .loginError {
+                color: #C23934;
+                margin-bottom: 14px;
+                list-style: none;
+                font-size: 12px;
+                padding-left: 0;
+            }
+            @media only screen and (min-height: 1200px) {
+                .contentWrapper { padding-top: 275px; }
+            }
+            @media only screen and (max-height: 1200px) {
+                .contentWrapper { padding-top: 215px; }
+            }
+     		@media(max-width: 1024px){
+            	.contentWrapper { min-height: 100vh; }
+            }
+            @media only screen and (max-height: 1000px) {
+                .contentWrapper { padding-top: 175px; }
+            }
+            @media only screen and (max-height: 900px) {
+                .contentWrapper { padding-top: 135px; }
+            }
+            @media only screen and (max-height: 736px) {
+                .contentWrapper { padding-top: 95px; }
+            }
+            @media only screen and (max-height: 670px) {
+                .contentWrapper { padding-top: 75px; }
+            }
+            @media only screen and (max-height: 610px) {
+                .contentWrapper { padding-top: 55px; }
+            }
+            .loginErrorMsg {
+                color: rgb(194, 57, 52);
+                font-size: 12px;
+            }
+        </style>
+    </head>
+	<body>
+    	<div class="contentWrapper">
+            <apex:image url="{!$Resource.DakotaMarketplaceLogo}" width="180" />
+			<h2 class="contentTitle text-center">Forgot Your Password</h2>
+			<apex:form id="loginForm" forceSSL="true" styleClass="form-forgot">
+                
+                <label class="Label mb-20">To reset your password, enter your username or email.</label>
+                <label class="fieldLabel">Username or Email</label>
+                <apex:inputText required="true" id="login-email" styleClass="form-control un" value="{!usernameOrEmail}"/>
+                <div style="overflow: hidden;">
+                   <a class="btn btn-50 btn-secondary float-left" href="./SigninUI" >Cancel</a>
+                	<apex:commandButton id="submit" value="Continue" action="{!forgotPassword}" styleClass="btn btn-50 btn-dark float-right"/>   
+                </div>
+                <span class="loginErrorMsg"><apex:pageMessage severity="error" summary="{!errorMsg}" rendered="{!isLoginFailed}"/></span>
+			</apex:form>
+		</div> 
+        <footer class="text-center"> © 2023 dakota.com. All rights reserved. </footer>
+        <script src="{!URLFOR($Resource.include, '_include/js/jquery-1.10.2.min.js')}"></script>
+        <script>
+            $(document).ready(function() {
+                $('.un').attr('placeholder','Username or Email');
+            });
+        </script>   
+	</body>
+</apex:page>

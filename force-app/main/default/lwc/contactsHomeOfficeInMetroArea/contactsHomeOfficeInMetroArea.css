@@ -1,0 +1,10 @@
+.contact-icon {
+     background-color: #51b71a;
+    --sds-c-avatar-text-color: white;
+}
+
+.footerStyle {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-top: 6px;
+}

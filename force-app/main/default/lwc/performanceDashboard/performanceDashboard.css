@@ -1,0 +1,57 @@
+.componentStyling {
+    border-collapse: separate;
+    border-radius: 5px;
+    overflow: initial;
+    height: 100%;
+    
+}
+
+.headingStyling {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 17px 17px 10px 17px;
+}
+
+.searchbarStyle {
+    padding-right: 10px;
+    width: 399px;
+}
+
+.searchDiv{
+    display: flex;
+    padding-left: 1.87%;
+}
+
+.searchButton{
+    padding-right: 5px;
+    padding-top: 19px;
+}
+
+.resetButton{
+    padding-top: 19px;
+}
+
+.emptyTableStyling {
+    margin-top: 25px;
+    text-align: center;
+    color: grey;
+}
+.filesDiv{
+    height: 710px;
+}
+
+.helpText{
+    font-style: italic;
+    color: #6B6D70;
+    font-size: 11px;
+    margin-top: 10px;
+    margin-left: 16px;
+}
+
+.paddingLeft {
+    padding-left: 5.5%;
+}
+
+.paddingRight {
+    padding-right: 5%;
+}

@@ -1,0 +1,22 @@
+<template>
+        <table>
+          <tr>
+            <td style="padding-top: 25px;padding-left: 25px;vertical-align: top;width: 65%;padding-bottom:25px"  class="slds-card">
+              <template if:true={renderData}>
+              <lightning-record-form
+                record-id={recordId}
+                object-api-name={objectApiName}
+                fields={fields}
+                columns="1"
+                mode="readonly"
+              ></lightning-record-form>
+            </template>
+            </td> 
+            <td style="background: white;vertical-align: middle;width: 35%; border-radius:5px" >
+              <c-metro-area-review-highlight-video record-id={recordId}
+              onprogressvaluechange={hanldeProgressValue}>
+              </c-metro-area-review-highlight-video>   
+            </td>
+          </tr>
+        </table>
+    </template>

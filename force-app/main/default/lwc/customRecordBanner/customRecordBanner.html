@@ -1,0 +1,33 @@
+<template>
+
+    <div class="ui-widget">
+        <header class="forceHighlightsPanel forceCommunityRecordHeadline">
+            <div class="slds-page-header slds-page-header_record-home forceHighlightsStencilDesktop forceRecordLayout"
+                style="height: 67.5px; left: 13px; right: 13px; padding-left: 16px; padding-right: 16px; border-radius: 4px;">
+                <div class="slds-grid primaryFieldRow">
+                    <div class="slds-grid slds-col slds-has-flexi-truncate">
+                        <div class="profilePicWrapper slds-media slds-no-space">
+                            <lightning-icon size="medium" icon-name="custom:custom43"
+                                class="contact-icon slds-media__figure slds-icon forceEntityIcon">
+                            </lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <h1>
+                                <div class="entityNameTitle slds-line-height_reset">
+                                    Investment Strategy</div>
+                                <div class="slds-page-header__title slds-m-right--small slds-align-middle clip-text slds-line-clamp"
+                                    title={investmentName}><span class="uiOutputText">{investmentName}</span></div>
+                            </h1>
+                        </div>
+                    </div>
+                    <template if:true={isVisible}>
+                    <!-- <div role="group">
+                        <lightning-button label="Edit" title="Edit" onclick={handleClick} ></lightning-button>
+                    </div> -->
+                </template>
+                </div>
+
+            </div>
+        </header>
+    </div>
+</template>

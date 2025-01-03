@@ -1,0 +1,29 @@
+<template>
+    <main class="msger-chat">
+        <template for:each={chats} for:item="chatMessage">
+            <template lwc:if={chatMessage.isBot}>
+                <div key={chatMessage.time} class="msg left-msg">
+                    <img class="msg-img" src={botProfilePic} />
+                    <c-bot-message onscrollbottomupdate={handleScrollBottomUpdate} class="bot-message-component" chat-message-input={chatMessage} 
+                    thread-id={threadId} onthreadidupdate={handleThreadIdUpdate} chat-history-flag={chatHistoryFlag}>
+                    </c-bot-message>
+                </div>
+            </template>
+            <template lwc:else>
+                <div key={chatMessage.time} class="msg right-msg">
+                    <!-- <img class="msg-img" src={currentUserProfilePic} /> -->
+                    <div class="msg-bubble">
+                        <div>
+                            {chatMessage.message}
+                        </div>
+                    </div>
+                    <div class="msg-info">
+                        <div class="msg-info-name">{currentUserNameBycallback}</div>
+                        <div class="msg-info-name">•</div>                      
+                        <div class="msg-info-time">{userTimeZoneDateTimeBycallback}</div>
+                    </div>
+                </div>
+            </template>
+        </template>
+    </main>
+</template>

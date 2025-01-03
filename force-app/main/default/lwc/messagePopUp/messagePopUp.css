@@ -1,0 +1,44 @@
+.slds-welcome-mat__info {
+    background-image: none;
+    padding: 74px 48px 124px !important;
+}
+
+.message-popup {
+    width: 30% !important;
+    min-width: 20rem !important;
+}
+
+.message-content {
+    border-radius: inherit;
+}
+
+.message-mat {
+    padding: 45px 48px 45px !important;
+}
+
+.message-main-mat {
+    height: auto;
+    max-height: none;
+}
+
+.trialDiv {
+    font-size: medium;
+    margin-top: 28px;
+}
+
+.centerConclusion {
+    text-align: center;
+}
+
+.leftConclusion {
+    text-align: left;
+    font-size: 0.8em;
+}
+
+.termsCondDiv {
+    margin-bottom: 25px;
+}
+
+.termsCondCheckbox {
+    margin-right: var(--lwc-spacingXSmall,0.5rem);
+}

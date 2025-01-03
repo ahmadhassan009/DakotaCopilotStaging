@@ -1,0 +1,348 @@
+<template>
+    <div data-id="mainDiv" class="slds-card slds-card_boundary slds-grid slds-grid--vertical mainDiv">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="listViewIndex">
+            </lightning-spinner>
+        </template>
+        <div class="slds-var-p-around_medium headerStyling">
+            <div>
+                <p class="objectLabel">Metro Areas</p>
+                <div class="headerLabel">{activeCountry}</div>
+                <div class="helpTextLabel">{offset}{plusSign} items</div>
+            </div>
+
+
+            <div class="searchMainDiv">
+                <div class="searchDiv">
+                    <lightning-input data-id="state-toggle" type="toggle" class="state-toggle-class" label="Metro Area by State" 
+                        onchange={changeStateToggle} unchecked message-toggle-active="" message-toggle-inactive="" ></lightning-input>
+                    <lightning-input data-id="searchValue" name="searchValue" onkeydown={searchMetroAreaOnEnter}
+                        placeholder={searchPlaceHolder} type="search" class="searchbarStyle">
+                    </lightning-input>
+                    <lightning-button name="Search" variant="brand" label="Search" title="Search"
+                        onclick={fetchSearchResults} class="searchButton"></lightning-button>
+                    <lightning-button name="Reset" label="Reset" title="Reset" onclick={resetFilters}
+                        class="resetButton">
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+        <div class="mainBlockDiv">
+            <div class="countriesDiv scrollContainer">
+                <div class="scrollArea">
+                    <template for:each={countryList} for:item="country">
+                        <div data-id={country.Name} key={country.Name} class="parentDiv">
+                            <template if:true={country.highlightPanel}>
+                                <div class="slds-media countryList1">
+                                    <div class="slds-media__body slds-m-left--x-small">
+                                        <div class="slds-media">
+                                            <div
+                                                class="slds-setup-assistant__step-summary-content slds-media__body countryDiv">
+                                                <div class="sub-territories-main">
+                                                    <template if:true={country.subTerritory}>
+                                                        <div onclick={changeCountryChevronStatus} data-id={country.Name}
+                                                        class="highlightTerrWidth">
+                                                            <lightning-formatted-text id={country.Name}
+                                                                class="slds-truncate countryTextStyling"
+                                                                value={country.Name} title={country.Name}>
+                                                            </lightning-formatted-text>
+                                                        </div>
+                                                        <lightning-button-icon icon-name="utility:chevrondown" alternative-text="My Territories" 
+                                                            title="My Territories" class="slds-button slds-button_icon slds-m-top_x-small chevronDownClass"
+                                                            data-id={country.Name} onclick={changeCountryChevronStatus}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                    <template if:false={country.subTerritory}>
+                                                        <div onclick={changeCountryChevronStatus} data-id={country.Name}
+                                                            class="sub-territories-name sub-territoies-name-ellipsis">
+                                                            <lightning-formatted-text id={country.Name}
+                                                                class="slds-truncate countryTextStyling"
+                                                                value={country.Name} title={country.Name}>
+                                                            </lightning-formatted-text>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Custom List Views -->
+                                <template if:true={country.subTerritory}>
+                                    <div class="addNewMainDiv" onclick={openModel}>
+                                        <lightning-button-icon class="slds-button slds-button_icon slds-m-top_x-small addNewIconClass" icon-name="utility:add"
+                                            alternative-text="Add New" title="Add New">
+                                        </lightning-button-icon>
+                                        <div class="addNewClass">Add New</div>
+                                    </div>
+                                    <template for:each={country.subTerritoriesList} for:item="customListView">
+                                        <template if:true={customListView.highlightPanel}>
+                                            <div class="slds-media listViewList sub-territories"
+                                                key={customListView.Name}>
+                                                <div class="slds-media__body slds-m-left--x-small">
+                                                    <div class="slds-media">
+                                                        <div
+                                                            class="slds-setup-assistant__step-summary-content slds-media__body countryDiv">
+                                                            <div class="sub-territories-main">
+                                                                <div onclick={changeCountryChevronStatus}
+                                                                    data-id={customListView.Name}
+                                                                    class="sub-territories-name sub-territoies-name-ellipsis">
+                                                                    <lightning-formatted-text id={customListView.Name}
+                                                                        class="slds-truncate subTerritoriesTextStyling"
+                                                                        value={customListView.Name}
+                                                                        title={customListView.Name}>
+                                                                        {customListView.Name}
+                                                                    </lightning-formatted-text>
+                                                                </div>
+                                                                <div class="rowActionsClass">
+                                                                    <lightning-button-icon data-name={customListView.Name}
+                                                                            class="slds-button slds-button_icon slds-m-top_x-small editIconClass"
+                                                                            icon-name="utility:edit" onclick={handleEditListView}
+                                                                            alternative-text="Edit" title="Edit">
+                                                                    </lightning-button-icon>
+                                                                    <lightning-button-icon data-name={customListView.Name}
+                                                                            class="slds-button slds-button_icon slds-m-top_x-small deleteIconClass"
+                                                                            icon-name="utility:close" onclick={handleDeleteListView}
+                                                                            alternative-text="Remove" title="Remove">
+                                                                    </lightning-button-icon>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template if:false={customListView.highlightPanel}>
+                                            <div class="slds-media countryList2 sub-territories"
+                                                key={customListView.Name}>
+                                                <div class="slds-media__body slds-m-left--x-small">
+                                                    <div class="slds-media">
+                                                        <div
+                                                            class="slds-setup-assistant__step-summary-content slds-media__body countryDiv">
+                                                            <div class="sub-territories-main">
+                                                                <div onclick={changeCountryChevronStatus}
+                                                                    data-id={customListView.Name}
+                                                                    class="sub-territories-name sub-territoies-name-ellipsis">
+                                                                    <lightning-formatted-text id={customListView.Name}
+                                                                        class="slds-truncate subTerritoriesTextStyling"
+                                                                        value={customListView.Name}
+                                                                        title={customListView.Name}>
+                                                                        {customListView.Name}
+                                                                    </lightning-formatted-text>
+                                                                </div>
+                                                                <div class="rowActionsClass">
+                                                                    <lightning-button-icon data-name={customListView.Name}
+                                                                            class="slds-button slds-button_icon slds-m-top_x-small editIconClass"
+                                                                            icon-name="utility:edit" onclick={handleEditListView}
+                                                                            alternative-text="Edit" title="Edit">
+                                                                    </lightning-button-icon>
+                                                                    <lightning-button-icon data-name={customListView.Name}
+                                                                            class="slds-button slds-button_icon slds-m-top_x-small deleteIconClass"
+                                                                            icon-name="utility:close" onclick={handleDeleteListView}
+                                                                            alternative-text="Remove" title="Remove">
+                                                                    </lightning-button-icon>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                    </template>
+                                </template>
+                            </template>
+                            <template if:false={country.highlightPanel}>
+                                <div class="slds-media countryList2" data-id={country.Name}>
+                                    <div class="slds-media__body slds-m-left--x-small">
+                                        <div class="slds-media">
+                                            <div
+                                                class="slds-setup-assistant__step-summary-content slds-media__body countryDiv">
+                                                <div class="sub-territories-main">
+                                                    <template if:true={country.subTerritory}>
+                                                        <div onclick={changeCountryChevronStatus} data-id={country.Name}
+                                                            class="sub-territories-name unhighlightTerrWidth sub-territoies-name-ellipsis">
+                                                            <lightning-formatted-text id={country.Name}
+                                                                class="slds-truncate countryTextStyling"
+                                                                value={country.Name} title={country.Name}>
+                                                            </lightning-formatted-text>
+                                                        </div>
+                                                        <lightning-button-icon icon-name="utility:chevrondown" alternative-text="My Territories" 
+                                                            title="My Territories" class="slds-button slds-button_icon slds-m-top_x-small chevronDownClass"
+                                                            data-id={country.Name} onclick={changeCountryChevronStatus}>
+                                                        </lightning-button-icon>
+                                                    </template>
+                                                    <template if:false={country.subTerritory}>
+                                                        <div onclick={changeCountryChevronStatus} data-id={country.Name}
+                                                            class="sub-territories-name sub-territoies-name-ellipsis">
+                                                            <lightning-formatted-text id={country.Name}
+                                                                class="slds-truncate countryTextStyling"
+                                                                value={country.Name} title={country.Name}>
+                                                            </lightning-formatted-text>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-scrollable_y countriesListDiv">
+                <template if:false={recordsExist}>
+                    <p class="noRecordsStyling">No results found.</p>
+                </template>
+                <template if:true={recordsExist}>
+                    <template if:true={showRecordsByState}>
+                        <!-- SHOW STATE COMPONENT -->
+                        <c-metro-areas-by-state onselectedstate={showMetroAreasByState} ontotalstatecount={updateStateCount} ondataloaded={childDataLoaded}></c-metro-areas-by-state>
+                    </template>
+                    <template if:false={showRecordsByState}>
+                        <div class="slds-table_bordered slds-table_col-bordered slds-scrollable">
+                            <div class='customViewAll listViewDiv'>
+                                <lightning-datatable key-field="Id" data={metroAreaFilteredRecords} columns={columns}
+                                    hide-checkbox-column enable-infinite-loading="true" onloadmore={loadMoreData}
+                                    load-more-offset="20" default-sort-direction={defaultSortDirection}
+                                    sorted-direction={sortDirection} sorted-by={sortedBy} onsort={onHandleSort}
+                                    onrowaction={handleRowAction}>
+                                </lightning-datatable>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!-- List View Deletion Pop-up Start -->
+    <template if:true={isDeleteListViewModalOpen}>
+        <section class="slds-modal slds-fade-in-open greyBackground">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeDeleteListViewModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">Remove List View
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                    <center>
+                        <p>Are you sure you want to remove "{listViewToBeDeleted}" List View?</p>
+                    </center>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeDeleteListViewModal}
+                        title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={deleteListView}
+                        title="Remove">Remove</button>
+                </footer>
+            </div>
+        </section>
+    </template>
+    <!-- List View Deletion Pop-up End -->
+
+    <!-- List View Create/Edit Pop-up Start -->
+    <template if:true={isModalOpen}>
+        <section class="slds-modal slds-fade-in-open greyBackground">
+            <div class="slds-modal__container">
+                <div>
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closePopup}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">{listViewPopupTitle}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                        <lightning-input label="List View Name" name="enter-list-view-name" type="text"
+                            value={listViewName} placeholder="Enter list view name…" onchange={handleListViewName}
+                            required>
+                        </lightning-input>
+                        <lightning-combobox name="field" label="Field" value={filterFieldName}
+                            placeholder="Select a Field" options={filterFieldNameOptions} onchange={handleFilterFieldName}
+                            required="true">
+                        </lightning-combobox>
+
+                        <template if:true={isNameFilterField}>
+                            <lightning-combobox name="Operator" label="Operator" value={operator}
+                                placeholder="Select an Operator" options={options} onchange={handleOperator}
+                                required="true">
+                            </lightning-combobox>
+                        </template>
+                        <template if:false={isNameFilterField}>
+                            <lightning-combobox name="Operator" label="Operator" value={operator}
+                                placeholder="Select an Operator" options={stateOperatorOptions} onchange={handleOperator}
+                                required="true">
+                            </lightning-combobox>
+                        </template>
+
+                        <div class="row">
+                            <!-- If Name field is selected then text box is shown-->
+                            <template if:true={isNameFilterField}>
+                                <lightning-textarea label="Value" placeholder="Enter metro area names separated by comma…"
+                                value={filterValue} onchange={handleValue} required></lightning-textarea>
+                            </template>
+                            <!-- If State field is selected then multiselect picklist is shown-->
+                            <template if:false={isNameFilterField}>
+                                <c-multi-select-combobox onselectedstates={handleselectedStates} multi-select="true" options={stateOptions} selected-values={filterStateValue} label="Value" required=true></c-multi-select-combobox>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <footer class=slds-modal__footer>
+                    <template if:false={isDisabled}>
+                        <button class="slds-button slds-button_neutral" onclick={closePopup}
+                            title="Cancel">Cancel</button>
+                        <button class="slds-button slds-button_brand" title="Save" onclick={saveListView}>Save</button>
+                    </template>
+                    <template if:true={isDisabled}>
+                        <button class="slds-button slds-button_neutral" onclick={closePopup} title="Cancel"
+                            disabled>Cancel</button>
+                        <button class="slds-button slds-button_brand" title="Save" onclick={saveListView}
+                            disabled>Save</button>
+                    </template>
+                </footer>
+            </div>
+
+        </section>
+    </template>
+    <!-- List View Create/Edit Pop-up End -->
+
+    <!-- Custom Toast Message Start -->
+    <template if:true={showToast}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="toasMsgStyling">
+                <div class="slds-notify_container slds-is-relative">
+                    <div class={toastMsgClasses} role="status">
+                        <span class="slds-assistive-text">success</span>
+                        <span class={toastMsgIconClasses} title="Description of icon when needed">
+                            <lightning-icon size="medium" icon-name={iconName} alternative-text={alternativeText}
+                                title={title} class="comments-icn">
+                            </lightning-icon>
+                        </span>
+                        <div class="slds-notify__content">
+                            <h3 class="slds-text-heading_small ">{toastmessage}</h3>
+                        </div>
+                        <div class="slds-notify__close">
+                            <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close"
+                                onclick={closeToast}>
+                                <lightning-icon size="small" icon-name="utility:close" alternative-text="Close"
+                                    title="Close" class="comments-icn"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+    <!-- Custom Toast Message End -->
+</template>

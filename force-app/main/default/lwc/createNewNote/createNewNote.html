@@ -1,0 +1,52 @@
+<template>
+    <template if:true={isLoadingCreateCon}>
+        <lightning-spinner alternative-text="Loading..." size="medium">
+        </lightning-spinner> 
+    </template>
+    <lightning-record-edit-form object-api-name="Dakota_Notes__c" record-id={recordId}  onerror={handleFormError} onsuccess={handleSuccess} onsubmit={handlesubmit} density="comfy" onload={handleLoad}>
+        <template if:true={areDetailsVisible}>
+            <div class="slds-p-around_medium">
+                <section class="test-id__section-header-container slds-section__title slds-theme--shade slds-m-bottom_small title-background">
+                    <h3 class="slds-p-horizontal--small">Details</h3>
+                </section>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        
+                        <lightning-input-field data-name="nameCmp2" required field-name="Name">
+                            </lightning-input-field>
+                        <lightning-input-field field-name="Text_Preview__c">
+                            </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <template if:true={isAccount}>
+                            <lightning-input-field field-name="Account__c" value ={parentRecordId}>
+                            </lightning-input-field>
+                        
+                        <lightning-input-field field-name="Contact__c">
+                            </lightning-input-field>
+                        </template>
+                        <template if:true={isContact}>
+                            <lightning-input-field field-name="Account__c">
+                            </lightning-input-field>
+                        
+                        <lightning-input-field field-name="Contact__c" value ={parentRecordId}>
+                            </lightning-input-field>
+                        </template>
+                        
+                    </div>
+                </div>   
+            </div>
+    </template>
+    <div class="slds-align_absolute-center footer-margin">
+        <lightning-button class="popup-button" variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+        <div class="slds-m-left_small">
+            <lightning-button
+                            type="submit"
+                            name="submit"
+                            variant="brand"
+                            label="Save">
+            </lightning-button>
+        </div>
+    </div>
+    </lightning-record-edit-form>
+</template>

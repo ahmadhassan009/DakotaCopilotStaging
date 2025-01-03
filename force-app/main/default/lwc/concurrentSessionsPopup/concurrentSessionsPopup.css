@@ -1,0 +1,30 @@
+.modal-parent {
+    background-color: rgb(255 255 255 / 78%);
+    -webkit-transition: 0.5s;
+    z-index: 9999;
+
+}
+.modal-container {
+    max-width: 46.0625rem;
+}
+.sessionDiv {
+    font-size: large;
+}
+
+.popForm{
+    display: block;
+    overflow: hidden;
+    padding: unset;
+    background-image: none;
+}
+
+.popFrom2 {
+    height: auto;
+}
+
+.login-text {
+    text-decoration: underline;
+}
+.message-content {
+    border-radius: 3px;
+}

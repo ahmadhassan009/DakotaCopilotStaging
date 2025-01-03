@@ -1,0 +1,14 @@
+h1 {
+        font-size: xx-large;
+        font-style: bold;
+    }
+    h2 {
+        font-style: bold;
+    }
+
+    .downloadPDFText {
+        text-align: center;
+        padding-top: 11%;
+        background: white;
+        border-radius: 3px
+    }

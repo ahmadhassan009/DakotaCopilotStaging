@@ -1,0 +1,19 @@
+c-dakota-news-related-to-account .dataTableHeight tr lightning-formatted-rich-text > span{
+    max-height:42px; 
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+c-dakota-news-related-to-account .dataTableHeight tr:hover lightning-formatted-rich-text > span:after{
+    background-color: #f3f4f5;
+}
+c-dakota-news-related-to-account .dataTableHeight tr lightning-formatted-rich-text > span:after{
+    content: ' ...';
+    display: inline-block;
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    z-index: 100;
+    height: 21px;
+}

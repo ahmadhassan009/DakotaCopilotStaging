@@ -1,0 +1,15 @@
+c-near-by-accounts .dataTableClass tbody tr td lightning-primitive-cell-factory .slds-grid {
+	word-break: break-all;
+}
+
+c-near-by-accounts > div > div > .slds-grid.slds-wrap > div > div > c-multi-select-combobox-custom > div > div > div > div > .slds-dropdown.slds-dropdown_length-5.slds-dropdown_fluid.multi-select-combobox__listbox {
+    margin-left: 10% !important;
+    height: 220.719px !important;
+    width: 219.719px !important;
+    max-width: 219.719px !important;
+    max-height: calc(((1rem * 1.5) + 1rem) * 5.6) !important;
+}
+
+c-near-by-accounts > div > div > .slds-grid.slds-wrap > div > div > c-multi-select-combobox-custom > div > div > div > div > .slds-combobox_form-element.slds-input-has-icon.slds-input-has-icon_right.slds-truncate.cstm_pointer > input {
+    padding: 0 1.5rem 0 0.75rem;
+}

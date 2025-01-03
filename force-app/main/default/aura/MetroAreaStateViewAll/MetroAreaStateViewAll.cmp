@@ -1,0 +1,41 @@
+<aura:component  implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute type="String" name="stateName" />
+    <aura:attribute type="String" name="objectName" />
+    <aura:attribute type="String" name="homeOffice" />
+    <aura:attribute type="String" name="accountType" />
+    <aura:attribute type="String" name="subAccountType" />
+    <aura:attribute type="String" name="accountTypeLabel" />
+    <aura:attribute type="Integer" name="totalRecordCount" />
+
+    <aura:attribute type="Boolean" name="accountsViewAll" />
+    <aura:attribute type="Boolean" name="contactsViewAll" />
+    <aura:attribute type="Boolean" name="dakotaContentViewAll" />
+    <aura:attribute type="Boolean" name="dakotaSearchesViewAll" />
+    <aura:attribute type="Boolean" name="accountTypesViewAll" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+ 
+    <div class="slds-card">
+
+        <aura:if isTrue="{!v.accountsViewAll}">
+            <c:metroAreaStatesAllAccountsViewAll stateName="{!v.stateName}" />
+            <aura:set attribute="else">
+                <aura:if isTrue="{!v.contactsViewAll}">
+                    <c:metroAreaStatesAllContactsViewAll stateName="{!v.stateName}" homeOffice="{!v.homeOffice}"/>
+                    <aura:set attribute="else">
+                        <aura:if isTrue="{!v.dakotaContentViewAll}">
+                            <c:metroAreaStatesAllContentViewAll stateName="{!v.stateName}" />
+                            <aura:set attribute="else">
+                                <aura:if isTrue="{!v.dakotaSearchesViewAll}">
+                                    <c:metroAreaStatesSearchesViewAll stateName="{!v.stateName}" />
+                                    <aura:set attribute="else">
+                                        <c:metroAreaStatesSpecificAccTypesViewAll stateName="{!v.stateName}" accountType="{!v.accountType}" subAccountType="{!v.subAccountType}"  accountTypeLabel="{!v.accountTypeLabel}" totalRecordCount="{!v.totalRecordCount}" />
+                                    </aura:set>
+                                </aura:if>
+                            </aura:set>
+                        </aura:if>
+                    </aura:set>
+                  </aura:if>
+            </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

@@ -1,0 +1,36 @@
+.displayStyle {
+    display: contents;
+}
+
+.greyBackground {
+    z-index: 9988;
+}
+
+.displayStyle {
+    display: contents;
+}
+
+.comboboxHeight {
+    height: 300px;
+}
+
+.cstm_header_css {
+    padding: var(--lwc-spacingMedium,1rem);
+    text-align: center;
+    background-color: white;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.cstm_footer_css {
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem
+}
+
+.cstm_btn_margin {
+    margin-left: 0.5rem !important
+}
+
+.cstm_btn_border_width {
+    border-width: 2px !important
+}

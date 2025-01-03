@@ -1,0 +1,98 @@
+<template>
+    <div class="parentDiv" onclick={handleShowOptionsClose}>
+        <template if:true={recordExist}>
+            <div class="slds-page-header headerAllignment" role="banner">
+                <div class="slds-grid">
+                    <div class="slds-col slds-has-flexi-truncate headerStyle">
+                        <div class="slds-media__body slds-align-middle">
+                            <nav role="navigation" aria-label="Breadcrumbs">
+                                <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                    <li class="slds-breadcrumb__item slds-line-height--reset"><a href={objectNameLink}>Back to {objectBreadcrum}</a></li>
+                                </ol>
+                            </nav>
+                            <template if:true={displayHeader}>
+                                <div class="dropdownStyling">                            
+                                    <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="List View">
+                                        <span class="headerTitle">{objectName} ( {offset}{plusSign} )</span>                                
+                                    </h1> 
+    
+                                   <div class="dropdownButtonClose slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                                        <button onclick={handleShowOptions} class="dropdownButtonClose  btn-styling slds-button slds-button_icon slds-button_icon-border-filled" aria-haspopup="true" aria-expanded="true" title="Select a List View">
+                                           
+                                            <lightning-icon class="dropdownButtonClose slds-button__icon" aria-hidden="true" icon-name="utility:chevrondown" size="x-small"></lightning-icon>
+                                            <span class="dropdownButtonClose slds-assistive-text">Select a List View</span>
+                                        </button>
+                                        <template if:true={displayOptions}>
+                                            <div class="dropdownButtonClose dropdownHeight slds-dropdown slds-dropdown_left slds-dropdown_small" style={dynamicStyle}>
+                                                <span class="dropdownButtonClose listViewText">LIST VIEWS</span>
+                                                <ul class="dropdownButtonClose slds-dropdown__list" role="menu" aria-label="Show More">
+                                                    <template for:each={savedFilters} for:item="option">
+        
+                                                        <template if:true={option.selected}>
+                                                            <li key={option.value}  data-id={option.value} onclick={handleChange}  class="dropdownButtonClose slds-dropdown__item slds-is-selected" role="presentation">
+                                                                <a data-id={option.value} aria-checked={option.selected} class="dropdownButtonClose" href="javascript:void(0)" role="menuitemcheckbox" tabindex="0">
+                                                                    <span  data-id={option.value} class="slds-truncate" title={option.label}>                                                                
+                                                                    <lightning-icon data-id={option.value} class="slds-icon slds-icon_selected slds-icon_x-small slds-icon-text-default slds-m-right_x-small" aria-hidden="true" icon-name="utility:check" size="x-small"></lightning-icon>
+                                                                    {option.label}</span>
+                                                                </a>
+                                                            </li>
+                                                        </template>
+                                                        <template if:false={option.selected}>
+                                                            <li key={option.value} onclick={handleChange} class="dropdownButtonClose slds-dropdown__item" role="presentation">
+                                                                <a  data-id={option.value} aria-checked={option.selected} class="dropdownButtonClose" href="javascript:void(0)" role="menuitemcheckbox" tabindex="-1">
+                                                                <span  data-id={option.value} class="slds-truncate" title={option.label}>
+                                                                    <svg  data-id={option.value} class="slds-icon slds-icon_selected slds-icon_x-small slds-icon-text-default slds-m-right_x-small" aria-hidden="true">
+                                                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check"></use>
+                                                                    </svg>{option.label}</span>
+                                                                </a>
+                                                            </li>
+                                                        </template>
+                                                    </template>                                     
+                                                </ul>
+                                            </div>
+                                        </template>                                        
+                                    </div>
+                                </div> 
+                            </template>
+                                                                                  
+                        </div>                        
+                    </div>
+
+                    <button disabled={buttonDisabled} class="slds-button slds-button_neutral followButton" title="Follow" onclick={handleFollowRecord}>
+                        <lightning-icon data-id="followIcon" icon-name="utility:add" size="x-small" class="slds-p-right--xx-small">
+                        </lightning-icon>
+                        <span>Follow</span>
+                    </button>
+                    <button disabled={buttonDisabled} class="slds-button slds-button_neutral unfollowButton" title="Unfollow" onclick={handleUnfollowRecord}>
+                        <lightning-icon data-id="unfollowIcon" icon-name="utility:clear" size="x-small" class="slds-p-right--xx-small fav_icon_class">
+                        </lightning-icon>
+                        <span class="unfollowText">Unfollow</span>
+                    </button>
+                </div>
+            </div>
+        
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="medium">
+                </lightning-spinner> 
+            </template>
+            <div class="dataTableHeight">
+                <lightning-datatable
+                    key-field="matchId"
+                    data={data}
+                    columns={columns}
+                    show-row-number-column="true" 
+                    enable-infinite-loading="true"
+                    default-sort-direction={defaultSortDirection}
+                    sorted-direction={sortedDirection}
+                    sorted-by={sortedBy}
+                    onsort={updateColumnSorting}
+                    onloadmore={loadMoreData} 
+                    load-more-offset="50"                    
+                    selected-rows={selectedIds}
+                    onrowselection ={hanldeRecordSelected}>
+                </lightning-datatable>
+            </div>
+            <div class="footerBottom"></div>
+        </template>
+    </div>
+</template>

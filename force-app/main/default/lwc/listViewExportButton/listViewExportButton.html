@@ -1,0 +1,7 @@
+<template>
+    <div class="exportButtonCustom" style={buttonStyling}>
+        <template if:false={isTrialUser}>
+            <lightning-button variant="neutral" label={buttonName} onclick={goToExportPage}></lightning-button>
+        </template>
+    </div>
+</template>

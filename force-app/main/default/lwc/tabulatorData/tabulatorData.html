@@ -1,0 +1,112 @@
+<template>
+    <div class="slds-page-header" role="banner">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                    <img class="msg-img" src={botProfilePic} />
+                    </div>
+                    <div class="slds-media__body header">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span>Report</span>
+                                    <span class="slds-page-header__title slds-truncate" title="Recently Viewed">Dakota Copilot</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-page-header__col-actions">
+                <div class="slds-page-header__controls">
+                    <div class="slds-page-header__control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-meta requested-Prompt-container">
+                <template if:false={isLoading}>
+                    <p class="slds-page-header__meta-text requested-Prompt-text">{recordCount}</p>
+                    <p class="slds-page-header__meta-text requested-Prompt-text">out of</p>
+                    <p class="slds-page-header__meta-text requested-Prompt-text">{totalRecordCount}</p>
+                    <p class="slds-page-header__meta-text requested-Prompt-text">item(s)</p>
+                    <p class="slds-page-header__meta-text requested-Prompt-text">•</p>
+                </template>
+                <p class="slds-page-header__meta-text requested-Prompt-text">The response of requested Prompt is following below</p>
+            </div>
+        </div>
+        <lightning-layout>
+            <lightning-layout-item size="2">
+                <lightning-combobox name="fieldName" value={fieldValue}
+                    placeholder="Field Name" options={fieldOptions}
+                    onchange={handleFieldChange} class="slds-align_absolute-center"></lightning-combobox>
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+                <lightning-combobox name="operator" value={operatorValue}
+                    placeholder="Operator" options={operatorOptions}
+                    onchange={handleOperatorChange} class="slds-align_absolute-center slds-var-m-left_x-small"></lightning-combobox>
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+                <lightning-input name="filterInput" type="text" value={input} placeholder="Enter Filter Value"
+                    onchange={handleInputChange} class="slds-align_absolute-center slds-var-m-left_x-small"></lightning-input>
+            </lightning-layout-item>
+            <!-- <lightning-layout-item size="2">
+                <lightning-combobox name="fieldGroupName" value={groupValue}
+                    placeholder="GroupBy Rows" options={fieldOptions}
+                    onchange={handleGroupChange} class="slds-align_absolute-center slds-var-m-left_x-small"></lightning-combobox>
+            </lightning-layout-item> -->
+            <lightning-layout-item class="icon slds-var-m-left_x-small">
+                <lightning-button variant="brand-outline" label="Search" title="Search"
+                onclick={handleFilters}>
+                </lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item class="icon slds-var-m-left_x-small">
+                <lightning-button variant="brand" label="Clear Filters" title="Clear Filters"
+                onclick={handleClearFilters}>
+                </lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto"></lightning-layout-item>
+            <lightning-layout-item class="icon slds-var-m-left_x-small">
+                <lightning-button variant="brand" label="Export" title="Export"
+                onclick={exportCsv}>
+                </lightning-button>
+            </lightning-layout-item>  
+        </lightning-layout>
+    </div>
+    <div class={datatableHeight}>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium">
+            </lightning-spinner> 
+        </template>
+        <template if:false={isLoading}>
+            <div class={divHeight}>
+                <template if:false={noRecords}>
+                    <lightning-datatable
+                        columns={columns}
+                        data={resultantRecords}
+                        key-field="Id"
+                        show-row-number-column="true"
+                        hide-checkbox-column="true"
+                        default-sort-direction="asc"
+                        sorted-direction={sortedDirection}
+                        sorted-by={sortedBy}
+                        onsort={onHandleSort}
+                        column-widths-mode="auto"
+                        min-column-width="170"
+                        onloadmore={handleLoadMore}
+                        enable-infinite-loading="true"
+                        is-loading={isLoadingMore}
+                        load-more-offset="50">      
+                    </lightning-datatable>  
+                </template>
+                <template if:true={noRecords}>
+                    <div class="no-records">
+                        No items to display.
+                    </div>
+                </template>
+            </div>                
+        </template>    
+    </div>
+</template>

@@ -1,0 +1,79 @@
+<apex:page controller="ICNotesDetailsController" applyBodyTag="false" renderAs="pdf">
+    <head>
+            <apex:stylesheet value="{!$Resource.PublicPlanMinutesStyle}"/>
+      </head>
+
+    <div class="header">
+        <table class="header">
+            <tr>
+                <th class="headerLogo">
+                    <img class="headerImage" src="{!URLFOR($Resource.NotesHeader,'pdfHeader.png')}" height="69px" />                   
+                </th>
+                <th class="headerTitle">
+                    <span class="headerTitileText"> &nbsp;&nbsp;PUBLIC PLAN MINUTES <br/>&nbsp;&nbsp;</span>
+                </th>
+            </tr>
+        </table>
+    </div>
+     <div class="footer">
+        <table>
+            <tr>
+            <td><img src="{!URLFOR($Resource.NotesHeader,'pdfFooter.png')}" height="35" width="110"/>
+            </td>
+            <td class="footerText"> 
+                <span class="footerTitile">{!$Label.DakotaAddress}</span>
+            </td>
+            <td class="linkContainer">
+                <a class="link-a" title="https://www.dakota.com/" href="https://www.dakota.com/" target="_blank">Click Here to Learn More</a>
+            </td>
+            </tr>
+            </table>
+    </div>
+
+    <div class="content">
+        <apex:variable var="cnt" value="{!0}" /> 
+        <apex:repeat value="{!Notes}" var="note">
+            <apex:variable var="cnt" value="{!cnt+1}"/>
+            <table class="tableContainer">
+                <tr>
+                    <td class="outputTextContainer">
+                        <apex:outputText styleClass="accountNameStyle" rendered="{!NOT(note.AccountName='')}" value="{!note.AccountName}" />
+                    </td>
+                    <td class="tdDivider"></td>
+                    <td class="innerTd">
+                        <apex:outputText styleClass="meetingDateStyle" rendered="{!NOT(note.MeetingDate=null)}" value="{0, date, MMMM d','  yyyy}">
+                            <apex:param value="{!note.MeetingDate}" /> 
+                        </apex:outputText>
+                    </td>
+                </tr>
+            </table>
+            
+            <apex:outputText styleClass="fontStyle" rendered="{!NOT(note.AccountAUM='')}" value="Plan Assets - ${!note.AccountAUM}" />
+            <apex:outputText rendered="{!NOT(note.AccountAUM='')}" value="<br/>" escape="false" />
+            <apex:outputText styleClass="fontStyle"  rendered="{!NOT(note.AccountGeneralConsultant='')}" value="General Consultant - {!note.AccountGeneralConsultant}" />
+            <apex:outputText rendered="{!NOT(note.AccountGeneralConsultant='')}" value="<br/>" escape="false" />
+            <apex:outputText styleClass="fontStyle"  rendered="{!NOT(note.AccountGeneralConsultant2='')}" value="General Consultant - {!note.AccountGeneralConsultant2}" />
+            <apex:outputText rendered="{!NOT(note.AccountGeneralConsultant2='')}" value="<br/>" escape="false" />
+            <apex:outputText styleClass="fontStyle"  rendered="{!NOT(note.AccountRealEstateConsultant='')}" value="Real Estate Consultant - {!note.AccountRealEstateConsultant}" />
+            <apex:outputText rendered="{!NOT(note.AccountRealEstateConsultant='')}" value="<br/>" escape="false" />
+            <apex:outputText styleClass="fontStyle"  rendered="{!NOT(note.AccountPrivateEquityConsultant='')}" value="Private Equity Consultant - {!note.AccountPrivateEquityConsultant}" />
+            <apex:outputText rendered="{!NOT(note.AccountPrivateEquityConsultant='')}" value="<br/>" escape="false" />
+            <apex:outputText styleClass="fontStyle"  rendered="{!NOT(note.AccountPrivateCreditConsultant='')}" value="Private Credit Consultant - {!note.AccountPrivateCreditConsultant}" />
+            <apex:outputText rendered="{!NOT(note.AccountPrivateCreditConsultant='')}" value="<br/>" escape="false" />
+            <apex:outputText styleClass="fontStyle"  rendered="{!NOT(note.AccountHedgeFundConsultant='')}" value="Hedge Fund Consultant - {!note.AccountHedgeFundConsultant}" />
+            <apex:outputText rendered="{!NOT(note.AccountHedgeFundConsultant='')}" value="<br/>" escape="false" />
+            <apex:outputText styleClass="fontStyle"  rendered="{!NOT(note.AccountMetroArea='')}" value="Metro Area - {!note.AccountMetroArea}" />
+            <apex:outputText rendered="{!NOT(note.AccountMetroArea='')}" value="<br/>" escape="false" />
+
+            <div class="divStyle">
+                <apex:outputText escape="false" styleClass="meetingSummaryStyle" rendered="{!NOT(note.MeetingSummary='')}" value="{!note.MeetingSummary}" />
+            </div>
+
+            <apex:outputPanel rendered="{!cnt != Notes.size}">
+                <hr class="outpulPanelHr"/>
+            </apex:outputPanel>
+            
+            <br/>
+        </apex:repeat>
+    </div>
+</apex:page>

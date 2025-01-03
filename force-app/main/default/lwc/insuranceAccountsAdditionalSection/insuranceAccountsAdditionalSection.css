@@ -1,0 +1,17 @@
+.field-border
+{
+    border-bottom: solid;
+    border-color: rgb(221, 219, 218);
+    border-width: thin;
+    width: 95%;
+}
+
+.left-column {
+    padding-left: 12px;
+    padding-right: 25px;
+}
+
+.right-column {
+    padding-left: 28px;
+    padding-right: 12px
+}

@@ -1,0 +1,78 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12" style="width:100%">
+            <article class="slds-card lightning-card">
+                <div class="componentStyling slds-modal__content content-div">
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="small">
+                        </lightning-spinner>
+                    </template>
+                    <lightning-card title="Private Fund Performance">
+                        <div class="slds-grid slds-gutters">
+                            <div class="searchDiv slds-size_1-of-3">
+                                <lightning-input data-id="searchValue" name="searchValue"
+                                    onkeydown={searchManagerPrestOnEnter} placeholder="Search" type="search"
+                                    class="searchbarStyle">
+                                </lightning-input>
+                                <lightning-button name="Search" variant="brand" label="Search" title="Search"
+                                    onclick={fetchSearchResults} class="searchButton"></lightning-button>
+                                <lightning-button name="Reset" label="Reset" title="Reset" onclick={resetFilters}
+                                    class="resetButton"></lightning-button>
+                            </div>
+                            <div class="helpText">
+                                <!-- <span>Try Searching for any columns in the Performance.</span> -->
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-size_1-of-3">
+                                <c-multi-select-combobox-custom data-id="assetClass" label="Asset Class"
+                                    placeholder="Select Asset Class" class="paddingLeft displayStyle" name="Asset Class"
+                                    options={assetClassOptions} onchange={handleAssetClassChange}
+                                    onstoreoldvalues={storeAssetOldValues}>
+                                </c-multi-select-combobox-custom>
+                            </div>
+                            <div class="slds-size_1-of-3">
+                                <c-multi-select-combobox-custom data-id="subAssetClass" label="Sub-Asset Class"
+                                    placeholder="Select Sub-Asset Class" class="paddingLeft displayStyle"
+                                    name="Sub-Asset Class" options={subAssetClassOptions}
+                                    onchange={handleSubAssetClassChange} onstoreoldvalues={storeSubAssetOldValues}>
+                                </c-multi-select-combobox-custom>
+                            </div>
+                            <div class="slds-size_1-of-3">
+                                <c-multi-select-combobox-custom data-id="vintage" label="Vintage"
+                                    placeholder="Select Vintage" class="paddingLeft paddingRight displayStyle"
+                                    name="Vintage" options={vintageOptions} onchange={handleVintageChange}
+                                    onstoreoldvalues={storeVintageOldValues}>
+                                </c-multi-select-combobox-custom>
+                            </div>
+                        </div>
+                        <template if:true={performanceRecordsExist}>
+                            <div class="filesDiv">
+                                <h3>  
+                                    <div style="float:right;padding-right: 10px;">
+                                        <span class="slds-form-element__label slds-no-flex">Showing {currentCount} of
+                                            {totalNumberOfRows}</span>
+                                    </div>
+                                </h3>
+                                <br /><br />
+                                <lightning-datatable class="dataTable" key-field="Id" data={performanceRecords}
+                                    columns={columns} show-row-number-column hide-checkbox-column sorted-by={sortBy}
+                                    sorted-direction={sortDirection} onsort={doSorting} enable-infinite-loading="true"
+                                    onloadmore={loadMoreData} load-more-offset="20"
+                                    style="padding-top: 15px !important;" wrap-text-max-lines="5">
+                                </lightning-datatable>
+                            </div>
+                        </template>
+                        <template if:false={performanceRecordsExist}>
+                            <div class="filesDiv">
+                                <strong>
+                                    <p class="emptyTableStyling"> No Performance record found.</p>
+                                </strong>
+                            </div>
+                        </template>
+                    </lightning-card>
+                </div>
+            </article>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -1,0 +1,9 @@
+<aura:component
+    implements="flexipage:availableForAllPageTypes,lightning:isUrlAddressable,forceCommunity:availableForAllPageTypes"
+    access="global">
+    <aura:attribute type="Id" name="Id" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <div class="slds-card">
+        <c:allFundServiceProviders accountId="{!v.Id}" ></c:allFundServiceProviders>
+    </div>
+</aura:component>

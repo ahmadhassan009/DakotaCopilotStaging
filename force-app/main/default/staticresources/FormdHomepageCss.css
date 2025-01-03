@@ -1,0 +1,4 @@
+c-new-object-home-page-list > .dataTableHeightHome > c-custom-datatable > .dt-outer-container > .slds-table_header-fixed_container.slds-scrollable_x 
+{
+    overflow-x: hidden !important;
+}

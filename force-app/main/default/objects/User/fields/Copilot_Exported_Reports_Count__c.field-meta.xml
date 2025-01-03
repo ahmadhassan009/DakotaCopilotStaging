@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copilot_Exported_Reports_Count__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>To count the number of reports exported by users using Dakota Copilot Application</description>
+    <externalId>false</externalId>
+    <label>Copilot Exported Reports Count</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

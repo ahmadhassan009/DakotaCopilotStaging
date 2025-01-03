@@ -1,0 +1,41 @@
+<template>
+    <span class="iconPosition" style={display1}>
+        <lightning-avatar size="medium" src={imageURL1} initials="AL" style={visiblity1} class={imageColor1}></lightning-avatar>
+    </span>
+    <span class="iconPosition" style={display2}>
+        <lightning-avatar size="medium" src={imageURL} initials="AC" style={visiblity2} class={imageColor}></lightning-avatar>
+    </span>
+    <lightning-tabset>
+        <template if:true={isMPCommunity}>
+            <lightning-tab onactive={handleInvestmentsTitlePI} label="New Public Investments">
+                <div class="slds-border_bottom"></div>
+                <c-new-object-home-page-list type='investment' record-type-name='Public_Investment'>
+                </c-new-object-home-page-list>
+            </lightning-tab>
+        </template>
+        <template if:true={isMPCommunity}>
+            <lightning-tab onactive={handleInvestmentsTitle13} label="New 13F Filings">
+                <div class="slds-border_bottom"></div>
+                <c-new-object-home-page-list type='investment' record-type-name='X13F_Filings'>
+                </c-new-object-home-page-list>
+            </lightning-tab>
+        </template>
+        <template if:true={isMPCommunity}>
+            <lightning-tab onactive={handleFormOffering} label="New Form D Filings">
+                <div class="slds-border_bottom"></div>
+                <c-new-object-home-page-list type='Form_D_Offering__c' >
+                </c-new-object-home-page-list>
+            </lightning-tab>
+        </template>
+        <lightning-tab onactive={handleAccountsTitle} label="New Accounts">
+            <div class="slds-border_bottom"></div>
+            <c-new-object-home-page-list type='account' >
+            </c-new-object-home-page-list>
+        </lightning-tab>
+        <lightning-tab onactive={handleContactsTitle} label="New Contacts">
+            <div class="slds-border_bottom"></div>
+            <c-new-object-home-page-list type='contact' >
+            </c-new-object-home-page-list>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

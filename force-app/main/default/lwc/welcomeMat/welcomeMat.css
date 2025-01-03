@@ -1,0 +1,30 @@
+.slds-welcome-mat__info {
+    background-image: none;
+    padding: 74px 48px 124px !important;
+}
+
+div .welcome-mat-list > li:first-child > div,
+div .welcome-mat-list > li:first-child > div > div > div.slds-welcome-mat__tile-body {
+    padding-top: 0 !important;
+}
+div .welcome-mat-list > li:last-child {
+    margin-bottom: 20px;
+}
+
+.slds-welcome-mat__info-content {
+    margin: 0 auto auto !important;
+    text-align: center !important;
+}
+
+.trialDiv {
+    font-size: medium;
+    margin-top: 50px;
+}
+.trialCheckboxDiv {
+    margin-bottom: 30px;
+    margin-top: 75px;
+}
+
+.message-content {
+    border-radius: inherit;
+}

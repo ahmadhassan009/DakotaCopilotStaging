@@ -1,0 +1,53 @@
+.button-style
+{
+   float: right;
+}
+
+.fields-div{
+   display: flex; 
+   width:100%;
+   align-items: baseline;
+   padding-top: 10px;
+}
+
+.picklist-div{
+   width:50%; 
+   height: 100%;
+}
+
+.sales-div{
+   padding-right: 10px;
+}
+
+.owner-div{
+   padding-left: 10px;
+}
+.picklist-width{
+   width: 100%;
+}
+
+.div-height{
+   height: 173px;
+}
+
+.popup-cancel-button
+{
+   padding-right: 5px;
+}
+
+.div-width{
+   width: 100%;
+   padding-bottom: 10px;
+   padding-top: 10px;
+}
+:host {
+   --sds-c-textarea-sizing-min-height: 211px;
+}
+
+.full-width{
+   width: 100%;
+}
+.header-content{
+   float:left; 
+   margin-right:12px;
+}

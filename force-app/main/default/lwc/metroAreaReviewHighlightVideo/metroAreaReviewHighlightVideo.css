@@ -1,0 +1,21 @@
+.button-group {
+    padding: 0px;
+    width: 19px;
+    z-index: 1;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    background: rgba(30,30,30,0.9);
+    padding-left: 3px;
+    padding-top: 4px;
+    height: 18px;
+}
+.full-screen-styling{
+    width: 16px;
+    height: 16px;
+}
+.parent-div-styling {
+    width:90%;
+    margin: 0px auto;
+    position: relative;
+}

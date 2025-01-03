@@ -1,0 +1,26 @@
+.layout-div{
+    width:100%;
+}
+
+.article-div{
+    display: block; 
+    height: fit-content;
+}
+
+.header-content{
+    float: left; 
+    margin-right: 12px;
+}
+
+.float-content{
+    float: left; 
+}
+
+.font-properties{
+    font-weight: bold
+}
+
+.performance_icon {
+    border-radius: var(--slds-c-avatar-radius-border, var(--sds-c-avatar-radius-border, var(--lwc-borderRadiusMedium,0.25rem))) !important;
+    background-color: #007FCC !important;
+}

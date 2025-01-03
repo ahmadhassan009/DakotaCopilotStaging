@@ -1,0 +1,153 @@
+.newsRecords{
+  margin-top: 5px;
+
+}
+
+.newsRecordbottom{
+ margin-top: -12.5px;
+}
+.iconBackgroundColor{
+  background-color: #4dca76;
+}
+.headerPadding {
+ padding-bottom: 10px;
+}
+.comment-div
+{
+ font-size: 1em;
+ font-weight: 400;
+ font-style: normal;
+ word-wrap:break-word; 
+ max-width: calc(100% - 48px);
+}
+
+.button-style
+{
+ float:right;
+}
+
+.popup-button
+{
+ padding-right: 5px;
+}
+
+.comment-section
+{
+ padding-top: 7px;
+ width: 100%;
+ flex-wrap: nowrap !important;  
+}
+
+.text-area-div
+{
+ position: inherit; 
+ margin-left: 11px;
+ margin-right: 11px; 
+ margin-bottom: 10px;
+}
+
+.comm-div-display
+{
+ display: flex;
+ padding-bottom: 20px;
+}
+
+.title-div
+{
+ font-size: 1.1em;
+}
+
+.footer-div
+{
+ text-align: center;
+ margin-bottom: 15px;
+}
+
+.scrollContainer {
+ height: 504px;
+ overflow: auto;
+ position: relative;
+}
+.scrollArea {
+ position: relative;
+}
+
+.approval-notes-style {
+ color: #2e844a;
+}
+
+.approval-notes-date {
+ color: #2e844a;
+ font-size:0.88em;
+}
+
+.section-space{
+ margin-top: 10px;
+ 
+}
+
+.card-height{
+ overflow: auto;
+ height: 471px;
+ /*margin-top: 15px;*/
+}
+.card-height-no-record{
+ height: 326px;
+ margin-left: 42.5%;
+ margin-top: 17.5%;
+}
+.spinner-height{
+ height: 30px;
+ position: absolute;
+ margin-left: 50%;
+ margin-top: 25%;
+}
+.spinner{
+ position: relative;
+
+}
+.link-color{
+ color: #3558D6;
+}
+
+.record-css {
+ font-size: 14px;
+ line-height: 20px;
+}
+
+.borderMargin{
+ margin-top: 4px;
+}
+
+.searchPosition{
+  margin-right: 1.25%;
+  margin-top: -15px;
+  width: 43%;
+}
+
+.sortIcon{
+  margin-right: 1rem;
+  top: -3px;
+  position: relative;
+}
+
+.bottomBorder{
+  border-bottom: none;
+}
+
+.searchbarStyle{
+  margin-top: -10px;
+}
+
+.titleStyle{
+  margin-top: -5px;
+}
+
+.emptyTableStyling {
+  font-weight: 700;
+  color: grey;
+}
+.customPostion {
+  top: -3px;
+  position: relative;
+}

@@ -1,0 +1,119 @@
+<template>
+    <lightning-record-view-form record-id={recordId} object-api-name="Account">
+        <div class="slds-grid slds-wrap bgColor">
+            <div class="slds-col slds-size_1-of-2 left-column">
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Account Name</label>
+                    <div class="minHeight">
+                    <lightning-output-field variant="label-hidden" field-name="Name"></lightning-output-field>
+                </div>
+                </div>
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Type</label>
+                    <div class="minHeight">
+                    <lightning-output-field variant="label-hidden" field-name="Type"></lightning-output-field>
+                </div>
+                </div>
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">AUM</label>
+                    <div class="minHeight">
+                    <lightning-output-field variant="label-hidden" field-name="AUM__c"></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Metro Area</label>
+                    <div class="minHeight">
+                    <lightning-output-field variant="label-hidden" field-name="MetroArea__c"></lightning-output-field>
+                
+                    </div>
+                </div>
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Website</label>
+                    <div class="minHeight">
+                    <lightning-output-field variant="label-hidden" field-name="Website"></lightning-output-field>
+                    </div>
+                </div>
+                
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Billing Address</label>
+                    <div class="minHeight">
+                    <lightning-output-field variant="label-hidden" field-name="BillingAddress"></lightning-output-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-2 right-column">
+                
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Parent Account</label>
+                            <div class="minHeight">
+                        <a href={recordUrl} target="_blank" style="color: var(--lwc-brandTextLink,rgb(53, 88, 214));" class="slds-form-element__static">{parentAccountName}</a>
+                        </div>
+
+                </div>
+                <template if:true={isSubtype}>
+                    <div class="slds-border_bottom">
+                        <label class="slds-form-element__label" for="form-element-01">Sub-Type</label>
+                        <div class="minHeight">
+                        <lightning-output-field variant="label-hidden" field-name="Sub_Type__c"></lightning-output-field>
+                    </div>
+                    </div>
+                </template>
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Phone</label>
+                    <div class="minHeight">
+                    <lightning-output-field variant="label-hidden" field-name="Phone"></lightning-output-field>
+                    </div>
+                </div>
+                <template if:true={isCRD}>
+                    <div class="slds-border_bottom">
+                        <label class="slds-form-element__label" for="form-element-01">CRD#</label>
+                        <div class="minHeight">
+                        <lightning-output-field variant="label-hidden" field-name="CRD__c"></lightning-output-field>
+                    </div>
+                    </div>
+                </template>
+                <template if:true={isAverageTicketSize}>
+                    <div class="slds-border_bottom">
+                        
+                        <label class="slds-form-element__label" for="form-element-01">Average Ticket Size</label>
+                        <div class="minHeight">
+                        <lightning-output-field variant="label-hidden" field-name="Average_Ticket_Size__c"></lightning-output-field>
+                        </div>
+                    </div>
+                </template>
+                <template if:true={isQP}>
+                    <div class="slds-border_bottom">
+                        <label class="slds-form-element__label" for="form-element-01"># of QPs</label>
+                        <div class="minHeight">
+                        <lightning-output-field variant="label-hidden" field-name="Number_of_QPs__c"></lightning-output-field>
+                        </div>
+                    </div>
+                </template>              
+                
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Last Modified Date</label>
+                    <br>
+                    <div class="minHeight">
+                    <div class="slds-form-element__static">{lastModifiedDateValue}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 full-width-bottom-fields">
+                <div class="slds-border_bottom">
+                    <label class="slds-form-element__label" for="form-element-01">Description</label>
+                    <div class="minHeight">
+                    <lightning-output-field variant="label-hidden" field-name="Description"></lightning-output-field>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </lightning-record-view-form>
+    <template if:true={isInsurance}>
+        <template if:true={isCopyright}>
+            <div class ="insuranceMsg slds-text-align--right slds-m-top--medium slds-m-bottom--small">
+                <lightning-formatted-text value={copyrightText}></lightning-formatted-text>
+            </div>
+        </template>
+    </template> 
+</template>

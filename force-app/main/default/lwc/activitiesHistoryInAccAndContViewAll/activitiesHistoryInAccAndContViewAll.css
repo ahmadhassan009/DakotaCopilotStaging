@@ -1,0 +1,47 @@
+.layout-div{
+    width:100%;
+}
+.article-div{
+    display:block; 
+    height:fit-content;
+}
+.header-content{
+    float:left; 
+    margin-right:12px;
+}
+.iconBackgroundColor {
+    background-color: #4FAC9C;
+}
+.float-content{
+    float:left; 
+}
+.font-properties{
+    font-weight: bold
+}
+.popup-button
+{
+   padding-right: 5px;
+}
+
+.modal-content-overflow {
+    overflow: visible !important;
+}
+
+.modal-container-width {
+    width: 70%; 
+    max-width: 840px; 
+    min-width: 480px;
+}
+.modal-footer {
+    margin:unset; 
+    padding:16px;
+}
+.modal-popup {
+    margin:0px!important; 
+    z-index : 1;
+}
+.custom-datatable-style {
+    height: 790px; 
+    border-collapse: 
+    collapse;
+}

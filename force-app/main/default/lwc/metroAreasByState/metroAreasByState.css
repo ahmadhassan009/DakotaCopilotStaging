@@ -1,0 +1,10 @@
+.state-table-div {
+    height: 790px;
+}
+
+.noRecordsStyling {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 0.8rem;
+    color: rgb(131 127 127);
+}

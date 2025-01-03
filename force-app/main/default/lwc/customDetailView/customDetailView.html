@@ -1,0 +1,140 @@
+<template>
+    <template if:true={isRendered}>
+        <div data-aura-rendered-by="40:2;a" class="forceCommunityRecordDetail"
+            data-aura-class="forceCommunityRecordDetail">
+            <div class="slds-clearfix slds-card groupDependentFieldEnabled forceDetailPanelDesktop"
+                style="padding: 16px;">
+                <article>
+                    <h2 class="slds-assistive-text">Details</h2>
+                    <div class="test-id__record-layout-container riseTransitionEnabled">
+                        <div class="full forcePageBlock forceRecordLayout">
+                            <div class="test-id__section slds-section  slds-is-open full forcePageBlockSection forcePageBlockSectionView"
+                                style="margin-top: unset;">
+                                <div
+                                    class="test-id__section-content slds-section__content section__content slds-p-top--none">
+                                    <template for:each={resultantArray} for:item="section">
+                                        <template if:true={section.showHeader}>
+                                            <lightning-accordion style="margin-top: 7px;"
+                                                active-section-name={section.hederName} allow-multiple-sections-open
+                                                key={section.hederName}>
+                                                <lightning-accordion-section name={section.hederName}
+                                                    label={section.hederName}>
+                                                    <lightning-record-view-form record-id={recordId}
+                                                        object-api-name="Investment_Strategy__c" key={section.hederName}
+                                                        density="comfy">
+                                                        <div class="slds-grid  bgColor" style="margin-top: 10px">
+                                                            <div class="slds-col slds-size_1-of-2 left-column"
+                                                                style="padding-right: 12px;margin-right: 16px;max-width: 49%;">
+                                                                <template for:each={section.col1} for:item="col">
+
+                                                                    <div class="slds-form-element slds-form-element_readonly slds-grow slds-hint-parent override--slds-form-element"
+                                                                        key={col.label}>
+                                                                        <label class="slds-form-element__label"
+                                                                            for="form-element-01">{col.label}</label>
+                                                                        <div class="minHeight">
+                                                                            <template if:false={col.hasDefaultValue}>
+                                                                                <lightning-output-field
+                                                                                    variant="label-hidden"
+                                                                                    field-name={col.apiName}></lightning-output-field>
+                                                                            </template>
+                                                                            <template if:true={col.hasDefaultValue}>
+                                                                                <lightning-formatted-rich-text
+                                                                                    value={col.defaultValue}></lightning-formatted-rich-text>
+                                                                            </template>
+                                                                        </div>
+                                                                    </div>
+                                                                </template>
+                                                            </div>
+
+                                                            <div class="slds-col slds-size_1-of-2 right-column"
+                                                                style="padding-left: 12px;margin-left: 16px;max-width: 49%;">
+                                                                <template for:each={section.col2} for:item="col">
+                                                                    <div class="slds-form-element slds-form-element_readonly slds-grow slds-hint-parent override--slds-form-element"
+                                                                        key={col.label}>
+                                                                        <label class="slds-form-element__label"
+                                                                            for="form-element-01">{col.label}</label>
+                                                                        <div class="minHeight">
+                                                                            <template if:false={col.hasDefaultValue}>
+                                                                                <lightning-output-field
+                                                                                    variant="label-hidden"
+                                                                                    field-name={col.apiName}></lightning-output-field>
+                                                                            </template>
+                                                                            <template if:true={col.hasDefaultValue}>
+                                                                                <lightning-formatted-rich-text
+                                                                                    value={col.defaultValue}></lightning-formatted-rich-text>
+                                                                            </template>
+                                                                        </div>
+                                                                    </div>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                    </lightning-record-view-form>
+                                                </lightning-accordion-section>
+                                            </lightning-accordion>
+                                        </template>
+                                        <template if:false={section.showHeader}>
+                                            <lightning-record-view-form record-id={recordId}
+                                                object-api-name="Investment_Strategy__c" key={section.hederName}
+                                                density="comfy">
+                                                <div class="slds-grid  bgColor" style="margin-bottom: 10px;">
+                                                    <div class="slds-col slds-size_1-of-2 left-column"
+                                                        style="padding-left: 12px;padding-right: 12px;margin-right: 16px;max-width: 49%;">
+                                                        <template for:each={section.col1} for:item="col">
+
+                                                            <div class="slds-form-element slds-form-element_readonly slds-grow slds-hint-parent override--slds-form-element"
+                                                                key={col.label}>
+                                                                <label class="slds-form-element__label"
+                                                                    for="form-element-01">{col.label}</label>
+                                                                <div class="minHeight">
+                                                                    <template if:false={col.hasDefaultValue}>
+                                                                        <lightning-output-field variant="label-hidden"
+                                                                            field-name={col.apiName}></lightning-output-field>
+                                                                    </template>
+                                                                    <template if:true={col.hasDefaultValue}>
+                                                                        <lightning-formatted-rich-text
+                                                                            value={col.defaultValue}></lightning-formatted-rich-text>
+                                                                    </template>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+
+                                                    <div class="slds-col slds-size_1-of-2 right-column"
+                                                        style="padding-left: 12px;padding-right: 12px;margin-left: 16px;max-width: 49%;">
+                                                        <template for:each={section.col2} for:item="col">
+                                                            <div class="slds-form-element slds-form-element_readonly slds-grow slds-hint-parent override--slds-form-element"
+                                                                key={col.label}>
+                                                                <label class="slds-form-element__label"
+                                                                    for="form-element-01">{col.label}</label>
+                                                                <div class="minHeight">
+                                                                    <template if:false={col.hasDefaultValue}>
+                                                                        <lightning-output-field variant="label-hidden"
+                                                                            field-name={col.apiName}></lightning-output-field>
+                                                                    </template>
+                                                                    <template if:true={col.hasDefaultValue}>
+                                                                        <lightning-formatted-rich-text
+                                                                            value={col.defaultValue}></lightning-formatted-rich-text>
+                                                                    </template>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </lightning-record-view-form>
+
+                                        </template>
+
+                                    </template>
+                                    <!-- <template if:true={isSourceSelfReported}>
+                                        <p class="messageStyle">Performance is self reported by the manager and not
+                                            verified by Dakota.</p>
+                                    </template> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </template>
+</template>

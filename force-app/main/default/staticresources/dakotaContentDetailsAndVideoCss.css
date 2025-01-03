@@ -1,0 +1,4 @@
+/* Set width of field if number of fields are odd in layout*/
+.siteforceCptBody .cCenterPanel .custom-width .slds-form .record-form-spinner-holder > div:last-child > div:nth-child(odd):last-child{
+    max-width:50%;
+}

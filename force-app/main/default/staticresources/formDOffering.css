@@ -1,0 +1,61 @@
+
+lightning-tabset lightning-tab-bar ul li[data-label="New 13F Filings"] a{
+	font-size: 14px;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	border-bottom: None !important;
+}
+lightning-tabset lightning-tab-bar ul li[data-label="New Public Investments"] a {
+	font-size: 14px;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	border-bottom: None !important;
+}
+lightning-tabset lightning-tab-bar ul li[data-label="New Form D Filings"] a{
+	font-size: medium;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	border-bottom: 3px solid #0171D2 !important;
+}
+
+lightning-tabset lightning-tab-bar ul li[data-label="New Accounts"] a{
+	font-size: 14px;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	border-bottom: None !important;
+}
+
+lightning-tabset lightning-tab-bar ul li[data-label="New Contacts"] a{
+	font-size: 14px;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	border-bottom: None !important;
+}
+
+lightning-tabset lightning-tab-bar ul {
+    margin-left: 52px;
+    padding-top: 11px;
+    border-bottom-style: none !important;
+}
+
+
+lightning-tabset lightning-tab-bar ul li[data-label="New Form D Filings"]::after{
+	content: none !important;
+}
+lightning-tabset lightning-tab-bar ul li[data-label="New 13F Filings"]::after{
+	content: none !important;
+}
+lightning-tabset lightning-tab-bar ul li[data-label="New Public Investment"]::after{
+	content: none !important;
+}
+lightning-tabset lightning-tab-bar ul li[data-label="New Accounts"]::after{
+	content: none !important;
+}
+lightning-tabset lightning-tab-bar ul li[data-label="New Contacts"]::after{
+	content: none !important;
+}
+
+.dataTableHeightHome c-custom-datatable table tbody tr{
+	height: 29px !important;
+	word-break: break-word;
+}

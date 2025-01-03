@@ -1,0 +1,55 @@
+<template>
+    <template if:true={recordsExist}>
+        <lightning-layout>
+            <lightning-layout-item size="12" class="layout-div">
+                <article class="slds-card slds-card_boundary">
+                    <div class="slds-grid slds-page-header forceRelatedListCardHeader article-div">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate ">
+                            <div class="slds-media__body slds-grid">
+                                <div class ="header-content">
+                                <span >
+                                    <template if:true={isInvestment}>
+                                        <lightning-avatar size="small" src={iconName} class="iconBackgroundColorInvestment"></lightning-avatar>
+                                    </template>
+                                    <template if:false={isInvestment}>
+                                        <lightning-icon size="small" icon-name={iconName} ></lightning-icon>
+                                    </template>
+                                </span>
+                            </div>
+                            <h2 class="slds-card__header-title slds-grid--vertical-align-center float-content" >
+                                <a class="slds-card__header-link font-properties" onclick={handleShowFullRelatedList}>
+                                    <span>{relatedListTitle} ({totalRecords})</span>
+                                </a>
+                            </h2>
+                            </div>
+                            
+                        </header>
+                    </div>
+                    <template if:true={isLoading}>
+                            <lightning-spinner alternative-text="Loading..." size="medium">
+                            </lightning-spinner> 
+                    </template>
+                    <div >
+                            <c-custom-datatable  
+                                columns={columns}
+                                data={data} 
+                                key-field="Id"  
+                                show-row-number-column="true" 
+                                default-sort-direction={defaultSortDirection}
+                                sorted-direction={sortedDirection}
+                                sorted-by={sortedBy}
+                                onsort={updateColumnSorting}
+                                enable-infinite-loading="false" 
+                                wrap-text-max-lines = "5"
+                                hide-checkbox-column>
+                            </c-custom-datatable>
+                    </div>
+                    <footer class="slds-card__footer ">
+                        <a onclick={handleShowFullRelatedList}>View All</a>
+                        <span class="slds-assistive-text">entity type</span>
+                    </footer>
+                </article>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

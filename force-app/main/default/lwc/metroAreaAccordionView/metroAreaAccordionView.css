@@ -1,0 +1,316 @@
+.mainDiv {
+    max-height: 810px !important;
+    padding-bottom: 0px !important;
+    padding-right: 0px !important;
+    overflow: hidden;
+    font-family: "Salesforce Sans", Arial, sans-serif;
+    max-height: 100% !important;
+    min-height: var(--lwc-sizeLarge, 25rem);
+    border: none;
+}
+
+.headerStyling {
+    display: flex;
+    padding: var(--lwc-spacingXSmall, 0.5rem) var(--lwc-spacingSmall, 0.75rem);
+}
+
+.objectLabel {
+    color: rgb(62, 62, 60);
+    line-height: 13px;
+    margin-bottom: 4px;
+}
+
+.iconCSS {
+    background-color: #48c7c8;
+    width: 32px;
+    height: 32px;
+}
+
+.headerLabel {
+    color: #0b0b0b;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: normal;
+    display: inline;
+}
+
+.helpTextLabel {
+    margin-top: 4px;
+    color: rgb(34, 34, 34);
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.searchMainDiv {
+    margin-left: auto !important;
+    width: calc(100% - 70%);
+    min-width: min-content;
+}
+
+.searchDiv {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: -290px
+}
+
+.searchbarStyle {
+    padding-right: 5px;
+    width: calc(100% - 90px);
+    line-height: 19px;
+    font-size: 13px;
+    min-width: 112px !important;
+    max-width: 272px;
+}
+
+.searchButton {
+    padding-right: 5px;
+    padding-top: 19px;
+}
+
+.createListViewButton {
+    padding-right: 5px;
+    padding-top: 19px;
+    min-width: 135px
+}
+
+.resetButton {
+    padding-top: 19px;
+}
+
+.mainBlockDiv {
+    display: flex;
+}
+
+.countriesDiv {
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+}
+
+/*Scroll on left panel*/
+.scrollContainer {
+    max-height: 795px;
+    padding-top: 10px;
+    overflow: auto;
+    overflow-x: hidden !important;
+    position: relative;
+    border-top: 1px solid #d7d1d1;
+    border-right: 1px solid #d7d1d1;
+}
+
+.scrollArea {
+    position: relative;
+}
+
+.parentDiv {
+    align-items: flex-start;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.countryList1 {
+    height: 35px;
+    box-shadow: inset 0.25rem 0 0 var(--lwc-brandPrimary, rgb(16, 33, 56));
+    font-weight: bold;
+}
+
+.listViewList {
+    height: 35px;
+    margin-top: 3px;
+    box-shadow: inset 0.25rem 0 0 var(--lwc-brandPrimary, rgb(16, 33, 56));
+    font-weight: bold;
+}
+
+.countryList1:hover {
+    cursor: pointer;
+}
+
+.countryList2 {
+    height: 35px;
+}
+
+.countryList2:hover {
+    text-decoration: none;
+    background: var(--lwc-brandLight, rgb(244, 246, 254));
+    box-shadow: inset .125rem 0 0 var(--lwc-brandPrimary, rgb(16, 33, 56));
+    cursor: pointer;
+}
+
+.countryDiv {
+    margin-right: 0px !important;
+}
+
+.countryTextStyling {
+    font-size: 0.8rem;
+    color: rgb(44, 44, 44);
+    line-height: 20px !important;
+    padding: var(--lwc-spacingXSmall, 0.5rem) var(--lwc-spacingLarge, 1.5rem) var(--lwc-spacingXSmall, 0.5rem) var(--lwc-spacingLarge, 1.5rem);
+    /* Show ellipsis for longer country names */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.subTerritoriesTextStyling {
+    white-space: pre !important;
+    font-size: 0.8rem;
+    color: rgb(44, 44, 44);
+    line-height: 20px !important;
+    padding: var(--lwc-spacingXSmall, 0.5rem) var(--lwc-spacingLarge, 1.5rem) var(--lwc-spacingXSmall, 0.5rem) var(--lwc-spacingXSmall, 0.5rem);
+    /* Show ellipsis for longer country names */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.countryTextStyling:hover {
+    cursor: pointer;
+}
+
+.listViewDiv {
+    height: 790px;
+}
+
+.greyBackground {
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .5);
+
+}
+
+.countriesListDiv {
+    flex-grow: 1;
+    height: 793px !important;
+}
+
+.noRecordsStyling {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 0.8rem;
+    color: rgb(131 127 127);
+}
+
+.sub-territories {
+    padding-left: 40px;
+}
+
+.sub-territories-name {
+    flex-grow: 1;
+}
+
+.sub-territories-main {
+    display: flex;
+}
+
+.disabledFooter {
+    pointer-events: none;
+    background-color: #dddddd;
+}
+
+.disabledFooter button {
+    opacity: 0.5;
+}
+
+/* Custom Toast Message Styling */
+.comments-icn {
+    --sds-c-icon-color-foreground-default: white;
+}
+
+.toasMsgStyling {
+    height: 4rem;
+    position: fixed;
+    top: 4%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.slds-modal__content {
+    overflow: visible !important;
+}
+
+.addButtonAlignment {
+    right: 10px;
+}
+
+.highlightAddBtnWidth {
+    width: 25px;
+}
+
+.unhighlightAddBtnWidth {
+    width: 15px;
+}
+
+.highlightTerrWidth {
+    width: calc(100% - 25px);
+}
+
+.unhighlightTerrWidth {
+    width: calc(100% - 15px);
+}
+
+.addNewMainDiv {
+    display: flex;
+    padding-left: 14px;
+    height: 35px;
+    align-items: center;
+}
+
+.addNewClass {
+    padding: 0 8px 0 0;
+}
+
+.rowActionsClass {
+    display: flex;
+    margin-left: -17px;
+    align-items: flex-start;
+}
+
+.editIconClass {
+    margin-right: -10px;
+}
+
+.deleteIconClass {
+    margin-left: 0;
+}
+
+.sub-territoies-name-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.addNewMainDiv:hover {
+    text-decoration: none;
+    background: var(--lwc-brandLight, rgb(244, 246, 254));
+    box-shadow: inset .125rem 0 0 var(--lwc-brandPrimary, rgb(16, 33, 56));
+    cursor: pointer;
+}
+
+.chevronDownClass {
+    margin-top: -6px;
+    margin-right: 0px;
+}
+
+.chevronDownClass:active {
+    margin-top: -6px;
+    margin-right: 0px;
+    border-color: white;
+}
+
+.addNewIconClass {
+    margin-top: 0;
+}
+
+.state-toggle-class {
+    margin-top: 23px;
+    margin-right: 10px;
+    font-weight: 700;
+    color: rgb(90, 90, 90);
+}
+
+.listViewIndex {
+    z-index: 1;
+}

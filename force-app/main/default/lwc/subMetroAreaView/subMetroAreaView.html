@@ -1,0 +1,30 @@
+<template>
+    <template if:true={showComponent}>
+        <lightning-layout>
+            <lightning-layout-item size="12" class="layout-div">
+                <article class="slds-card slds-p-around_medium">
+                    <div class="slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate ">
+                            <div class="slds-media__body slds-grid">
+                                <div class ="header-content">
+                                <span >
+                                    <lightning-icon size="small"  icon-name="custom:custom78"></lightning-icon>
+                                </span>
+                            </div>
+                            <h2 class="slds-card__header-title slds-grid--vertical-align-center float-content" >
+                                <b>
+                                    <span>Sub Metro Areas ({totalRecords})</span>
+                                </b>
+                            </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-m-top--medium">
+                        <lightning-formatted-rich-text value={relatedSubMetroAreaRecords}>
+                        </lightning-formatted-rich-text>
+                    </div>
+                </article>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

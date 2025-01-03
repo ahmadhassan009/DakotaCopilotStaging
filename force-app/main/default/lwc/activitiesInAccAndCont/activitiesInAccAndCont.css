@@ -1,0 +1,58 @@
+.layout-div{
+    width:100%;
+}
+.header{
+    position: relative;
+}
+.article-div{
+    display:block; 
+    height:fit-content;
+}
+.header-content{
+    float:left; 
+    margin-right:12px;
+}
+.iconBackgroundColor {
+    background-color: #4FAC9C;
+}
+.float-content{
+    float:left; 
+}
+.font-properties{
+    font-weight: bold
+}
+.popup-button
+{
+   padding-right: 5px;
+}
+.header-position{
+    position: absolute;
+}
+.modal-content-overflow {
+    overflow: visible !important;
+}
+.modal-container-width {
+    width: 70%; 
+    max-width: 840px; 
+    min-width: 480px;
+}
+.modal-footer {
+    margin:unset; 
+    padding:16px;
+}
+.event-task-button{
+    margin: auto;
+}
+.event-task-radio-button{
+    position: absolute;
+    top: -5px;
+    right:0;
+}
+.modal-popup {
+    margin:0px!important; 
+    z-index : 1;
+}
+.headerLabelStyling {
+    float: right;
+    padding-top: 2px;
+}

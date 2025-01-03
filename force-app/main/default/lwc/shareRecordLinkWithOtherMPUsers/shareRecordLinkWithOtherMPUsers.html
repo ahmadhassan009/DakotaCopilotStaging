@@ -1,0 +1,26 @@
+<template>
+    <div class="slds-is-relative" onclick={handleDropDownClose}>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium">
+            </lightning-spinner>
+        </template>
+        <header class="cstm_header_css">
+            <div style="margin-top: 18px;"><img src={shareImage} alt="shareImage" width="50" height="50
+                "></div>
+            <h1 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate" style={headerStyle}>Share Record With Other Community Users</h1>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3" style="height: 246px;padding-top: unset;">
+            <div style="padding-left: 21px;padding-right: 21px;">
+            <c-multi-select-combobox-custom label="Select Users to Share the Record with" placeholder="Select Users" class="displayStyle"
+                name="MP Users Multi select picklist" options={multipicklistOptions}
+                onchange={handleChangeMultiPickList} ontestevent={ontestevent}></c-multi-select-combobox-custom>
+            </div>
+        </div>
+        <footer style={footerStyle} class="cstm_footer_css">
+          <div>
+              <button class="slds-button slds-button_neutral cstm_btn_border_width" onclick={closeModal} title="Cancel">Cancel</button>
+              <button class="slds-button slds-button_brand cstm_btn_margin" onclick={shareRecord} title="Share">Share</button>
+          </div>
+        </footer>
+    </div>
+</template>

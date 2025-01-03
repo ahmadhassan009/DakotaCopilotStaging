@@ -1,0 +1,27 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="toasMsgStyling">
+            <div class="slds-notify_container slds-is-relative">
+                <div class={toastMsgClasses} role="status">
+                    <span class="slds-assistive-text">success</span>
+                    <span class={toastMsgIconClasses} title="Description of icon when needed">
+                        <lightning-icon size="medium" icon-name={iconName} alternative-text={alternativeText}
+                            title={title} class="comments-icn"></lightning-icon>
+                    </span>
+                    <div class="slds-notify__content">
+                        <h3 class="slds-text-heading_small ">{toastmessage}</h3>
+                    </div>
+                    <div class="slds-notify__close">
+                        <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close"
+                            onclick={closeToast}>
+                            <lightning-icon size="small" icon-name="utility:close" alternative-text="Close"
+                                title="Close" class="comments-icn"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

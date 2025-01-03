@@ -1,0 +1,37 @@
+/*.comments-icn{
+    --sds-c-icon-color-foreground-default: white; 
+ }
+
+ .email {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.email-Label{
+    padding-left: 1%;
+}*/
+
+.searchBoxStylig {
+    padding-right: 5px;
+    width: 397px;
+    margin-top: 3px;
+}
+
+.searchButtonStyle {
+    padding-top: 22px;
+}
+.searchBoxMainDiv {
+    width: 100%;
+    margin-top: -23px;
+}
+.custom-margin{
+    margin: 0px 1.5% 0px 1.5%;
+}
+.helpIconStyling {
+    margin-top: 27px
+}
+
+.searchOuterDiv {
+    margin-right:-38px;
+    margin-bottom:-25px;
+}

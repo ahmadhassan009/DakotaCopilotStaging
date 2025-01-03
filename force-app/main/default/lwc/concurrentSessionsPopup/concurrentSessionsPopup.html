@@ -1,0 +1,21 @@
+<template>
+    <template if:true={showLogoutPopup}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small modal-parent" aria-labelledby="welcome-mat-130-label" aria-describedby="welcome-mat-130-content" aria-modal="true">
+            <div class="slds-modal__container modal-container">
+                <div class="slds-modal__content message-content" id="welcome-mat-130-content">
+                    <div  class="slds-welcome-mat__info message-mat popForm" >
+                        <div class="slds-welcome-mat slds-welcome-mat_info-only">
+                            <div class="slds-welcome-mat__content slds-grid popFrom2">
+                                <div class="slds-welcome-mat__info-content">
+                                    <div class="slds-welcome-mat__info-description slds-text-longform sessionDiv">
+                                        <p>{messageTextPart1}</p><br><p><a class="login-text" href='.'><strong>{messageTextLink}</strong></a>{messageTextPart2}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    </template>
+</template>

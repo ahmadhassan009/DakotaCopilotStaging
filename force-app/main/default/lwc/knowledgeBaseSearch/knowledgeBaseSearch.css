@@ -1,0 +1,43 @@
+.componentStyling {
+    background-color: white;
+    border-collapse: separate;
+    border-radius:5px;
+    overflow:hidden;
+    min-height: 500px;
+}
+
+.additionalCompStyling {
+    /*DSC-749 to move the search component down and align with the CMS collection*/
+    margin-top: 10px; 
+}
+
+.headingStyling {
+    font-size:16px;
+    font-weight:bold;
+    background-color:#dddbda;
+    padding:7px;
+}
+
+.searchbarStyle {
+    border-bottom:1px solid #dddbda;
+    padding: 0px 10px 10px 10px;
+    width:100%;
+}
+
+.tableStyling {
+    height: 100%;
+    position: relative;
+}
+
+.rowStyling {
+    border-bottom:1px solid #dddbda;
+    padding:8px;
+}
+
+.emptyTableStyling {
+    text-align: center;
+    color: grey;
+}
+.slds-page-header.header.flexipageHeader {
+    display: none;
+}

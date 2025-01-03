@@ -1,0 +1,371 @@
+<template>
+    <template if:false={isTrialUser}>
+        <div class="mainDivHeight">
+            <div class="slds-is-relative">
+                <template if:true={isLoading}>
+                    <lightning-spinner class="spinnerStyling" alternative-text="Loading..." size="medium">
+                    </lightning-spinner>
+                </template>
+                <lightning-card>
+                    <div class="headerButtonsDiv">
+                        <lightning-button class="slds-m-around--xx-small" label="Select Fields To Display"
+                            onclick={handleClick}></lightning-button>
+
+                        <template if:true={isFilterOpen}><button type="button"
+                                class=" FilterButtonStyling slds-button slds-button_icon tooltip"
+                                onclick={handleFilterIconClick}>
+                                <lightning-icon size="xx-small" icon-name="utility:filterList" class="filterButtonColor"
+                                    alternative-text="Open Filter"></lightning-icon>
+                                <span class="tooltiptext">Filter Content</span>
+                            </button>
+                        </template>
+
+                        <template if:false={isFilterOpen}><button type="button"
+                                class="UnFilterButtonStyling slds-button slds-button_icon tooltip"
+                                onclick={handleFilterIconClick}>
+                                <lightning-icon size="xx-small" icon-name="utility:filterList"
+                                    class="unFilterButtonColor" alternative-text="Open Filter"></lightning-icon>
+                                <span class="tooltiptext">Filter Content</span>
+                            </button>
+                        </template>
+
+                        <button class="slds-m-around--xx-small ExportButtonStyling " type="button"
+                            onclick={exportExcelData}>
+                            <span>Export {pluralObjectName}</span>
+                            <span>
+                                <lightning-avatar size="medium" src={excel} initials="SM"></lightning-avatar>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="filesDiv slds-border--top slds-border--bottom slds-p-right--xx-small slds-p-left--xx-small"
+                        style={listViewSize}>
+                        <lightning-datatable columns={columns} data={data} key-field="Id" show-row-number-column="true"
+                            enable-infinite-loading="false" wrap-text-max-lines="5" hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+
+                    <div class="slds-m-around--xx-small slds-p-top--small textCenter">
+                        <lightning-button class="slds-m-right--xxx-small" disabled={disablePrevPage} variant="brand"
+                            label="Previous Page" slot="actions" onclick={goToPreviousPage}></lightning-button>
+                        <span class="slds-m-around--xx-small">Page {currentPage} of {totalPages}</span>
+                        <lightning-button class="slds-p-right--large" disabled={disableNextPage} variant="brand"
+                            label="Next Page" slot="actions" onclick={gotToNextPage}></lightning-button>
+                    </div>
+                </lightning-card>
+            </div>
+            <!-- SELECT FIELDS TO DISPLAY POPUP  -->
+
+            <template if:true={fieldDisplayPopup}>
+                <div class="slds-m-around--xx-large modal-popup">
+                    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+                        <div class="slds-modal__container" role="document" tabindex="0">
+                            <div class="slds-modal__header">
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Select Fields
+                                    To Display</h2>
+                            </div>
+                            <div class="slds-modal__content slds-p-around--medium">
+                                <lightning-dual-listbox name="languages" label={displayFieldPopupLabel}
+                                    source-label="Available Fields" selected-label="Selected Visible Fields"
+                                    field-level-help={displayFieldPopupLabel} options={options}
+                                    value={selectedFieldsToDisplay} onchange={handleChange}>
+                                </lightning-dual-listbox>
+                               
+                                <template if:true={showGroupedCombobox}>
+                                    <br/>
+                                    <lightning-dual-listbox name="languages" label="Select Account Fields To Display"
+                                        source-label="Available Fields" selected-label="Selected Visible Fields"
+                                        field-level-help="Select Account Fields To Display"
+                                        options={accountOptionsToDisplay} value={accountSelectedFieldsToDisplay}
+                                        onchange={handleChangeForAccountSelectedFields}>
+                                    </lightning-dual-listbox>
+
+                                </template>
+                            </div>
+
+                            <div class="slds-modal__footer">
+                                <Span class="popButtonMargin"><lightning-button class="popup-button" variant="neutral"
+                                        label="Cancel" onclick={closefieldDisplayPopup}></lightning-button></Span>
+                                <lightning-button variant="brand" label="Save" onclick={saveColumns}></lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open"></div>
+                </div>
+
+            </template>
+
+            <!-- *****************************custom list view filters starts from here **************************** -->
+
+            <template if:true={customBackDrop}>
+                <div class="slds-m-around_xx-small noMargin">
+                    <section class="slds-modal slds-fade-in-open">
+                        <div class="back-brop-custom-class backDropHeight" onclick={closeFilterModal}></div>
+                    </section>
+                </div>
+            </template>
+            <template if:true={isFilterOpen}>
+                <div class="custom-filter-container filterContainerWidth" onclick={closeDropDownIfOpen}>
+
+                    <div if:true={isFilterOpen}
+                        class="slds-border--top slds-border--bottom slds-border--left popover-menu">
+                        <div id="filterSelectionModal" class="feildDetailWrapper hide">
+                            <div class="header">
+                                <span class="slds-assistive-text">Close</span>
+                            </div>
+                            <!-- modal body start -->
+                            <div id="modal-content-id-1">
+                                <template if:false={showGroupedCombobox}>
+                                    <lightning-combobox class="test" label="Field" value={selectedField} options={fieldOptions}
+                                        onchange={handleFieldChange} ></lightning-combobox>
+                                </template>
+                                <template if:true={showGroupedCombobox}>
+                                    <!-- ***********************************************Grouped Combobox****************************************************** -->
+                                    <div>
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-combobox_container">
+                                                    <div class={comboboxTriggerClass}>
+                                                        <div class="slds-m-top--xx-small titleStyle">
+                                                            <span>Field</span>
+                                                        </div>
+                                                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                                            role="none">
+                                                            <button onclick={handleDropDownClick} type="button"
+                                                                class={buttonClass}>
+                                                                <span class="slds-truncate">{selectedFieldLabel}</span>
+                                                            </button>
+                                                            <span
+                                                                class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+                                                                <svg
+                                                                    class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default">
+                                                                    <use
+                                                                        xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#down">
+                                                                    </use>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="slds-dropdown slds-dropdown_fluid slds-scrollable listBoxMaxHeight"
+                                                            role="listbox">
+                                                            <template for:each={groupsAndOptions} for:item="group">
+                                                                <ul key={group.groupName}
+                                                                    class="slds-listbox slds-listbox_vertical"
+                                                                    data-item={group.groupName} role="group">
+                                                                    <!-- GROUP LIST ITEM -->
+                                                                    <li role="presentation" class="slds-listbox__item">
+                                                                        <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                                            role="presentation">
+                                                                            <h3 class="slds-listbox__option-header"
+                                                                                role="presentation">{group.groupName}
+                                                                            </h3>
+                                                                        </div>
+                                                                    </li>
+                                                                    <!-- OPTIONS -->
+                                                                    <template for:each={group.options}
+                                                                        for:item="option">
+                                                                        <template if:true={option.selected}>
+                                                                            <li key={option.value} role="presentation"
+                                                                                class="slds-listbox__item">
+                                                                                <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-is-selected slds-has-focus"
+                                                                                    role="option">
+                                                                                    <span
+                                                                                        class="slds-media__figure slds-listbox__option-icon">
+                                                                                        <span
+                                                                                            class="slds-icon_container slds-icon-utility-check slds-current-color">
+                                                                                            <svg
+                                                                                                class="slds-icon slds-icon_x-small checkIconColor">
+                                                                                                <use
+                                                                                                    xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#check">
+                                                                                                </use>
+                                                                                            </svg>
+                                                                                        </span>
+                                                                                    </span>
+                                                                                    <span class="slds-media__body">
+                                                                                        <span>{option.objectName}:&nbsp;
+                                                                                        </span>
+                                                                                        <span class="slds-truncate"
+                                                                                            title={option.label}>{option.label}</span>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </li>
+                                                                        </template>
+                                                                        <template if:false={option.selected}>
+                                                                            <li key={option.value} role="presentation"
+                                                                                class="slds-listbox__item">
+                                                                                <div data-id={option.value}
+                                                                                    onclick={handleOptionClick}
+                                                                                    data-item={group.groupName}
+                                                                                    class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                                                                    role="option">
+                                                                                    <span
+                                                                                        class="slds-media__figure slds-listbox__option-icon"></span>
+                                                                                    <span class="slds-media__body">
+                                                                                        <span>{option.objectName}:&nbsp;
+                                                                                        </span>
+                                                                                        <span class="slds-truncate"
+                                                                                            title={option.label}>{option.label}</span>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </li>
+                                                                        </template>
+                                                                    </template>
+                                                                </ul>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <lightning-combobox label="Operator" value={selectedOperator} options={operatorOptions}
+                                    onchange={handleOperatorChange}></lightning-combobox>
+
+                                <template if:false={isPicklist}>
+                                    <template if:false={isMultipicklist}>
+                                        <lightning-input label="Value" class="displayStyle" value={filterValue}
+                                        onchange={handleValueChange} placeholder={customPlaceHolder}></lightning-input>
+                                    </template>
+                                </template>
+
+                                <template if:true={isPicklist}>
+                                    <lightning-combobox label="Field" value={selectedPicklistValue} options={picklistOptions}
+                                        onchange={handlePicklistChange}></lightning-combobox>
+                                </template>
+                                <template if:true={isMultipicklist}>
+                                    <template if:true={listopen}>
+                                        <div id="filterSelectionLayOver" class="feildDetailWrapper" style="z-index: 1;height: 302px;top: 0px;right: 0px;background-color:unset;border: 0px" onclick={handleListClose}>
+            
+                                        </div>
+                                    </template>
+                                    <c-multi-select-combobox-custom
+                                        label="Value"
+                                        class="displayStyle"
+                                        name="multipicklistOptions"
+                                        options={multipicklistOptions}
+                                        onchange={handleChangeMultiPickList}
+                                        ontestevent={ontestevent}
+                                    ></c-multi-select-combobox-custom>
+                                </template>
+                                
+                                    
+                                <template if:true={isInvalidInput}>
+                                    <p class="redColorText">{invalidInputMessage}</p>
+                                </template>
+                            </div>
+                            <div class="footer footerPadding">
+                                <button class="slds-button slds-button_neutral" onclick={handleDoneButton}>Done</button>
+                            </div>
+                        </div>
+                        <div class="filterContentWrapper">
+                            <div class="complete-filter">
+
+                                <div class="header-section">
+                                    <h1 class="header-title FilterHeadingFont">Filters</h1>
+                                    <div class="header-icon">
+                                        <lightning-icon icon-name="utility:close" alternative-text="Close"
+                                            size="xx-small" onclick={handleCloseModal}></lightning-icon>
+                                    </div>
+                                </div>
+
+                                <template if:true={isFilterNotEmpty}>
+                                    <p class="subHeading"> Matching all of these filters </p>
+                                </template>
+                                <template if:false={isFilterNotEmpty}>
+                                    <lightning-card class="static-card cardTextAlignment">
+                                        <span>Filter By All {pluralObjectName}</span>
+                                    </lightning-card>
+                                </template>
+                                <template for:each={addedFilters} for:item="filter">
+                                    <div key={filter.index} class="filter-wrapper filterWrapperMargin">
+                                        <template if:true={isAddFilterLogic}>
+                                            <span key={filter.index} class="index-number">{filter.filterNumber}.</span>
+                                        </template>
+                                        <lightning-card key={filter.index} class="box" data-item={filter.index}
+                                            onclick={handleOpenSingleFilterModal}>
+
+                                            <span data-id="testDataId" id={filter.index} data-item={filter.index}
+                                                class="value">
+                                                <span data-item={filter.index} class="filterField">{filter.label}</span>
+                                                <div data-item={filter.index} class="filterOperator">{filter.operator}
+                                                </div>
+                                                <div data-item={filter.index} class="filterValueStyling">{filter.value}
+                                                </div>
+                                            </span>
+                                            <lightning-icon class="filter-box-cross closeIconRight"
+                                                data-item={filter.index} icon-name="utility:close" title="Close"
+                                                size='xx-small' onclick={handleDeleteFilter}></lightning-icon>
+                                        </lightning-card>
+                                    </div>
+                                </template>
+                                <template if:true={filtersToSave}>
+                                    <div>
+                                        <button class="slds-button slds-button_brand applyFilterButton"
+                                            onclick={handleSaveFilter}>
+                                            <span>APPLY FILTER</span>
+                                            <lightning-icon size="xx-small" icon-name="utility:filterList"
+                                                class="filterButtonColor filterIconStyling"
+                                                alternative-text="Open Filter"></lightning-icon>
+                                        </button>
+
+                                    </div>
+                                </template>
+                                <div class="filterButton">
+                                    <template if:false={isFiltersLimitReached}>
+                                        <a href="javascript:void(0);" onclick={handleAddFilter}
+                                            class="slds-text-link custom-text-color"> Add
+                                            Filter</a>
+                                    </template>
+                                    <template if:true={isFilterNotEmpty}>
+                                        <a href="javascript:void(0);" onclick={handleRemoveFilters}
+                                            class="slds-text-link custom-text-color remove-all">Remove All</a>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div class='filterWrapper'>
+                                <template if:true={showCustomFilterLogicSection}>
+                                    <template if:false={isAddFilterLogic}>
+                                        <a href="javascript:void(0);" onclick={handleAddFilterLogic}
+                                            class="slds-text-link custom-text-color add-filter-logic">Add Filter
+                                            Logic</a>
+                                    </template>
+                                    <template if:true={isAddFilterLogic}>
+                                        <div class="filterSubHeading">
+                                            <label class="filterLogic">Filter Logic</label>
+
+                                            <a href="javascript:void(0);" onclick={handleRemoveCustomLogic}
+                                                class="slds-text-link custom-text-color remove-all">Remove</a>
+                                        </div>
+                                        <lightning-textarea value={customLogic} onchange={handleTextAreaChange}
+                                            class="my-textarea filterTextarea">
+                                        </lightning-textarea>
+                                        <div data-id="error-message" data-help-message="" role="alert"
+                                            class="filter-logic-error slds-hide">
+                                            <span>{filterValidationMsg}</span>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <template if:true={isTrialUser}>
+        <div dir="ltr" class="marginTop no-permission-msg">
+            <div class="slds-grid slds-grid--vertical slds-align--absolute-center slds-container--large">
+                <h4
+                    class="slds-text-align--center slds-text-heading--large slds-text-color--weak slds-m-bottom--small top-Heading FontStyling">
+                    Page not available
+                </h4>
+                <p class="slds-text-align--center slds-text-heading--medium slds-text-color--weak error-Message">
+                    Page does not exist or you do not have permission to access this page. Please contact your
+                    Marketplace Administrator if you need further assistance.
+                </p>
+            </div>
+        </div>
+    </template>
+
+</template>

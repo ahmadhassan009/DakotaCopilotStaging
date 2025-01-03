@@ -1,0 +1,12 @@
+.comments-icn{
+    --sds-c-icon-color-foreground-default: white; 
+ }
+
+ .email {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.email-Label{
+    padding-left: 1%;
+}

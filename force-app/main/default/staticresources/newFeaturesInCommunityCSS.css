@@ -1,0 +1,12 @@
+c-new-features-in-community lightning-formatted-date-time {
+   font-size: 13px !important;
+   font-weight: bold;
+}
+
+.videoPopup c-video-popup-for-new-feature .videoDivStyling {
+    padding:unset;
+}
+
+.videoPopup c-video-popup-for-new-feature .parent-div-styling{
+    width:unset;
+}
