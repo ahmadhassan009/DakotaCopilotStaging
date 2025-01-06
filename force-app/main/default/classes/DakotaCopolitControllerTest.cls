@@ -204,7 +204,6 @@ public class DakotaCopolitControllerTest {
 
         // Define the input parameters for the method
         String query = 'SELECT * FROM Account';
-        String threadId = 'thread123'; // You can change this value based on your test needs
         String requestType = 'Prompt Request';
         Integer recordLimit = 10;
         Integer offset = 0;
@@ -215,7 +214,7 @@ public class DakotaCopolitControllerTest {
 
         // Call the processQueryAllRecords method with the required parameters
         Map<String, Object> result = DakotaCopolitController.processQueryAllRecords(
-            query, threadId, requestType, recordLimit, offset, orderBy, filter
+            query, requestType, recordLimit, offset, orderBy, filter
         );
 
         Test.stopTest();
@@ -248,13 +247,40 @@ public class DakotaCopolitControllerTest {
 
         // Call the processQueryAllRecords method with the required parameters
         Map<String, Object> result = DakotaCopolitController.processQueryAllRecords(
-            query, threadId, requestType, recordLimit, offset, orderBy, filter
+            query, requestType, recordLimit, offset, orderBy, filter
         );
 
         Test.stopTest();
 
         // Assertions to validate the mock response
         System.assertEquals(1, result.get('flag'), 'Flag should be 1');
+    }
+    
+    @isTest
+    static void testIsDakotaCopilotAccessibleForUser() {
+        // Step 1: Create a test user
+        User testUser = new User(
+            FirstName = 'Test',
+            LastName = 'User',
+            Email = 'testuser@example.com',
+            Username = 'testuser@example.com' + System.currentTimeMillis(),
+            Alias = 'tuser',
+            ProfileId = [SELECT Id FROM Profile WHERE Name = 'Standard User' LIMIT 1].Id,
+            TimeZoneSidKey = 'America/New_York',
+            LocaleSidKey = 'en_US',
+            EmailEncodingKey = 'UTF-8',
+            LanguageLocaleKey = 'en_US',
+            Enable_Dakota_Copilot__c = true // Ensure this matches your custom field
+        );
+        insert testUser;
+
+        // Step 2: Run the method as the test user
+        Test.startTest();
+        System.runAs(testUser) {
+            Boolean isAccessible = DakotaCopolitController.isDakotaCopilotAccessibleForUser();
+            System.assertEquals(true, isAccessible, 'The user should have Dakota Copilot access.');
+        }
+        Test.stopTest();
     }
 
     // Mock HTTP response generator class

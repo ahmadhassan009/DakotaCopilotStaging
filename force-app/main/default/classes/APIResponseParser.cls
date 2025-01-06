@@ -29,12 +29,12 @@ public with sharing class APIResponseParser {
 		return (String) System.JSON.serialize(apiResponseParser);
 	}
     
+    public static String parseToJson(FilterValue filterValue){
+        return (String) System.JSON.serialize(filterValue);
+    }
+    
 	public static FilterValue parseReportFilter(String json){
 		return (FilterValue) System.JSON.deserialize(json, FilterValue.class);
-	}
-
-	public static String parseToJson(FilterValue filterValue){
-		return (String) System.JSON.serialize(filterValue);
 	}
 
 	public static List<Map<String,String>> convertToMap(List<Filter> filterValues){
