@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>DC_Plan_Accounts_Access__c</fullName>
-    <defaultValue>false</defaultValue>
-    <inlineHelpText>Check/Uncheck this checkbox to give/revert DC Plan Accounts access to community users</inlineHelpText>
-    <label>DC Plan Accounts Access</label>
-    <trackFeedHistory>false</trackFeedHistory>
-    <type>Checkbox</type>
-</CustomField>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Allow_Account_and_Contacts_Export__c</fullName>
-    <defaultValue>false</defaultValue>
-    <inlineHelpText>Allow Marketplace members to export Accounts and Contacts in chunk of 500</inlineHelpText>
-    <label>Allow Account and Contacts Export</label>
-    <trackFeedHistory>false</trackFeedHistory>
-    <type>Checkbox</type>
-</CustomField>
