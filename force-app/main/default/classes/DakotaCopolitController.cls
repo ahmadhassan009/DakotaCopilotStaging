@@ -4,7 +4,7 @@ public with sharing class DakotaCopolitController {
     public static Map<String, Object> processQuery(String query, String threadId, string requestType) {
         Map<String, Object> emptyMap = new Map<String, Object>();
         List<Object> emptyFilter = new List<Object>();
-        HttpResponse response = sendQueryToServer(query, threadId, requestType, 0, 0, emptyMap, emptyFilter, false);
+        HttpResponse response = sendQueryToServer(query, threadId, requestType, 0, 0, emptyMap, emptyFilter);
         system.debug('line 6: ' + response);
         system.debug('line 7: ' + query);
         String body;
@@ -34,7 +34,7 @@ public with sharing class DakotaCopolitController {
     @AuraEnabled
     public static Map<String, Object> processQueryAllRecords(String query, string requestType, Integer recordLimit, 
     Integer offset, Map<String, Object> order_by, List<Object> filter) {
-        HttpResponse response = sendQueryToServer(query, '', requestType, recordLimit, offset, order_by, filter, false);
+        HttpResponse response = sendQueryToServer(query, '', requestType, recordLimit, offset, order_by, filter);
         system.debug('line 35: ' + response);
         system.debug('line 36: ' + query);
         String body;
@@ -60,37 +60,9 @@ public with sharing class DakotaCopolitController {
             return dataMap;
         }
     }
-
-    @AuraEnabled
-    public static Map<String, Object> exportRecords(String query, string requestType, Map<String, Object> order_by, List<Object> filter, Boolean isExport) {
-        HttpResponse response = sendQueryToServer(query, '', requestType, 0, 0, order_by, filter, isExport);
-        system.debug('line 67: ' + response);
-        system.debug('line 68: ' + query);
-        String body;
-        Map<String, Object> dataMap;
-        if (response != Null && response.getStatusCode() == 200) {
-
-            body = response.getBody();
-            if (String.isEmpty(body)) {
-            // Handle empty response body
-            body = '{"error":"The server response was empty. Please check your query and try again."}';
-        	}
-            dataMap = (Map<String, Object>) JSON.deserializeUntyped(body);
-            system.debug('line 80: ' + dataMap);
-            return dataMap;
-        } 
-        else{
-            system.debug('row 84: ' + response);
-            system.debug('row 85: ' + response.getStatusCode());
-            
-            body = '{"flag":1,"answer":"Oops! We’re having trouble reaching the server."}';
-            dataMap = (Map<String, Object>) JSON.deserializeUntyped(body);
-            return dataMap;
-        }
-    }
-     
+    
     public static HttpResponse sendQueryToServer(String query, String threadId, String requestType, Integer recordLimit, 
-    Integer offset, Map<String, Object> order_by, List<Object> filter, Boolean isExport) {
+    Integer offset, Map<String, Object> order_by, List<Object> filter) {
         try {
             // Input Validation
             if (requestType == null || requestType.trim() == '') {
@@ -103,7 +75,7 @@ public with sharing class DakotaCopolitController {
             Boolean isAdmin = checkIfUserIsAdmin(userId);
 
             // Create Request Body based on Request Type
-            Map<String, Object> requestBody = constructRequestBody(userId, orgId, isAdmin, query, threadId, requestType, recordLimit, offset, order_by, filter, isExport);
+            Map<String, Object> requestBody = constructRequestBody(userId, orgId, isAdmin, query, threadId, requestType, recordLimit, offset, order_by, filter);
 
             // Serialize the Request Body to JSON
             String requestBodyJson = JSON.serialize(requestBody);
@@ -122,7 +94,7 @@ public with sharing class DakotaCopolitController {
 
     // Helper Method to Construct the Request Body
     private static Map<String, Object> constructRequestBody(String userId, String orgId, Boolean isAdmin, String query, String threadId, String requestType, 
-    Integer recordLimit, Integer offset, Map<String, Object> order_by, List<Object> filter, Boolean isExport) {
+    Integer recordLimit, Integer offset, Map<String, Object> order_by, List<Object> filter) {
         Map<String, Object> requestBody = new Map<String, Object>();
 
         // Common Data for both types of requests
@@ -148,16 +120,6 @@ public with sharing class DakotaCopolitController {
             requestBody.put('query', query);
             requestBody.put('offset', offset);
             requestBody.put('limit', recordLimit);
-            if(!order_by.isEmpty()){
-                requestBody.put('order_by', order_by);
-            }
-            if(!filter.isEmpty()){
-                requestBody.put('filter', filter);
-            }
-        }
-        else if(requestType == 'Export'){
-            requestBody.put('query', query);
-            requestBody.put('export', isExport);
             if(!order_by.isEmpty()){
                 requestBody.put('order_by', order_by);
             }
@@ -191,20 +153,6 @@ public with sharing class DakotaCopolitController {
             return (userProfile == 'System Administrator' || userProfile == 'Administrator');
         }
         return false;
-    }
-
-    //Number of reports exported by community user are tracked
-    @AuraEnabled
-    public static void incrementExportCount() {
-
-        // Retrieve the current export count
-        User currentUser = [SELECT Copilot_Exported_Reports_Count__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
-
-        // Increment the field value
-        currentUser.Copilot_Exported_Reports_Count__c = (currentUser.Copilot_Exported_Reports_Count__c == null ? 0 : currentUser.Copilot_Exported_Reports_Count__c) + 1;
-
-        // Update the record
-        update currentUser;
     }
 
     @AuraEnabled(cacheable=true)

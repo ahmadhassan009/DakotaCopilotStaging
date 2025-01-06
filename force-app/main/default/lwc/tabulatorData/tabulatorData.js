@@ -1,12 +1,8 @@
 import { LightningElement, wire, api, track } from 'lwc'
-// import { subscribe, unsubscribe, onError } from 'lightning/empApi'
 import floatingIcon from '@salesforce/resourceUrl/dakotaCopilotViewall';
 import activeCommunities from '@salesforce/label/c.active_communities_copilot';
 import processQueryAllRecords from '@salesforce/apex/DakotaCopolitController.processQueryAllRecords';
-import exportRecords from '@salesforce/apex/DakotaCopolitController.exportRecords';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import incrementExportCount from '@salesforce/apex/DakotaCopolitController.incrementExportCount';
-
 import USER_LOCALE from '@salesforce/i18n/locale';
 import USER_CURRENCY from '@salesforce/i18n/currency';
 import TIMEZONE from '@salesforce/i18n/timeZone';
@@ -41,9 +37,7 @@ export default class TabulatorData extends LightningElement {
     @track sortingCriteria = {}; // Empty object by default
     @track filtersCriteria = []; // Empty object by default
     noRecords = false;
-    groupBy = '';
-
-    exportedRecords = [];
+    //groupBy = '';
 
     // Pagination state
     @track recordsToDisplay = 50;
@@ -171,176 +165,6 @@ export default class TabulatorData extends LightningElement {
             }
         )
     }
-
-    exportCsv() {
-        this.isLoading = true;
-        const queryString = sessionStorage.getItem('SQL_Default_Query');
-        exportRecords({ 
-            query: queryString, 
-            requestType: 'Export',
-            order_by: this.sortingCriteria,
-            filter: this.filtersCriteria,
-            isExport: true
-            })
-        .then( 
-            (result) => {
-                console.log("response view all request for export: ");
-                console.log(result);
-
-                const dataString = result.SQL_Query_Result;
-                const columnsString = JSON.stringify(result.SQL_Query_Columns);
-
-                console.log("response view all request columnsString for export: ");
-                console.log(columnsString);
-
-                console.log("response view all request dataString for export: ");
-                console.log(dataString);
-
-                // Check if sessionStorage has necessary data
-                if (columnsString && dataString) {
-
-                    // Parse column data for grid setup
-                    const columns = JSON.parse(columnsString);
-                    this.columns = columns.map(item => ({
-                        label: item.title,/// name
-                        fieldName: item.field_name, // name
-                        sortable: true,
-                        type: item.type,
-                        //apiName: item.field_name
-                    }));
-                        
-                    // Parse data for the grid
-                    const data = JSON.parse(dataString);
-                    this.exportedRecords = data; 
-
-                    // Apply formatting based on column types
-                    this.exportedRecords = this.formatData(this.columns, this.exportedRecords);
-
-                    if (!this.exportedRecords || !this.exportedRecords.length) {
-                        // Show toast message if no data to export
-                        this.showToast('Error', 'No data available to export.', 'error');
-                        return;
-                    }
-                
-                    // Extract headers from column labels
-                    const headers = this.columns.map(column => column.label);
-
-                    // Map data fields from column.fieldName
-                    const fieldNames = this.columns.map(column => column.fieldName);
-
-                    // Generate CSV rows
-                    const rows = this.exportedRecords.map(record =>
-                        fieldNames.map(fieldName => `"${record[fieldName] || ""}"`).join(",")
-                    );
-                    // // Extract column headers
-                    // const headers = Object.keys(this.exportedRecords[0]);
-                
-                    // // Generate CSV rows
-                    // const rows = this.exportedRecords.map(record =>
-                    //     headers.map(header => `"${record[header] || ""}"`).join(",")
-                    // );
-                
-                    // Combine headers and rows
-                    const csvContent = [headers.join(","), ...rows].join("\n");
-                
-                    // Encode CSV content into a data URI
-                    const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent);
-            
-                    // Create a link and trigger download
-                    const link = document.createElement('a');
-                    link.href = encodedUri;
-                    link.setAttribute('download', 'ResultantRecords.csv');
-                    document.body.appendChild(link); // Required for Firefox
-                    link.click();
-                    document.body.removeChild(link);
-                    
-                    //Track no. of reports exported
-                    this.incrementExportCount();
-                } else {
-                    console.error('SQL Query Columns or Results are missing from sessionStorage.');
-                }
-
-                if(dataString == ''){
-                    // Show toast message if no data to export
-                    this.showToast('Error', 'No data available to export.', 'error');
-                }
-            }
-        )
-        .catch(
-            (error) => {
-                let message = 'An unknown error occurred.'; // Default message
-
-                if (error && error.body && error.body.message) {
-                    message = error.body.message;  // Standard Salesforce error
-                } else if (error && error.message) {
-                    message = error.message;  // Other JavaScript or network errors
-                }
-                console.error('Error: ', error); // Log the complete error for debugging
-            }
-        ).finally(
-            () => {
-                this.isLoading = false;
-            }
-        )
-
-
-
-
-    
-        /*if (!this.resultantRecords || !this.resultantRecords.length) {
-            // Show toast message if no data to export
-            this.showToast('Error', 'No data available to export.', 'error');
-            return;
-        }
-    
-        // Extract column headers
-        const headers = Object.keys(this.resultantRecords[0]);
-    
-        // Generate CSV rows
-        const rows = this.resultantRecords.map(record =>
-            headers.map(header => `"${record[header] || ""}"`).join(",")
-        );
-    
-        // Combine headers and rows
-        const csvContent = [headers.join(","), ...rows].join("\n");
-    
-        // Encode CSV content into a data URI
-        const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent);
-
-        // Create a link and trigger download
-        const link = document.createElement('a');
-        link.href = encodedUri;
-        link.setAttribute('download', 'ResultantRecords.csv');
-        document.body.appendChild(link); // Required for Firefox
-        link.click();
-        document.body.removeChild(link);*/
-    }
-
-    incrementExportCount(){
-        incrementExportCount()
-            .then(() => {
-                // Show success message
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Export count incremented successfully!',
-                        variant: 'success',
-                    })
-                );
-            })
-            .catch((error) => {
-                // Show error message
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error',
-                        message: 'Failed to increment export count.',
-                        variant: 'error',
-                    })
-                );
-                console.error('Error updating export count:', error);
-            });
-    }
-
 
     handleLoadMore(event) {
         const totalRecordCount = Number(this.totalRecordCount.replace(/,/g, ''));
@@ -604,7 +428,7 @@ export default class TabulatorData extends LightningElement {
         this.operatorValue = ''
         this.input = ''
         this.groupValue = ''
-        this.groupBy = ''
+        //this.groupBy = ''
         this.filtersCriteria = []
         this.sortingCriteria = {}
         this.initializeGrid()
