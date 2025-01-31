@@ -1,3 +1,0 @@
-<apex:page standardController="Account">      
- Session_Id_Start_Here{!$Api.Session_ID}Session_Id_End_Here
-</apex:page>

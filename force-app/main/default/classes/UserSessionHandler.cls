@@ -1,17 +1,31 @@
-public class UserSessionHandler
- {
-    public static String fetchUserSessionId(){
+public class UserSessionHandler {
+    
+    public static String fetchUserSessionId() {
+        return fetchUserSessionId(false, '');
+    }
+    
+    public static String fetchUserSessionId(Boolean isTest, String mockContent) {
         String sSessionId = '';        
-        PageReference sessionIdPage = Page.UserSessionPage;
-        // Get the content of the VF page
-        String vfContent = sessionIdPage.getContent().toString();
-        // Find the position of Start and End
+        String vfContent;
+        if (isTest) {
+            // Use test content instead of calling VF PageReference.getContent()
+            vfContent = mockContent;
+        } else {
+            PageReference sessionIdPage = Page.UserSessionPage;
+            vfContent = sessionIdPage.getContent().toString();
+        }
+        // Check if vfContent is null or empty (additional condition)
+        if (vfContent == null || vfContent == '') {
+            return sSessionId;
+        }
+        // Extract Session ID
         Integer startPosition = vfContent.indexOf('Start') + 'Start'.length();
         Integer endPosition = vfContent.indexOf('End');
-        // Get the Session Id
-        sSessionId = vfContent.substring(startPosition, endPosition);
-        System.debug('sessionId '+sSessionId);
-        // Return Session Id
+        if (startPosition > 0 && endPosition > startPosition) {
+            sSessionId = vfContent.substring(startPosition, endPosition).trim();
+        } else {
+            System.debug('Start or End position invalid, no session ID found.');
+        }
         return sSessionId;
-    }
+	}
 }

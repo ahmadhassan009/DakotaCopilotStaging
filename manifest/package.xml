@@ -1,52 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>*</members>
+        <members>APIResponseParser</members>
+        <members>APIResponseParserTest</members>
+        <members>CreateReportAPI</members>
+        <members>CreateReportAPIMock</members>
+        <members>CreateReportAPITest</members>
+        <members>DakotaCopolitController</members>
+        <members>DakotaCopolitControllerTest</members>
+        <members>HttpRequestMockFactory</members>
+        <members>ReportApiParser</members>
+        <members>ReportApiParserTest</members>
+        <members>UserSessionHandler</members>
+        <members>UserSessionHandlerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexComponent</name>
+        <members>TabulatorDataWrapper</members>
+        <name>AuraDefinitionBundle</name>
     </types>
-    <types>
-        <members>*</members>
+     <types>
+        <members>UserSessionPage</members>
         <name>ApexPage</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexTestSuite</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexTrigger</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>AuraDefinitionBundle</name>
-    </types>
-    <types>
-        <members>*</members>
+        <members>botMessage</members>
+        <members>chatHistory</members>
+        <members>chatHowCanWeHelpYou</members>
+        <members>chatInput</members>
+        <members>chatMessages</members>
+        <members>chatSplashScreen</members>
+        <members>chatbot</members>
+        <members>floatingIconComponent</members>
+        <members>tabulatorData</members>
+        <members>tabulatorDataSnap</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
-        <members>*</members>
+        <members>Bot_Messages</members>
+        <members>chatHistoryDataMessageChannel</members>
+        <name>LightningMessageChannel</name>
+    </types>
+    <types>
+        <members>CopilotButtonIcon</members>
+        <members>chatbotCssFile</members>
+        <members>chevronleft</members>
+        <members>chevronright</members>
+        <members>clock</members>
+        <members>dakotaCopilotViewall</members>
+        <members>floatingButtonBotIcon</members>
+        <members>helpScreen</members>
+        <members>marketplaceLogo</members>
+        <members>new</members>
+        <members>refresh</members>
+        <members>send</members>
+        <members>splashBot</members>
         <name>StaticResource</name>
     </types>
-        <types>
+    <types>
         <members>User</members> <!-- Retrieves all fields from User object -->
         <name>CustomObject</name>
     </types>
     <types>
+        <members>DakotaGPT__c.DakotaGPT_Endpoint__c</members>
         <members>User.Enable_Dakota_Copilot__c</members> <!-- Retrieves specific custom field from User -->
         <name>CustomField</name>
     </types>
-        <types>
-        <members>User.Copilot_Exported_Reports_Count__c</members> <!-- Retrieves specific custom field from User -->
-        <name>CustomField</name>
+    <types>
+        <members>DakotaGPT_API</members> <!-- Retrieves all Remote Site Settings -->
+        <name>RemoteSiteSetting</name>
     </types>
     <types>
-        <members>*</members> <!-- Retrieves all Remote Site Settings -->
-        <name>RemoteSiteSetting</name>
+        <members>DakotaGPT__c</members>
+        <name>CustomObject</name>
     </types>
     <version>61.0</version>
 </Package>

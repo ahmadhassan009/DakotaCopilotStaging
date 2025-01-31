@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="input-box slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
-            <button class="box-icon new-icon slds-button slds-button_icon slds-input__icon_right" onclick={handleClear}>
+            <button class="box-icon slds-button slds-button_icon slds-input__icon_right" onclick={handleClear}>
                 <img src={newIcon} alt="New Chat" class="newChatIconCss" title="New Chat"/>
             </button>
             <textarea type="text" value={inputData} placeholder="Type here" class="slds-textarea"
@@ -12,8 +12,6 @@
             <button class="send-icon slds-button slds-button_icon slds-input__icon_right" onclick={handleSend}>
                 <img src={sendIcon} alt="Send" class="sendIconCss" title="Send"/>
             </button>
-            <!-- <input type="text" value={inputData} placeholder="Type here" class="slds-input"
-                oninput={handleInputChange} onkeydown={handleKeyDown} /> -->
         </div>
     </div>
 </template>

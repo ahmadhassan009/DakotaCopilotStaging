@@ -1,7 +1,6 @@
 .response-container {
     max-height: 350px;
     overflow-y: auto;
-    /* max-width: 44.5vw !important; */
     overflow-x: auto;
 }
 
@@ -30,7 +29,6 @@
     font-size: 0.85em;
 }
 
-/* chat typing animation */
 .typing {
     align-items: center;
     display: flex;
@@ -81,7 +79,6 @@
         background-color: #727272;
     }
 }
-
 
 .regenerate-button {
     display: flex;

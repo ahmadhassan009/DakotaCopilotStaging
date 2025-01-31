@@ -3,6 +3,7 @@
     border: 1px solid #dcdcdc; /* Add border color */
     overflow: hidden; /* Ensure the radius applies to the content */
 }
+
 .total-records-container{
     width: 100%;
     height: 32px;
