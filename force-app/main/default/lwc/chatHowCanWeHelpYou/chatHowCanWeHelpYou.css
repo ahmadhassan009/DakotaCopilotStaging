@@ -8,7 +8,6 @@
     flex-flow: column;
     align-items: center;
     justify-content: flex-start;
-    /* height: 58vh; */
     height: calc(100% - 70px);
 }
 
@@ -44,7 +43,6 @@
 
 .bg{
     width: 100%;
-    /* height: 58vh; */
     height: calc(100% - 70px);
     display: flex;
     flex-direction: column;
@@ -83,6 +81,7 @@
     font-size: 12px;
     margin-bottom: 1vh;
 }
+
 .seaches-div{
     height: 122px;
     background-color: #FFF;
@@ -99,9 +98,11 @@
     width: 100%;
     border: none;
 }
+
 .prompt-stying{
     margin-bottom: 5px;
 }
+
 .prompt-text{
     font-weight: 400;
     text-align: left;
@@ -110,7 +111,6 @@
     font-size: 12px;
     flex: 1;
     padding: 10px;
-
 }
 
 .img-icon{
@@ -120,8 +120,6 @@
 }
 
 .chat-history-how-can-help{
-    /* height: 58vh; */
-    /* height: calc(100% - 70px); */
     width: 100%;
     display: block;
     height: 100%;
@@ -135,6 +133,7 @@
     justify-content: flex-start;
     align-items: flex-end;
 }
+
 .visible{
     width: 100%;
     height: 100%;

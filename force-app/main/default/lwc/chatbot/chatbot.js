@@ -1,8 +1,8 @@
 import { LightningElement, api} from 'lwc';
 
 export default class Chatbot extends LightningElement {
-    @api showChildComponent = false
-    @api minimizeChildComponent = false
+    @api showChildComponent = false;
+    @api minimizeChildComponent = false;
 
     handleCloseClick(event) {
         const buttonId = event.currentTarget.dataset.id;

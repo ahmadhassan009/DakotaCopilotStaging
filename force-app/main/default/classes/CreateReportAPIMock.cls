@@ -5,7 +5,6 @@ public class CreateReportAPIMock implements HttpCalloutMock {
     public HTTPResponse respond(HTTPRequest req) {
         HttpResponse res = new HttpResponse();
         res.setHeader('Content-Type', 'application/json');
-
         // Simulate a POST request with a mock report creation response
         if (req.getMethod() == 'POST') {
             res.setStatusCode(200);
@@ -21,7 +20,6 @@ public class CreateReportAPIMock implements HttpCalloutMock {
             res.setStatusCode(400); // Bad request if other methods are used
             res.setBody('{"error": "Invalid request method"}');
         }
-        
         return res;
     }
 }

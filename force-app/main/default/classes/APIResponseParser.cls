@@ -48,7 +48,6 @@ public with sharing class APIResponseParser {
             filtersMapsList.add(filterMap);
             filterMap = new Map<String, String>();
         }
-        System.debug('Filters Map'+filtersMapsList);
 		return filtersMapsList;
 	}
 }

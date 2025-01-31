@@ -1,3 +1,0 @@
-<design:component label="FavoriteIconAuraWrapper">
-   <design:attribute name="isFavIconDisabled" />
-</design:component>

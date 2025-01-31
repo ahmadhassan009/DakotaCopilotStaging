@@ -1,30 +1,21 @@
 public with sharing class DakotaCopolitController {
-    
     @AuraEnabled
     public static Map<String, Object> processQuery(String query, String threadId, string requestType) {
         Map<String, Object> emptyMap = new Map<String, Object>();
         List<Object> emptyFilter = new List<Object>();
         HttpResponse response = sendQueryToServer(query, threadId, requestType, 0, 0, emptyMap, emptyFilter);
-        system.debug('line 6: ' + response);
-        system.debug('line 7: ' + query);
         String body;
         Map<String, Object> dataMap;
         if (response != Null && response.getStatusCode() == 200) {
-
-            body = response.getBody();     
-            
+            body = response.getBody();          
             if (String.isEmpty(body)) {
             // Handle empty response body
             body = '{"error":"The server response was empty. Please check your query and try again."}';
         	}
             dataMap = (Map<String, Object>) JSON.deserializeUntyped(body);
-            system.debug('line 11: ' + dataMap);
             return dataMap;
         } 
         else{
-            system.debug('row 20: ' + response);
-            system.debug('row 21: ' + response.getStatusCode());
-            
             body = '{"flag":1,"answer":"Oops! We’re having trouble reaching the server."}';
             dataMap = (Map<String, Object>) JSON.deserializeUntyped(body);
             return dataMap;
@@ -35,26 +26,18 @@ public with sharing class DakotaCopolitController {
     public static Map<String, Object> processQueryAllRecords(String query, string requestType, Integer recordLimit, 
     Integer offset, Map<String, Object> order_by, List<Object> filter) {
         HttpResponse response = sendQueryToServer(query, '', requestType, recordLimit, offset, order_by, filter);
-        system.debug('line 35: ' + response);
-        system.debug('line 36: ' + query);
         String body;
         Map<String, Object> dataMap;
         if (response != Null && response.getStatusCode() == 200) {
-
             body = response.getBody();     
-            
             if (String.isEmpty(body)) {
             // Handle empty response body
             body = '{"error":"The server response was empty. Please check your query and try again."}';
         	}
             dataMap = (Map<String, Object>) JSON.deserializeUntyped(body);
-            system.debug('line 48: ' + dataMap);
             return dataMap;
         } 
         else{
-            system.debug('row 52: ' + response);
-            system.debug('row 53: ' + response.getStatusCode());
-            
             body = '{"flag":1,"answer":"Oops! We’re having trouble reaching the server."}';
             dataMap = (Map<String, Object>) JSON.deserializeUntyped(body);
             return dataMap;
@@ -68,23 +51,18 @@ public with sharing class DakotaCopolitController {
             if (requestType == null || requestType.trim() == '') {
                 throw new CustomException('Invalid request type');
             }
-
             // Determine User and Org Info
             String userId = UserInfo.getUserId();
             String orgId = UserInfo.getOrganizationId();
             Boolean isAdmin = checkIfUserIsAdmin(userId);
-
             // Create Request Body based on Request Type
             Map<String, Object> requestBody = constructRequestBody(userId, orgId, isAdmin, query, threadId, requestType, recordLimit, offset, order_by, filter);
-
             // Serialize the Request Body to JSON
             String requestBodyJson = JSON.serialize(requestBody);
-
             // Send the HTTP Request
             HttpRequest request = createHttpRequest(requestBodyJson);
             Http http = new Http();
             return http.send(request);
-
         } catch (Exception e) {
             // Log the error and rethrow or return a custom error response
             System.debug('Error occurred while sending query to server: ' + e.getMessage());
@@ -96,19 +74,16 @@ public with sharing class DakotaCopolitController {
     private static Map<String, Object> constructRequestBody(String userId, String orgId, Boolean isAdmin, String query, String threadId, String requestType, 
     Integer recordLimit, Integer offset, Map<String, Object> order_by, List<Object> filter) {
         Map<String, Object> requestBody = new Map<String, Object>();
-
         // Common Data for both types of requests
         requestBody.put('userId', userId);
         requestBody.put('orgId', orgId);
         requestBody.put('isAdmin', isAdmin);
-
         // Handle Different Request Types
         if(requestType == 'Prompt Request' && query != null && query != ''){
             requestBody.put('data', query);
             requestBody.put('threadId', threadId);
         }
         else if(requestType == 'History Request' && (query == null || query == '')){
-            //requestBody.put('data', '');
         }
         else if(requestType == 'Chat History Request' && (query == null || query == '')){
             requestBody.put('threadId', threadId);
@@ -130,7 +105,6 @@ public with sharing class DakotaCopolitController {
         else {
             throw new CustomException('Invalid query or request type');
         }
-        system.debug(requestBody);
         return requestBody;
     }
 
@@ -163,18 +137,11 @@ public with sharing class DakotaCopolitController {
 
     // Helper Method to Get the Endpoint (can be retrieved from Custom Setting or Custom Metadata)
     private static String getEndpoint() {
-        //return 'http://staging5.rolustech.com:14886/chatcomplete'; // Ideally, use custom settings or metadata
-
-        //return 'http://staging5.rolustech.com:14887/chatcomplete';
-
-        //return 'http://staging5.rolustech.com:14888/api/chatcomplete';
-
-        return 'http://staging5.rolustech.com:14883/api/chatcomplete';
+        return DakotaGPT__c.getInstance().DakotaGPT_Endpoint__c;
     }
 
     // Custom Exception class
     public class CustomException extends Exception {}
-    
     public static List<String> getObjectAndName(String objectName, String objAndField){
         String fieldName;
         if(objAndField.contains('.')){
@@ -224,11 +191,9 @@ public with sharing class DakotaCopolitController {
             List<String> objAndFieldList = getObjectAndName(objectName, key);
             String fieldObject = objAndFieldList[0];
             String fieldName = objAndFieldList[1];
-
             List<String> labelAndDataType = getFieldsMetadata(fieldObject, fieldName);
             String label = labelAndDataType[0];
             String dataType = labelAndDataType[1];
-
             if(objectName != fieldObject){
                 if(objAndFieldList.size() == 3){
                     String fieldAlias = objAndFieldList[2];
@@ -236,8 +201,7 @@ public with sharing class DakotaCopolitController {
                 } else{
                     label = objectName.capitalize() + ': ' + label;
                 }
-            }
-            
+            }   
             Map<String, Object> columnDefination = generateColumnDefination(label);
             dataTableKeys.put(key, label);
             if(fieldName == 'sfid'){
@@ -266,7 +230,6 @@ public with sharing class DakotaCopolitController {
     public static List<Map<String, Object>> generateDataTable(List<Object> records, Map<String, String> keysLabels){
         List<Map<String, Object>> dataTable = new List<Map<String, Object>>();
         Map<String, Object> currentRow;
-
         for(Object record: records){
             Map<String, Object> currentRecord = (Map<String, Object>) record; // dataType casted from Object dataType
             currentRow = new Map<String, Object>();

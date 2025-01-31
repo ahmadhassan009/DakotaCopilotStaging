@@ -1,11 +1,10 @@
 @isTest
 public class ReportApiParserTest {
+
     @isTest
     static void testReportApiParser() {
         String jsonInput = '{"reportMetadata": {"name": "Test Report", "reportType": {"label": "Opportunity", "type": "Opportunity"}, "detailColumns": ["Column1", "Column2"], "standardDateFilter": {"column": "CLOSE_DATE", "durationValue": "THIS_FISCAL_QUARTER"}, "reportBooleanFilter": "1 AND 2", "reportFilters": [{"column": "Amount", "operator": "greaterThan", "value": "1000"}]}}';
-
         ReportApiParser reportApiParser = ReportApiParser.parse(jsonInput);
-        
         System.assertNotEquals(null, reportApiParser, 'Parsed ReportApiParser should not be null');
         System.assertEquals('Test Report', reportApiParser.reportMetadata.name, 'Report name should match');
         System.assertEquals('Opportunity', reportApiParser.reportMetadata.reportType.type, 'Report type should match');
