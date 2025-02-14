@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: flex-start;
     height: calc(100% - 70px);
+    overflow: hidden;
 }
 
 .help-main::-webkit-scrollbar {
@@ -37,8 +38,9 @@
 }
 
 .seaches-main-div {
-    margin-top: 10vh;
+    margin-top: 4.5vh;
     width: 100%;
+    overflow: hidden;
 }
 
 .bg{
@@ -82,9 +84,57 @@
     margin-bottom: 1vh;
 }
 
-.seaches-div{
-    height: 122px;
+.seaches-div {
     background-color: #FFF;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-bottom: 23px;
+    padding-right: 6px;
+    padding-left: 2px;
+    margin-bottom: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    gap: 1px; /* Adds space between the items */
+    scroll-snap-type: y mandatory; /* Ensures smooth vertical scrolling effect */
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS devices */
+}
+
+.seaches-div::-webkit-scrollbar {
+    width: 6px; /* Vertical scrollbar width */
+}
+
+.seaches-div::-webkit-scrollbar-track {
+    background: #ddd;
+}
+
+.seaches-div::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 10px;
+}
+
+.seaches-div::-webkit-scrollbar-thumb:hover {
+    background: #888; /* Change color on hover */
+}
+
+.prompt-div {
+    height: 38px;
+    background-color: #F3F3F3;
+    border-radius: 9px;
+    padding: 4px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: none;
+    flex-shrink: 0; /* Prevents the prompt-divs from shrinking */
+    scroll-snap-align: start; /* Ensures the scroll stops at each prompt-div */
+    margin-bottom: 15px; /* Reduced bottom margin */
+
+}
+
+/* Optional: Add hover effect for the prompt-div */
+.prompt-div:hover {
+    background-color: #e6e6e6; /* Slight color change on hover */
 }
 
 .prompt-div{

@@ -261,4 +261,12 @@ public class DakotaCopolitControllerTest {
             return mockResponse;
         }
     }
+        @isTest
+  		static void testGetTopPrompts() {    
+            Test.startTest();
+            List<Dakota_GPT_Prompts__mdt> result = DakotaCopolitController.getTopPrompts(); // Replace with actual class name
+            Test.stopTest();
+            System.assertEquals(5, result.size());
+    }
+
 }
