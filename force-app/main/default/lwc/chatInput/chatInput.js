@@ -115,6 +115,12 @@ export default class ChatInput extends LightningElement {
             isClear: true,
         };
         publish(this.messageContext, BOT_MESSAGES_CHANNEL, payload);
+
+        // Dispatch a custom event to send the value to the parent
+        const event = new CustomEvent('newchatclick', {
+            detail: { isVisible: false }// Pass 'false' to show How can we help You? div
+        });
+        this.dispatchEvent(event); // Fire the event to notify the parent component
     }
 
     handleSendClick() {
