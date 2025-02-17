@@ -8,6 +8,7 @@ import Id from '@salesforce/user/Id';
 import UserPhotoUrl from '@salesforce/schema/User.MediumBannerPhotoUrl';
 import UserTimeZone from '@salesforce/schema/User.TimeZoneSidKey';
 import CHAT_HISTORY_DATA_MESSAGE_CHANNEL from '@salesforce/messageChannel/chatHistoryDataMessageChannel__c';
+import getTopPrompts from '@salesforce/apex/DakotaCopolitController.getTopPrompts';
 
 export default class ChatHowCanWeHelpYou extends LightningElement {
     messageGif = messageGif;
@@ -20,6 +21,8 @@ export default class ChatHowCanWeHelpYou extends LightningElement {
     isLoading = false;
     @api chats = [];
     @api dynamicClass = 'visible';
+    prompts;
+    error;
 
     @wire(MessageContext)
     messageContext
@@ -104,6 +107,12 @@ export default class ChatHowCanWeHelpYou extends LightningElement {
         }
     }
 
+    handleNewChat(event){
+        if(this.sendButtonClicked){
+            this.sendButtonClicked = event.detail.isVisible; // Update visibility based on event data
+        }
+    }
+
     handleBackClick(){
         this.showHistory = false;
         if(this.showHistory){
@@ -138,6 +147,17 @@ export default class ChatHowCanWeHelpYou extends LightningElement {
         if (chatContainer) {
             // Scroll to the bottom of the container
             chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    }
+
+    @wire(getTopPrompts)
+    wiredPrompts({ error, data }) {
+        if (data) {
+            this.prompts = data;
+            this.error = undefined;
+        } else if (error) {
+            this.error = 'Error fetching prompts';
+            this.prompts = undefined;
         }
     }
 }
