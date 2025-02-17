@@ -249,4 +249,14 @@ public with sharing class DakotaCopolitController {
         }
         return dataTable;
     }
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Dakota_GPT_Prompts__mdt> getTopPrompts() {
+        return [
+            SELECT Frequent_Prompts__c, Prompt_Order__c 
+            FROM Dakota_GPT_Prompts__mdt
+            ORDER BY Prompt_Order__c ASC 
+            LIMIT 5
+        ];
+    }
 }

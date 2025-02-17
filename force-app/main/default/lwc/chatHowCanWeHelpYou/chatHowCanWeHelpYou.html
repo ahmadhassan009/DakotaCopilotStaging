@@ -11,32 +11,23 @@
                         <img src={messageGif} />
                     </div>
                     <div class="help-text">
-                        How can we help You?
+                        How Can We Help You?
                     </div>
                     <div class="seaches-main-div">
                         <div class="popular-text">
-                            Most popular Searches
+                            Most Popular Searches
                         </div>
-                        <div class="seaches-div">
-                            <button class="prompt-div prompt-stying" data-id="Show me all DC Plan Allocations to Private Credit Strategies, with dates of Investment." 
-                            onclick={handleSend}>
-                                <div class="prompt-text">
-                                    Show me all DC Plan Allocations to Private Credit Strategies, with dates of Investment.
-                                </div>
-                                <img class='img-icon' src={chevronRight} />
-                            </button>
-                            <button class="prompt-div prompt-stying" data-id="Run a report for an account that contains 1000$ aum." onclick={handleSend}>
-                                <div class="prompt-text">
-                                    Run a report for an account that contains 1000$ aum
-                                </div>
-                                <img class='img-icon' src={chevronRight} />
-                            </button>
-                            <button class="prompt-div" data-id ="Retrive all the accounts where type is DCIO." onclick={handleSend}>
-                                <div class="prompt-text">
-                                    Retrive all the accounts where type is DCIO.
-                                </div>
-                                <img class='img-icon' src={chevronRight} />
-                            </button>
+                        <div class="seaches-div">                           
+                            <template if:true={prompts}>
+                                <template for:each={prompts} for:item="prompt">
+                                    <div class="prompt-div" key={prompt.Id} data-id={prompt.Frequent_Prompts__c} onclick={handleSend}>
+                                        <div class="prompt-text">
+                                            {prompt.Frequent_Prompts__c}
+                                        </div>
+                                        <img class='img-icon' src={chevronRight} />
+                                    </div>
+                                </template>
+                            </template>
                         </div>
                     </div>
                 </main>
@@ -46,7 +37,7 @@
                     <c-chat-messages class="msgs-box-chat-message" button-text={buttonText} onscrollupdate={handleScrollToBottom}></c-chat-messages>
                 </div>    
             </template>
-            <c-chat-input class="txt-box" onvaluechange={checkPromptEntered} onupdatevisibility={handleVisibilityUpdate}></c-chat-input>
+            <c-chat-input class="txt-box" onvaluechange={checkPromptEntered} onupdatevisibility={handleVisibilityUpdate} onnewchatclick={handleNewChat}></c-chat-input>
         </div>
         <template if:true={showHistory}>
             <c-chat-history class="chat-history-how-can-help" onbackbuttonclick={handleBackClick} ondatafromchathistory={handleChatHistorySelected}></c-chat-history>
