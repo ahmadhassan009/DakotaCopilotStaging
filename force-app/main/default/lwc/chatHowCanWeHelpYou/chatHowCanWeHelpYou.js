@@ -14,15 +14,14 @@ export default class ChatHowCanWeHelpYou extends LightningElement {
     messageGif = messageGif;
     chevronRight = chevronRight;
     sendButtonClicked = false;
-    @api showHistory = false; // Variable to track child component visibilityc
+    @api showHistory = false; // Variable to track child component visibility
+    @api showReport = false; // Variable to track child component visibility
     @track buttonText = ''; // Text to pass to the child
     userTimeZone;
     userTimeZoneDateTime;
     isLoading = false;
     @api chats = [];
     @api dynamicClass = 'visible';
-    prompts;
-    error;
 
     @wire(MessageContext)
     messageContext
@@ -97,10 +96,20 @@ export default class ChatHowCanWeHelpYou extends LightningElement {
         }
     }
 
-    // Method to handle the event fired from child to update visibility in parent
-    handleVisibilityUpdate(event) {
+    // Method to handle the event fired from chatInput to update visibility in this component
+    handleHistoryVisibility(event) {
         this.showHistory = event.detail.isVisible; // Update visibility based on event data
         if(this.showHistory){
+            this.dynamicClass = 'hidden';
+        }else{
+            this.dynamicClass = 'visible';
+        }
+    }
+
+    // Method to handle the event fired from chatInput to update visibility in this component
+    handleReportVisibility(event) {
+        this.showReport = event.detail.isVisible; // Update visibility based on event data
+        if(this.showReport){
             this.dynamicClass = 'hidden';
         }else{
             this.dynamicClass = 'visible';
@@ -113,9 +122,18 @@ export default class ChatHowCanWeHelpYou extends LightningElement {
         }
     }
 
-    handleBackClick(){
+    handleHistoryBackClick(){
         this.showHistory = false;
         if(this.showHistory){
+            this.dynamicClass = 'hidden';
+        }else{
+            this.dynamicClass = 'visible';
+        }
+    }
+    
+    handleReportBackClick(){
+        this.showReport = false;
+        if(this.showReport){
             this.dynamicClass = 'hidden';
         }else{
             this.dynamicClass = 'visible';
@@ -149,6 +167,9 @@ export default class ChatHowCanWeHelpYou extends LightningElement {
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
     }
+
+    prompts;
+    error;
 
     @wire(getTopPrompts)
     wiredPrompts({ error, data }) {

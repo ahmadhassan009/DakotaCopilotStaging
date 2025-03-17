@@ -3,7 +3,7 @@ public with sharing class DakotaCopolitController {
     public static Map<String, Object> processQuery(String query, String threadId, string requestType) {
         Map<String, Object> emptyMap = new Map<String, Object>();
         List<Object> emptyFilter = new List<Object>();
-        HttpResponse response = sendQueryToServer(query, threadId, requestType, 0, 0, emptyMap, emptyFilter);
+        HttpResponse response = sendQueryToServer(query, threadId, requestType, 0, 0, emptyMap, emptyFilter, '','');
         String body;
         Map<String, Object> dataMap;
         if (response != Null && response.getStatusCode() == 200) {
@@ -25,7 +25,7 @@ public with sharing class DakotaCopolitController {
     @AuraEnabled
     public static Map<String, Object> processQueryAllRecords(String query, string requestType, Integer recordLimit, 
     Integer offset, Map<String, Object> order_by, List<Object> filter) {
-        HttpResponse response = sendQueryToServer(query, '', requestType, recordLimit, offset, order_by, filter);
+        HttpResponse response = sendQueryToServer(query, '', requestType, recordLimit, offset, order_by, filter,'','');
         String body;
         Map<String, Object> dataMap;
         if (response != Null && response.getStatusCode() == 200) {
@@ -43,9 +43,43 @@ public with sharing class DakotaCopolitController {
             return dataMap;
         }
     }
+
+    @AuraEnabled
+    public static Map<String, Object> saveReports(String query, string requestType, Map<String, Object> order_by, List<Object> filter, string data, string reportName) {
+        HttpResponse response = sendQueryToServer(query, '', requestType, 0, 0, order_by, filter, data, reportName);
+        System.debug('Request Body: ' + JSON.serializePretty(new Map<String, Object>{
+            'query' => query,
+            'requestType' => requestType,
+            'order_by' => order_by,
+            'filter' => filter,
+            'data' => data,
+            'reportName' => reportName
+        }));
     
+        String body;
+        Map<String, Object> dataMap;
+        if (response != Null && response.getStatusCode() == 200) {
+            body = response.getBody();     
+            if (String.isEmpty(body)) {
+            // Handle empty response body
+            body = '{"error":"The server response was empty. Please check your query and try again."}';
+        	}
+            System.debug('Response Body: ' + body);
+
+            dataMap = (Map<String, Object>) JSON.deserializeUntyped(body);
+            return dataMap;
+        } 
+        else{
+            body = '{"flag":1,"answer":"Oops! We’re having trouble reaching the server."}';
+            System.debug('Error Response Body: ' + body);
+
+            dataMap = (Map<String, Object>) JSON.deserializeUntyped(body);
+            return dataMap;
+        }
+    }
+   
     public static HttpResponse sendQueryToServer(String query, String threadId, String requestType, Integer recordLimit, 
-    Integer offset, Map<String, Object> order_by, List<Object> filter) {
+    Integer offset, Map<String, Object> order_by, List<Object> filter, string data, string reportName) {
         try {
             // Input Validation
             if (requestType == null || requestType.trim() == '') {
@@ -56,7 +90,7 @@ public with sharing class DakotaCopolitController {
             String orgId = UserInfo.getOrganizationId();
             Boolean isAdmin = checkIfUserIsAdmin(userId);
             // Create Request Body based on Request Type
-            Map<String, Object> requestBody = constructRequestBody(userId, orgId, isAdmin, query, threadId, requestType, recordLimit, offset, order_by, filter);
+            Map<String, Object> requestBody = constructRequestBody(userId, orgId, isAdmin, query, threadId, requestType, recordLimit, offset, order_by, filter, data, reportName);
             // Serialize the Request Body to JSON
             String requestBodyJson = JSON.serialize(requestBody);
             // Send the HTTP Request
@@ -72,7 +106,7 @@ public with sharing class DakotaCopolitController {
 
     // Helper Method to Construct the Request Body
     private static Map<String, Object> constructRequestBody(String userId, String orgId, Boolean isAdmin, String query, String threadId, String requestType, 
-    Integer recordLimit, Integer offset, Map<String, Object> order_by, List<Object> filter) {
+    Integer recordLimit, Integer offset, Map<String, Object> order_by, List<Object> filter, string data, string reportName) {
         Map<String, Object> requestBody = new Map<String, Object>();
         // Common Data for both types of requests
         requestBody.put('userId', userId);
@@ -101,6 +135,15 @@ public with sharing class DakotaCopolitController {
             if(!filter.isEmpty()){
                 requestBody.put('filter', filter);
             }
+        }
+        else if(requestType == 'saveReport'){
+            requestBody.put('data', data);
+            requestBody.put('query', query);
+            requestBody.put('order_by', order_by);
+            requestBody.put('filter', filter);
+            requestBody.put('requestType', requestType);
+            requestBody.put('reportName', reportName);
+
         }
         else {
             throw new CustomException('Invalid query or request type');
@@ -131,8 +174,19 @@ public with sharing class DakotaCopolitController {
 
     @AuraEnabled(cacheable=true)
     public static Boolean isDakotaCopilotAccessibleForUser() {
+        
+        String userId = UserInfo.getUserId();
+        PermissionSetAssignment psa = [
+            SELECT Id 
+            FROM PermissionSetAssignment 
+            WHERE AssigneeId = :userId 
+            AND PermissionSet.Name = 'Enable_Dakota_Bot'
+            LIMIT 1
+        ];     
+        //return (psa != null);
         User currentUser = [SELECT Enable_Dakota_Copilot__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
-        return currentUser.Enable_Dakota_Copilot__c;
+        //return currentUser.Enable_Dakota_Copilot__c;
+        return ( (psa != null) && currentUser.Enable_Dakota_Copilot__c) ;
     }   
 
     // Helper Method to Get the Endpoint (can be retrieved from Custom Setting or Custom Metadata)
@@ -249,7 +303,6 @@ public with sharing class DakotaCopolitController {
         }
         return dataTable;
     }
-    
     @AuraEnabled(cacheable=true)
     public static List<Dakota_GPT_Prompts__mdt> getTopPrompts() {
         return [
@@ -259,4 +312,5 @@ public with sharing class DakotaCopolitController {
             LIMIT 5
         ];
     }
+    
 }

@@ -4,6 +4,7 @@ import BOT_MESSAGES_CHANNEL from '@salesforce/messageChannel/Bot_Messages__c';
 import newChatImg from '@salesforce/resourceUrl/clock';
 import sendImg from '@salesforce/resourceUrl/send';
 import newImg from '@salesforce/resourceUrl/new';
+import viewReportsImg from '@salesforce/resourceUrl/viewReportsIcon';
 import { getRecord } from 'lightning/uiRecordApi';
 import Id from '@salesforce/user/Id';
 import UserPhotoUrl from '@salesforce/schema/User.MediumBannerPhotoUrl';
@@ -13,6 +14,7 @@ export default class ChatInput extends LightningElement {
     newChatIcon = newChatImg;
     sendIcon = sendImg;
     newIcon = newImg;
+    viewReportsIcon = viewReportsImg;
     sendButtonPressed = false;
     userTimeZone;
     userTimeZoneDateTime;
@@ -134,6 +136,13 @@ export default class ChatInput extends LightningElement {
     handleHistory(){
         // Fire a custom event to the parent with the updated visibility state
         const event = new CustomEvent('updatevisibility', {
+            detail: { isVisible: true } // Pass 'false' to hide the parent component
+        });
+        this.dispatchEvent(event); // Fire the event to notify the parent component
+    }
+    handleSavedReports(){
+        // Fire a custom event to the parent with the updated visibility state
+        const event = new CustomEvent('reportvisibility', {
             detail: { isVisible: true } // Pass 'false' to hide the parent component
         });
         this.dispatchEvent(event); // Fire the event to notify the parent component

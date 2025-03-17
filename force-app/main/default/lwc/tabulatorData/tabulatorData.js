@@ -2,6 +2,7 @@ import { LightningElement, wire, api, track } from 'lwc';
 import floatingIcon from '@salesforce/resourceUrl/dakotaCopilotViewall';
 import activeCommunities from '@salesforce/label/c.active_communities_copilot';
 import processQueryAllRecords from '@salesforce/apex/DakotaCopolitController.processQueryAllRecords';
+import saveReports from '@salesforce/apex/DakotaCopolitController.saveReports';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import USER_LOCALE from '@salesforce/i18n/locale';
 import USER_CURRENCY from '@salesforce/i18n/currency';
@@ -12,6 +13,8 @@ export default class TabulatorData extends LightningElement {
     fieldOptions;
     groupValue = '';
     fieldValue = '';
+    is_lookup = false;
+    fieldType = '';
     operatorValue = '';
     input = '';
     @track columns = [];
@@ -39,7 +42,10 @@ export default class TabulatorData extends LightningElement {
     @track recordsToDisplay = 50;
     totalLoadedRecords = 0;
     @track isLoadingMore = false; // Spinner for loading more records
-
+    prompt;
+    isModalOpen = false;
+    @track reportTitle = '';
+    reportId;
     get operatorOptions() {
         return [
             { label: 'Equals', value: '=' },
@@ -62,9 +68,61 @@ export default class TabulatorData extends LightningElement {
         this.initializeGrid();
     }
 
+    // Open Modal
+    openModal() {
+        this.isModalOpen = true;
+    }
+
+    // Close Modal
+    closeModal() {
+        this.isModalOpen = false;
+    }
+
+    // Handle Input Change on Modal
+    handleInputChangereport(event) {
+        this.reportTitle = (event.target.value).trim();
+    }
+
+    handleSave() {
+            const queryString = sessionStorage.getItem('SQL_Default_Query');
+
+        if (this.reportTitle !== '') {
+            const query = this.prompt; // Might be undefined
+            const requestType = 'saveReport';
+            const order_by = this.sortingCriteria || {}; // Ensure it's at least an empty object
+            const filter = this.filtersCriteria || []; // Ensure it's at least an empty array
+            const data = queryString || 'N/A'; // Avoid undefined
+            const reportName = this.reportTitle;
+    
+            // Call Apex method
+            saveReports({ query, requestType, order_by, filter, data, reportName })
+                .then(response => {
+                 
+                    if (response.flag === 2) {
+                        this.showToast('Success', response.answer, 'success');
+                        this.reportId = response.report_id;
+                    } else {
+                        console.warn('⚠️ Report save failed.');
+                        console.warn(`   🚩 Failure Flag: ${response.flag}`);
+                        this.showToast('Error', 'Failed to save report', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('❌ ERROR: An issue occurred while saving the report.');
+                    console.error('   🔍 Error Details:', error);
+                    this.showToast('Error', 'An error occurred while saving the report', 'error');
+                });
+        } else {
+            console.warn('⚠️ Report title is empty. Save operation aborted.');
+        }
+    
+        this.closeModal(); // Close modal after saving
+    }
+    
     initializeGrid() {
         this.isLoading = true;
         const queryString = sessionStorage.getItem('SQL_Default_Query');
+        this.prompt = sessionStorage.getItem('inputPrompt');
         processQueryAllRecords({ 
             query: queryString, 
             requestType: 'View All Data',

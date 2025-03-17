@@ -26,6 +26,7 @@ export default class BotMessage extends NavigationMixin(LightningElement) {
   refreshIcon = refreshIcon;
   isLoadingRegenerate = 'spinner-container-hidden';
   communityName = (activeCommunities.includes(location.pathname.split('/')[1]) ? location.pathname.split('/')[1] : null);
+  inputPrompt = '';
 
   connectedCallback() {
     this.checkIsCommunityInstance(); 
@@ -49,9 +50,13 @@ export default class BotMessage extends NavigationMixin(LightningElement) {
     const messageIndex = event.currentTarget.dataset.index;
     const selectedMessage = this.chatHistoryBotMsgList[messageIndex];
     this.threadId = selectedMessage.threadId;
+    const selectedPrompt = selectedMessage.prompt;
     processQuery({ query: selectedMessage.message, threadId: '', requestType: 'Regenerate'})
     .then((result) => {
         this.pressRegenerate =true;
+        let tempResult = Object.assign({}, result); //cloning object
+        tempResult.prompt = selectedPrompt;
+        result = tempResult;
         this.handleHerokuResult(result);
       }
     ).catch((error) => {
@@ -76,6 +81,7 @@ export default class BotMessage extends NavigationMixin(LightningElement) {
     this.isBotLoading = true;
     let inputData = this.chatMessage.message;
     if (inputData != null & inputData.trim().length !== 0) {
+      this.inputPrompt = inputData.trim();
       this.threadId = this.chatMessage.threadId;
        processQuery({ query: inputData, threadId: this.threadId, requestType: 'Prompt Request'})
          .then(
@@ -148,6 +154,10 @@ export default class BotMessage extends NavigationMixin(LightningElement) {
   handleViewAllData() {
     this.isLoading = true;
     sessionStorage.setItem('SQL_Default_Query', this.recordsPreview.SQL_Default_Query);
+    if(this.recordsPreview.prompt && this.recordsPreview.prompt !== ""){
+      this.inputPrompt = this.recordsPreview.prompt
+    }
+    sessionStorage.setItem('inputPrompt', this.inputPrompt);
     var url = '/view-dakota-copilot-records'; 
     if(this.isCommunity){
       this[NavigationMixin.Navigate]({

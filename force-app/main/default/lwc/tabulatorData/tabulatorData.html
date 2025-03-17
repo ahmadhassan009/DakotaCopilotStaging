@@ -62,6 +62,11 @@
                 onclick={handleClearFilters}>
                 </lightning-button>
             </lightning-layout-item> 
+            <lightning-layout-item class="icon slds-var-m-left_x-small">
+                <lightning-button variant="brand-outline" label="Save Report" title="Save Report"
+                onclick={openModal}>
+                </lightning-button>
+            </lightning-layout-item>
         </lightning-layout>
     </div>
     <div class={datatableHeight}>
@@ -98,4 +103,22 @@
             </div>                
         </template>    
     </div>
+        <!-- Modal (Shown When isModalOpen is True) -->
+        <template if:true={isModalOpen}>
+            <section role="dialog" class="modal-backdrop">
+                <div class="modal-container">
+                    <!-- Modal Title -->
+                    <h2 class="slds-text-heading_medium slds-m-bottom_medium">Save Report</h2>
+    
+                    <!-- Input Field -->
+                    <lightning-input type="text" placeholder="Enter Report Title"
+                        value={reportTitle} onchange={handleInputChangereport} class="slds-align_absolute-center report-title-input" maxlength="255"></lightning-input>
+                    <!-- Buttons -->
+                    <div class="button-container">
+                        <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                        <lightning-button variant="brand" label="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </div>
+            </section>
+        </template>
 </template>

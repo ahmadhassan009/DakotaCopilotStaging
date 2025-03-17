@@ -20,12 +20,12 @@
                         <div class="seaches-div">                           
                             <template if:true={prompts}>
                                 <template for:each={prompts} for:item="prompt">
-                                    <button class="prompt-div prompt-stying" key={prompt.Id} data-id={prompt.Frequent_Prompts__c} onclick={handleSend}>
+                                    <div class="prompt-div" key={prompt.Id} data-id={prompt.Frequent_Prompts__c} onclick={handleSend}>
                                         <div class="prompt-text">
                                             {prompt.Frequent_Prompts__c}
                                         </div>
                                         <img class='img-icon' src={chevronRight} />
-                                    </button>
+                                    </div>
                                 </template>
                             </template>
                         </div>
@@ -37,10 +37,13 @@
                     <c-chat-messages class="msgs-box-chat-message" button-text={buttonText} onscrollupdate={handleScrollToBottom}></c-chat-messages>
                 </div>    
             </template>
-            <c-chat-input class="txt-box" onvaluechange={checkPromptEntered} onupdatevisibility={handleVisibilityUpdate} onnewchatclick={handleNewChat}></c-chat-input>
+            <c-chat-input class="txt-box" onvaluechange={checkPromptEntered} onupdatevisibility={handleHistoryVisibility} onreportvisibility={handleReportVisibility} onnewchatclick={handleNewChat}></c-chat-input>
         </div>
         <template if:true={showHistory}>
-            <c-chat-history class="chat-history-how-can-help" onbackbuttonclick={handleBackClick} ondatafromchathistory={handleChatHistorySelected}></c-chat-history>
+            <c-chat-history class="chat-history-how-can-help" onbackbuttonclick={handleHistoryBackClick} ondatafromchathistory={handleChatHistorySelected}></c-chat-history>
+        </template>
+        <template if:true={showReport}>
+            <c-saved-reports class="chat-history-how-can-help" onbackbuttonclick={handleReportBackClick}></c-saved-reports>
         </template>
     </template>
 </template>

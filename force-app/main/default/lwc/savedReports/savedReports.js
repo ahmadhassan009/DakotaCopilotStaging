@@ -7,18 +7,18 @@ import UserName from '@salesforce/schema/User.Name';
 import UserPhotoUrl from '@salesforce/schema/User.MediumBannerPhotoUrl';
 import UserTimeZone from '@salesforce/schema/User.TimeZoneSidKey';
 
-export default class ChatHistory extends LightningElement {
+export default class savedReports extends LightningElement {
     chevronleftIcon = chevronleft;
     inputData = '';
     threadId = '';
     fomattedChat = [];
-    chatHistoryList = [];
+    reportList = [];
     @track isLoading = true;
     currentUserName = 'User';
     userTimeZone;
-    @track hasHistory = false; // Flag to track if there's chat history
+    @track hasReport = false; // Flag to track if there's Report
     chatHistoryDialogs = [];
-    filteredChatHistoryList = []; // New list for filtered data
+    filteredReportList = []; // New list for filtered data
     searchInput = ''; // New property for search input
     
     // get current User Name and Profile Picture
@@ -40,7 +40,7 @@ export default class ChatHistory extends LightningElement {
 
     handleSearch(event) {
         this.searchInput = event.target.value.toLowerCase(); // Store search input and convert to lowercase
-        this.filteredChatHistoryList = this.chatHistoryList.filter((chat) => {
+        this.filteredReportList = this.reportList.filter((chat) => {
             return chat.label.toLowerCase().includes(this.searchInput); // Filter chat list based on search input
         });
     }
@@ -51,14 +51,14 @@ export default class ChatHistory extends LightningElement {
            (result) => {
             // Check if result has any keys (if it’s not an empty object)
             if (Object.keys(result).length > 0) {
-                this.chatHistoryList = Object.entries(result).map(([threadId, chat]) => {
+                this.reportList = Object.entries(result).map(([threadId, chat]) => {
                     chat.formattedTimestamp = this.formatDateWithUserTimezone(chat.timestamp, this.userTimeZone);
                     return { threadId, ...chat };
                 });
-                this.filteredChatHistoryList = [...this.chatHistoryList]; // Copy initial data to filtered list
-                this.hasHistory = true;
+                this.filteredReportList = [...this.reportList]; // Copy initial data to filtered list
+                this.hasReport = true;
             } else {
-                this.hasHistory = false; // No chat history
+                this.hasReport = false; // No chat history
             }
             this.isLoading =false;
            }
@@ -156,8 +156,7 @@ export default class ChatHistory extends LightningElement {
                     message: chatData.assistant.value,
                     sender: "Bot",
                     threadId: threadId,
-                    time: this.formatDateToCustom(chatData.created_at), // Assuming timestamp is in seconds
-                    prompt: chatData.value
+                    time: this.formatDateToCustom(chatData.created_at) // Assuming timestamp is in seconds
                 });
             }
             else{
