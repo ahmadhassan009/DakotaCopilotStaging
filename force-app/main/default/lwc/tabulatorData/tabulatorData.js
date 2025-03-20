@@ -6,12 +6,15 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import USER_LOCALE from '@salesforce/i18n/locale';
 import USER_CURRENCY from '@salesforce/i18n/currency';
 import TIMEZONE from '@salesforce/i18n/timeZone';
+import { htmlToPlainText } from 'c/dakotaLwcUitils'; 
 
 export default class TabulatorData extends LightningElement {
     botProfilePic = floatingIcon;
     fieldOptions;
     groupValue = '';
     fieldValue = '';
+    is_lookup = false;
+    fieldType = '';
     operatorValue = '';
     input = '';
     @track columns = [];
@@ -65,6 +68,7 @@ export default class TabulatorData extends LightningElement {
     initializeGrid() {
         this.isLoading = true;
         const queryString = sessionStorage.getItem('SQL_Default_Query');
+        this.prompt = sessionStorage.getItem('inputPrompt');      
         processQueryAllRecords({ 
             query: queryString, 
             requestType: 'View All Data',
@@ -85,23 +89,74 @@ export default class TabulatorData extends LightningElement {
                     }
                     // Parse and map field options for dropdown/filter
                     const fieldOptionsValues = JSON.parse(columnsString);
-                    this.fieldOptions = fieldOptionsValues.map(item => ({
-                        label: item.title,
-                        value: item.field_name
-                    }));
+                    this.fieldOptions = fieldOptionsValues.map(item => {
+                        var mapFieldOptions = {
+                            label: item.title,
+                            value: item.field_name,
+                            type: item.type
+                        }
+
+                        if (item.hasOwnProperty('joinMeta')) {
+                            mapFieldOptions['is_lookup'] = true;
+                            mapFieldOptions['object_id_field'] = item.object_id_field;
+                        }
+                        return mapFieldOptions;
+                    }
+                );
                     // Parse column data for grid setup
                     const columns = JSON.parse(columnsString);
-                    this.columns = columns.map(item => ({
-                        label: item.title,/// name
-                        fieldName: item.field_name, // name
-                        sortable: true,
-                        type: item.type,
-                    }));   
+                    this.columns = columns.map(item => {
+                        if (item.hasOwnProperty('object_name') && item.hasOwnProperty('object_id_field') && item.hasOwnProperty('joinMeta') &&
+                            item.object_name !== '' &&  item.object_id_field !== '' ) 
+                        {
+                            return {
+                                label: item?.title || 'Unnamed Column',
+                                fieldName: item?.object_id_field + '_link',
+                                type: 'url',
+                                initialWidth: 180,
+                                typeAttributes: { label: { fieldName: item?.object_id_field + '_name' }, target: '_blank' },
+                                object_name: item?.object_name,
+                                object_id_field: item?.object_id_field,
+                                field_name_mapping: item?.field_name,
+                                sortable: true
+
+                            };
+                        }
+                        else if (item.hasOwnProperty('object_name') && item.hasOwnProperty('object_id_field') && 
+                            item.object_name !== '' &&  item.object_id_field !== '' ) 
+                        {
+                            return {
+                                label: item?.title || 'Unnamed Column',
+                                fieldName: item?.field_name + '_link',
+                                type: 'url',
+                                initialWidth: 180,
+                                typeAttributes: { label: { fieldName: item?.field_name }, target: '_blank' },
+                                object_name: item?.object_name,
+                                object_id_field: item?.object_id_field,
+                                sortable: true
+
+                            };
+                        }
+                        else if (item?.type=='richText'){
+                            return {
+                                label: item.title,
+                                fieldName: item.field_name,
+                                type: item.type
+                            };
+                        }
+                        return {
+                            label: item.title,
+                            fieldName: item.field_name,
+                            type: item.type,
+                            sortable: true
+                        };
+                    });   
                     // Parse data for the grid
                     const data = JSON.parse(dataString);
                     this.allRecords = data; // Keep all records for further pagination
                     // Apply formatting based on column types
                     this.allRecords = this.formatData(this.columns, this.allRecords);
+                    this.allRecords = this.addLinks(this.allRecords, this.columns);
                     this.resultantRecords = this.allRecords; // Load the first 50 records
                     this.offset = result.next_offset; 
                     this.recordCount = this.recordCountFormatting(this.resultantRecords.length);
@@ -133,6 +188,37 @@ export default class TabulatorData extends LightningElement {
         )
     }
 
+    addLinks(data, columns) {
+        return data.map(record => {
+            var currentUrl = window.location.href;
+            this.isCommunity = currentUrl.indexOf(this.communityName) > -1 ? true : false;
+            columns.forEach(column => {
+                if (column?.object_name && column?.object_id_field && record[column.object_id_field]) {
+                    const objectId = record[column.object_id_field];
+                    const linkField = column.fieldName // e.g., account_name_link, metro_area_name__c_link   
+                    if (column?.field_name_mapping && objectId) {
+                       
+                        record[column.object_id_field + '_name'] = record[column.field_name_mapping];
+                        record[linkField] = this.isCommunity
+                        ? `/${this.communityName}/s/${column.object_name}/${objectId}/${record[column.field_name_mapping]}`
+                        : `/lightning/r/${column.object_name}/${objectId}/view`;                      
+                    }
+                    else if (objectId) {
+                        record[linkField] = this.isCommunity
+                        ? `/${this.communityName}/s/${column.object_name}/${objectId}/${record[column.typeAttributes.label.fieldName]}`
+                        : `/lightning/r/${column.object_name}/${objectId}/view`;
+                                       
+                    } else {
+                        console.warn(`⚠️ No Object ID found for ${column.title} (Field: ${column.object_id_field})`);
+                    }
+                } else {
+                    console.warn(`⚠️ Skipping column - Missing attributes. Column Data:`, JSON.stringify(column, null, 2));
+                }
+            });   
+            return record;
+        });
+    }
+
     handleLoadMore(event) {
         const totalRecordCount = Number(this.totalRecordCount.replace(/,/g, ''));
         if(this.offset > 0){
@@ -154,20 +240,50 @@ export default class TabulatorData extends LightningElement {
                     if (columnsString && dataString) {
                         // Parse column data for grid setup
                         const columns = JSON.parse(columnsString);
-                        this.columns = columns.map(item => ({
-                            label: item.title,// name
-                            fieldName: item.field_name,
-                            sortable: true,
-                            type: item.type
-                        })); 
-                        // Parse data for the grid
+                        this.columns = columns.map(item => {
+                            if (item.hasOwnProperty('object_name') && item.hasOwnProperty('object_id_field') && item.hasOwnProperty('joinMeta') &&
+                                item.object_name !== '' &&  item.object_id_field !== '' ) 
+                            {
+                                return {
+                                    label: item?.title || 'Unnamed Column',
+                                    fieldName: item?.object_id_field + '_link',
+                                    type: 'url',
+                                    initialWidth: 180,
+                                    typeAttributes: { label: { fieldName: item?.object_id_field + '_name' }, target: '_blank' },
+                                    object_name: item?.object_name,
+                                    object_id_field: item?.object_id_field,
+                                    field_name_mapping: item?.field_name
+                                };
+                            }
+                            else if (item.hasOwnProperty('object_name') && item.hasOwnProperty('object_id_field') && 
+                                item.object_name !== '' &&  item.object_id_field !== '' ) 
+                            {
+                                return {
+                                    label: item?.title || 'Unnamed Column',
+                                    fieldName: item?.field_name + '_link',
+                                    type: 'url',
+                                    initialWidth: 180,
+                                    typeAttributes: { label: { fieldName: item?.field_name }, target: '_blank' },
+                                    object_name: item?.object_name,
+                                    object_id_field: item?.object_id_field
+                                };
+                            }
+                            return {
+                                label: item.title,
+                                fieldName: item.field_name,
+                                type: item.type,
+                                sortable: true
+                            };
+                        });   
+                            // Parse data for the grid
                         const data = JSON.parse(dataString);
                         // Apply formatting based on column types
-                        const tempRecords= this.formatData(this.columns, data);
+                        var tempRecords= this.formatData(this.columns, data);
+                        tempRecords = this.addLinks(tempRecords, this.columns);
                         if(this.resultantRecords)
-                        this.resultantRecords = this.resultantRecords.concat(tempRecords); // append 50 new loaded records
-                        this.recordCount = this.recordCountFormatting(this.resultantRecords.length);
-                        this.offset = result.next_offset;
+                            this.resultantRecords = this.resultantRecords.concat(tempRecords); // append 50 new loaded records
+                            this.recordCount = this.recordCountFormatting(this.resultantRecords.length);
+                            this.offset = result.next_offset;
                     } else {
                         console.error('SQL Query Columns or Results are missing from sessionStorage.'); 
                     }
@@ -193,6 +309,14 @@ export default class TabulatorData extends LightningElement {
 
     handleFieldChange(event) {
         this.fieldValue = event.detail.value;
+        // Find the selected option based on value
+        const selectedOption = this.fieldOptions.find(option => option.value === this.fieldValue);
+        // Get the type if the option exists
+        this.fieldType = selectedOption ? selectedOption.type : '';
+        if (selectedOption?.is_lookup) {
+            this.fieldValue = selectedOption.object_id_field;
+            this.is_lookup = selectedOption.is_lookup;
+        }
     }
 
     handleOperatorChange(event) {
@@ -200,17 +324,24 @@ export default class TabulatorData extends LightningElement {
     }
 
     handleInputChange(event) {
-        this.input = event.detail.value;
+        let trimmedInput
+        trimmedInput = event.detail.value.trim();
+        this.input = trimmedInput;
     }
 
     handleFilters() {
         this.isLoading = true;
         if((this.fieldValue != '' && this.operatorValue != '' && this.input != '')){
-            this.filtersCriteria =[{
+            var filterParams = {
                 field: this.fieldValue,
                 operator: this.operatorValue,
-                value: this.input
-            }]
+                value: this.input,
+                type: this.fieldType
+            };
+            if (this.is_lookup) {
+                filterParams['is_lookup'] = true;
+            }
+            this.filtersCriteria = [filterParams];           
             this.offset = 0;
             this.initializeGrid();
         }
@@ -232,6 +363,7 @@ export default class TabulatorData extends LightningElement {
         this.offset = 0;
         this.limit = 50;
         this.fieldValue = '';
+        this.is_lookup = false;
         this.operatorValue = '';
         this.input = '';
         this.groupValue = '';
@@ -257,6 +389,8 @@ export default class TabulatorData extends LightningElement {
                     record[column.fieldName] = this.formatDate(record[column.fieldName]);
                 } else if (column.type === 'phone' && record[column.fieldName]) {
                     record[column.fieldName] = this.formatPhoneNumber(record[column.fieldName]);
+                } else if((column.type === 'richText' && record[column.fieldName]) ){
+                    record[column.fieldName] = htmlToPlainText(record[column.fieldName]);
                 }
             });
             return record;
@@ -314,23 +448,34 @@ export default class TabulatorData extends LightningElement {
         }
     }
 
-    // Sort handler
     onHandleSort(event) {
         this.isLoading = true;
         // Extract column name from the event
-        const { fieldName: column} = event.detail; 
+        const { fieldName: column } = event.detail;  
+        // Find the original field name (if the column is a link field)
+        let sortColumn = column;
+        const columnConfig = this.columns.find(col => col.fieldName === column);
+        if (columnConfig && columnConfig.type === 'url' && columnConfig.typeAttributes?.label?.fieldName) {
+            sortColumn = columnConfig.typeAttributes.label.fieldName; // Get actual field name
+        }
+        if (columnConfig.hasOwnProperty('field_name_mapping')) {     
+            sortColumn = columnConfig.object_id_field;
+        }
         // Toggle sort direction based on the current direction
         let direction = 'asc';
-        if (this.sortedBy === column) {
+        if (this.sortedBy === sortColumn) {
             direction = this.sortedDirection === 'asc' ? 'desc' : 'asc';
         }
         // Update the sorting state
-        this.sortedBy = column;
+        this.sortedBy = sortColumn;
         this.sortedDirection = direction;
         this.sortingCriteria = {
-                direction:  this.sortedDirection,
-                column: column
+            direction: this.sortedDirection,
+            column: sortColumn
         };
+        if (columnConfig.hasOwnProperty('field_name_mapping')) {
+            this.sortingCriteria['is_lookup'] = true;
+        }
         this.offset = 0;
         this.initializeGrid();
     }
