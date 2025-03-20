@@ -20,12 +20,12 @@
                         <div class="seaches-div">                           
                             <template if:true={prompts}>
                                 <template for:each={prompts} for:item="prompt">
-                                    <button class="prompt-div prompt-stying" key={prompt.Id} data-id={prompt.Frequent_Prompts__c} onclick={handleSend}>
+                                    <div class="prompt-div" key={prompt.Id} data-id={prompt.Frequent_Prompts__c} onclick={handleSend}>
                                         <div class="prompt-text">
                                             {prompt.Frequent_Prompts__c}
                                         </div>
                                         <img class='img-icon' src={chevronRight} />
-                                    </button>
+                                    </div>
                                 </template>
                             </template>
                         </div>
