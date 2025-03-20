@@ -148,6 +148,10 @@ export default class BotMessage extends NavigationMixin(LightningElement) {
   handleViewAllData() {
     this.isLoading = true;
     sessionStorage.setItem('SQL_Default_Query', this.recordsPreview.SQL_Default_Query);
+    if(this.recordsPreview.chat_record.prompt && this.recordsPreview.chat_record.prompt !== ""){
+      this.inputPrompt = this.recordsPreview.chat_record.prompt
+    }
+    sessionStorage.setItem('inputPrompt', this.inputPrompt);
     var url = '/view-dakota-copilot-records'; 
     if(this.isCommunity){
       this[NavigationMixin.Navigate]({
