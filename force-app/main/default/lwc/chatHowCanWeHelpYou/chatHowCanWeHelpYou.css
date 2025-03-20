@@ -116,55 +116,32 @@
     background: #888; /* Change color on hover */
 }
 
-.prompt-div {
-    height: 38px;
-    background-color: #F3F3F3;
-    border-radius: 9px;
-    padding: 4px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border: none;
-    flex-shrink: 0; /* Prevents the prompt-divs from shrinking */
-    scroll-snap-align: start; /* Ensures the scroll stops at each prompt-div */
-    margin-bottom: 15px; /* Reduced bottom margin */
-
-}
-
 /* Optional: Add hover effect for the prompt-div */
 .prompt-div:hover {
     background-color: #e6e6e6; /* Slight color change on hover */
 }
 
 .prompt-div{
-    height: 38px;
     background-color: #F3F3F3;
     border-radius: 9px;
-    Padding: 4px, 14px, 4px, 14px;
+    Padding: 8px 14px 8px 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     border: none;
-}
-
-.prompt-stying{
     margin-bottom: 5px;
+    height: fit-content !important;
 }
 
 .prompt-text{
-    font-weight: 400;
     text-align: left;
     color: #444444;
-    line-height: 19px;
     font-size: 12px;
-    flex: 1;
-    padding: 10px;
+    padding-right: 5px;
 }
 
 .img-icon{
-    margin-right: 10px;
     width: 12px;
     height:12px;
 }
