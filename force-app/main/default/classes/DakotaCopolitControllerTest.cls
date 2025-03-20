@@ -224,32 +224,46 @@ public class DakotaCopolitControllerTest {
         System.assertEquals(1, result.get('flag'), 'Flag should be 1');
     }
     
-    @isTest
+   
     static void testIsDakotaCopilotAccessibleForUser() {
-        // Step 1: Create a test user
+        // Create a test user
+        Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User' LIMIT 1];
         User testUser = new User(
-            FirstName = 'Test',
-            LastName = 'User',
-            Email = 'testuser@example.com',
-            Username = 'testuser@example.com' + System.currentTimeMillis(),
-            Alias = 'tuser',
-            ProfileId = [SELECT Id FROM Profile WHERE Name = 'Standard User' LIMIT 1].Id,
-            TimeZoneSidKey = 'America/New_York',
-            LocaleSidKey = 'en_US',
+            Alias = 'test12',
+            Email = 'testuser12@example.com',
             EmailEncodingKey = 'UTF-8',
+            LastName = 'Test12',
             LanguageLocaleKey = 'en_US',
-            Enable_Dakota_Copilot__c = true // Ensure this matches your custom field
+            LocaleSidKey = 'en_US',
+            ProfileId = p.Id,
+            TimeZoneSidKey = 'America/Los_Angeles',
+            UserName = 'testuser12@example.com'
         );
         insert testUser;
-        // Step 2: Run the method as the test user
-        Test.startTest();
+        // Update user field
+        testUser.Enable_Dakota_Copilot__c = true;
+        update testUser;
+        // Assign permission set only if not already assigned
+        PermissionSet permSet = [SELECT Id FROM PermissionSet WHERE Name = 'Enable_Dakota_Bot' LIMIT 1];
+        Boolean alreadyAssigned = [
+            SELECT Id FROM PermissionSetAssignment 
+            WHERE AssigneeId = :testUser.Id 
+            AND PermissionSetId = :permSet.Id 
+            LIMIT 1
+        ].size() > 0; 
+        if (permSet != null && !alreadyAssigned) {
+            insert new PermissionSetAssignment(
+                AssigneeId = testUser.Id,
+                PermissionSetId = permSet.Id
+            );
+        }  
+        // Run test as the created user
         System.runAs(testUser) {
-            Boolean isAccessible = DakotaCopolitController.isDakotaCopilotAccessibleForUser();
-            System.assertEquals(true, isAccessible, 'The user should have Dakota Copilot access.');
+            Boolean hasAccess = DakotaCopolitController.isDakotaCopilotAccessibleForUser();
+            System.assertEquals(true, hasAccess, 'User should have access to Dakota Copilot');
         }
-        Test.stopTest();
     }
-
+    
     // Mock HTTP response generator class
     public class HttpRequestMockFactory implements HttpCalloutMock {
         private HttpResponse mockResponse;

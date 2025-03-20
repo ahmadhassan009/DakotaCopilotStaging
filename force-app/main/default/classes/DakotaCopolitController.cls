@@ -132,8 +132,16 @@ public with sharing class DakotaCopolitController {
     @AuraEnabled(cacheable=true)
     public static Boolean isDakotaCopilotAccessibleForUser() {
         User currentUser = [SELECT Enable_Dakota_Copilot__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
-        return currentUser.Enable_Dakota_Copilot__c;
-    }   
+        String userId = UserInfo.getUserId();
+        PermissionSetAssignment psa = [
+            SELECT Id 
+            FROM PermissionSetAssignment 
+            WHERE AssigneeId = :userId 
+            AND PermissionSet.Name = 'Enable_Dakota_Bot'
+            LIMIT 1
+        ];     
+        return ( (psa != null) && currentUser.Enable_Dakota_Copilot__c) ;
+    }    
 
     // Helper Method to Get the Endpoint (can be retrieved from Custom Setting or Custom Metadata)
     private static String getEndpoint() {
